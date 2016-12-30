@@ -12,23 +12,26 @@
 		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<!-- CSS Stylesheet -->
 		<link href="css/style.css" rel="stylesheet">
-		<!-- Cool fonts -->
+		<!-- Awesome open source icons & fonts!  Thank Google, you're the best! -->
 		<link href="https://fonts.googleapis.com/css?family=Archivo+Black&amp;subset=latin-ext" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 		<title>BikeNab</title>
 	</head>
 	<body>
 
 
-		<!-- Login Page -->
+
+		<!-- Login Page 
 		<div data-role="page" id="login">
-			<!-- Colors in the background -->
+			<!-- Colors in the background 
 			<div class="background">
 				<hr>
 				<div class="stripe"></div>
 				<hr>
 			</div>
-			<!-- Buttons at the top of the page -->
+			<!-- Buttons at the top of the page
 			<div class="center">
 				<div data-role="controlgroup" data-type="horizontal">
 					<button class="ui-btn">About</button>
@@ -36,23 +39,70 @@
 					<button class="ui-btn">Bike Registry</button>
 				</div>
 			</div>
-			<!-- Login box -->
+			<!-- Login box 
 			<div id="login-box" class="ui-shadow ui-corner-all">
 				<img src="img/logo.png">
 				<div id="bikenab">BIKENAB</div>
 				<div id="register">Register. Report. <b>Recover.</b></div>
-				<form>
-					<input type="email" name="email" placeholder="Log In">
-					<input type="password" name="password" placeholder="Password">
-					<button>Log In</button>
+				<button onclick="pleaseWork()">Ugh Ugh Ugh</button>
+				<a href="#page2">Log In</a>
+				<form >
+					<input type="email" name="email" placeholder="Log In"/>
+					<input type="password" name="password" placeholder="Password"/>
+					
+					<!-- <input type="submit" value="Go to Google" /> 
+				
 				</form>
+				<button type="submit" onclick="pleaseWork()">PLEASE WORK</button>	
 			</div>
-			<!-- Buttons at the bottom -->
+			<!-- Buttons at the bottom 
 			<div data-role="controlgroup" data-type="horizontal" class="center">
 				<button class="ui-btn">Forgot your password?</button>
 				<button class="ui-btn">Create an Account</button>
 			</div>
 		</div>
+
+
+
+		<!-- Home Page -->
+		<div data-role="page" id="home" class="blue">
+			<div data-role="main" class="ui-content">
+				<!-- Header (for all pages) --> <!-- TODO: Check how this works on mobile -->
+<!-- 				<div data-role="header">
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#">My Bikes</a></li>
+							<li><a href="#">Register</a></li>
+							<li><a href="#">Report</a></li>
+							<li><a href="#">Lookup</a></li>
+						</ul>
+					</div>
+				</div> -->
+
+				<!-- Four Buttons --> <!-- TODO: Have these and a menu??? -->
+				<div>
+					<button class="icon-button">
+						<div>My Bikes</div>
+						<i class="material-icons md-48">directions_bike</i> <!--TODO: Does this work with IE?-->
+					</button>
+					<button class="icon-button">
+						<div>Register</div>
+						<i class="material-icons md-48">create</i>
+					</button>
+				</div>
+				<div>
+					<button class="icon-button">
+						<div>Lookup</div>
+						<i class="material-icons md-48">search</i> <!--TODO: Does this work with IE?-->
+					</button>
+					<button class="icon-button">
+						<div>Personal Info</div>
+						<i class="material-icons md-48">person_outline</i> <!--TODO: Does this work with IE?-->
+					</button>
+				</div>
+			</div>
+		</div>
+		
 
 
 

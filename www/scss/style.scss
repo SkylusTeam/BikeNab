@@ -83,6 +83,19 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 
 
+#home {
+	.icon-button {
+		width: 40%;
+		max-width: 300px;
+		background-color: $blue-black;
+		color: $light-blue;
+		font-size: 20px;
+		display: inline-block;
+	}
+}
+
+
+
 
 /* Background Styling */
 
@@ -113,3 +126,16 @@ $fancy-font: 'Archivo Black', sans-serif;
 	}
 }
 
+.blue {
+	background-color: $light-blue;
+}
+
+form {
+	background-color: yellow;
+}
+
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }

@@ -43,6 +43,14 @@
     border-color: yellow;
     color: blue; }
 
+#home .icon-button {
+  width: 40%;
+  max-width: 300px;
+  background-color: #254ea2;
+  color: #E0E2F0;
+  font-size: 20px;
+  display: inline-block; }
+
 /* Background Styling */
 .background {
   display: block;
@@ -63,5 +71,23 @@
     height: 200px;
     background-color: #254ea2;
     margin: 0px; }
+
+.blue {
+  background-color: #E0E2F0; }
+
+form {
+  background-color: yellow; }
+
+.material-icons.md-18 {
+  font-size: 18px; }
+
+.material-icons.md-24 {
+  font-size: 24px; }
+
+.material-icons.md-36 {
+  font-size: 36px; }
+
+.material-icons.md-48 {
+  font-size: 48px; }
 
 /*# sourceMappingURL=style.css.map */
