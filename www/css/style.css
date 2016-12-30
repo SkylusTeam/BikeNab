@@ -1,27 +1,28 @@
 /* Login Page Styling */
 #login {
-  background-color: #E0E2F0; }
+  background-color: #E0E2F0;
+  z-index: -10; }
   #login .center {
-    display: inline-block;
-    margin: auto; }
+    text-align: center; }
   #login button {
     background-color: transparent;
     color: #254ea2;
     float: left;
-    display: inline-block; }
+    display: inline-block;
+    border-width: 0px; }
   #login #middle-button {
     border-color: #254ea2;
-    border-left: 20px;
-    border-right: 20px;
-    border-left-width: 30px; }
+    border-left-width: 1px;
+    border-right-width: 1px; }
   #login img {
     width: auto;
+    display: block;
     height: 200px;
     margin: auto; }
   #login #login-box {
     margin: auto;
     background-color: white;
-    width: 300px;
+    width: 350px;
     height: 400px;
     padding: 10px; }
   #login p {
@@ -30,7 +31,8 @@
     color: black;
     margin: auto;
     text-align: center;
-    font-size: 50px; }
+    font-size: 50px;
+    font-family: "Archivo Black", sans-serif; }
   #login #register {
     color: #ed1a3b;
     margin: auto;
@@ -40,16 +42,26 @@
     outline-color: red;
     border-color: yellow;
     color: blue; }
-  #login hr {
+
+/* Background Styling */
+.background {
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 100%;
+  z-index: -1; }
+  .background hr {
     background-color: #ed1a3b;
     height: 2px;
     border: none;
-    margin: 3px;
-    position: absolute; }
-  #login #stripe {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 3px;
+    margin-bottom: 3px; }
+  .background .stripe {
     height: 200px;
     background-color: #254ea2;
-    margin: 0px;
-    position: absolute; }
+    margin: 0px; }
 
 /*# sourceMappingURL=style.css.map */

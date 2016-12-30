@@ -12,6 +12,8 @@
 		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<!-- CSS Stylesheet -->
 		<link href="css/style.css" rel="stylesheet">
+		<!-- Cool fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Archivo+Black&amp;subset=latin-ext" rel="stylesheet">
 
 		<title>BikeNab</title>
 	</head>
@@ -20,14 +22,22 @@
 
 		<!-- Login Page -->
 		<div data-role="page" id="login">
+			<!-- Colors in the background -->
+			<div class="background">
+				<hr>
+				<div class="stripe"></div>
+				<hr>
+			</div>
 			<!-- Buttons at the top of the page -->
-			<div data-role="controlgroup" data-type="horizontal" class="center">
-				<button class="ui-btn">About</button> <!--data-inline="true" -->
-				<button id="middle-button" class="ui-btn">Law Enforcement</button>
-				<button class="ui-btn">Bike Registry</button>
+			<div class="center">
+				<div data-role="controlgroup" data-type="horizontal">
+					<button class="ui-btn">About</button>
+					<button id="middle-button" class="ui-btn">Law Enforcement</button>
+					<button class="ui-btn">Bike Registry</button>
+				</div>
 			</div>
 			<!-- Login box -->
-			<div id="login-box">
+			<div id="login-box" class="ui-shadow ui-corner-all">
 				<img src="img/logo.png">
 				<div id="bikenab">BIKENAB</div>
 				<div id="register">Register. Report. <b>Recover.</b></div>
@@ -36,10 +46,6 @@
 					<input type="password" name="password" placeholder="Password">
 				</form>
 			</div>
-			<!-- Colors in the background -->
-			<hr>
-			<div id="stripe"></div>
-			<hr>
 			<!-- Buttons at the bottom -->
 			<div data-role="controlgroup" data-type="horizontal" class="center">
 				<button class="ui-btn">Forgot your password?</button>

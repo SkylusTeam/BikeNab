@@ -2,18 +2,17 @@ $red-highlight: #ed1a3b;
 $blue-black: #254ea2;
 $light-blue: #E0E2F0;
 $normal-font: Arial;
-$fancy-fond: Gotham;
-
+$fancy-font: 'Archivo Black', sans-serif;
 
 /* Login Page Styling */
 
 #login {
 	background-color: $light-blue;
+	z-index: -10;
 
 
 	.center {
-		display: inline-block;
-		margin: auto; //TODO: Why isn't this centering?
+		text-align: center;
 	}
 
 	// Top and bottom buttons
@@ -22,22 +21,26 @@ $fancy-fond: Gotham;
 		color: $blue-black;
 		float: left;
 		display: inline-block;
+		border-width: 0px;
 	}
+
+	// .spacer {
+	// 	background-color: yellow;
+	// 	width: 3px;
+	// 	height: 10px;
+	// }
 
 
 	#middle-button {
 		border-color: $blue-black;
-		border-left: 20px;
-		border-right: 20px;
-		border-left-width: 30px;
-
-		// border-top: 0px;
-		// border-bottom: thick ppx;
+		border-left-width: 1px;
+		border-right-width: 1px;
 	}
 
 	// Login box styling
 	img {
 		width: auto;
+		display: block;
 		height: 200px;
 		margin: auto;
 	}
@@ -45,7 +48,7 @@ $fancy-fond: Gotham;
 	#login-box {
 		margin: auto;
 		background-color: white;
-		width: 300px;
+		width: 350px;
 		height: 400px;
 		padding: 10px;
 	}
@@ -59,6 +62,7 @@ $fancy-fond: Gotham;
 		margin: auto;
 		text-align: center;
 		font-size: 50px;
+		font-family: $fancy-font;
 	}
 
 	#register {
@@ -75,20 +79,37 @@ $fancy-fond: Gotham;
 		color: blue; //TODO: MAke sure this does something!
 	}
 
-	// Background styling
+}
+
+
+
+
+/* Background Styling */
+
+.background {
+
+	display: block;
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	width: 100%;
+	z-index: -1;
+
+
 	hr {
 		background-color: $red-highlight;
 		height: 2px;
 		border: none;
-		margin: 3px;
-		position: absolute;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 3px;
+		margin-bottom: 3px;
 	}
 
-	#stripe {
+	.stripe {
 		height: 200px;
 		background-color: $blue-black;
 		margin: 0px;
-		position: absolute;
 	}
 }
 
