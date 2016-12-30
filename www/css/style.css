@@ -1,3 +1,55 @@
-
+/* Login Page Styling */
+#login {
+  background-color: #E0E2F0; }
+  #login .center {
+    display: inline-block;
+    margin: auto; }
+  #login button {
+    background-color: transparent;
+    color: #254ea2;
+    float: left;
+    display: inline-block; }
+  #login #middle-button {
+    border-color: #254ea2;
+    border-left: 20px;
+    border-right: 20px;
+    border-left-width: 30px; }
+  #login img {
+    width: auto;
+    height: 200px;
+    margin: auto; }
+  #login #login-box {
+    margin: auto;
+    background-color: white;
+    width: 300px;
+    height: 400px;
+    padding: 10px; }
+  #login p {
+    margin: auto; }
+  #login #bikenab {
+    color: black;
+    margin: auto;
+    text-align: center;
+    font-size: 50px; }
+  #login #register {
+    color: #ed1a3b;
+    margin: auto;
+    text-align: center;
+    font-size: 20px; }
+  #login input {
+    outline-color: red;
+    border-color: yellow;
+    color: blue; }
+  #login hr {
+    background-color: #ed1a3b;
+    height: 2px;
+    border: none;
+    margin: 3px;
+    position: absolute; }
+  #login #stripe {
+    height: 200px;
+    background-color: #254ea2;
+    margin: 0px;
+    position: absolute; }
 
 /*# sourceMappingURL=style.css.map */

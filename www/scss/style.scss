@@ -1,0 +1,94 @@
+$red-highlight: #ed1a3b;
+$blue-black: #254ea2;
+$light-blue: #E0E2F0;
+$normal-font: Arial;
+$fancy-fond: Gotham;
+
+
+/* Login Page Styling */
+
+#login {
+	background-color: $light-blue;
+
+
+	.center {
+		display: inline-block;
+		margin: auto; //TODO: Why isn't this centering?
+	}
+
+	// Top and bottom buttons
+	button {
+		background-color: transparent;
+		color: $blue-black;
+		float: left;
+		display: inline-block;
+	}
+
+
+	#middle-button {
+		border-color: $blue-black;
+		border-left: 20px;
+		border-right: 20px;
+		border-left-width: 30px;
+
+		// border-top: 0px;
+		// border-bottom: thick ppx;
+	}
+
+	// Login box styling
+	img {
+		width: auto;
+		height: 200px;
+		margin: auto;
+	}
+
+	#login-box {
+		margin: auto;
+		background-color: white;
+		width: 300px;
+		height: 400px;
+		padding: 10px;
+	}
+
+	p {
+		margin: auto;
+	}
+
+	#bikenab {
+		color: black;
+		margin: auto;
+		text-align: center;
+		font-size: 50px;
+	}
+
+	#register {
+		color: $red-highlight;
+		margin: auto;
+		text-align: center;
+		font-size: 20px;
+		//font-family: normal-font; //TODO: Why doesn't this work?
+	}
+
+	input {
+		outline-color: red;
+		border-color: yellow;
+		color: blue; //TODO: MAke sure this does something!
+	}
+
+	// Background styling
+	hr {
+		background-color: $red-highlight;
+		height: 2px;
+		border: none;
+		margin: 3px;
+		position: absolute;
+	}
+
+	#stripe {
+		height: 200px;
+		background-color: $blue-black;
+		margin: 0px;
+		position: absolute;
+	}
+}
+
