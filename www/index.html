@@ -26,13 +26,10 @@
 
 		<!-- Login Page -->
 		<div data-role="page" id="login">
+			<!-- Background Stripes -->
+			<div class="stripey"></div>
+
 			<div data-role="main" class="ui-content">
-				<!-- Background Stripes -->
-	 			<div class="background">
-					<hr>
-					<div class="stripe"></div>
-					<hr>
-				</div>
 				<!-- Buttons at the top of the page -->
 	  			<div class="center">
 					<div data-role="controlgroup" data-type="horizontal">
@@ -66,18 +63,11 @@
 		<div data-role="page" id="home" class="blue">
 
 			<div data-role="main" class="ui-content">
-				<!-- Header (for all pages) --> <!-- TODO: Check how this works on mobile -->
-				<div data-role="header" class="thin header">
-					<div data-role="navbar" class="thin">
-						<ul class="home-buttons">
-							<li><a href="#my-bikes">My Bikes</a></li>
-							<li><a href="#register">Register</a></li>
-							<li><a href="#lookup">Lookup</a></li>
-							<li><a href="#profile">Profile</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Four Buttons --> <!-- TODO: Have these and a menu??? -->
+				<!-- Header (for all pages) -->
+				<div data-role="header" data-position="fixed" class="thin header"></div>
+				<!-- Four Buttons -->
+
+				<!--Top Row-->
 				<div class="center-block">
 					<button class="icon-button">
 						<div>My Bikes</div>
@@ -88,14 +78,16 @@
 						<i class="material-icons md-48">create</i>
 					</button>
 				</div>
+
+				<!--Bottom Row-->
 				<div class="center-block">
 					<button class="icon-button">
 						<div>Lookup</div>
-						<i class="material-icons md-48">search</i> <!--TODO: Does this work with IE?-->
+						<i class="material-icons md-48">search</i>
 					</button>
 					<button class="icon-button" onclick="goSomewhere('#profile')">
 						<div>Profile</div>
-						<i class="material-icons md-48">person_outline</i> <!--TODO: Does this work with IE?-->
+						<i class="material-icons md-48">person_outline</i>
 					</button>
 				</div>
 			</div>
@@ -104,216 +96,114 @@
 
 		<!-- Profile -->
 		<div data-role="page" id="profile" class="blue">
-			<!-- Background Stripes --> <!-- TODO: Find way to repeat this code -->
- 			<div class="background">
-				<hr>
-				<div class="stripe"></div>
-				<hr>
-			</div>
+			<!-- Background Stripes -->
+ 			<div class="stripey"></div>
+
 			<div data-role="main" class="ui-content">
-			<!-- Header --> <!--TODO: Find way to reduce code duplication here -->
-			<div data-role="header" class="thin header">
-				<div data-role="navbar" class="thin">
-					<ul class="home-buttons">
-						<li><a href="#home">Home</a></li>
-						<li><a href="#my-bikes">My Bikes</a></li>
-						<li><a href="#register">Register</a></li>
-						<li><a href="#lookup">Lookup</a></li>
-					</ul>
+				<div data-role="header" class="thin header"></div>
+				<!-- Floating white box holding the form --> 
+				<div class="floating-box ui-shadow ui-corner-all">
+					<form>
+
+						<h2>Personal Info</h2>
+
+						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+						<div class="text-input" name="name" txt="Name:"></div>
+						<div class="text-input" name="primary-email" txt="Email Address:"></div>
+						<div class="text-input" name="backup-email" txt="Backup Email:"></div>
+						<div class="text-input" name="birthdate" txt="Date of Birth:"></div>
+						<div class="text-input" name="address" txt="Address:"></div>
+						<div class="text-input" name="cell" txt="Cell Phone:"></div>
+						<div class="text-input" name="social-media" txt="Social Media:"></div>
+
+
+						<h2>Privacy Settings</h2>
+
+						<!-- Flipswitch Input Form Fields (These will be dynamically replaced with styled input fields)-->
+						<h4>When any individual searches a serial number I marked stolen:</h4>
+
+						<div class="flipswitch-input" name="i-s-all" txt="All my personal information is visible:"></div>
+						<div class="flipswitch-input" name="i-s-primary" txt="My primary contact method is visible:"></div>
+						<div class="flipswitch-input" name="i-s-name" txt="My name is visible:"></div>
+						<div class="flipswitch-input" name="i-s-none" txt="None of my personal information is visible:"></div>
+
+						<h4>When a law enforcement officer searches my bike's serial number:</h4>
+
+						<div class="flipswitch-input" name="le-n-all" txt="All my personal information is visible:"></div>
+						<div class="flipswitch-input" name="le-n-primary" txt="My primary contact method is visible:"></div>
+						<div class="flipswitch-input" name="le-n-name" txt="My name is visible:"></div>
+						<div class="flipswitch-input" name="le-n-none" txt="None of my personal information is visible:"></div>
+
+						<h4>When a law enforcement officer searches a serial number I marked stolen:</h4>
+
+						<div class="flipswitch-input" name="le-s-all" txt="All my personal information is visible:"></div>
+						<div class="flipswitch-input" name="le-s-primary" txt="My primary contact method is visible:"></div>
+						<div class="flipswitch-input" name="le-s-name" txt="My name is visible:"></div>
+						<div class="flipswitch-input" name="le-s-none" txt="None of my personal information is visible:"></div>
+
+						<input type="submit" value="Save Changes">
+					</form>
 				</div>
 			</div>
-
-			<!-- Form With Personal Info --> 
-			<div class="floating-box ui-shadow ui-corner-all">
-				<h2>Personal Info</h2>
-				<form>
-	 				<div data-role="fieldcontain">
-						<label for="name">Name:</label>
-						<input type="text" name="name" id="name" data-clear-btn="true">
-					</div>
-	 				<div data-role="fieldcontain">
-						<label for="primary-email">Email Address:</label>
-						<input type="text" name="primary-email" id="primary-email" data-clear-btn="true">
-					</div>
-	 				<div data-role="fieldcontain">
-						<label for="backup-email">Backup Email:</label>
-						<input type="text" name="backup-email" id="backup-email" data-clear-btn="true">
-					</div>
-	 				<div data-role="fieldcontain">
-						<label for="birthdate">Date of Birth:</label>
-						<input type="text" name="birthdate" id="birthdate" data-clear-btn="true">
-					</div>
-	 				<div data-role="fieldcontain">
-						<label for="address">Address:</label>
-						<input type="text" name="address" id="address" data-clear-btn="true">
-					</div>
-	 				<div data-role="fieldcontain">
-						<label for="cell">Cell Phone:</label>
-						<input type="text" name="cell" id="cell" data-clear-btn="true">
-					</div>
-	 				<div data-role="fieldcontain">
-						<label for="social-media">Social Media:</label>
-						<input type="text" name="social-media" id="social-media" data-clear-btn="true">
-					</div>
-
-					<h2>Privacy Settings</h2>
-
-					<h4>When any individual searches a serial number I marked stolen:</h4>
-
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="i-s-all">All my personal information is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="i-s-all" id="i-s-all" checked="" data-mini="true">
-					</div>
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="i-s-primary">My primary contact method is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="i-s-primary" id="i-s-primary" checked="" data-mini="true">
-					</div>
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="i-s-name">My name is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="i-s-name" id="i-s-name" checked="" data-mini="true">
-					</div>
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="i-s-none">None of my personal information is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="i-s-none" id="i-s-none" checked="" data-mini="true">
-					</div>
-	<!--  					<div id="seriously"></div>
-					<div  class="optContainer">
-						<label class="form-label" for="i-s-all">None of my personal information is visible:</label>
-						<input class="form-field" type="checkbox" data-role="flipswitch" name="i-s-all" id="i-s-all" checked="" data-mini="true">
-					</div> -->
-					
-					<h4>When a law enforcement officer searches my bike's serial number:</h4>
-
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="le-n-all">All my personal information is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="le-n-all" id="le-n-all" checked="" data-mini="true">
-					</div>
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="ls-n-primary">My primary contact method is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="le-n-primary" id="le-n-primary" checked="" data-mini="true">
-					</div>
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="le-n-name">My name is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="le-n-name" id="le-n-name" checked="" data-mini="true">
-					</div>
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="le-n-none">None of my personal information is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="le-n-none" id="le-n-none" checked="" data-mini="true">
-					</div>
-
-
-					<h4>When a law enforcement officer searches a serial number I marked stolen:</h4>
-
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="le-s-all">All my personal information is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="le-s-all" id="le-s-all" checked="" data-mini="true">
-					</div>
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="ls-s-primary">My primary contact method is visible:</label>
-						<input type="checkbox" class="flipswitch-holder" data-role="flipswitch" name="le-s-primary" id="le-s-primary" checked="" data-mini="true">
-					</div>
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="le-s-name">My name is visible:</label>
-						<input type="checkbox"  class="flipswitch-holder"data-role="flipswitch" name="le-s-name" id="le-s-name" checked="" data-mini="true">
-					</div>
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="le-s-none">None of my personal information is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="le-s-none" id="le-s-none" checked="" data-mini="true">
-					</div>
-					<input type="submit" value="Save Changes">
-				</form>
-			</div>
-			</div>
 		</div>
+
 
 
 		<!-- Registration Page -->
 		<div data-role="page" id="register" class="blue">
-			 <div class="background">
-				<hr>
-				<div class="stripe"></div>
-				<hr>
-			</div>
+			 <div class="stripey"></div>
+
 			<div data-role="main" class="ui-content">
-			<!-- Header --> <!--TODO: Find way to reduce code duplication here -->
-			<div data-role="header" class="thin header">
-				<div data-role="navbar" class="thin">
-					<ul class="home-buttons">
-						<li><a href="#home">Home</a></li>
-						<li><a href="#my-bikes">My Bikes</a></li>
-						<li><a href="#lookup">Lookup</a></li>
-						<li><a href="#profile">Profile</a></li>
-					</ul>
+				<!-- Header -->
+				<div data-role="header" class="thin header"></div>
+				<div class="floating-box ui-shadow ui-corner-all">
+					<h2>Register Bike</h2>
+					<form>
+						<!-- Text Input Form Fields -->
+						
+						<!-- These will be dynamically replaced with styled input fields-->
+						<div class="text-input" name="serial-number" txt="Serial Number"></div>
+						<div class="text-input" name="bike-make" txt="Make"></div>
+						<div class="text-input" name="bike-model" txt="Model"></div>
+						<div class="text-input" name="bike-year" txt="Year"></div>
+						<div class="text-input" name="bike-purchase-place" txt="Place of Purchase"></div>
+						<div class="text-input" name="bike-cost" txt="Cost/Value"></div>
+
+						<!-- Photos of the bike -->
+						<p>Photo of Owner with Bike</p>
+						<img class="registration-pic"></img>
+						<button class="registration-button blue-button">Take Picture</button>
+
+						<p>Photo of Bike Alone</p>
+						<img class="registration-pic"></img>
+						<button class="registration-button blue-button">Take Picture</button>
+
+						<p>Photo of Serial Number</p>
+						<img class="registration-pic"></img>
+						<button class="registration-button blue-button">Take Picture</button>
+
+						<p>Photo of Receipt</p>
+						<img class="registration-pic"></img>
+						<button class="registration-button blue-button">Take Picture</button>
+
+
+						<label for="additional-info">Additional Information About Bike</label>
+						<textarea name="additional-info" id="additional-info">
+						</textarea>
+
+						<!-- Pyayment Options-->
+						<div data-role="fieldcontain" class="flipswitch-holder">
+							<label for="le-s-none">I have a BikeNab app code:</label>
+							<input type="checkbox" data-role="flipswitch" name="le-s-none" id="le-s-none" checked="" data-mini="true"><!--TODO: Yes/no -->
+						</div>
+
+						<input type="text" id="app-code" data-clear-btn="true" placeholder="App Code">
+						<!-- Submit Button-->
+						<input type="submit" value="Register Bike" class="blue-button">
+					</form>
 				</div>
 			</div>
-			<div class="floating-box ui-shadow ui-corner-all">
-				<h2>Register Bike</h2>
-				<form>
-					<!-- Fields with info about the bike -->
-	 				<div data-role="fieldcontain">
-						<label for="name">Serial Number</label>
-						<input type="text" name="name" id="name" data-clear-btn="true">
-					</div>
-
-					<div data-role="fieldcontain">
-						<label for="name">Make</label>
-						<input type="text" name="name" id="name" data-clear-btn="true">
-					</div>
-
-					<div data-role="fieldcontain">
-						<label for="name">Model</label>
-						<input type="text" name="name" id="name" data-clear-btn="true">
-					</div>
-
-					<div data-role="fieldcontain">
-						<label for="name">Year</label>
-						<input type="text" name="name" id="name" data-clear-btn="true">
-					</div>
-
-					<div data-role="fieldcontain">
-						<label for="name">Place of Purchase</label>
-						<input type="text" name="name" id="name" data-clear-btn="true">
-					</div>
-
-					<div data-role="fieldcontain">
-						<label for="name">Cost/Value</label>
-						<input type="text" name="name" id="name" data-clear-btn="true">
-					</div>
-
-					<!-- Photos of the bike -->
-					<p>Photo of Owner with Bike</p>
-					<img class="registration-pic"></img>
-					<button class="registration-button blue-button">Take Picture</button>
-
-					<p>Photo of Bike Alone</p>
-					<img class="registration-pic"></img>
-					<button class="registration-button blue-button">Take Picture</button>
-
-					<p>Photo of Serial Number</p>
-					<img class="registration-pic"></img>
-					<button class="registration-button blue-button">Take Picture</button>
-
-					<p>Photo of Receipt</p>
-					<img class="registration-pic"></img>
-					<button class="registration-button blue-button">Take Picture</button>
-
-					<label for="additional-info">Additional Information About Bike</label>
-					<textarea name="additional-info" id="additional-info">
-					</textarea>
-
-					<div data-role="fieldcontain" class="flipswitch-holder">
-						<label for="le-s-none">I have a BikeNab app code:</label>
-						<input type="checkbox" data-role="flipswitch" name="le-s-none" id="le-s-none" checked="" data-mini="true"><!--TODO: Yes/no -->
-					</div>
-					<input type="text" id="app-code" data-clear-btn="true" placeholder="App Code">
-
-					<input type="submit" value="Register Bike" class="blue-button">
-
-				</form>
-			</div>
 		</div>
-
-
 
 		<!-- Javascript files -->
 		<script type="text/javascript" src="cordova.js"></script>

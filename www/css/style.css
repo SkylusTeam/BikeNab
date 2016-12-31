@@ -1,3 +1,5 @@
+/* Page-Specific Styling */
+/* Login Page Styling */
 @media screen and (min-width: 340px) {
   #login-box {
     margin: auto;
@@ -11,19 +13,12 @@
 
   #login img {
     height: 120px; } }
-@media screen and (min-width: 620px) {
-  .floating-box {
-    margin: auto;
-    width: 600px;
-    padding-left: 40px;
-    padding-right: 40px;
-    z-index: 10; } }
 @media screen and (max-width: 340px) {
   #login-box {
     margin: auto;
     height: 320px;
-    margin-right: 20px;
     margin-left: 20px;
+    margin-right: 20px;
     padding-left: 20px;
     padding-right: 20px; }
 
@@ -32,13 +27,6 @@
 
   #login img {
     height: 80px; } }
-@media screen and (max-width: 620px) {
-  .floating-box {
-    margin-right: 0px;
-    margin-left: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    z-index: 10; } }
 #login {
   background-color: #E0E2F0;
   z-index: 1; }
@@ -87,6 +75,7 @@
   padding-left: 0px;
   padding-right: 0px; }
 
+/* Home Screen */
 #home .icon-button {
   width: 45%;
   max-width: 250px;
@@ -108,35 +97,44 @@
   margin: 0px;
   padding: 0px; }
 
+/* Regstration Page */
+#register .registration-pic {
+  width: 250px;
+  height: 250px; }
+#register .registration-button {
+  width: 250px;
+  display: block; }
+#register .blue-button {
+  background-color: #254ea2;
+  color: white;
+  text-shadow: 0 0 0; }
+
+/* STUFF USED ACROSS THE SITE */
 /* Background Styling */
-.background {
+.stripey {
   display: block;
   position: fixed;
   top: 50%;
   transform: translate(0, -50%);
   width: 100%;
   z-index: -1; }
-  .background hr {
+  .stripey hr {
     background-color: #ed1a3b;
     height: 2px;
     border: none;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 3px;
-    margin-bottom: 3px; }
-  .background .stripe {
+    margin: 3px 0px; }
+  .stripey .stripe {
     height: 200px;
     background-color: #254ea2;
     margin: 0px; }
 
+/* General Page Styling */
 .blue {
   background-color: #E0E2F0;
   position: absolute;
-  z-index: 1;
-  padding-top: 50px; }
+  z-index: 1; }
 
 .header {
-  position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
@@ -149,14 +147,15 @@
   text-align: center;
   vertical-align: middle;
   line-height: 30px;
-  margin-right: 0px;
   margin-left: 0px;
+  margin-right: 0px;
   padding-left: 0px;
   padding-right: 0px;
   background-color: #444;
   color: white;
   text-shadow: 0 0 0; }
 
+/* White box floating over the background */
 .floating-box {
   background-color: white;
   padding-top: 20px;
@@ -164,17 +163,20 @@
   margin: auto;
   margin-top: 30px; }
 
-#register .registration-pic {
-  width: 250px;
-  height: 250px; }
-#register .registration-button {
-  width: 250px;
-  display: block; }
-#register .blue-button {
-  background-color: #254ea2;
-  color: white;
-  text-shadow: 0 0 0; }
-
+@media screen and (min-width: 620px) {
+  .floating-box {
+    margin: auto;
+    width: 600px;
+    padding-left: 40px;
+    padding-right: 40px;
+    z-index: 10; } }
+@media screen and (max-width: 620px) {
+  .floating-box {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 10; } }
 .flipswitch-holder {
   width: 300%; }
 

@@ -4,19 +4,37 @@ $light-blue: #E0E2F0;
 $normal-font: Arial;
 $fancy-font: 'Archivo Black', sans-serif;
 
-// /* Login Page Styling */
 
+@mixin side-padding($pixels) {
+	padding-left: $pixels;
+	padding-right: $pixels;
+}
+
+@mixin side-margin($pixels) {
+	margin-left: $pixels;
+	margin-right: $pixels;
+}
+
+
+//===================================================//
+
+/* Page-Specific Styling */
+
+//===================================================//
+
+
+
+
+/* Login Page Styling */
 
 // Big Screens
 @media screen and (min-width: 340px) {
 
-	//Login Page
 	#login-box {
 		margin: auto;
 		width: 300px;
 		height: 360px;
-		padding-left: 40px;
-		padding-right: 40px;
+		@include side-padding(40px);
 	}
 
 	#bikenab {
@@ -30,29 +48,14 @@ $fancy-font: 'Archivo Black', sans-serif;
 	}
 }
 
-
-@media screen and (min-width: 620px) {
-	.floating-box {
-		margin: auto;
-		width: 600px;
-		padding-left: 40px;
-		padding-right: 40px;
-		z-index: 10;
-	}
-}
-
-
 // Small screens
 @media screen and (max-width: 340px) {
 
-	//Login Page 
 	#login-box {
 		margin: auto;
 		height: 320px;
-		margin-right: 20px;
-		margin-left: 20px;
-		padding-left: 20px;
-		padding-right: 20px;
+		@include side-margin(20px);
+		@include side-padding(20px);
 	}
 
 	#bikenab {
@@ -66,28 +69,14 @@ $fancy-font: 'Archivo Black', sans-serif;
 	}
 }
 
-@media screen and (max-width: 620px) {
-	//Profile Page <!-- TODO: Have this and login-box extend the same base class-->
-	.floating-box {
-		//width: 100%;
-		margin-right: 0px;
-		margin-left: 0px;
-		padding-left: 20px;
-		padding-right: 20px;
-		z-index: 10;
-	}
-}
 
-
- #login {
+#login {
 	background-color: $light-blue;
 	z-index: 1;
-
 
 	.center {
 		text-align: center;
 		align: center;
-		//background-color: yellow;
 	}
 
 	// Top and bottom buttons
@@ -100,7 +89,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 		border-width: 0px;
 		font-size: 15px; //TODO: If possible, have font size expand on big screens, contract on small
 	}
-
 
 	#middle-button {
 		border-color: $blue-black;
@@ -147,19 +135,18 @@ $fancy-font: 'Archivo Black', sans-serif;
 		border: solid 1px $blue-black;
 		color: $blue-black;
 	}
-
 }
-
 
 .ui-content {
-	padding-left: 0px;
-	padding-right: 0px;
+	@include side-padding(0px);
 }
 
 
 
-#home {
 
+/* Home Screen */
+
+#home {
 
 	.icon-button {
 		width: 45%;
@@ -170,8 +157,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 		font-size: 20px;
 		display: inline-block;
 		text-align: center;
-		padding-left: 0px;
-		padding-right: 0px;
+		@include side-padding(0px);
 		height: 150px;
 	}
 
@@ -189,80 +175,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 
 
-/* Background Styling */
-
-.background {
-
-	display: block;
-	position: fixed;
-	top: 50%;
-	transform: translate(0, -50%);
-	width: 100%;
-	z-index: -1;
-
-
-	hr {
-		background-color: $red-highlight;
-		height: 2px;
-		border: none;
-		margin-left: 0px;
-		margin-right: 0px;
-		margin-top: 3px;
-		margin-bottom: 3px;
-	}
-
-	.stripe {
-		height: 200px;
-		background-color: $blue-black;
-		margin: 0px;
-	}
-}
-
-.blue {
-	background-color: $light-blue;
-	position: absolute;
-	z-index: 1;
-	padding-top: 50px;
-}
-
-.header {
-	position: fixed;
-	top:0px;
-	left:0px;
-	right:0px;
-	z-index:20;
-}
-
-
-/* Menu Styling */
-
-#body .home-buttons {
-
-	a {
-		height: 30px;
-		border: none;
-		text-align: center;
-		vertical-align: middle;
-		line-height: 30px;
-		margin-right: 0px;
-		margin-left: 0px;
-		padding-left: 0px;
-		padding-right: 0px;
-		background-color: #444;
-		color: white;
-		text-shadow:0 0 0;
-	}
-}
-
-
-.floating-box {
-	background-color: white;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	margin:auto;
-	margin-top: 30px;
-}
-
+/* Regstration Page */
 
 #register {
 	.registration-pic {
@@ -280,14 +193,115 @@ $fancy-font: 'Archivo Black', sans-serif;
 		color: white;
 		text-shadow:0 0 0;
 	}
+}
 
+
+
+
+//===================================================//
+
+/* STUFF USED ACROSS THE SITE */
+
+//===================================================//
+
+
+/* Background Styling */
+
+.stripey {
+
+	display: block;
+	position: fixed;
+	top: 50%;
+	transform: translate(0, -50%);
+	width: 100%;
+	z-index: -1;
+
+
+	hr {
+		background-color: $red-highlight;
+		height: 2px;
+		border: none;
+		margin: 3px 0px;
+	}
+
+	.stripe {
+		height: 200px;
+		background-color: $blue-black;
+		margin: 0px;
+	}
+}
+
+
+/* General Page Styling */
+
+.blue { //TODO: Name this better
+	background-color: $light-blue;
+	position: absolute;
+	z-index: 1;
+	//padding-top: 50px;
+}
+
+.header {
+	//position: fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	z-index:20;
+}
+
+
+/* Menu Styling */
+
+#body .home-buttons {
+	a {
+		height: 30px;
+		border: none;
+		text-align: center;
+		vertical-align: middle;
+		line-height: 30px;
+		@include side-margin(0px);
+		@include side-padding(0px);
+		background-color: #444;
+		color: white;
+		text-shadow:0 0 0;
+	}
+}
+
+
+/* White box floating over the background */
+
+.floating-box {
+	background-color: white;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin:auto;
+	margin-top: 30px;
+}
+
+// Big Screens
+@media screen and (min-width: 620px) {
+	.floating-box {
+		margin: auto;
+		width: 600px;
+		@include side-padding(40px);
+		z-index: 10;
+	}
+}
+
+// Small Screens
+@media screen and (max-width: 620px) {
+	.floating-box {
+		//width: 100%;
+		@include side-margin(0px);
+		@include side-padding(20px);
+		z-index: 10;
+	}
 }
 
 
 .flipswitch-holder {
 	width: 300%;
 }
-
 
 
 /* Icon Styling */
