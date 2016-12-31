@@ -10,7 +10,14 @@
     font-size: 50px; }
 
   #login img {
-    height: 120px; } }
+    height: 120px; }
+
+  .floating-box {
+    margin: auto;
+    width: 700px;
+    padding-left: 40px;
+    padding-right: 40px;
+    z-index: 10; } }
 @media screen and (max-width: 340px) {
   #login-box {
     margin: auto;
@@ -24,7 +31,15 @@
     font-size: 45px; }
 
   #login img {
-    height: 80px; } }
+    height: 80px; }
+
+  .floating-box {
+    margin: auto;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 10; } }
 #login {
   background-color: #E0E2F0;
   z-index: 1; }
@@ -116,10 +131,19 @@
     margin: 0px; }
 
 .blue {
-  background-color: #E0E2F0; }
+  background-color: #E0E2F0;
+  position: absolute;
+  z-index: 1; }
+
+.header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 20; }
 
 /* Menu Styling */
-#home-buttons a {
+#body .home-buttons a {
   height: 30px;
   border: none;
   text-align: center;
@@ -130,6 +154,24 @@
   padding-left: 0px;
   padding-right: 0px;
   background-color: #444;
+  color: white;
+  text-shadow: 0 0 0; }
+
+.floating-box {
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: auto;
+  margin-top: 30px; }
+
+#register .registration-pic {
+  width: 250px;
+  height: 250px; }
+#register .registration-button {
+  width: 250px;
+  display: block; }
+#register .blue-button {
+  background-color: #254ea2;
   color: white;
   text-shadow: 0 0 0; }
 
