@@ -28,11 +28,13 @@ $fancy-font: 'Archivo Black', sans-serif;
 			height: 120px;
 		}
 	}
+}
 
-	//Profile Page
+
+@media screen and (min-width: 620px) {
 	.floating-box {
 		margin: auto;
-		width: 700px;
+		width: 600px;
 		padding-left: 40px;
 		padding-right: 40px;
 		z-index: 10;
@@ -62,18 +64,18 @@ $fancy-font: 'Archivo Black', sans-serif;
 			height: 80px;
 		}
 	}
+}
 
+@media screen and (max-width: 620px) {
 	//Profile Page <!-- TODO: Have this and login-box extend the same base class-->
 	.floating-box {
-		margin: auto;
+		//width: 100%;
 		margin-right: 0px;
 		margin-left: 0px;
 		padding-left: 20px;
 		padding-right: 20px;
 		z-index: 10;
 	}
-
-
 }
 
 
@@ -220,6 +222,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 	background-color: $light-blue;
 	position: absolute;
 	z-index: 1;
+	padding-top: 50px;
 }
 
 .header {
@@ -278,6 +281,11 @@ $fancy-font: 'Archivo Black', sans-serif;
 		text-shadow:0 0 0;
 	}
 
+}
+
+
+.flipswitch-holder {
+	width: 300%;
 }
 
 

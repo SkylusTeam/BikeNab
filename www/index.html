@@ -67,7 +67,7 @@
 
 			<div data-role="main" class="ui-content">
 				<!-- Header (for all pages) --> <!-- TODO: Check how this works on mobile -->
-				<div data-role="header" class="thin">
+				<div data-role="header" class="thin header">
 					<div data-role="navbar" class="thin">
 						<ul class="home-buttons">
 							<li><a href="#my-bikes">My Bikes</a></li>
@@ -112,7 +112,7 @@
 			</div>
 			<div data-role="main" class="ui-content">
 			<!-- Header --> <!--TODO: Find way to reduce code duplication here -->
-			<div data-role="header" class="thin">
+			<div data-role="header" class="thin header">
 				<div data-role="navbar" class="thin">
 					<ul class="home-buttons">
 						<li><a href="#home">Home</a></li>
@@ -160,19 +160,19 @@
 
 					<h4>When any individual searches a serial number I marked stolen:</h4>
 
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="i-s-all">All my personal information is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="i-s-all" id="i-s-all" checked="" data-mini="true">
 					</div>
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="i-s-primary">My primary contact method is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="i-s-primary" id="i-s-primary" checked="" data-mini="true">
 					</div>
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="i-s-name">My name is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="i-s-name" id="i-s-name" checked="" data-mini="true">
 					</div>
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="i-s-none">None of my personal information is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="i-s-none" id="i-s-none" checked="" data-mini="true">
 					</div>
@@ -184,39 +184,39 @@
 					
 					<h4>When a law enforcement officer searches my bike's serial number:</h4>
 
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="le-n-all">All my personal information is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="le-n-all" id="le-n-all" checked="" data-mini="true">
 					</div>
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="ls-n-primary">My primary contact method is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="le-n-primary" id="le-n-primary" checked="" data-mini="true">
 					</div>
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="le-n-name">My name is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="le-n-name" id="le-n-name" checked="" data-mini="true">
 					</div>
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="le-n-none">None of my personal information is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="le-n-none" id="le-n-none" checked="" data-mini="true">
 					</div>
 
 
-						<h4>When a law enforcement officer searches my bike's serial number:</h4>
+					<h4>When a law enforcement officer searches a serial number I marked stolen:</h4>
 
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="le-s-all">All my personal information is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="le-s-all" id="le-s-all" checked="" data-mini="true">
 					</div>
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="ls-s-primary">My primary contact method is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="le-s-primary" id="le-s-primary" checked="" data-mini="true">
+						<input type="checkbox" class="flipswitch-holder" data-role="flipswitch" name="le-s-primary" id="le-s-primary" checked="" data-mini="true">
 					</div>
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="le-s-name">My name is visible:</label>
-						<input type="checkbox" data-role="flipswitch" name="le-s-name" id="le-s-name" checked="" data-mini="true">
+						<input type="checkbox"  class="flipswitch-holder"data-role="flipswitch" name="le-s-name" id="le-s-name" checked="" data-mini="true">
 					</div>
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="le-s-none">None of my personal information is visible:</label>
 						<input type="checkbox" data-role="flipswitch" name="le-s-none" id="le-s-none" checked="" data-mini="true">
 					</div>
@@ -285,11 +285,11 @@
 					<img class="registration-pic"></img>
 					<button class="registration-button blue-button">Take Picture</button>
 
-					<p>Photos of Bike Alone</p>
+					<p>Photo of Bike Alone</p>
 					<img class="registration-pic"></img>
 					<button class="registration-button blue-button">Take Picture</button>
 
-					<p>Photos of Serial Number</p>
+					<p>Photo of Serial Number</p>
 					<img class="registration-pic"></img>
 					<button class="registration-button blue-button">Take Picture</button>
 
@@ -297,12 +297,11 @@
 					<img class="registration-pic"></img>
 					<button class="registration-button blue-button">Take Picture</button>
 
-					<p>Additional Information About Bike</p>
-					<label for="additional-info">Textarea:</label>
+					<label for="additional-info">Additional Information About Bike</label>
 					<textarea name="additional-info" id="additional-info">
 					</textarea>
 
-					<div data-role="fieldcontain">
+					<div data-role="fieldcontain" class="flipswitch-holder">
 						<label for="le-s-none">I have a BikeNab app code:</label>
 						<input type="checkbox" data-role="flipswitch" name="le-s-none" id="le-s-none" checked="" data-mini="true"><!--TODO: Yes/no -->
 					</div>
