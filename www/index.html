@@ -46,14 +46,14 @@
 					<div id="bikenab">BIKENAB</div>
 					<div id="register">Register. Report. <b>Recover.</b></div>
 					<form>
-						<input type="email" name="email" placeholder="Log In"/>
-						<input type="password" name="password" placeholder="Password"/>	
+						<input class="login-input" type="email" name="email" placeholder="Log In"/>
+						<input class="login-input" type="password" name="password" placeholder="Password"/>	
 					</form>
-					<button onclick="goHome()">Log In</button>
+					<button class="login-input" onclick="goHome()">Log In</button>
 				</div>
 				<!-- Buttons at the bottom -->
 	 			<div data-role="controlgroup" data-type="horizontal" class="center">
-					<button class="ui-btn">Forgot your password?</button>
+					<button class="ui-btn" id="left-button">Forgot your password?</button>
 					<button class="ui-btn">Create an Account</button>
 				</div>
 			</div>
@@ -63,21 +63,21 @@
 
 		<!-- Home Page -->
 		<div data-role="page" id="home" class="blue">
-			<div data-role="main" class="ui-content">
-				<!-- Header (for all pages) --> <!-- TODO: Check how this works on mobile -->
-<!-- 				<div data-role="header">
-					<div data-role="navbar">
-						<ul>
-							<li><a href="#">My Bikes</a></li>
-							<li><a href="#">Register</a></li>
-							<li><a href="#">Report</a></li>
-							<li><a href="#">Lookup</a></li>
-						</ul>
-					</div>
-				</div> -->
 
+			<div data-role="main" class="ui-content">
+			<!-- Header (for all pages) --> <!-- TODO: Check how this works on mobile -->
+			<div data-role="header" class="thin">
+				<div data-role="navbar" class="thin">
+					<ul id="home-buttons">
+						<li><a href="#">My Bikes</a></li>
+						<li><a href="#">Register</a></li>
+						<li><a href="#">Lookup</a></li>
+						<li><a href="#">Profile</a></li>
+					</ul>
+				</div>
+			</div>
 				<!-- Four Buttons --> <!-- TODO: Have these and a menu??? -->
-				<div>
+				<div class="center-block">
 					<button class="icon-button">
 						<div>My Bikes</div>
 						<i class="material-icons md-48">directions_bike</i> <!--TODO: Does this work with IE?-->
@@ -87,13 +87,13 @@
 						<i class="material-icons md-48">create</i>
 					</button>
 				</div>
-				<div>
+				<div class="center-block">
 					<button class="icon-button">
 						<div>Lookup</div>
 						<i class="material-icons md-48">search</i> <!--TODO: Does this work with IE?-->
 					</button>
 					<button class="icon-button">
-						<div>Personal Info</div>
+						<div>Profile</div>
 						<i class="material-icons md-48">person_outline</i> <!--TODO: Does this work with IE?-->
 					</button>
 				</div>

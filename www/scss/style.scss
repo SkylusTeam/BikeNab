@@ -6,22 +6,73 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 // /* Login Page Styling */
 
+
+// Big Screens
+@media screen and (min-width: 340px) {
+	#login-box {
+		margin: auto;
+		width: 300px;
+		height: 360px;
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+
+	#bikenab {
+		font-size: 50px;
+	}
+
+	#login {
+		img {
+			height: 120px;
+		}
+	}
+}
+
+
+// Small screens
+@media screen and (max-width: 340px) {
+
+	#login-box {
+		margin: auto;
+		height: 320px;
+		margin-right: 20px;
+		margin-left: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	#bikenab {
+		font-size: 45px;
+	}
+
+	#login {
+		img {
+			height: 80px;
+		}
+	}
+}
+
+
  #login {
- 	background-color: $light-blue;
- 	z-index: 1;
+	background-color: $light-blue;
+	z-index: 1;
 
 
 	.center {
 		text-align: center;
+		align: center;
+		//background-color: yellow;
 	}
 
-	// Top and bottom buttons //TODO: Make them not affect Log In button
-	button {
-		background-color: transparent;
+	// Top and bottom buttons
+	.center button {
+		padding: 4px;
+		background-color: $light-blue;
 		color: $blue-black;
 		float: left;
 		display: inline-block;
 		border-width: 0px;
+		font-size: 15px; //TODO: If possible, have font size expand on big screens, contract on small
 	}
 
 
@@ -31,27 +82,30 @@ $fancy-font: 'Archivo Black', sans-serif;
 		border-right-width: 1px;
 	}
 
+	#left-button {
+		border-color: $blue-black;
+		border-right-width: 1px;
+	}
+
+
 	// Login box styling
 	img {
 		width: auto;
 		display: block;
-		height: 200px;
 		margin: auto;
+		transform: translate(-5%, 0);
 	}
 
 	#login-box {
-		margin: auto;
 		background-color: white;
-		width: 350px;
-		height: 450px;
-		padding: 10px;
+		padding-top: 20px;
+		padding-bottom: 20px;
 	}
 
 	#bikenab {
 		color: black;
 		margin: auto;
 		text-align: center;
-		font-size: 50px;
 		font-family: $fancy-font;
 	}
 
@@ -63,27 +117,49 @@ $fancy-font: 'Archivo Black', sans-serif;
 		//font-family: normal-font; //TODO: Why doesn't this work?
 	}
 
-	input {
-		outline-color: red;
-		border-color: yellow;
-		color: blue; //TODO: MAke sure this does something!
+	.login-input {
+		border: solid 1px $blue-black;
+		color: $blue-black;
 	}
 
+}
+
+
+.ui-content {
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 
 
 #home {
+
+
 	.icon-button {
-		width: 40%;
-		max-width: 300px;
+		width: 45%;
+		max-width: 250px;
 		background-color: $blue-black;
-		color: $light-blue;
+		text-shadow:0 0 0;
+		color: white;
 		font-size: 20px;
 		display: inline-block;
+		text-align: center;
+		padding-left: 0px;
+		padding-right: 0px;
+		height: 150px;
+	}
+
+	.center-block {
+		text-align: center;
+		align: center;
+		display: block;
 	}
 }
 
+.thin {
+	margin: 0px;
+	padding: 0px;
+}
 
 
 
@@ -121,6 +197,32 @@ $fancy-font: 'Archivo Black', sans-serif;
 }
 
 
+/* Menu Styling */
+
+#home-buttons {
+
+	a {
+		height: 30px;
+		border: none;
+		text-align: center;
+		vertical-align: middle;
+		line-height: 30px;
+		margin-right: 0px;
+		margin-left: 0px;
+		padding-left: 0px;
+		padding-right: 0px;
+		background-color: #444;
+		color: white;
+		text-shadow:0 0 0;
+	}
+}
+
+
+
+
+
+
+/* Icon Styling */
 
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
