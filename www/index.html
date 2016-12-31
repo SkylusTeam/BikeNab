@@ -25,40 +25,37 @@
 
 		<!-- Login Page -->
 		<div data-role="page" id="login">
-			<!-- Colors in the background -->
-			<div class="background">
-				<hr>
-				<div class="stripe"></div>
-				<hr>
-			</div>
-			<!-- Buttons at the top of the page -->
-			<div class="center">
-				<div data-role="controlgroup" data-type="horizontal">
-					<button class="ui-btn">About</button>
-					<button id="middle-button" class="ui-btn">Law Enforcement</button>
-					<button class="ui-btn">Bike Registry</button>
+			<div data-role="main" class="ui-content">
+				<!-- Colors in the background -->
+	 			<div class="background">
+					<hr>
+					<div class="stripe"></div>
+					<hr>
 				</div>
-			</div>
-			<!-- Login box -->
-			<div id="login-box" class="ui-shadow ui-corner-all">
-				<img src="img/logo.png">
-				<div id="bikenab">BIKENAB</div>
-				<div id="register">Register. Report. <b>Recover.</b></div>
-				<button onclick="pleaseWork()">Ugh Ugh Ugh</button>
-				<a href="#page2">Why aren't you working???</a>
-				<form >
-					<input type="email" name="email" placeholder="Log In"/>
-					<input type="password" name="password" placeholder="Password"/>
-					
-					<!-- <input type="submit" value="Go to Google" /> -->
-				
-				</form>
-				<button type="submit" onclick="pleaseWork()">PLEASE WORK</button>	
-			</div>
-			<!-- Buttons at the bottom -->
-			<div data-role="controlgroup" data-type="horizontal" class="center">
-				<button class="ui-btn">Forgot your password?</button>
-				<button class="ui-btn">Create an Account</button>
+				<!-- Buttons at the top of the page -->
+	  			<div class="center">
+					<div data-role="controlgroup" data-type="horizontal">
+						<button class="ui-btn">About</button>
+						<button id="middle-button" class="ui-btn">Law Enforcement</button>
+						<button class="ui-btn">Bike Registry</button>
+					</div>
+				</div>
+				<!-- Login box -->
+				<div id="login-box" class="ui-shadow ui-corner-all">
+	 				<img src="img/logo.png">
+					<div id="bikenab">BIKENAB</div>
+					<div id="register">Register. Report. <b>Recover.</b></div>
+					<form>
+						<input type="email" name="email" placeholder="Log In"/>
+						<input type="password" name="password" placeholder="Password"/>	
+					</form>
+					<button onclick="goHome()">Log In</button>
+				</div>
+				<!-- Buttons at the bottom -->
+	 			<div data-role="controlgroup" data-type="horizontal" class="center">
+					<button class="ui-btn">Forgot your password?</button>
+					<button class="ui-btn">Create an Account</button>
+				</div>
 			</div>
 		</div>
 

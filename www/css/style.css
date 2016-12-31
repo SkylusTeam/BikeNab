@@ -1,7 +1,6 @@
-/* Login Page Styling */
 #login {
   background-color: #E0E2F0;
-  z-index: -10; }
+  z-index: 1; }
   #login .center {
     text-align: center; }
   #login button {
@@ -25,8 +24,6 @@
     width: 350px;
     height: 450px;
     padding: 10px; }
-  #login p {
-    margin: auto; }
   #login #bikenab {
     color: black;
     margin: auto;

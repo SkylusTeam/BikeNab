@@ -4,18 +4,18 @@ $light-blue: #E0E2F0;
 $normal-font: Arial;
 $fancy-font: 'Archivo Black', sans-serif;
 
-/* Login Page Styling */
+// /* Login Page Styling */
 
-#login {
-	background-color: $light-blue;
-	z-index: -10;
+ #login {
+ 	background-color: $light-blue;
+ 	z-index: 1;
 
 
 	.center {
 		text-align: center;
 	}
 
-	// Top and bottom buttons
+	// Top and bottom buttons //TODO: Make them not affect Log In button
 	button {
 		background-color: transparent;
 		color: $blue-black;
@@ -23,12 +23,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 		display: inline-block;
 		border-width: 0px;
 	}
-
-	// .spacer {
-	// 	background-color: yellow;
-	// 	width: 3px;
-	// 	height: 10px;
-	// }
 
 
 	#middle-button {
@@ -51,10 +45,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 		width: 350px;
 		height: 450px;
 		padding: 10px;
-	}
-
-	p {
-		margin: auto;
 	}
 
 	#bikenab {
