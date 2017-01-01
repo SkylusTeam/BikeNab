@@ -30,9 +30,6 @@
 #login {
   background-color: #E0E2F0;
   z-index: 1; }
-  #login .center {
-    text-align: center;
-    align: center; }
   #login .center button {
     padding: 4px;
     background-color: #E0E2F0;
@@ -109,6 +106,14 @@
   color: white;
   text-shadow: 0 0 0; }
 
+/* Create Account Page  */
+.account-link {
+  display: block;
+  vertical-align: center;
+  line-height: 40px;
+  height: 40px;
+  margin-top: 50px; }
+
 /* STUFF USED ACROSS THE SITE */
 /* Background Styling */
 .stripey {
@@ -139,6 +144,10 @@
   left: 0px;
   right: 0px;
   z-index: 20; }
+
+#body .center {
+  text-align: center;
+  align: center; }
 
 /* Menu Styling */
 #body .home-buttons a {

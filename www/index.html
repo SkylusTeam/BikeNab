@@ -52,7 +52,7 @@
 				<!-- Buttons at the bottom -->
 	 			<div data-role="controlgroup" data-type="horizontal" class="center">
 					<button class="ui-btn" id="left-button">Forgot your password?</button>
-					<button class="ui-btn">Create an Account</button>
+					<button class="ui-btn" onclick=goSomewhere("#create-account")>Create an Account</button>
 				</div>
 			</div>
 		</div>
@@ -100,7 +100,7 @@
  			<div class="stripey"></div>
 
 			<div data-role="main" class="ui-content">
-				<div data-role="header" class="thin header"></div>
+				<div data-role="header" data-position="fixed" class="thin header"></div>
 				<!-- Floating white box holding the form --> 
 				<div class="floating-box ui-shadow ui-corner-all">
 					<form>
@@ -148,6 +148,32 @@
 		</div>
 
 
+		<!-- Create Account -->
+		<div data-role="page" id="create-account" class="blue">
+			<!-- Background Stripes -->
+ 			<div class="stripey"></div>
+
+			<div data-role="main" class="ui-content">
+				<div data-role="header" data-position="fixed" class="thin header"></div>
+				<!-- Floating white box holding the form --> 
+				<div class="floating-box ui-shadow ui-corner-all">
+					<form>
+
+						<h2>Account Information</h2>
+
+						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+						<div class="text-input" name="username" txt="Username:"></div>
+						<div class="text-input" name="password1" txt="Password:"></div>
+						<div class="text-input" name="password2" txt="Confirm Password:"></div>
+						<input type="submit" value="Create Account">
+					</form>
+					<a class="center account-link" href="#login">I already have an account.</a>
+				</div>
+			</div>
+		</div>
+
+
+
 
 		<!-- Registration Page -->
 		<div data-role="page" id="register" class="blue">
@@ -155,7 +181,7 @@
 
 			<div data-role="main" class="ui-content">
 				<!-- Header -->
-				<div data-role="header" class="thin header"></div>
+				<div data-role="header" data-position="fixed" class="thin header"></div>
 				<div class="floating-box ui-shadow ui-corner-all">
 					<h2>Register Bike</h2>
 					<form>
@@ -204,6 +230,38 @@
 				</div>
 			</div>
 		</div>
+
+
+
+
+		<!-- Law Enforcement Personal Info -->
+		<div data-role="page" id="le-personal-info" class="blue">
+			<!-- Background Stripes -->
+ 			<div class="stripey"></div>
+
+			<div data-role="main" class="ui-content">
+				<div data-role="header" data-position="fixed" class="thin header"></div>
+				<!-- Floating white box holding the form --> 
+				<div class="floating-box ui-shadow ui-corner-all">
+					<form>
+
+						<h2>Law Enforcement Personal Info</h2>
+
+						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+						<div class="text-input" name="le-name" txt="Name:"></div>
+						<div class="text-input" name="le-department" txt="Law Enforcement Department:"></div>
+						<div class="text-input" name="le-dept-zip" txt="Department Zip Code:"></div>
+						<div class="text-input" name="le-email" txt="Work Email:"></div>
+						<div class="text-input" name="le-work-phone" txt="Work Main Number:"></div>
+						<div class="text-input" name="le-cell" txt="Work Cell Number:"></div>
+						<div class="text-input" name="le-social-media" txt="Work Social Media:"></div>
+						<input type="submit" value="Save">
+					</form>
+				</div>
+			</div>
+		</div>
+
+
 
 		<!-- Javascript files -->
 		<script type="text/javascript" src="cordova.js"></script>
