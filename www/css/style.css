@@ -85,26 +85,10 @@
   padding-left: 0px;
   padding-right: 0px;
   height: 150px; }
-#home .center-block {
-  text-align: center;
-  align: center;
-  display: block; }
 
 .thin {
   margin: 0px;
   padding: 0px; }
-
-/* Regstration Page */
-#register .registration-pic {
-  width: 250px;
-  height: 250px; }
-#register .registration-button {
-  width: 250px;
-  display: block; }
-#register .blue-button {
-  background-color: #254ea2;
-  color: white;
-  text-shadow: 0 0 0; }
 
 /* Create Account Page  */
 .account-link {
@@ -147,7 +131,9 @@
 
 #body .center {
   text-align: center;
-  align: center; }
+  align: center;
+  margin: auto;
+  display: block; }
 
 /* Menu Styling */
 #body .home-buttons a {
@@ -165,12 +151,13 @@
   text-shadow: 0 0 0; }
 
 /* White box floating over the background */
-.floating-box {
+#body .floating-box {
   background-color: white;
   padding-top: 20px;
   padding-bottom: 20px;
   margin: auto;
-  margin-top: 30px; }
+  margin-top: 30px;
+  min-height: 350px; }
 
 @media screen and (min-width: 620px) {
   .floating-box {
@@ -186,9 +173,33 @@
     padding-left: 20px;
     padding-right: 20px;
     z-index: 10; } }
-.flipswitch-holder {
+/* Buttons etc. formatting */
+#body .flipswitch-holder {
   width: 300%; }
+#body .medium-button {
+  width: 250px;
+  display: block; }
+#body .blue-button {
+  background-color: #254ea2;
+  color: white;
+  text-shadow: 0 0 0; }
+#body .medium-pic {
+  width: 250px;
+  height: 250px; }
+#body .small-pic {
+  width: 140px;
+  height: 140px; }
+#body .side-by-side-block {
+  align: center;
+  display: block; }
+#body .side-by-side {
+  display: inline-block;
+  vertical-align: top; }
+#body .text-border {
+  border: 3px #254ea2 solid;
+  padding: 10px; }
 
+/* For Debugging Only  */
 /* Icon Styling */
 .material-icons.md-18 {
   font-size: 18px; }

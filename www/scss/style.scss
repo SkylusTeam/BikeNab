@@ -156,11 +156,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 		height: 150px;
 	}
 
-	.center-block {
-		text-align: center;
-		align: center;
-		display: block;
-	}
 }
 
 .thin {
@@ -169,26 +164,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 }
 
 
-
-/* Regstration Page */
-
-#register {
-	.registration-pic {
-		width: 250px;
-		height: 250px;
-	}
-
-	.registration-button {
-		width: 250px;
-		display: block;
-	}
-
-	.blue-button {
-		background-color: $blue-black;
-		color: white;
-		text-shadow:0 0 0;
-	}
-}
 
 
 /* Create Account Page  */ 
@@ -200,7 +175,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 	height: 40px;
 	margin-top: 50px;
 }
-
 
 
 
@@ -259,8 +233,9 @@ $fancy-font: 'Archivo Black', sans-serif;
 #body .center {
 		text-align: center;
 		align: center;
+		margin: auto; //TODO: If causing problems, delete here
+		display: block; // And here
 	}
-
 
 
 /* Menu Styling */
@@ -283,12 +258,13 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 /* White box floating over the background */
 
-.floating-box {
+#body .floating-box {
 	background-color: white;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	margin:auto;
 	margin-top: 30px;
+	min-height: 350px; //TODO: Check how this affects small screens
 }
 
 // Big Screens
@@ -312,9 +288,59 @@ $fancy-font: 'Archivo Black', sans-serif;
 }
 
 
-.flipswitch-holder {
-	width: 300%;
+/* Buttons etc. formatting */
+
+#body {
+
+	.flipswitch-holder {
+		width: 300%;
+	}
+
+	.medium-button {
+		width: 250px;
+		display: block;
+	}
+
+	.blue-button {
+		background-color: $blue-black;
+		color: white;
+		text-shadow:0 0 0;
+	}
+
+	.medium-pic {
+		width: 250px;
+		height: 250px;
+	}
+
+	.small-pic {
+		width: 140px;
+		height: 140px;
+	}
+
+	.side-by-side-block {
+		align: center;
+		display: block;
+		
+	}
+
+	.side-by-side {
+		display: inline-block;
+		vertical-align: top; //TODO: Is this line problematic?
+	}
+
+	.text-border {
+		border: 3px $blue-black solid;
+		padding: 10px
+
+	}
 }
+
+
+/* For Debugging Only  */ 
+
+// #body div {
+// 	border: 1px solid green;
+// }
 
 
 /* Icon Styling */

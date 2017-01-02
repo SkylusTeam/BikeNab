@@ -23,13 +23,29 @@ $( document ).ready(function() {
 
 function addRepeatedElements() {
 
-	// Add header
-	const header = '<div data-role="navbar" class="thin"><ul class="home-buttons"><li><a href="#home">Home</a></li><li><a href="#my-bikes">My Bikes</a></li><li><a href="#register">Register</a></li><li><a href="#lookup">Lookup</a></li><li><a href="#profile">Profile</a></li></ul></div>';
-	$('[data-role="header"]').append(header);
+	// Format floating white box.
+	$(".floating-box").addClass('ui-shadow ui-corner-all');
+
+	// Add menu
+	const menu = '<div data-role="header" data-position="fixed" class="thin header">' +
+	'<div data-role="navbar" class="thin">' + 
+					'<ul class="home-buttons">' + 
+						'<li><a href="#home">Home</a></li>' + 
+						'<li><a href="#my-bikes">My Bikes</a></li>' + 
+						'<li><a href="#register">Register</a></li>' +
+						'<li><a href="#lookup">Lookup</a></li>' + 
+						'<li><a href="#profile">Profile</a></li>' + 
+					'</ul>' + 
+				'</div>' + 
+				'</div>';
+
+	$('.header-container').append(menu);
+	//$('[data-role="header"]').header();	
 	$('[data-role="navbar"]').navbar(); //TODO: Maybe add background stripey stuff here!
+
 	
 	// Add background
-	$(".stripey").append("<hr><div class='stripe'></div><hr>");
+	$(".stripey-background").prepend("<div class='stripey'><hr><div class='stripe'></div><hr><div>");
 
 	// Add text input fields
 	$(".text-input").each(function() {
@@ -47,5 +63,23 @@ function addRepeatedElements() {
 	$("[data-role=fieldcontain]").fieldcontain();
 	$("[data-role=flipswitch]").flipswitch();
 
+	//insertSections();
 }
+
+
+
+/*function insertSections() {
+	$(".insert").each(function() {
+		console.log("got it!")
+		console.log(this);
+		//Get list of sections to insert
+		var sections = $(this).attr("insert").split();
+		for (section of sections) {
+			const x = $("." + section).clone();
+			console.log(x);
+			console.log(x.clone());
+			$(this).append(x);
+		}
+	})
+}*/
 

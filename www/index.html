@@ -15,7 +15,7 @@
 		<!-- Awesome open source icons & fonts!  Thank Google, you're the best! -->
 		<link href="https://fonts.googleapis.com/css?family=Archivo+Black&amp;subset=latin-ext" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+		rel="stylesheet">
 
 		<title>BikeNab</title>
 	</head>
@@ -25,13 +25,10 @@
 	<body id="body">
 
 		<!-- Login Page -->
-		<div data-role="page" id="login">
-			<!-- Background Stripes -->
-			<div class="stripey"></div>
-
+		<div data-role="page" id="login" class="blue stripey-background">
 			<div data-role="main" class="ui-content">
 				<!-- Buttons at the top of the page -->
-	  			<div class="center">
+				<div class="center">
 					<div data-role="controlgroup" data-type="horizontal">
 						<button class="ui-btn">About</button>
 						<button id="middle-button" class="ui-btn">Law Enforcement</button>
@@ -40,7 +37,7 @@
 				</div>
 				<!-- Login box -->
 				<div id="login-box" class="ui-shadow ui-corner-all">
-	 				<img src="img/logo.png">
+					<img src="img/logo.png">
 					<div id="bikenab">BIKENAB</div>
 					<div id="register">Register. Report. <b>Recover.</b></div>
 					<form>
@@ -50,7 +47,7 @@
 					<button class="login-input" onclick="goSomewhere('#home')">Log In</button>
 				</div>
 				<!-- Buttons at the bottom -->
-	 			<div data-role="controlgroup" data-type="horizontal" class="center">
+				<div data-role="controlgroup" data-type="horizontal" class="center">
 					<button class="ui-btn" id="left-button">Forgot your password?</button>
 					<button class="ui-btn" onclick=goSomewhere("#create-account")>Create an Account</button>
 				</div>
@@ -61,15 +58,11 @@
 
 		<!-- Home Page -->
 		<div data-role="page" id="home" class="blue">
-
-			<div data-role="main" class="ui-content">
-				<!-- Header (for all pages) -->
-				<div data-role="header" data-position="fixed" class="thin header"></div>
+			<div data-role="main" class="ui-content header-container">
 				<!-- Four Buttons -->
-
 				<!--Top Row-->
-				<div class="center-block">
-					<button class="icon-button">
+				<div class="side-by-side-block">
+					<button class="icon-button" onclick="goSomewhere('#my-bikes')">
 						<div>My Bikes</div>
 						<i class="material-icons md-48">directions_bike</i> <!--TODO: Does this work with IE?-->
 					</button>
@@ -79,9 +72,9 @@
 					</button>
 				</div>
 
-				<!--Bottom Row-->
-				<div class="center-block">
-					<button class="icon-button">
+				<!--Middle Row-->
+				<div class="side-by-side-block">
+					<button class="icon-button"  onclick="goSomewhere('#lookup')">
 						<div>Lookup</div>
 						<i class="material-icons md-48">search</i>
 					</button>
@@ -90,21 +83,26 @@
 						<i class="material-icons md-48">person_outline</i>
 					</button>
 				</div>
+
+				<!--Bottom Row-->
+				<div class="side-by-side-block" onclick="goSomewhere('#settings')">
+					<button class="icon-button">
+						<div>Settings</div>
+						<i class="material-icons md-48">settings</i>
+					</button>
+				</div>
+
 			</div>
 		</div>
 
 
 		<!-- Profile -->
-		<div data-role="page" id="profile" class="blue">
-			<!-- Background Stripes -->
- 			<div class="stripey"></div>
-
-			<div data-role="main" class="ui-content">
-				<div data-role="header" data-position="fixed" class="thin header"></div>
+		<div data-role="page" id="profile" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
 				<!-- Floating white box holding the form --> 
-				<div class="floating-box ui-shadow ui-corner-all">
+				<div class="floating-box">
 					<form>
-
+						<h1 class="center">Profile</h1>
 						<h2>Personal Info</h2>
 
 						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
@@ -149,17 +147,11 @@
 
 
 		<!-- Create Account -->
-		<div data-role="page" id="create-account" class="blue">
-			<!-- Background Stripes -->
- 			<div class="stripey"></div>
-
-			<div data-role="main" class="ui-content">
-				<div data-role="header" data-position="fixed" class="thin header"></div>
-				<!-- Floating white box holding the form --> 
-				<div class="floating-box ui-shadow ui-corner-all">
+		<div data-role="page" id="create-account" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
 					<form>
-
-						<h2>Account Information</h2>
+						<h1>Account Information</h1>
 
 						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
 						<div class="text-input" name="username" txt="Username:"></div>
@@ -176,14 +168,10 @@
 
 
 		<!-- Registration Page -->
-		<div data-role="page" id="register" class="blue">
-			 <div class="stripey"></div>
-
-			<div data-role="main" class="ui-content">
-				<!-- Header -->
-				<div data-role="header" data-position="fixed" class="thin header"></div>
-				<div class="floating-box ui-shadow ui-corner-all">
-					<h2>Register Bike</h2>
+		<div data-role="page" id="register" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+					<h1 class="center">Register Bike</h1>
 					<form>
 						<!-- Text Input Form Fields -->
 						
@@ -197,25 +185,24 @@
 
 						<!-- Photos of the bike -->
 						<p>Photo of Owner with Bike</p>
-						<img class="registration-pic"></img>
-						<button class="registration-button blue-button">Take Picture</button>
+						<img class="medium-pic">
+						<button class="medium-button blue-button">Take Picture</button>
 
 						<p>Photo of Bike Alone</p>
-						<img class="registration-pic"></img>
-						<button class="registration-button blue-button">Take Picture</button>
+						<img class="medium-pic">
+						<button class="medium-button blue-button">Take Picture</button>
 
 						<p>Photo of Serial Number</p>
-						<img class="registration-pic"></img>
-						<button class="registration-button blue-button">Take Picture</button>
+						<img class="medium-pic">
+						<button class="medium-button blue-button">Take Picture</button>
 
 						<p>Photo of Receipt</p>
-						<img class="registration-pic"></img>
-						<button class="registration-button blue-button">Take Picture</button>
+						<img class="medium-pic">
+						<button class="medium-button blue-button">Take Picture</button>
 
 
 						<label for="additional-info">Additional Information About Bike</label>
-						<textarea name="additional-info" id="additional-info">
-						</textarea>
+						<textarea name="additional-info" id="additional-info"></textarea>
 
 						<!-- Pyayment Options-->
 						<div data-role="fieldcontain" class="flipswitch-holder">
@@ -235,17 +222,12 @@
 
 
 		<!-- Law Enforcement Personal Info -->
-		<div data-role="page" id="le-personal-info" class="blue">
-			<!-- Background Stripes -->
- 			<div class="stripey"></div>
-
-			<div data-role="main" class="ui-content">
-				<div data-role="header" data-position="fixed" class="thin header"></div>
-				<!-- Floating white box holding the form --> 
-				<div class="floating-box ui-shadow ui-corner-all">
+		<div data-role="page" id="le-personal-info" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
 					<form>
 
-						<h2>Law Enforcement Personal Info</h2>
+						<h1>Law Enforcement Profile</h1>
 
 						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
 						<div class="text-input" name="le-name" txt="Name:"></div>
@@ -261,6 +243,287 @@
 			</div>
 		</div>
 
+
+		<!-- Settings -->
+		<div data-role="page" id="settings" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+
+					<h1 class="center">Settings</h1>
+
+					<h2>Account Info</h2>
+					<h4>Account Email: skylusRocks@gmail.com</h4>
+					<button >Change Email</button>
+					<button>Change Password</button>
+
+					<h2>About BikeNab</h2>
+					<button>About Us</button>
+					<button>Contact Us</button>
+
+					<h2>Goodbye</h2>
+					<button  onclick="goSomewhere('#login')">Log Out</button>
+					<button>Delete Account</button>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- My Bikes -->
+		<div data-role="page" id="my-bikes" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box" style="min-height:350px;">
+					<h1 class="center">My Bikes</h1>
+					<ul data-role="listview" data-inset="true">
+						<li><a  href="#bike-detail">
+							<img class="medium-pic" src="img/bike2.jpg">
+							<div>Model: Thing </div>
+							<div>Status: Okay </div>
+						</a></li>
+						<li><a href="#bike-detail">
+							<img class="medium-pic" src="img/bike3.jpg">
+							<div>(These bikes should be added dynamically) </div><!-- TODO: Make this deal with long descriptions well-->
+							<div>Status: Stolen </div>
+						</a></li>
+					</ul>
+					<button class="blue-button" onclick="goSomewhere('#register')">Register Another Bike</button>
+					<button class="blue-button" onclick="goSomewhere('#past-reports')">View Past Reports</button>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Bike-detail -->
+		<div data-role="page" id="bike-detail" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+					<h1 class="center">About My Bike</h1>
+					<h2>Bicycle Description</h2>
+
+					<div class="text-border">
+					<div class="side-by-side-block">
+						<div class="side-by-side" style="width: 200px;">Serial Number: </div>
+						<div class="side-by-side">1234567890</div>
+					</div>
+					<div>
+						<div class="side-by-side" style="width: 200px;">Make:</div>
+						<div class="side-by-side">Unicycle</div>
+					</div>
+					<div>
+						<div class="side-by-side" style="width: 200px;">Model:</div>
+						<div class="side-by-side">Wheelturner</div>
+					</div>
+					<div>
+						<div class="side-by-side" style="width: 200px;">Year:</div>
+						<div class="side-by-side">2019</div>
+					</div>
+					<div>
+						<div class="side-by-side" style="width: 200px;">Place of Purchase:</div>
+						<div class="side-by-side">Narnia</div>
+					</div>
+					<div>
+						<div class="side-by-side" style="width: 200px;">Cost/Value:</div>
+						<div class="side-by-side">$1</div>
+					</div>
+					<br/>
+					<div>(Text from the additional info field): It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.
+						During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR, an armored space station with enough power to destroy an entire planet.
+						Pursued by the Empire's sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy...."
+					</div>
+				</div>
+
+					<h2>Bicycle Images</h2>
+					<div class="side-by-side-block">
+						<img class="small-pic ui-corner-all" src="img/bike2.jpg"><!--TODO: Should there be labels?-->
+						<img class="small-pic ui-corner-all" src="img/bike2.jpg">
+						<img class="small-pic ui-corner-all" src="img/bike2.jpg">
+						<img class="small-pic ui-corner-all" src="img/bike2.jpg">
+					</div>
+
+					<h2>Options</h2>
+					<button class="blue-button">Edit Info</button>
+					<button class="blue-button" onclick="goSomewhere('#report')">Report Bike Missing/Stolen</button>
+					<button class="blue-button" onclick="goSomewhere('#unregister')">Transfer/Unregister</button>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Unregister Page -->
+		<div data-role="page" id="unregister" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+					<h1 class="center">Unregister/Transfer Bike</h1>
+					<form>
+						<div class="flipswitch-input" name="transferring" txt="Are you transferring your bike to another individual?"></div>
+						<div class="text-input" name="transferee" txt="Recipient's Email:"></div><!--TODO: Make this Yes/No--><!--TODO: Make the field below be hidden or visible based on this field.-->
+						<p>The recipient will recieve an email inviting them to add this bike to an existing acocunt or create a new account.  When this invitation is accepted, the bike will be removed from your account.</p>
+						<input type="submit" value="Unregister Bike">
+					</form>
+					<br/>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Lookup Page -->
+		<div data-role="page" id="lookup" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+					<h1 class="center">Bike Lookup</h1>
+					<br/>
+					<ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Enter Serial Number...">
+						<li><a>1234567890</a></li>
+						<li><a>2345678901</a></li>
+						<li><a>3456789012</a></li>
+						<li><a>4567890123</a></li>
+						<li><a>5678901234</a></li>
+						<li><a>6789012345</a></li>
+						<li><a>7890123456</a></li>
+						<li><a>8901234567</a></li>
+						<li><a>9012345678</a></li>
+						<li><a>0123456789</a></li>
+					</ul>
+
+					<h2 class="center" style="color: red">Status: Stolen</h2>
+					<br/>
+					<img class="medium-pic ui-corner-all center" src="img/bike2.jpg">
+
+					<h2>Bicycle Info</h2>
+
+					<div class="text-border">
+						<div>
+							<div class="side-by-side" style="width: 200px;">Make:</div>
+							<div class="side-by-side">Unicycle</div>
+						</div>
+						<div>
+							<div class="side-by-side" style="width: 200px;">Model:</div>
+							<div class="side-by-side">Wheelturner</div>
+						</div>
+						(ETC.  The specifics of what info appears here would depend on your role (police or not), the bike's status (stolen or not) & the owner's privacy settings)
+					</div>
+
+					<h2>Owner Info</h2>
+
+					<div class="text-border">
+						<div>
+							<div class="side-by-side" style="width: 200px;">Name:</div>
+							<div class="side-by-side">Jane Doe</div>
+						</div>
+						<div>
+							<div class="side-by-side" style="width: 200px;">Owner Email:</div>
+							<div class="side-by-side">iwantmybike@gmail.com</div>
+						</div>
+						(Of course, all this info would only show up when someone searches a serial number.)
+					</div>
+
+					<h2>Law Enforcement Info</h2>
+
+					<div class="text-border">
+						<div>
+							<div class="side-by-side" style="width: 200px;">Case Officer:</div>
+							<div class="side-by-side">John Doe</div>
+						</div>
+						<div>
+							<div class="side-by-side" style="width: 200px;">Police Phone Number:</div>
+							<div class="side-by-side">(012) 345-6789</div>
+						</div>
+						(IDK exactly what information we'd have here.)
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- Report Page -->
+		<div data-role="page" id="report" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+					<h1 class="center">Report Bike</h1>
+					<form>
+						<div class="text-input" name="incident-number" txt="Incident Report Number:"></div>
+						<br/>
+
+						<h4>Case Officer's Contact Info</h4>
+						<div class="text-input" name="le-case-email" txt="Officer Email:"></div>
+						<div class="text-input" name="le-phone-email" txt="Officer Phone:"></div>
+						</br>
+
+						<h4>Describe the Incident</h4>
+						<textarea name="additional-info" id="additional-info"></textarea>
+						</br>
+
+						<div class="flipswitch-input" name="i-s-primary" txt="My bike was"></div>
+						<br/>
+
+						<h4>If my bike is found</h4>
+						<div class="flipswitch-input" name="i-s-name" txt="Contact me"></div>
+						<div class="flipswitch-input" name="i-s-none" txt="Contact local police"></div>
+
+						<input type="submit" value="Submit Report">
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Past Reports -->
+		<div data-role="page" id="past-reports" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+					<h1 class="center">Past Reports</h1>
+					<div data-role="collapsibleset">
+						<div data-role="collapsible">
+							<h1>Superspeeder bike reported missing on 1/1/2017.</h1>
+							<div>
+								<img class="small-pic ui-corner-all center side-by-side medium-margin" src="img/bike2.jpg">
+								<div class="side-by-side">
+									<button class="blue-button medium-button" onclick="goSomewhere('#bike-detail')">Bike Details</button><!--TODO: Add more of a margin around these-->
+									<button class="blue-button medium-button" onclick="goSomewhere('#report')">Edit Report</button>
+								</div>
+							</div>
+							<h4>Incident Information</h4>
+							<div>
+								<div class="side-by-side" style="width: 200px;">Incident Report Number:</div>
+								<div class="side-by-side">1234567</div>
+							</div>
+							<div>
+								<div class="side-by-side" style="width: 200px;">Case Officer's Email:</div>
+								<div class="side-by-side">imacop@gmail.com</div>
+							</div>
+							<div>
+								<div class="side-by-side" style="width: 200px;">Case Officer's Phone:</div>
+								<div class="side-by-side">(333) 444-5555</div>
+							</div>
+							<div>
+								<div class="side-by-side" style="width: 200px;">Reported:</div>
+								<div class="side-by-side">Missing</div>
+							</div>
+							<div>
+								<div class="side-by-side" style="width: 200px;">When Found:</div>
+								<div class="side-by-side">Contact owner and local police</div>
+							</div>
+							<p>Data from the 'Additional Info' field will go here.  I'm not quite sure what people will put into it.</p>
+						</div>
+						<div data-role="collapsible">
+							<h1>Some other Report!</h1>
+							<p>Maybe if there's only one it should appear auto-expanded.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Unregister/Transfer -->
+ <!-- 		<div data-role="page" id="test" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box" id='heere'>
+				</div>
+			</div>
+		</div>
+
+		<div id="please">Please Work</div> -->
 
 
 		<!-- Javascript files -->
