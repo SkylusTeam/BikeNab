@@ -31,7 +31,7 @@
 				<div class="center">
 					<div data-role="controlgroup" data-type="horizontal">
 						<button class="ui-btn">About</button>
-						<button id="middle-button" class="ui-btn">Law Enforcement</button>
+						<button id="middle-button" class="ui-btn" onclick='goSomewhere("#le-create-account")'>Law Enforcement</button>
 						<button class="ui-btn">Bike Registry</button>
 					</div>
 				</div>
@@ -49,7 +49,7 @@
 				<!-- Buttons at the bottom -->
 				<div data-role="controlgroup" data-type="horizontal" class="center">
 					<button class="ui-btn" id="left-button">Forgot your password?</button>
-					<button class="ui-btn" onclick=goSomewhere("#create-account")>Create an Account</button>
+					<button class="ui-btn" onclick='goSomewhere("#create-account")'>Create an Account</button>
 				</div>
 			</div>
 		</div>
@@ -151,12 +151,21 @@
 			<div data-role="main" class="ui-content header-container">
 				<div class="floating-box">
 					<form>
-						<h1>Account Information</h1>
+						<div class="insert" insert="create-account-form"></div>
+						<input type="submit" value="Create Account">
+					</form>
+			<a class="center account-link" href="#login">I already have an account.</a>
+				</div>
+			</div>
+		</div>
 
-						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
-						<div class="text-input" name="username" txt="Username:"></div>
-						<div class="text-input" name="password1" txt="Password:"></div>
-						<div class="text-input" name="password2" txt="Confirm Password:"></div>
+
+		<!-- Law Enforcement Create Account -->
+		<div data-role="page" id="le-create-account" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+					<form>
+						<div class="insert" insert="create-account-form le-personal-info"></div>
 						<input type="submit" value="Create Account">
 					</form>
 					<a class="center account-link" href="#login">I already have an account.</a>
@@ -220,28 +229,22 @@
 
 
 
-
-		<!-- Law Enforcement Personal Info -->
-		<div data-role="page" id="le-personal-info" class="blue stripey-background">
+		<!-- Law Enforcement Profile -->
+		<div data-role="page" id="le-profile" class="blue stripey-background">
 			<div data-role="main" class="ui-content header-container">
 				<div class="floating-box">
 					<form>
-
-						<h1>Law Enforcement Profile</h1>
-
-						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
-						<div class="text-input" name="le-name" txt="Name:"></div>
-						<div class="text-input" name="le-department" txt="Law Enforcement Department:"></div>
-						<div class="text-input" name="le-dept-zip" txt="Department Zip Code:"></div>
-						<div class="text-input" name="le-email" txt="Work Email:"></div>
-						<div class="text-input" name="le-work-phone" txt="Work Main Number:"></div>
-						<div class="text-input" name="le-cell" txt="Work Cell Number:"></div>
-						<div class="text-input" name="le-social-media" txt="Work Social Media:"></div>
+						<h1 class="center">Law Enforcement Profile</h1>
+						<div class="insert" insert="le-personal-info"></div>
 						<input type="submit" value="Save">
 					</form>
 				</div>
 			</div>
 		</div>
+
+
+
+
 
 
 		<!-- Settings -->
@@ -515,15 +518,51 @@
 		</div>
 
 
-		<!-- Unregister/Transfer -->
- <!-- 		<div data-role="page" id="test" class="blue stripey-background">
+
+		<!-- Hidden page containing elements that pop up in various pages -->
+		<div data-role="page" id="hidden">
+
+			<!-- Law Enforcement Personal Info -->
+			<!-- used in #le-profile and #le-create-account-->
+			<div class="le-personal-info">
+				<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+				<div class="text-input" name="le-name" txt="Name:"></div>
+				<div class="text-input" name="le-department" txt="Law Enforcement Department:"></div>
+				<div class="text-input" name="le-dept-zip" txt="Department Zip Code:"></div>
+				<div class="text-input" name="le-email" txt="Work Email:"></div>
+				<div class="text-input" name="le-work-phone" txt="Work Main Number:"></div>
+				<div class="text-input" name="le-cell" txt="Work Cell Number:"></div>
+				<div class="text-input" name="le-social-media" txt="Work Social Media:"></div>
+			</div>
+
+
+			<!--Create Account Form-->
+			<!--Used in #create-account and #le-create-account -->
+			<div class="create-account-form">
+				
+					<h1 class="center">Account Information</h1>
+					<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+					<div class="text-input" name="username" txt="Username:"></div>
+					<div class="text-input" name="password1" txt="Password:"></div>
+					<div class="text-input" name="password2" txt="Confirm Password:"></div>
+				
+			</div>
+		</div> 
+
+
+
+
+		
+
+		<!--TEST-->
+		<div data-role="page" id="test" class="blue stripey-background">
 			<div data-role="main" class="ui-content header-container">
-				<div class="floating-box" id='heere'>
+				<div class="floating-box">
+					<div class="insert" insert="create-account-form"></div>
 				</div>
 			</div>
-		</div>
+		</div> 
 
-		<div id="please">Please Work</div> -->
 
 
 		<!-- Javascript files -->

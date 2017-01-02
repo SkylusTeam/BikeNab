@@ -8,12 +8,12 @@ function goSomewhere(screen) {
 
 
 //Show the background and header on various pages
-$("body").on("pagecontainerbeforeshow", function( event, ui ) {
+/*$("body").on("pagecontainerbeforeshow", function( event, ui ) {
 	console.log("function called");
 	const destination = ui.toPage[0].id;;
 
 });
-
+*/
 
 
 $( document ).ready(function() {
@@ -22,6 +22,8 @@ $( document ).ready(function() {
 
 
 function addRepeatedElements() {
+
+	insertSections();
 
 	// Format floating white box.
 	$(".floating-box").addClass('ui-shadow ui-corner-all');
@@ -63,23 +65,21 @@ function addRepeatedElements() {
 	$("[data-role=fieldcontain]").fieldcontain();
 	$("[data-role=flipswitch]").flipswitch();
 
-	//insertSections();
 }
 
 
 
-/*function insertSections() {
+function insertSections() {
 	$(".insert").each(function() {
-		console.log("got it!")
-		console.log(this);
 		//Get list of sections to insert
-		var sections = $(this).attr("insert").split();
+		var sections = $(this).attr("insert").split(" ");
 		for (section of sections) {
-			const x = $("." + section).clone();
-			console.log(x);
-			console.log(x.clone());
-			$(this).append(x);
+			$(this).append($("." + section).clone()[0]);
 		}
+		console.log("before");
+		$(this).each(function() {
+			console.log("Seriously?")
+		});
 	})
-}*/
+}
 
