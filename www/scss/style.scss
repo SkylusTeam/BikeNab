@@ -320,7 +320,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 	.side-by-side-block {
 		align: center;
 		display: block;
-		
+		text-align: center; //TODO: was there a reason this was deleted?
 	}
 
 	.side-by-side {
@@ -330,7 +330,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 	.text-border {
 		border: 3px $blue-black solid;
-		padding: 10px
+		padding: 10px;
 
 	}
 }

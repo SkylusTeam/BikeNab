@@ -191,7 +191,8 @@
   height: 140px; }
 #body .side-by-side-block {
   align: center;
-  display: block; }
+  display: block;
+  text-align: center; }
 #body .side-by-side {
   display: inline-block;
   vertical-align: top; }

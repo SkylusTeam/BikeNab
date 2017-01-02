@@ -182,37 +182,7 @@
 				<div class="floating-box">
 					<h1 class="center">Register Bike</h1>
 					<form>
-						<!-- Text Input Form Fields -->
-						
-						<!-- These will be dynamically replaced with styled input fields-->
-						<div class="text-input" name="serial-number" txt="Serial Number"></div>
-						<div class="text-input" name="bike-make" txt="Make"></div>
-						<div class="text-input" name="bike-model" txt="Model"></div>
-						<div class="text-input" name="bike-year" txt="Year"></div>
-						<div class="text-input" name="bike-purchase-place" txt="Place of Purchase"></div>
-						<div class="text-input" name="bike-cost" txt="Cost/Value"></div>
-
-						<!-- Photos of the bike -->
-						<p>Photo of Owner with Bike</p>
-						<img class="medium-pic">
-						<button class="medium-button blue-button">Take Picture</button>
-
-						<p>Photo of Bike Alone</p>
-						<img class="medium-pic">
-						<button class="medium-button blue-button">Take Picture</button>
-
-						<p>Photo of Serial Number</p>
-						<img class="medium-pic">
-						<button class="medium-button blue-button">Take Picture</button>
-
-						<p>Photo of Receipt</p>
-						<img class="medium-pic">
-						<button class="medium-button blue-button">Take Picture</button>
-
-
-						<label for="additional-info">Additional Information About Bike</label>
-						<textarea name="additional-info" id="additional-info"></textarea>
-
+						<div class="insert" insert="bike-info"></div>
 						<!-- Pyayment Options-->
 						<div data-role="fieldcontain" class="flipswitch-holder">
 							<label for="le-s-none">I have a BikeNab app code:</label>
@@ -222,6 +192,21 @@
 						<input type="text" id="app-code" data-clear-btn="true" placeholder="App Code">
 						<!-- Submit Button-->
 						<input type="submit" value="Register Bike" class="blue-button">
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Edit Bike Info Page -->
+		<div data-role="page" id="edit-bike-info" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+					<h1 class="center">Update Bike Info</h1>
+					<form>
+						<div class="insert" insert="bike-info"></div>
+						<!-- Submit Button-->
+						<input type="submit" value="Save" class="blue-button">
 					</form>
 				</div>
 			</div>
@@ -343,7 +328,7 @@
 					</div>
 
 					<h2>Options</h2>
-					<button class="blue-button">Edit Info</button>
+					<button class="blue-button" onclick="goSomewhere('#edit-bike-info')">Edit Info</button>
 					<button class="blue-button" onclick="goSomewhere('#report')">Report Bike Missing/Stolen</button>
 					<button class="blue-button" onclick="goSomewhere('#unregister')">Transfer/Unregister</button>
 				</div>
@@ -444,26 +429,22 @@
 				<div class="floating-box">
 					<h1 class="center">Report Bike</h1>
 					<form>
-						<div class="text-input" name="incident-number" txt="Incident Report Number:"></div>
-						<br/>
-
-						<h4>Case Officer's Contact Info</h4>
-						<div class="text-input" name="le-case-email" txt="Officer Email:"></div>
-						<div class="text-input" name="le-phone-email" txt="Officer Phone:"></div>
-						</br>
-
-						<h4>Describe the Incident</h4>
-						<textarea name="additional-info" id="additional-info"></textarea>
-						</br>
-
-						<div class="flipswitch-input" name="i-s-primary" txt="My bike was"></div>
-						<br/>
-
-						<h4>If my bike is found</h4>
-						<div class="flipswitch-input" name="i-s-name" txt="Contact me"></div>
-						<div class="flipswitch-input" name="i-s-none" txt="Contact local police"></div>
-
+						<div class="insert" insert="report-form"></div>
 						<input type="submit" value="Submit Report">
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Edit Report Page -->
+		<div data-role="page" id="edit-report" class="blue stripey-background">
+			<div data-role="main" class="ui-content header-container">
+				<div class="floating-box">
+					<h1 class="center">Edit Report</h1>
+					<form>
+						<div class="insert" insert="report-form"></div>
+						<input type="submit" value="Edit Report">
 					</form>
 				</div>
 			</div>
@@ -482,7 +463,7 @@
 								<img class="small-pic ui-corner-all center side-by-side medium-margin" src="img/bike2.jpg">
 								<div class="side-by-side">
 									<button class="blue-button medium-button" onclick="goSomewhere('#bike-detail')">Bike Details</button><!--TODO: Add more of a margin around these-->
-									<button class="blue-button medium-button" onclick="goSomewhere('#report')">Edit Report</button>
+									<button class="blue-button medium-button" onclick="goSomewhere('#edit-report')">Edit Report</button>
 								</div>
 							</div>
 							<h4>Incident Information</h4>
@@ -540,13 +521,74 @@
 			<!--Used in #create-account and #le-create-account -->
 			<div class="create-account-form">
 				
-					<h1 class="center">Account Information</h1>
+					<h1 class="center">Create Account</h1>
 					<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
 					<div class="text-input" name="username" txt="Username:"></div>
 					<div class="text-input" name="password1" txt="Password:"></div>
 					<div class="text-input" name="password2" txt="Confirm Password:"></div>
-				
 			</div>
+
+
+			<!-- Report Form -->
+			<!-- Used in #report and #edit-report-->
+			<div class="report-form">
+				<div class="text-input" name="incident-number" txt="Incident Report Number:"></div>
+				<br/>
+
+				<h4>Case Officer's Contact Info</h4>
+				<div class="text-input" name="le-case-email" txt="Officer Email:"></div>
+				<div class="text-input" name="le-phone-email" txt="Officer Phone:"></div>
+				</br>
+
+				<h4>Describe the Incident</h4>
+				<textarea name="additional-info" id="additional-info"></textarea>
+				</br>
+
+				<div class="flipswitch-input" name="i-s-primary" txt="My bike was"></div>
+				<br/>
+
+				<h4>If my bike is found</h4>
+				<div class="flipswitch-input" name="i-s-name" txt="Contact me"></div>
+				<div class="flipswitch-input" name="i-s-none" txt="Contact local police"></div>
+			</div>
+
+
+			<!-- Bike info form-->
+			<!-- Used in #register and #edit-bike-info-->
+			<div class="bike-info">
+				<!-- Text Input Form Fields -->		
+				<!-- These will be dynamically replaced with styled input fields-->
+				<div class="text-input" name="serial-number" txt="Serial Number"></div>
+				<div class="text-input" name="bike-make" txt="Make"></div>
+				<div class="text-input" name="bike-model" txt="Model"></div>
+				<div class="text-input" name="bike-year" txt="Year"></div>
+				<div class="text-input" name="bike-purchase-place" txt="Place of Purchase"></div>
+				<div class="text-input" name="bike-cost" txt="Cost/Value"></div>
+
+				<!-- Photos of the bike -->
+				<p>Photo of Owner with Bike</p>
+				<img class="medium-pic">
+				<button class="medium-button blue-button">Take Picture</button>
+
+				<p>Photo of Bike Alone</p>
+				<img class="medium-pic">
+				<button class="medium-button blue-button">Take Picture</button>
+
+				<p>Photo of Serial Number</p>
+				<img class="medium-pic">
+				<button class="medium-button blue-button">Take Picture</button>
+
+				<p>Photo of Receipt</p>
+				<img class="medium-pic">
+				<button class="medium-button blue-button">Take Picture</button>
+
+
+				<label for="additional-info">Additional Information About Bike</label>
+				<textarea name="additional-info" id="additional-info"></textarea>
+			</div>
+
+
+
 		</div> 
 
 
