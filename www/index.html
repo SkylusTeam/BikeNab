@@ -120,24 +120,36 @@
 						<!-- Flipswitch Input Form Fields (These will be dynamically replaced with styled input fields)-->
 						<h4>When any individual searches a serial number I marked stolen:</h4>
 
-						<div class="flipswitch-input" name="i-s-all" txt="All my personal information is visible:"></div>
-						<div class="flipswitch-input" name="i-s-primary" txt="My primary contact method is visible:"></div>
-						<div class="flipswitch-input" name="i-s-name" txt="My name is visible:"></div>
-						<div class="flipswitch-input" name="i-s-none" txt="None of my personal information is visible:"></div>
+						<fieldset class="ui-field-contain">
+							<label for="ind-stolen">Visible Information:</label>
+							<select name="ind-stolen" id="ind-stolen">
+								<option value="2">All my personal info</option>
+								<option value="2">Basic bike info + contact details</option>
+								<option value="2">Only basic info about bike</option>
+							</select>
+						</fieldset>
 
 						<h4>When a law enforcement officer searches my bike's serial number:</h4>
 
-						<div class="flipswitch-input" name="le-n-all" txt="All my personal information is visible:"></div>
-						<div class="flipswitch-input" name="le-n-primary" txt="My primary contact method is visible:"></div>
-						<div class="flipswitch-input" name="le-n-name" txt="My name is visible:"></div>
-						<div class="flipswitch-input" name="le-n-none" txt="None of my personal information is visible:"></div>
+						<fieldset class="ui-field-contain">
+							<label for="le-normal">Visible Information:</label>
+							<select name="le-normal" id="le-normal">
+								<option value="2">All my personal info</option>
+								<option value="2">Basic bike info + contact details</option>
+								<option value="2">Only basic info about bike</option>
+							</select>
+						</fieldset>
 
 						<h4>When a law enforcement officer searches a serial number I marked stolen:</h4>
 
-						<div class="flipswitch-input" name="le-s-all" txt="All my personal information is visible:"></div>
-						<div class="flipswitch-input" name="le-s-primary" txt="My primary contact method is visible:"></div>
-						<div class="flipswitch-input" name="le-s-name" txt="My name is visible:"></div>
-						<div class="flipswitch-input" name="le-s-none" txt="None of my personal information is visible:"></div>
+						<fieldset class="ui-field-contain">
+							<label for="le-stolen">Visible Information:</label>
+							<select name="le-stolen" id="le-stolen">
+								<option value="2">All my personal info</option>
+								<option value="2">Basic bike info + contact details</option>
+								<option value="2">Only basic info about bike</option>
+							</select>
+						</fieldset>
 
 						<input type="submit" value="Save Changes">
 					</form>
@@ -240,7 +252,7 @@
 					<h1 class="center">Settings</h1>
 
 					<h2>Account Info</h2>
-					<h4>Account Email: skylusRocks@gmail.com</h4>
+					<h4>Email: skylusRocks@gmail.com</h4>
 					<button >Change Email</button>
 					<button>Change Password</button>
 
@@ -259,10 +271,10 @@
 		<!-- My Bikes -->
 		<div data-role="page" id="my-bikes" class="blue stripey-background">
 			<div data-role="main" class="ui-content header-container">
-				<div class="floating-box" style="min-height:350px;">
+				<div class="floating-box">
 					<h1 class="center">My Bikes</h1>
 					<ul data-role="listview" data-inset="true">
-						<li><a  href="#bike-detail">
+						<li><a href="#bike-detail">
 							<img class="medium-pic" src="img/bike2.jpg">
 							<div>Model: Thing </div>
 							<div>Status: Okay </div>
@@ -286,32 +298,29 @@
 				<div class="floating-box">
 					<h1 class="center">About My Bike</h1>
 					<h2>Bicycle Description</h2>
-
 					<div class="text-border">
-					<div class="side-by-side-block">
-						<div class="side-by-side" style="width: 200px;">Serial Number: </div>
-						<div class="side-by-side">1234567890</div>
-					</div>
-					<div>
-						<div class="side-by-side" style="width: 200px;">Make:</div>
-						<div class="side-by-side">Unicycle</div>
-					</div>
-					<div>
-						<div class="side-by-side" style="width: 200px;">Model:</div>
-						<div class="side-by-side">Wheelturner</div>
-					</div>
-					<div>
-						<div class="side-by-side" style="width: 200px;">Year:</div>
-						<div class="side-by-side">2019</div>
-					</div>
-					<div>
-						<div class="side-by-side" style="width: 200px;">Place of Purchase:</div>
-						<div class="side-by-side">Narnia</div>
-					</div>
-					<div>
-						<div class="side-by-side" style="width: 200px;">Cost/Value:</div>
-						<div class="side-by-side">$1</div>
-					</div>
+						<table>
+							<tr>
+								<td><b>Serial Number:</b></td>
+								<td>1234567890</td>
+							</tr>
+							<tr>
+								<td><b>Make:</b></td>
+								<td>Unicycle</td>
+							</tr>
+							<tr>
+								<td><b>Model:</b></td>
+								<td>Wheelturner</td>
+							</tr>
+							<tr>
+								<td><b>Year:</b></td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td><b>Place of Purchase:</b></td>
+								<td>Narnia</td>
+							</tr>
+						</table>
 					<br/>
 					<div>(Text from the additional info field): It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.
 						During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR, an armored space station with enough power to destroy an entire planet.
@@ -333,7 +342,7 @@
 					<button class="blue-button" onclick="goSomewhere('#unregister')">Transfer/Unregister</button>
 				</div>
 			</div>
-		</div>
+		</div> 
 
 
 		<!-- Unregister Page -->
@@ -342,8 +351,10 @@
 				<div class="floating-box">
 					<h1 class="center">Unregister/Transfer Bike</h1>
 					<form>
-						<div class="flipswitch-input" name="transferring" txt="Are you transferring your bike to another individual?"></div>
-						<div class="text-input" name="transferee" txt="Recipient's Email:"></div><!--TODO: Make this Yes/No--><!--TODO: Make the field below be hidden or visible based on this field.-->
+						<label for="transferring">Are you transferring your bike to someone else?</label>
+						<input type="checkbox" name="transferring" id="transferring" value="transferring"><!--TODO: Make the field below be hidden or visible based on this field.-->
+
+						<div class="text-input" name="transferee" txt="Recipient's Email:"></div>
 						<p>The recipient will recieve an email inviting them to add this bike to an existing acocunt or create a new account.  When this invitation is accepted, the bike will be removed from your account.</p>
 						<input type="submit" value="Unregister Bike">
 					</form>
@@ -467,27 +478,31 @@
 								</div>
 							</div>
 							<h4>Incident Information</h4>
-							<div>
-								<div class="side-by-side" style="width: 200px;">Incident Report Number:</div>
-								<div class="side-by-side">1234567</div>
-							</div>
-							<div>
-								<div class="side-by-side" style="width: 200px;">Case Officer's Email:</div>
-								<div class="side-by-side">imacop@gmail.com</div>
-							</div>
-							<div>
-								<div class="side-by-side" style="width: 200px;">Case Officer's Phone:</div>
-								<div class="side-by-side">(333) 444-5555</div>
-							</div>
-							<div>
-								<div class="side-by-side" style="width: 200px;">Reported:</div>
-								<div class="side-by-side">Missing</div>
-							</div>
-							<div>
-								<div class="side-by-side" style="width: 200px;">When Found:</div>
-								<div class="side-by-side">Contact owner and local police</div>
-							</div>
+							<div class="text-border">
+							<table>
+								<tr>
+									<td><b>Incident Number:</b></td>
+									<td>1234567890</td>
+								</tr>
+								<tr>
+									<td><b>Officer's Email:</b></td>
+									<td>imacop@gmail.com</td>
+								</tr>
+								<tr>
+									<td><b>Officer's Phone:</b></td>
+									<td>(333) 444-5555</td>
+								</tr>
+								<tr>
+									<td><b>Reported:</b></td>
+									<td>Missing</td>
+								</tr>
+								<tr>
+									<td><b>When Found:</b></td>
+									<td>Contact owner and local police</td>
+								</tr>
+							</table>
 							<p>Data from the 'Additional Info' field will go here.  I'm not quite sure what people will put into it.</p>
+						</div>
 						</div>
 						<div data-role="collapsible">
 							<h1>Some other Report!</h1>
@@ -544,12 +559,23 @@
 				<textarea name="additional-info" id="additional-info"></textarea>
 				</br>
 
-				<div class="flipswitch-input" name="i-s-primary" txt="My bike was"></div>
+				<fieldset data-role="controlgroup">
+					<legend>My bike is:</legend>
+					<label for="missing">Missing</label>
+					<input type="radio" name="bike-status" id="missing" value="missing">
+					<label for="stolen">Stolen</label>
+					<input type="radio" name="bike-status" id="stolen" value="stolen">
+				</fieldset>
+				<br/>
+				<fieldset data-role="controlgroup">
+					<legend>When my bike is found:</legend>
+					<label for="contact-me">Contact me</label>
+					<input type="checkbox" name="when-found" id="contact-me" value="contact-me">
+					<label for="contact-police">Contact local police</label>
+					<input type="checkbox" name="when-found" id="contact-police" value="contact-police">
+				</fieldset>
 				<br/>
 
-				<h4>If my bike is found</h4>
-				<div class="flipswitch-input" name="i-s-name" txt="Contact me"></div>
-				<div class="flipswitch-input" name="i-s-none" txt="Contact local police"></div>
 			</div>
 
 

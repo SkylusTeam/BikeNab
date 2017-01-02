@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Page-Specific Styling */
 /* Login Page Styling */
 @media screen and (min-width: 340px) {
@@ -200,8 +201,14 @@
   border: 3px #254ea2 solid;
   padding: 10px; }
 
-/* For Debugging Only  */
-/* Icon Styling */
+.ui-mobile .ui-page .ui-content .ui-collapsible .ui-collapsible-heading .ui-btn {
+  white-space: normal; }
+
+ΓÇï
+.ui-mobile .ui-page .ui-content .ui-listview .ui-btn {
+  white-space: normal; }
+
+ΓÇï
 .material-icons.md-18 {
   font-size: 18px; }
 

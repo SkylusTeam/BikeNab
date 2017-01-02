@@ -335,6 +335,20 @@ $fancy-font: 'Archivo Black', sans-serif;
 	}
 }
 
+// http://stackoverflow.com/questions/10253917/prevent-jquery-mobile-collapsible-set-header-from-being-truncated
+.ui-mobile .ui-page .ui-content .ui-collapsible .ui-collapsible-heading .ui-btn {
+    white-space : normal;
+}​
+
+.ui-mobile .ui-page .ui-content .ui-listview .ui-btn {
+    white-space : normal;
+
+}​
+
+/* #body #please {
+	color: orange;
+	white-space: normal;
+} */
 
 /* For Debugging Only  */ 
 
