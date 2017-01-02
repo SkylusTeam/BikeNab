@@ -130,6 +130,10 @@ $fancy-font: 'Archivo Black', sans-serif;
 		border: solid 1px $blue-black;
 		color: $blue-black;
 	}
+
+	.bottom-buttons {
+		margin: 7px !important;
+	}
 }
 
 .ui-content {
@@ -263,13 +267,13 @@ $fancy-font: 'Archivo Black', sans-serif;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	margin:auto;
-	margin-top: 30px;
 	min-height: 350px; //TODO: Check how this affects small screens
 }
 
 // Big Screens
 @media screen and (min-width: 620px) {
 	.floating-box {
+		margin-top: 30px !important;
 		margin: auto;
 		width: 600px;
 		@include side-padding(40px);
@@ -281,6 +285,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 @media screen and (max-width: 620px) {
 	.floating-box {
 		//width: 100%;
+		margin-top: 10px;
 		@include side-margin(0px);
 		@include side-padding(20px);
 		z-index: 10;

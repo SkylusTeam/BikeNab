@@ -47,7 +47,7 @@
 					<button class="login-input" onclick="goSomewhere('#home')">Log In</button>
 				</div>
 				<!-- Buttons at the bottom -->
-				<div data-role="controlgroup" data-type="horizontal" class="center">
+				<div data-role="controlgroup" data-type="horizontal" class="bottom-buttons center">
 					<button class="ui-btn" id="left-button">Forgot your password?</button>
 					<button class="ui-btn" onclick='goSomewhere("#create-account")'>Create an Account</button>
 				</div>
@@ -124,8 +124,8 @@
 							<label for="ind-stolen">Visible Information:</label>
 							<select name="ind-stolen" id="ind-stolen">
 								<option value="2">All my personal info</option>
-								<option value="2">Basic bike info + contact details</option>
-								<option value="2">Only basic info about bike</option>
+								<option value="1">Bike info + contact info</option>
+								<option value="0">Basic bike info only</option>
 							</select>
 						</fieldset>
 
@@ -135,8 +135,8 @@
 							<label for="le-normal">Visible Information:</label>
 							<select name="le-normal" id="le-normal">
 								<option value="2">All my personal info</option>
-								<option value="2">Basic bike info + contact details</option>
-								<option value="2">Only basic info about bike</option>
+								<option value="1">Bike info + contact info</option>
+								<option value="0">Basic bike info only</option>
 							</select>
 						</fieldset>
 
@@ -146,8 +146,8 @@
 							<label for="le-stolen">Visible Information:</label>
 							<select name="le-stolen" id="le-stolen">
 								<option value="2">All my personal info</option>
-								<option value="2">Basic bike info + contact details</option>
-								<option value="2">Only basic info about bike</option>
+								<option value="1">Bike info + contact info</option>
+								<option value="0">Basic bike info only</option>
 							</select>
 						</fieldset>
 
@@ -390,42 +390,48 @@
 					<h2>Bicycle Info</h2>
 
 					<div class="text-border">
-						<div>
-							<div class="side-by-side" style="width: 200px;">Make:</div>
-							<div class="side-by-side">Unicycle</div>
-						</div>
-						<div>
-							<div class="side-by-side" style="width: 200px;">Model:</div>
-							<div class="side-by-side">Wheelturner</div>
-						</div>
+						<table>
+							<tr>
+								<td><b>Make:</b></td>
+								<td>Unicycle</td>
+							</tr>
+							<tr>
+								<td><b>Model:</b></td>
+								<td>Wheelturner</td>
+							</tr>
+						</table>
 						(ETC.  The specifics of what info appears here would depend on your role (police or not), the bike's status (stolen or not) & the owner's privacy settings)
 					</div>
 
 					<h2>Owner Info</h2>
 
 					<div class="text-border">
-						<div>
-							<div class="side-by-side" style="width: 200px;">Name:</div>
-							<div class="side-by-side">Jane Doe</div>
-						</div>
-						<div>
-							<div class="side-by-side" style="width: 200px;">Owner Email:</div>
-							<div class="side-by-side">iwantmybike@gmail.com</div>
-						</div>
+						<table>
+							<tr>
+								<td><b>Name:</b></td>
+								<td>Jane Doe</td>
+							</tr>
+							<tr>
+								<td><b>Owner Email:</b></td>
+								<td>iwantmybike@gmail.com</td>
+							</tr>
+						</table>
 						(Of course, all this info would only show up when someone searches a serial number.)
 					</div>
 
 					<h2>Law Enforcement Info</h2>
 
 					<div class="text-border">
-						<div>
-							<div class="side-by-side" style="width: 200px;">Case Officer:</div>
-							<div class="side-by-side">John Doe</div>
-						</div>
-						<div>
-							<div class="side-by-side" style="width: 200px;">Police Phone Number:</div>
-							<div class="side-by-side">(012) 345-6789</div>
-						</div>
+						<table>
+							<tr>
+								<td><b>Case Officer:  </b></td>
+								<td>Officer Elmo McMuffy</td>
+							</tr>
+							<tr>
+								<td><b>Police Phone Number:</b></td>
+								<td>(012) 345-6789</td>
+							</tr>
+						</table>
 						(IDK exactly what information we'd have here.)
 					</div>
 				</div>

@@ -68,6 +68,8 @@
   #login .login-input {
     border: solid 1px #254ea2;
     color: #254ea2; }
+  #login .bottom-buttons {
+    margin: 7px !important; }
 
 .ui-content {
   padding-left: 0px;
@@ -157,11 +159,11 @@
   padding-top: 20px;
   padding-bottom: 20px;
   margin: auto;
-  margin-top: 30px;
   min-height: 350px; }
 
 @media screen and (min-width: 620px) {
   .floating-box {
+    margin-top: 30px !important;
     margin: auto;
     width: 600px;
     padding-left: 40px;
@@ -169,6 +171,7 @@
     z-index: 10; } }
 @media screen and (max-width: 620px) {
   .floating-box {
+    margin-top: 10px;
     margin-left: 0px;
     margin-right: 0px;
     padding-left: 20px;
