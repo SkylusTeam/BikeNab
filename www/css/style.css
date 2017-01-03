@@ -103,22 +103,26 @@
 
 /* STUFF USED ACROSS THE SITE */
 /* Background Styling */
-.stripey {
-  display: block;
-  position: fixed;
-  top: 50%;
-  transform: translate(0, -50%);
-  width: 100%;
-  z-index: -1; }
-  .stripey hr {
-    background-color: #ed1a3b;
-    height: 2px;
-    border: none;
-    margin: 3px 0px; }
-  .stripey .stripe {
-    height: 200px;
-    background-color: #254ea2;
-    margin: 0px; }
+@media screen and (min-height: 450px) {
+  .stripey {
+    display: block;
+    position: fixed;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 100%;
+    z-index: -1; }
+    .stripey hr {
+      background-color: #ed1a3b;
+      height: 2px;
+      border: none;
+      margin: 3px 0px; }
+    .stripey .stripe {
+      height: 200px;
+      background-color: #254ea2;
+      margin: 0px; } }
+@media screen and (max-height: 450px) {
+  .stripey {
+    display: none; } }
 
 /* General Page Styling */
 .blue {
@@ -161,7 +165,7 @@
   margin: auto;
   min-height: 350px; }
 
-@media screen and (min-width: 620px) {
+@media screen and (min-width: 655px) {
   .floating-box {
     margin-top: 30px !important;
     margin: auto;
@@ -169,7 +173,7 @@
     padding-left: 40px;
     padding-right: 40px;
     z-index: 10; } }
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 655px) {
   .floating-box {
     margin-top: 10px;
     margin-left: 0px;
@@ -182,9 +186,10 @@
   width: 300%; }
 #body .medium-button {
   width: 250px;
-  display: block; }
+  display: block;
+  margin: 5px auto; }
 #body .blue-button {
-  background-color: #254ea2;
+  background-color: #254ea2 !important;
   color: white;
   text-shadow: 0 0 0; }
 #body .medium-pic {
@@ -203,6 +208,8 @@
 #body .text-border {
   border: 3px #254ea2 solid;
   padding: 10px; }
+#body .five-mar {
+  margin: 5px; }
 
 .ui-mobile .ui-page .ui-content .ui-collapsible .ui-collapsible-heading .ui-btn {
   white-space: normal; }

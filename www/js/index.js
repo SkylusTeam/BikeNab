@@ -2,18 +2,8 @@
 // http://stackoverflow.com/questions/29970885/cordova-5-0-0-which-files-should-i-commit-to-git
 
 function goSomewhere(screen) {
-	console.log("YAY!");
 	$.mobile.pageContainer.pagecontainer("change", screen, {});
 }
-
-
-//Show the background and header on various pages
-/*$("body").on("pagecontainerbeforeshow", function( event, ui ) {
-	console.log("function called");
-	const destination = ui.toPage[0].id;;
-
-});
-*/
 
 
 $( document ).ready(function() {
@@ -76,10 +66,6 @@ function insertSections() {
 		for (section of sections) {
 			$(this).append($("." + section).clone()[0]);
 		}
-		console.log("before");
-		$(this).each(function() {
-			console.log("Seriously?")
-		});
 	})
 }
 

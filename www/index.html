@@ -151,7 +151,7 @@
 							</select>
 						</fieldset>
 
-						<input type="submit" value="Save Changes">
+						<button type="submit" class="blue-button">Save Changes</button>
 					</form>
 				</div>
 			</div>
@@ -164,7 +164,7 @@
 				<div class="floating-box">
 					<form>
 						<div class="insert" insert="create-account-form"></div>
-						<input type="submit" value="Create Account">
+						<button type="submit" class="blue-button">Create Account</button>
 					</form>
 			<a class="center account-link" href="#login">I already have an account.</a>
 				</div>
@@ -178,7 +178,7 @@
 				<div class="floating-box">
 					<form>
 						<div class="insert" insert="create-account-form le-personal-info"></div>
-						<input type="submit" value="Create Account">
+						<button type="submit" class="blue-button">Create Account</button>
 					</form>
 					<a class="center account-link" href="#login">I already have an account.</a>
 				</div>
@@ -203,7 +203,7 @@
 
 						<input type="text" id="app-code" data-clear-btn="true" placeholder="App Code">
 						<!-- Submit Button-->
-						<input type="submit" value="Register Bike" class="blue-button">
+						<button type="submit" class="blue-button">Register Bike</button>
 					</form>
 				</div>
 			</div>
@@ -253,7 +253,7 @@
 
 					<h2>Account Info</h2>
 					<h4>Email: skylusRocks@gmail.com</h4>
-					<button >Change Email</button>
+					<button>Change Email</button>
 					<button>Change Password</button>
 
 					<h2>About BikeNab</h2>
@@ -274,15 +274,17 @@
 				<div class="floating-box">
 					<h1 class="center">My Bikes</h1>
 					<ul data-role="listview" data-inset="true">
-						<li><a href="#bike-detail">
+						<li data-icon="false"><a href="#bike-detail">
 							<img class="medium-pic" src="img/bike2.jpg">
 							<div>Model: Thing </div>
 							<div>Status: Okay </div>
 						</a></li>
-						<li><a href="#bike-detail">
+						<li data-icon="false"><a href="#bike-detail">
 							<img class="medium-pic" src="img/bike3.jpg">
-							<div>(These bikes should be added dynamically) </div><!-- TODO: Make this deal with long descriptions well-->
-							<div>Status: Stolen </div>
+							<font style="white-space:normal" >
+								Model: Some-Awesome-Model
+							</font>
+							<br/>Status: Stolen
 						</a></li>
 					</ul>
 					<button class="blue-button" onclick="goSomewhere('#register')">Register Another Bike</button>
@@ -356,7 +358,7 @@
 
 						<div class="text-input" name="transferee" txt="Recipient's Email:"></div>
 						<p>The recipient will recieve an email inviting them to add this bike to an existing acocunt or create a new account.  When this invitation is accepted, the bike will be removed from your account.</p>
-						<input type="submit" value="Unregister Bike">
+						<button type="submit" class="blue-button">Unregister Bike</button>
 					</form>
 					<br/>
 				</div>
@@ -370,19 +372,7 @@
 				<div class="floating-box">
 					<h1 class="center">Bike Lookup</h1>
 					<br/>
-					<ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Enter Serial Number...">
-						<li><a>1234567890</a></li>
-						<li><a>2345678901</a></li>
-						<li><a>3456789012</a></li>
-						<li><a>4567890123</a></li>
-						<li><a>5678901234</a></li>
-						<li><a>6789012345</a></li>
-						<li><a>7890123456</a></li>
-						<li><a>8901234567</a></li>
-						<li><a>9012345678</a></li>
-						<li><a>0123456789</a></li>
-					</ul>
-
+					<input type="search" name="serial-lookup" placeholder="Enter a serial number...">
 					<h2 class="center" style="color: red">Status: Stolen</h2>
 					<br/>
 					<img class="medium-pic ui-corner-all center" src="img/bike2.jpg">
@@ -447,7 +437,7 @@
 					<h1 class="center">Report Bike</h1>
 					<form>
 						<div class="insert" insert="report-form"></div>
-						<input type="submit" value="Submit Report">
+						<button type="submit" class="blue-button">Submit Report</button>
 					</form>
 				</div>
 			</div>
@@ -477,15 +467,14 @@
 						<div data-role="collapsible">
 							<h1>Superspeeder bike reported missing on 1/1/2017.</h1>
 							<div>
-								<img class="small-pic ui-corner-all center side-by-side medium-margin" src="img/bike2.jpg">
-								<div class="side-by-side">
-									<button class="blue-button medium-button" onclick="goSomewhere('#bike-detail')">Bike Details</button><!--TODO: Add more of a margin around these-->
-									<button class="blue-button medium-button" onclick="goSomewhere('#edit-report')">Edit Report</button>
+								<img class="small-pic ui-corner-all center side-by-side five-mar" src="img/bike2.jpg">
+								<div class="side-by-side center">
+									<button class="blue-button medium-button five-mar" onclick="goSomewhere('#bike-detail')">Bike Details</button>
+									<button class="blue-button medium-button center five-mar" onclick="goSomewhere('#edit-report')">Edit Report</button>
 								</div>
 							</div>
-							<h4>Incident Information</h4>
-							<div class="text-border">
-							<table>
+							<h3>Incident Information</h3>
+							<table cellpadding="3px">
 								<tr>
 									<td><b>Incident Number:</b></td>
 									<td>1234567890</td>
@@ -508,7 +497,6 @@
 								</tr>
 							</table>
 							<p>Data from the 'Additional Info' field will go here.  I'm not quite sure what people will put into it.</p>
-						</div>
 						</div>
 						<div data-role="collapsible">
 							<h1>Some other Report!</h1>
@@ -599,20 +587,20 @@
 
 				<!-- Photos of the bike -->
 				<p>Photo of Owner with Bike</p>
-				<img class="medium-pic">
-				<button class="medium-button blue-button">Take Picture</button>
+				<img class="medium-pic center">
+				<button class="medium-button blue-button center">Take Picture</button>
 
 				<p>Photo of Bike Alone</p>
-				<img class="medium-pic">
-				<button class="medium-button blue-button">Take Picture</button>
+				<img class="medium-pic center">
+				<button class="medium-button center blue-button">Take Picture</button>
 
 				<p>Photo of Serial Number</p>
-				<img class="medium-pic">
-				<button class="medium-button blue-button">Take Picture</button>
+				<img class="medium-pic center">
+				<button class="medium-button blue-button center">Take Picture</button>
 
 				<p>Photo of Receipt</p>
-				<img class="medium-pic">
-				<button class="medium-button blue-button">Take Picture</button>
+				<img class="medium-pic center">
+				<button class="medium-button blue-button center">Take Picture</button>
 
 
 				<label for="additional-info">Additional Information About Bike</label>
