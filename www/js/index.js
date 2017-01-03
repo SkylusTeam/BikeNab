@@ -19,19 +19,17 @@ function addRepeatedElements() {
 	$(".floating-box").addClass('ui-shadow ui-corner-all');
 
 	// Add menu
-	const menu = '<div data-role="header" data-position="fixed" class="thin header">' +
-	'<div data-role="navbar" class="thin">' + 
+	const menu = '<div data-role="navbar" class="thin">' + 
 					'<ul class="home-buttons">' + 
 						'<li><a href="#home">Home</a></li>' + 
 						'<li><a href="#my-bikes">My Bikes</a></li>' + 
 						'<li><a href="#register">Register</a></li>' +
 						'<li><a href="#lookup">Lookup</a></li>' + 
 						'<li><a href="#profile">Profile</a></li>' + 
-					'</ul>' + 
-				'</div>' + 
+					'</ul>' +  
 				'</div>';
-
-	$('.header-container').append(menu);
+ 
+	$('[data-role=header]').html(menu);
 	//$('[data-role="header"]').header();	
 	$('[data-role="navbar"]').navbar(); //TODO: Maybe add background stripey stuff here!
 
