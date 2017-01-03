@@ -72,7 +72,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 #login {
 	background-color: $light-blue;
-	z-index: 1;
 
 	// Top and bottom buttons
 	.center button {
@@ -109,6 +108,10 @@ $fancy-font: 'Archivo Black', sans-serif;
 		background-color: white;
 		padding-top: 20px;
 		padding-bottom: 20px;
+		margin-left: auto;
+		margin-right: auto;
+		left: 0;
+		right: 0;
 	}
 
 	#bikenab {
@@ -162,12 +165,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 }
 
-.thin {
-	margin: 0px;
-	padding: 0px;
-}
-
-
 
 
 /* Create Account Page  */ 
@@ -194,15 +191,16 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 
 
-.stripey {
+ .stripey {
 
-	@media screen and (min-height: 450px) {
-		display: block;
-		position: fixed;
-		top: 50%;
-		transform: translate(0, -50%);
+ 	@media screen and (min-height: 450px) {
+ 		position: fixed;
+ 		z-index: -1;
 		width: 100%;
-		z-index: -1;
+
+ 		.ok {
+ 			transform: translate(0, 50%);
+ 		}
 
 
 		hr {
@@ -212,75 +210,52 @@ $fancy-font: 'Archivo Black', sans-serif;
 			margin: 3px 0px;
 		}
 
-		.stripe {
-			height: 200px;
-			background-color: $blue-black;
-			margin: 0px;
-		}
-	}
+ 		.stripe {
+ 			height: 200px;
+ 			background-color: $blue-black;
+ 			margin: 0px;
+ 		}
+ 	}
 
-	@media screen and (max-height: 450px) {
-		display:none;
-	}
+ 	@media screen and (max-height: 450px) {
+ 		display: none;
+ 	}
+ }
 
-
-
-
-}
-
-
-/* General Page Styling */
-
-.blue { //TODO: Name this better
-	background-color: $light-blue;
-	position: absolute;
-	z-index: 1;
-	//padding-top: 50px;
-}
-
-.header {
-	//position: fixed;
-	top:0px;
-	left:0px;
-	right:0px;
-	z-index:20;
-}
 
 #body .center {
 		text-align: center;
 		align: center;
-		margin: auto; //TODO: If causing problems, delete here
-		display: block; // And here
+		margin: auto;
+		display: block;
 	}
 
 
 /* Menu Styling */
 
-#body .home-buttons {
-	a {
-		height: 30px;
-		border: none;
-		text-align: center;
-		vertical-align: middle;
-		line-height: 30px;
-		@include side-margin(0px);
-		@include side-padding(0px);
-		background-color: #444;
-		color: white;
-		text-shadow:0 0 0;
-	}
-}
+ #body .home-buttons {
+ 	a {
+ 		height: 30px;
+ 		border: none;
+ 		line-height: 30px;
+ 		@include side-margin(0px);
+ 		@include side-padding(0px);
+ 		background-color: #444;
+ 		color: white;
+ 		text-shadow:0 0 0;
+ 	}
+ }
 
 
 /* White box floating over the background */
 
-#body .floating-box {
-	background-color: white;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	margin:auto;
-	min-height: 350px; //TODO: Check how this affects small screens
-}
+ #body .floating-box {
+  	background-color: white;
+ 	padding-top: 20px;
+ 	padding-bottom: 20px;
+ 	margin:auto;
+ 	min-height: 350px;
+ }
 
 // Big Screens
 @media screen and (min-width: 655px) {
@@ -296,11 +271,9 @@ $fancy-font: 'Archivo Black', sans-serif;
 // Small Screens
 @media screen and (max-width: 655px) {
 	.floating-box {
-		//width: 100%;
 		margin-top: 10px;
 		@include side-margin(0px);
 		@include side-padding(20px);
-		z-index: 10;
 	}
 }
 
@@ -328,7 +301,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 	.medium-pic {
 		width: 250px;
 		height: 250px;
-		//bottom-margin: 15px;
 	}
 
 	.small-pic {
@@ -339,12 +311,12 @@ $fancy-font: 'Archivo Black', sans-serif;
 	.side-by-side-block {
 		align: center;
 		display: block;
-		text-align: center; //TODO: was there a reason this was deleted?
+		text-align: center;
 	}
 
 	.side-by-side {
 		display: inline-block;
-		vertical-align: top; //TODO: Is this line problematic?
+		vertical-align: top;
 	}
 
 	.text-border {
@@ -361,25 +333,8 @@ $fancy-font: 'Archivo Black', sans-serif;
 // http://stackoverflow.com/questions/10253917/prevent-jquery-mobile-collapsible-set-header-from-being-truncated
 .ui-mobile .ui-page .ui-content .ui-collapsible .ui-collapsible-heading .ui-btn {
     white-space : normal;
-}​
-
-.ui-mobile .ui-page .ui-content .ui-listview .ui-btn {
-    white-space : normal;
-
-}​
-
-/* For Debugging Only  */ 
-
-/* #body .blue .floating-box div {
-	border: 2px solid purple;
-	background-color: yellow;
 }
- */
-/* #body .alright-already {
-	//border: 2px solid purple;
-	margin: 5px;
-}
- */
+
 
 /* Icon Styling */
 
@@ -387,3 +342,15 @@ $fancy-font: 'Archivo Black', sans-serif;
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
+
+.ui-page {
+    background: transparent !important;
+}
+.ui-content{
+    background: transparent !important;
+}
+
+#body {
+	background-color: $light-blue;
+}
+

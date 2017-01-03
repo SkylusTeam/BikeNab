@@ -29,13 +29,12 @@ function addRepeatedElements() {
 					'</ul>' +  
 				'</div>';
  
-	$('[data-role=header]').html(menu);
-	//$('[data-role="header"]').header();	
-	$('[data-role="navbar"]').navbar(); //TODO: Maybe add background stripey stuff here!
+	$('[data-role=header]').html(menu);	
+	$('[data-role="navbar"]').navbar();
 
 	
 	// Add background
-	$(".stripey-background").prepend("<div class='stripey'><hr><div class='stripe'></div><hr><div>");
+	$(".stripey-background").prepend("<div class='stripey'><div class='ok'><hr><div class='stripe'></div><hr></div></div>");
 
 	// Add text input fields
 	$(".text-input").each(function() {
