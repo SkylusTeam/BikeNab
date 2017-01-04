@@ -2,14 +2,22 @@
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>BikeNab</name>
     <description>
-        A blank PhoneGap app.
+        BikeNab app - yay!
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team
     </author>
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" onload="true" />
+    </feature>
     <content src="index.html" />
     <access origin="*" />
     <plugin name="cordova-plugin-camera" spec="~2.3.1" />
     <plugin name="cordova-plugin-device" spec="~1.1.4" />
     <engine name="browser" spec="~4.1.0" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.2.1" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="blackopaque" />
 </widget>
