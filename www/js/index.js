@@ -13,8 +13,38 @@ $( document ).ready(function() {
 
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
-	console.log("Yahoo! It works!!!");
-    console.log(device.cordova);
+	//Taken here:  //http://damien.antipa.at/blog/2014/02/08/3-ways-to-detect-that-your-application-is-running-in-cordova-slash-phonegap/
+	//This method differenetiates between apps & browsers (so mobile & desktop browsers count as the same)
+	//Useful for menus (deciding whether or not we want a back button)
+	const isApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+	
+	//Taken here: http://stackoverflow.com/questions/8068052/phonegap-detect-if-running-on-desktop-browser
+	//This method differenetiates between desktop and mobil (so mobile browsers and apps count as the same)
+	const isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
+
+	addMenu(isApp);
+}
+
+
+$(document).bind('mobileinit',function(){
+	console.log("func called");
+    $.mobile.page.prototype.options.addBackBtn  = true;
+    $.mobile.page.prototype.options.backBtnText  = "Previous";
+    $.mobile.page.prototype.options.backBtnTheme  = "b";
+});
+
+
+
+function addMenu(isApp) {
+	// Starts out with mobile menu visible.  If we're on a browser, this gets converted to our menu
+	if (!isApp) {
+		$('[data-role="header"]').html($(".browser-header").clone()[0].innerHTML);
+		$('[data-role="navbar"]').navbar();
+		$('[data-role="header"]').removeClass('header');
+	} else {
+		StatusBar.styleBlackOpaque();
+	}
+	
 }
 
 
@@ -24,23 +54,6 @@ function addRepeatedElements() {
 
 	// Format floating white box.
 	$(".floating-box").addClass('ui-shadow ui-corner-all');
-
-	// Add menu
-	const menu = '<div data-role="navbar" class="thin">' + 
-					'<ul class="home-buttons">' + 
-						'<li><a href="#home">Home</a></li>' + 
-						'<li><a href="#my-bikes">My Bikes</a></li>' + 
-						'<li><a href="#register">Register</a></li>' +
-						'<li><a href="#lookup">Lookup</a></li>' + 
-						'<li><a href="#profile">Profile</a></li>' + 
-					'</ul>' +  
-				'</div>';
-
-	//const menu2 = '<a href="#" class="ui-btn" data-rel="back">Back</a>';
- 
-	$('[data-role=header]').html(menu);	
-	$('[data-role="navbar"]').navbar();
-
 	
 	// Add background
 	$(".stripey-background").prepend("<div class='stripey'><div class='ok'><hr><div class='stripe'></div><hr></div></div>");
@@ -67,11 +80,14 @@ function addRepeatedElements() {
 
 function insertSections() {
 	$(".insert").each(function() {
+		console.log("just inserted");
 		//Get list of sections to insert
 		var sections = $(this).attr("insert").split(" ");
 		for (section of sections) {
 			$(this).append($("." + section).clone()[0]);
 		}
-	})
+	});
+
 }
+
 

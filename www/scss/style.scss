@@ -71,7 +71,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 
 #login {
-	background-color: $light-blue;
 
 	// Top and bottom buttons
 	.center button {
@@ -235,7 +234,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 /* Menu Styling */
 
- #body .home-buttons {
+#body .home-buttons { //TODO: better name
  	a {
  		height: 30px;
  		border: none;
@@ -247,6 +246,7 @@ $fancy-font: 'Archivo Black', sans-serif;
  		text-shadow:0 0 0;
  	}
  }
+
 
 
 /* White box floating over the background */
@@ -349,7 +349,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 	white-space:normal; 
 	vertical-align:middle;
 	text-align: center;
-	line-height: 60px;
 }
 
 #body .pw-popup {
@@ -357,6 +356,42 @@ $fancy-font: 'Archivo Black', sans-serif;
 	color: inherit;
 }
 
-#password-popup {
-	padding: 15px;
+#body #other-one {
+	border-left: 1px solid $blue-black;
 }
+
+
+#password-popup {
+	padding: 15px; 
+}
+
+#home {
+	background-color: $light-blue;
+}
+
+.ui-page {
+	background: transparent;
+}
+
+.ui-content {
+	background: transparent;
+}
+
+.header {
+	padding-top: 20px;
+	background-color: #444;
+ 	color: white;
+ 	text-shadow:0 0 0;
+
+ 	.ui-btn-active {
+ 		border-color: black !important;
+ 		color: white !important;
+ 		background-color: #444 !important; //TODO: Make this a variable
+	}
+
+ 	.ui-btn {
+		margin-top: 20px;
+ 	} //TODO: If there's an easy way to change the status bar color, do that
+}
+
+ 

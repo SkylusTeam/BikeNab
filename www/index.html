@@ -49,7 +49,7 @@
 				<!-- Buttons at the bottom -->
 				<div data-role="controlgroup" data-type="horizontal" class="bottom-buttons center">
 					<button><a class="pw-popup" href="#password-popup" data-rel="popup">Forgot Password?</a></button>	
-					<button class="ui-btn" onclick='goSomewhere("#create-account")'>Create Account</button>
+					<button class="ui-btn" id="other-one" onclick='goSomewhere("#create-account")'>Create Account</button>
 					<div data-role="popup" id="password-popup" class="ui-content">
 						<form>
 							<div>
@@ -70,7 +70,9 @@
 
 		<!-- Home Page -->
 		<div data-role="page" id="home" class="blue">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+			</div>
 			<div data-role="main" class="ui-content">
 				<!-- Four Buttons -->
 				<!--Top Row-->
@@ -80,7 +82,7 @@
 						<i class="material-icons md-48">directions_bike</i> <!--TODO: Does this work with IE?-->
 					</button>
 					<button class="icon-button" onclick="goSomewhere('#register')">
-						<div>Register</div>
+						<div>Register Bike</div>
 						<i class="material-icons md-48">create</i>
 					</button>
 				</div>
@@ -98,8 +100,8 @@
 				</div>
 
 				<!--Bottom Row-->
-				<div class="side-by-side-block" onclick="goSomewhere('#reports')">
-					<button class="icon-button">
+				<div class="side-by-side-block">
+					<button class="icon-button" onclick="goSomewhere('#reports')">
 						<div>Reports</div>
 						<i class="material-icons md-48">library_books</i>
 					</button>
@@ -108,14 +110,17 @@
 						<i class="material-icons md-48">settings</i>
 					</button>
 				</div>
-
 			</div>
 		</div>
 
 
 		<!-- Profile -->
 		<div data-role="page" id="profile" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<!-- Floating white box holding the form --> 
 				<div class="floating-box">
@@ -178,7 +183,11 @@
 
 		<!-- Create Account -->
 		<div data-role="page" id="create-account" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<form>
@@ -193,7 +202,11 @@
 
 		<!-- Law Enforcement Create Account -->
 		<div data-role="page" id="le-create-account" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<form>
@@ -210,7 +223,11 @@
 		<!-- Registration Page -->
 
 		<div data-role="page" id="register" data-position="fixed" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Register Bike</h1>
@@ -233,7 +250,11 @@
 
 		<!-- Edit Bike Info Page -->
 		<div data-role="page" id="edit-bike-info" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Update Bike Info</h1>
@@ -250,7 +271,11 @@
 
 		<!-- Law Enforcement Profile -->
 		<div data-role="page" id="le-profile" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<form>
@@ -269,7 +294,11 @@
 
 		<!-- Settings -->
 		<div data-role="page" id="settings" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 
@@ -294,7 +323,11 @@
 
 		<!-- My Bikes -->
 		<div data-role="page" id="my-bikes" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">My Bikes</h1>
@@ -323,7 +356,11 @@
 
 		<!-- Bike-detail -->
 		<div data-role="page" id="bike-detail" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">About My Bike</h1>
@@ -332,7 +369,7 @@
 						<table>
 							<tr>
 								<td><b>Serial Number:</b></td>
-								<td>1234567890</td>
+								<td>OK12345</td>
 							</tr>
 							<tr>
 								<td><b>Make:</b></td>
@@ -377,7 +414,11 @@
 
 		<!-- Unregister Page -->
 		<div data-role="page" id="unregister" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Unregister Bike</h1>
@@ -397,7 +438,11 @@
 
 		<!-- Lookup Page -->
 		<div data-role="page" id="lookup" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Bike Lookup</h1>
@@ -462,7 +507,11 @@
 
 		<!-- Report Page -->
 		<div data-role="page" id="report" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Report Bike</h1>
@@ -477,13 +526,17 @@
 
 		<!-- Edit Report Page -->
 		<div data-role="page" id="edit-report" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Edit Report</h1>
 					<form>
 						<div class="insert" insert="report-form"></div>
-						<input type="submit" value="Edit Report">
+						<button type="submit" class="blue-button">Edit Report</button>
 					</form>
 				</div>
 			</div>
@@ -492,10 +545,15 @@
 
 		<!-- Past Reports -->
 		<div data-role="page" id="past-reports" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Past Reports</h1>
+					<div class="insert" insert="expandable-reports"></div>
 				</div>
 			</div>
 		</div>
@@ -504,20 +562,29 @@
 
 
 
-		<div data-role="page" id="test2" class="stripey-background">
-		  <div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
-		   <div data-role="main" class="ui-content">
-			   	<div class="floating-box" style="height:800px;">
-			   		<p>Notice that we have added the CSS class of "ui-corner-all" and "ui-shadow" to the header buttons, to make them look a bit more desirable.</p>
+		<div data-role="page" id="test-mobile" class="stripey-background">
+			
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
+			<div data-role="main" class="ui-content">
+				<div class="floating-box" style="height:800px;">
+					<p>Notice that we have added the CSS class of "ui-corner-all" and "ui-shadow" to the header buttons, to make them look a bit more desirable.</p>
 				</div>
-		  </div>
+			</div>
 		</div>
 
 
 		<div data-role="page" id="reports" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
-				<div class="floating-box" style="height:800px;">
+				<div class="floating-box">
 					<h1 class="center">Past Reports</h1>
 					<div class="insert" insert="expandable-reports"></div>
 					<br>
@@ -542,9 +609,13 @@
 
 
 		<div data-role="page" id="about" class="stripey-background">
-			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
 			<div data-role="main" class="ui-content">
-				<div class="floating-box" style="height:800px;">
+				<div class="floating-box">
 					<h1 class="center">About</h1>
 					We're awesome.  What else can I say?
 				</div>
@@ -696,6 +767,24 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="mobile-header">
+				<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+				<h1>BikeNab</h1>
+			</div>
+
+			<!-- Browser header -->
+			<div class="browser-header">
+				<div data-role="navbar">
+					<ul class="home-buttons">
+						<li><a href="#home">Home</a></li>
+						<li><a href="#my-bikes">My Bikes</a></li>
+						<li><a href="#lookup">Lookup</a></li> 
+						<li><a href="#profile">Profile</a></li>
+					</ul>
+				</div>
+			</div>
+
 
 
 		</div> 
