@@ -192,6 +192,8 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 
  .stripey {
+ 	height: 100%;
+ 	background-color: $light-blue;
 
  	@media screen and (min-height: 450px) {
  		position: fixed;
@@ -343,14 +345,18 @@ $fancy-font: 'Archivo Black', sans-serif;
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
-.ui-page {
-    background: transparent !important;
-}
-.ui-content{
-    background: transparent !important;
-}
-
-#body {
-	background-color: $light-blue;
+.listview-text {
+	white-space:normal; 
+	vertical-align:middle;
+	text-align: center;
+	line-height: 60px;
 }
 
+#body .pw-popup {
+	text-decoration: none;
+	color: inherit;
+}
+
+#password-popup {
+	padding: 15px;
+}

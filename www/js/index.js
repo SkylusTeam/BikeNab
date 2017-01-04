@@ -11,6 +11,13 @@ $( document ).ready(function() {
 });
 
 
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+	console.log("Yahoo! It works!!!");
+    console.log(device.cordova);
+}
+
+
 function addRepeatedElements() {
 
 	insertSections();
@@ -28,6 +35,8 @@ function addRepeatedElements() {
 						'<li><a href="#profile">Profile</a></li>' + 
 					'</ul>' +  
 				'</div>';
+
+	//const menu2 = '<a href="#" class="ui-btn" data-rel="back">Back</a>';
  
 	$('[data-role=header]').html(menu);	
 	$('[data-role="navbar"]').navbar();

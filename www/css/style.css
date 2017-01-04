@@ -101,25 +101,28 @@
 
 /* STUFF USED ACROSS THE SITE */
 /* Background Styling */
-@media screen and (min-height: 450px) {
-  .stripey {
-    position: fixed;
-    z-index: -1;
-    width: 100%; }
-    .stripey .ok {
-      transform: translate(0, 50%); }
-    .stripey hr {
-      background-color: #ed1a3b;
-      height: 2px;
-      border: none;
-      margin: 3px 0px; }
-    .stripey .stripe {
-      height: 200px;
-      background-color: #254ea2;
-      margin: 0px; } }
-@media screen and (max-height: 450px) {
-  .stripey {
-    display: none; } }
+.stripey {
+  height: 100%;
+  background-color: #E0E2F0; }
+  @media screen and (min-height: 450px) {
+    .stripey {
+      position: fixed;
+      z-index: -1;
+      width: 100%; }
+      .stripey .ok {
+        transform: translate(0, 50%); }
+      .stripey hr {
+        background-color: #ed1a3b;
+        height: 2px;
+        border: none;
+        margin: 3px 0px; }
+      .stripey .stripe {
+        height: 200px;
+        background-color: #254ea2;
+        margin: 0px; } }
+  @media screen and (max-height: 450px) {
+    .stripey {
+      display: none; } }
 
 #body .center {
   text-align: center;
@@ -209,13 +212,17 @@
 .material-icons.md-48 {
   font-size: 48px; }
 
-.ui-page {
-  background: transparent !important; }
+.listview-text {
+  white-space: normal;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 60px; }
 
-.ui-content {
-  background: transparent !important; }
+#body .pw-popup {
+  text-decoration: none;
+  color: inherit; }
 
-#body {
-  background-color: #E0E2F0; }
+#password-popup {
+  padding: 15px; }
 
 /*# sourceMappingURL=style.css.map */

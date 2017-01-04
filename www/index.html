@@ -30,7 +30,7 @@
 				<!-- Buttons at the top of the page -->
 				<div class="center">
 					<div data-role="controlgroup" data-type="horizontal">
-						<button class="ui-btn">About</button>
+						<button class="ui-btn" onclick='goSomewhere("#about")'>About</button>
 						<button id="middle-button" class="ui-btn" onclick='goSomewhere("#le-create-account")'>Law Enforcement</button>
 						<button class="ui-btn">Bike Registry</button>
 					</div>
@@ -48,11 +48,23 @@
 				</div>
 				<!-- Buttons at the bottom -->
 				<div data-role="controlgroup" data-type="horizontal" class="bottom-buttons center">
-					<button class="ui-btn" id="left-button">Forgot Password?</button>
+					<button><a class="pw-popup" href="#password-popup" data-rel="popup">Forgot Password?</a></button>	
 					<button class="ui-btn" onclick='goSomewhere("#create-account")'>Create Account</button>
+					<div data-role="popup" id="password-popup" class="ui-content">
+						<form>
+							<div>
+								<h3>Password Recovery</h3>
+								<input type="text" name="email" id="user" placeholder="Enter your email">
+								We will send you a password recovery email.
+								<input type="submit" value="Submit">
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
+
+
 
 
 
@@ -86,8 +98,12 @@
 				</div>
 
 				<!--Bottom Row-->
-				<div class="side-by-side-block" onclick="goSomewhere('#settings')">
+				<div class="side-by-side-block" onclick="goSomewhere('#reports')">
 					<button class="icon-button">
+						<div>Reports</div>
+						<i class="material-icons md-48">library_books</i>
+					</button>
+					<button class="icon-button" onclick="goSomewhere('#settings')">
 						<div>Settings</div>
 						<i class="material-icons md-48">settings</i>
 					</button>
@@ -285,8 +301,10 @@
 					<ul data-role="listview" data-inset="true">
 						<li data-icon="false"><a href="#bike-detail">
 							<img class="medium-pic" src="img/bike2.jpg">
-							<div>Model: Thing </div>
-							<div>Status: Okay </div>
+								<font style="white-space:normal" >
+									Model: Thing
+								</font>
+								<br/>Status: Okay 
 						</a></li>
 						<li data-icon="false"><a href="#bike-detail">
 							<img class="medium-pic" src="img/bike3.jpg">
@@ -478,72 +496,12 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Past Reports</h1>
-					<div data-role="collapsibleset">
-						<div data-role="collapsible">
-							<h1>Superspeeder bike reported missing on 1/1/2017.</h1>
-							<div>
-								<img class="small-pic ui-corner-all center side-by-side five-mar" src="img/bike2.jpg">
-								<div class="side-by-side center">
-									<button class="blue-button medium-button five-mar" onclick="goSomewhere('#bike-detail')">Bike Details</button>
-									<button class="blue-button medium-button center five-mar" onclick="goSomewhere('#edit-report')">Edit Report</button>
-								</div>
-							</div>
-							<h3>Incident Information</h3>
-							<table cellpadding="3px">
-								<tr>
-									<td><b>Incident Number:</b></td>
-									<td>1234567890</td>
-								</tr>
-								<tr>
-									<td><b>Officer's Email:</b></td>
-									<td>imacop@gmail.com</td>
-								</tr>
-								<tr>
-									<td><b>Officer's Phone:</b></td>
-									<td>(333) 444-5555</td>
-								</tr>
-								<tr>
-									<td><b>Reported:</b></td>
-									<td>Missing</td>
-								</tr>
-								<tr>
-									<td><b>When Found:</b></td>
-									<td>Contact owner and local police</td>
-								</tr>
-							</table>
-							<p>Data from the 'Additional Info' field will go here.  I'm not quite sure what people will put into it.</p>
-						</div>
-						<div data-role="collapsible">
-							<h1>Some other Report!</h1>
-							<p>Maybe if there's only one it should appear auto-expanded.</p>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
 
 
-		<!--Test Page-->
- 		<div data-role="page" id="test" class="stripey-background">
-			<div data-role="main" class="ui-content header-container">
-				<div data-role="header" data-tap-toggle="false" data-position="fixed" class="thin header"></div>
-				<div class="floating-box" style="height:800px;">
-				</div>
-			</div>
-		</div>
- 
-<!-- 		<div data-role="page" id="test2" >
-		  <div data-role="header" data-position="fixed" data-tap-toggle="false">
 
-		    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
-		    <h1>Welcome To My Homepage</h1>
-		    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-search ui-btn-icon-left">Search</a>
-		  </div>
-
-		   <div data-role="main" class="ui-content" style="height:800px">
-		    <p>Notice that we have added the CSS class of "ui-corner-all" and "ui-shadow" to the header buttons, to make them look a bit more desirable.</p>
-		  </div>
-		</div> -->
 
 
 		<div data-role="page" id="test2" class="stripey-background">
@@ -554,6 +512,46 @@
 				</div>
 		  </div>
 		</div>
+
+
+		<div data-role="page" id="reports" class="stripey-background">
+			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="main" class="ui-content">
+				<div class="floating-box" style="height:800px;">
+					<h1 class="center">Past Reports</h1>
+					<div class="insert" insert="expandable-reports"></div>
+					<br>
+					<h1 class="center">Report A Bike</h1>
+					<ul data-role="listview" data-inset="true">
+						<li data-icon="false"><a href="#report">
+							<img class="medium-pic" src="img/bike2.jpg">
+							<font class="listview-text">
+								Report [Bike Model] as missing/stolen
+							</font>
+						</a></li>
+						<li data-icon="false"><a href="#bike-detail">
+							<img class="medium-pic" src="img/bike3.jpg">
+							<font class="listview-text">
+								Report [Bike Model] as missing/stolen
+							</font>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div data-role="page" id="about" class="stripey-background">
+			<div data-role="header" data-tap-toggle="false" data-position="fixed"></div>
+			<div data-role="main" class="ui-content">
+				<div class="floating-box" style="height:800px;">
+					<h1 class="center">About</h1>
+					We're awesome.  What else can I say?
+				</div>
+			</div>
+		</div>
+
+
 
 				
 
@@ -654,6 +652,52 @@
 				<label for="additional-info">Additional Information About Bike</label>
 				<textarea name="additional-info" id="additional-info"></textarea>
 			</div>
+
+
+			<div class="expandable-reports">
+				<div data-role="collapsibleset">
+					<div data-role="collapsible">
+						<h1>Superspeeder bike reported missing on 1/1/2017.</h1>
+						<div>
+							<img class="small-pic ui-corner-all center side-by-side five-mar" src="img/bike2.jpg">
+							<div class="side-by-side center">
+								<button class="blue-button medium-button five-mar" onclick="goSomewhere('#bike-detail')">Bike Details</button>
+								<button class="blue-button medium-button center five-mar" onclick="goSomewhere('#edit-report')">Edit Report</button>
+							</div>
+						</div>
+						<h3>Incident Information</h3>
+						<table cellpadding="3px">
+							<tr>
+								<td><b>Incident Number:</b></td>
+								<td>1234567890</td>
+							</tr>
+							<tr>
+								<td><b>Officer's Email:</b></td>
+								<td>imacop@gmail.com</td>
+							</tr>
+							<tr>
+								<td><b>Officer's Phone:</b></td>
+								<td>(333) 444-5555</td>
+							</tr>
+							<tr>
+								<td><b>Reported:</b></td>
+								<td>Missing</td>
+							</tr>
+							<tr>
+								<td><b>When Found:</b></td>
+								<td>Contact owner and local police</td>
+							</tr>
+						</table>
+						<p>Data from the 'Additional Info' field will go here.  I'm not quite sure what people will put into it.</p>
+					</div>
+					<div data-role="collapsible">
+						<h1>Some other Report!</h1>
+						<p>Maybe if there's only one it should appear auto-expanded.</p>
+					</div>
+				</div>
+			</div>
+
+
 		</div> 
 
 		<!-- Javascript files -->
