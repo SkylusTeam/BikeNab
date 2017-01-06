@@ -1,4 +1,4 @@
-# A Blank PhoneGap App
+# We should actually put something here
 
 ## Usage
 
