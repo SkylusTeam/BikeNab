@@ -25,7 +25,7 @@ function onDeviceReady() {
 	addMenu(false);
 }
 
-
+ 
 $(document).bind('mobileinit',function(){
 	console.log("func called");
     $.mobile.page.prototype.options.addBackBtn  = true;
