@@ -40,7 +40,7 @@
 					<img src="img/logo.png">
 					<div id="bikenab">BIKENAB</div>
 					<div id="register">Register. Report. <b>Recover.</b></div>
-					<form>
+					<form onSubmit="return false;">
 						<input class="login-input" type="email" name="email" placeholder="Log In"/>
 						<input class="login-input" type="password" name="password" placeholder="Password"/>	
 					</form>
@@ -51,7 +51,7 @@
 					<button><a class="pw-popup" href="#password-popup" data-rel="popup">Forgot Password?</a></button>	
 					<button class="ui-btn" id="other-one" onclick='goSomewhere("#create-account")'>Create Account</button>
 					<div data-role="popup" id="password-popup" class="ui-content">
-						<form>
+						<form onSubmit="return false;">
 							<div>
 								<h3>Password Recovery</h3>
 								<input type="text" name="email" id="user" placeholder="Enter your email">
@@ -124,7 +124,7 @@
 			<div data-role="main" class="ui-content">
 				<!-- Floating white box holding the form --> 
 				<div class="floating-box">
-					<form>
+					<form onSubmit="return false;">
 						<h1 class="center">Profile</h1>
 						<h2>Personal Info</h2>
 
@@ -190,7 +190,7 @@
 			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
-					<form>
+					<form onSubmit="return false;">
 						<div class="insert" insert="create-account-form"></div>
 						<button type="submit" class="blue-button">Create Account</button>
 					</form>
@@ -209,7 +209,7 @@
 			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
-					<form>
+					<form onSubmit="return false;">
 						<div class="insert" insert="create-account-form le-personal-info"></div>
 						<button type="submit" class="blue-button">Create Account</button>
 					</form>
@@ -231,7 +231,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Register Bike</h1>
-					<form>
+					<form onSubmit="return false;">
 						<div class="insert" insert="bike-info"></div>
 						<!-- Pyayment Options-->
 						<div data-role="fieldcontain" class="flipswitch-holder">
@@ -258,7 +258,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Update Bike Info</h1>
-					<form>
+					<form onSubmit="return false;">
 						<div class="insert" insert="bike-info"></div>
 						<!-- Submit Button-->
 						<input type="submit" value="Save" class="blue-button">
@@ -278,7 +278,7 @@
 			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
-					<form>
+					<form onSubmit="return false;">
 						<h1 class="center">Law Enforcement Profile</h1>
 						<div class="insert" insert="le-personal-info"></div>
 						<input type="submit" value="Save">
@@ -305,7 +305,7 @@
 					<h1 class="center">Settings</h1>
 
 					<h2>Account Info</h2>
-					<h4>Email: skylusRocks@gmail.com</h4>
+					<h4>Email: jdoe@hmc.edu</h4>
 					<button>Change Email</button>
 					<button>Change Password</button>
 
@@ -335,14 +335,14 @@
 						<li data-icon="false"><a href="#bike-detail">
 							<img class="medium-pic" src="img/bike2.jpg">
 								<font style="white-space:normal" >
-									Model: Thing
+									Model: Diamondback Sorrento Hard Tail
 								</font>
 								<br/>Status: Okay 
 						</a></li>
 						<li data-icon="false"><a href="#bike-detail">
 							<img class="medium-pic" src="img/bike3.jpg">
 							<font style="white-space:normal" >
-								Model: Some-Awesome-Model
+								Model: Schwinn Tango Tandem
 							</font>
 							<br/>Status: Stolen
 						</a></li>
@@ -373,11 +373,11 @@
 							</tr>
 							<tr>
 								<td><b>Make:</b></td>
-								<td>Unicycle</td>
+								<td>Diamondback</td>
 							</tr>
 							<tr>
 								<td><b>Model:</b></td>
-								<td>Wheelturner</td>
+								<td>Sorrento Hard Tail</td>
 							</tr>
 							<tr>
 								<td><b>Year:</b></td>
@@ -422,7 +422,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Unregister Bike</h1>
-					<form>
+					<form onSubmit="return false;">
 						<label for="transferring">Are you transferring your bike to someone else?</label>
 						<input type="checkbox" name="transferring" id="transferring" value="transferring"><!--TODO: Make the field below be hidden or visible based on this field.-->
 
@@ -458,11 +458,11 @@
 						<table>
 							<tr>
 								<td><b>Make:</b></td>
-								<td>Unicycle</td>
+								<td>Schwinn</td>
 							</tr>
 							<tr>
 								<td><b>Model:</b></td>
-								<td>Wheelturner</td>
+								<td>Tango Tandem</td>
 							</tr>
 						</table>
 						(ETC.  The specifics of what info appears here would depend on your role (police or not), the bike's status (stolen or not) & the owner's privacy settings)
@@ -478,7 +478,7 @@
 							</tr>
 							<tr>
 								<td><b>Owner Email:</b></td>
-								<td>iwantmybike@gmail.com</td>
+								<td>jdoe@hmc.edu</td>
 							</tr>
 						</table>
 						(Of course, all this info would only show up when someone searches a serial number.)
@@ -490,7 +490,7 @@
 						<table>
 							<tr>
 								<td><b>Case Officer:  </b></td>
-								<td>Officer Elmo McMuffy</td>
+								<td>Officer Smith</td>
 							</tr>
 							<tr>
 								<td><b>Police Phone Number:</b></td>
@@ -515,7 +515,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Report Bike</h1>
-					<form>
+					<form onSubmit="return false;">
 						<div class="insert" insert="report-form"></div>
 						<button type="submit" class="blue-button">Submit Report</button>
 					</form>
@@ -534,7 +534,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Edit Report</h1>
-					<form>
+					<form onSubmit="return false;">
 						<div class="insert" insert="report-form"></div>
 						<button type="submit" class="blue-button">Edit Report</button>
 					</form>
@@ -593,13 +593,13 @@
 						<li data-icon="false"><a href="#report">
 							<img class="medium-pic" src="img/bike2.jpg">
 							<font class="listview-text">
-								Report [Bike Model] as missing/stolen
+								Report Sorrento Hard Tail bicycle as missing/stolen
 							</font>
 						</a></li>
 						<li data-icon="false"><a href="#bike-detail">
 							<img class="medium-pic" src="img/bike3.jpg">
 							<font class="listview-text">
-								Report [Bike Model] as missing/stolen
+								Report Schwinn Tango Tandem bike as missing/stolen
 							</font>
 						</a></li>
 					</ul>
@@ -617,7 +617,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">About</h1>
-					We're awesome.  What else can I say?
+					[About BikeNab section here.]
 				</div>
 			</div>
 		</div>
@@ -728,7 +728,7 @@
 			<div class="expandable-reports">
 				<div data-role="collapsibleset">
 					<div data-role="collapsible">
-						<h1>Superspeeder bike reported missing on 1/1/2017.</h1>
+						<h1>Schwinn Tango Tandem bike reported missing on 1/1/2017.</h1>
 						<div>
 							<img class="small-pic ui-corner-all center side-by-side five-mar" src="img/bike2.jpg">
 							<div class="side-by-side center">
@@ -762,8 +762,8 @@
 						<p>Data from the 'Additional Info' field will go here.  I'm not quite sure what people will put into it.</p>
 					</div>
 					<div data-role="collapsible">
-						<h1>Some other Report!</h1>
-						<p>Maybe if there's only one it should appear auto-expanded.</p>
+						<h1>Unicycle reported stolen on 3/4/15.</h1>
+						<p>[Sample Report]</p>
 					</div>
 				</div>
 			</div>
