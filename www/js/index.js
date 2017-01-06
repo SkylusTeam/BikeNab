@@ -7,6 +7,7 @@ function goSomewhere(screen) {
 
 
 $( document ).ready(function() {
+	console.log("other ready");
 	addRepeatedElements();
 });
 
@@ -81,6 +82,7 @@ function addRepeatedElements() {
 
 
 function insertSections() {
+	console.log("insert works")
 	$(".insert").each(function() {
 		//Get list of sections to insert
 		var sections = $(this).attr("insert").split(" ");
