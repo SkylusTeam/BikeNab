@@ -7,8 +7,8 @@ function goSomewhere(screen) {
 
 
 $( document ).ready(function() {
-	console.log("other ready");
 	addRepeatedElements();
+	addMenu(false); //TODO: Should be in onDeviceReady;
 });
 
 
@@ -22,13 +22,12 @@ function onDeviceReady() {
 	//Taken here: http://stackoverflow.com/questions/8068052/phonegap-detect-if-running-on-desktop-browser
 	//This method differenetiates between desktop and mobil (so mobile browsers and apps count as the same)
 	///// ADD BACK const isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
-	console.log("device ready");
-	addMenu(false);
+	//console.log("device ready");
+	//addMenu(false);
 }
 
  
 $(document).bind('mobileinit',function(){
-	console.log("func called");
     $.mobile.page.prototype.options.addBackBtn  = true;
     $.mobile.page.prototype.options.backBtnText  = "Previous";
     $.mobile.page.prototype.options.backBtnTheme  = "b";
@@ -37,7 +36,6 @@ $(document).bind('mobileinit',function(){
 
 
 function addMenu(isApp) {
-	console.log("in addMenu");
 	// Starts out with mobile menu visible.  If we're on a browser, this gets converted to our menu
 	if (!isApp) {
 		console.log("replacing appStuff");
