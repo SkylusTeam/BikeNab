@@ -38,6 +38,7 @@ $(document).bind('mobileinit',function(){
 function addMenu(isApp) {
 	// Starts out with mobile menu visible.  If we're on a browser, this gets converted to our menu
 	if (!isApp) {
+		console.log("replacing appStuff");
 		$('[data-role="header"]').html($(".browser-header").clone()[0].innerHTML);
 		$('[data-role="navbar"]').navbar();
 		$('[data-role="header"]').removeClass('header');
@@ -80,7 +81,6 @@ function addRepeatedElements() {
 
 function insertSections() {
 	$(".insert").each(function() {
-		console.log("just inserted");
 		//Get list of sections to insert
 		var sections = $(this).attr("insert").split(" ");
 		for (section of sections) {
