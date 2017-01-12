@@ -398,3 +398,14 @@ $fancy-font: 'Archivo Black', sans-serif;
 #body .ui-controlgroup-controls .ui-checkbox .ui-btn, #body .ui-controlgroup-controls .ui-checkbox #terms {
  	z-index: 0;
  }
+
+
+#body .likeLogin button {
+	padding: 4px;
+	background-color: $light-blue;
+	color: $blue-black;
+	float: left;
+	display: inline-block;
+	border-width: 0px;
+	font-size: 15px; //TODO: If possible, have font size expand on big screens, contract on small
+}

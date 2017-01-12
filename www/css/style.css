@@ -250,4 +250,13 @@
 #body .ui-controlgroup-controls .ui-checkbox .ui-btn, #body .ui-controlgroup-controls .ui-checkbox #terms {
   z-index: 0; }
 
+#body .likeLogin button {
+  padding: 4px;
+  background-color: #E0E2F0;
+  color: #254ea2;
+  float: left;
+  display: inline-block;
+  border-width: 0px;
+  font-size: 15px; }
+
 /*# sourceMappingURL=style.css.map */

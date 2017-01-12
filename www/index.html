@@ -367,33 +367,37 @@
 				<div class="floating-box">
 					<h1 class="center">About My Bike</h1>
 					<h2>Bicycle Description</h2>
-					<div class="text-border">
-						<table>
-							<tr>
-								<td><b>Serial Number:</b></td>
-								<td>OK12345</td>
-							</tr>
-							<tr>
-								<td><b>Make:</b></td>
-								<td>Diamondback</td>
-							</tr>
-							<tr>
-								<td><b>Model:</b></td>
-								<td>Sorrento Hard Tail</td>
-							</tr>
-							<tr>
-								<td><b>Year:</b></td>
-								<td>2019</td>
-							</tr>
-							<tr>
-								<td><b>Place of Purchase:</b></td>
-								<td>Narnia</td>
-							</tr>
-						</table>
-					<br/>
-					<div>(Text from the additional info field): My bike has a uniquely shaped lightning-bolt indentation on the left handlebar which should make it easy to identify.
-					</div>
-				</div>
+					<ul data-role="listview" data-inset="true">
+						<li data-icon="false">
+							<font style="white-space:normal" >
+								<table>
+									<tr>
+										<td><b>Serial Number:</b></td>
+										<td>OK12345</td>
+									</tr>
+									<tr>
+										<td><b>Make:</b></td>
+										<td>Diamondback</td>
+									</tr>
+									<tr>
+										<td><b>Model:</b></td>
+										<td>Sorrento Hard Tail</td>
+									</tr>
+									<tr>
+										<td><b>Year:</b></td>
+										<td>2019</td>
+									</tr>
+									<tr>
+										<td><b>Place of Purchase:</b></td>
+										<td>Narnia</td>
+									</tr>
+								</table>
+								<br/>
+								<div>(Text from the additional info field): My bike has a uniquely shaped lightning-bolt indentation on the left handlebar which should make it easy to identify.
+								</div>
+							</font>
+						</li>
+					</ul>
 
 					<h2>Bicycle Images</h2>
 					<div class="side-by-side-block">
@@ -454,51 +458,65 @@
 
 					<h2>Bicycle Info</h2>
 
-					<div class="text-border">
-						<table>
-							<tr>
-								<td><b>Make:</b></td>
-								<td>Schwinn</td>
-							</tr>
-							<tr>
-								<td><b>Model:</b></td>
-								<td>Tango Tandem</td>
-							</tr>
-						</table>
-						(ETC.  The specifics of what info appears here would depend on your role (police or not), the bike's status (stolen or not) & the owner's privacy settings)
-					</div>
+					<ul data-role="listview" data-inset="true">
+						<li data-icon="false">
+							<font style="white-space:normal" >
+								<table>
+								<tr>
+									<td><b>Make:</b></td>
+									<td>Schwinn</td>
+								</tr>
+								<tr>
+									<td><b>Model:</b></td>
+									<td>Tango Tandem</td>
+								</tr>
+							</table>
+								(ETC.  The specifics of what info appears here would depend on your role (police or not), the bike's status (stolen or not) & the owner's privacy settings)
+							</font>
+						</li>
+					</ul>
+
 
 					<h2>Owner Info</h2>
 
-					<div class="text-border">
-						<table>
-							<tr>
-								<td><b>Name:</b></td>
-								<td>Jane Doe</td>
-							</tr>
-							<tr>
-								<td><b>Owner Email:</b></td>
-								<td>jdoe@hmc.edu</td>
-							</tr>
-						</table>
-						(Of course, all this info would only show up when someone searches a serial number.)
-					</div>
+					<ul data-role="listview" data-inset="true">
+						<li data-icon="false">
+							<font style="white-space:normal" >
+								<table>
+									<tr>
+										<td><b>Name:</b></td>
+										<td>Jane Doe</td>
+									</tr>
+									<tr>
+										<td><b>Owner Email:</b></td>
+										<td>jdoe@hmc.edu</td>
+									</tr>
+								</table>
+								(Of course, all this info would only show up when someone searches a serial number.)
+							</font>
+						</li>
+					</ul>
 
 					<h2>Law Enforcement Info</h2>
 
-					<div class="text-border">
-						<table>
-							<tr>
-								<td><b>Case Officer:  </b></td>
-								<td>Officer Smith</td>
-							</tr>
-							<tr>
-								<td><b>Police Phone Number:</b></td>
-								<td>(012) 345-6789</td>
-							</tr>
-						</table>
-						(IDK exactly what information we'd have here.)
-					</div>
+					<ul data-role="listview" data-inset="true">
+						<li data-icon="false">
+							<font style="white-space:normal" >
+								<table>
+									<tr>
+										<td><b>Case Officer:  </b></td>
+										<td>Officer Smith</td>
+									</tr>
+									<tr>
+										<td><b>Police Phone Number:</b></td>
+										<td>(012) 345-6789</td>
+									</tr>
+								</table>
+								(IDK exactly what information we'd have here.)
+							</font>
+						</li>
+					</ul>
+
 				</div>
 			</div>
 		</div>
@@ -682,10 +700,12 @@
 			<!-- Report Form -->
 			<!-- Used in #report and #edit-report-->
 			<div class="report-form">
+				<div class="text-input" name="bike-serial" txt="Bike Serial Number:"></div>
 				<div class="text-input" name="incident-number" txt="Incident Report Number:"></div>
 				<br/>
 
 				<h4>Case Officer's Contact Info</h4>
+				<div class="text-input" name="le-case-name" txt="Officer Name:"></div>
 				<div class="text-input" name="le-case-email" txt="Officer Email:"></div>
 				<div class="text-input" name="le-phone-email" txt="Officer Phone:"></div>
 				</br>
@@ -798,7 +818,7 @@
 			</div>
 
 			<!-- Browser header -->
-			<div class="browser-header">
+ 			<div class="browser-header">
 				<div data-role="navbar">
 					<ul class="home-buttons">
 						<li><a href="#home">Home</a></li>
@@ -807,6 +827,18 @@
 						<li><a href="#profile">Profile</a></li>
 					</ul>
 				</div>
+			</div>
+
+
+			<div class="browser-header likeLogin" data-role="controlgroup" data-type="horizontal">
+				<!-- <button class="ui-btn">Home</button>
+				<button class="ui-btn">My Bikes</button>
+				<button class="ui-btn">Lookup</button>
+				<button class="ui-btn">Profile</button> -->
+				<a href="#home">Home</a>
+				<a href="#lookup">Lookup</a> 
+				<a href="#profile">Profile</a>
+				<a href="#my-bikes">My Bikes</a>
 			</div>
 
 
