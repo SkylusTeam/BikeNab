@@ -38,7 +38,6 @@ $(document).bind('mobileinit',function(){
 function addMenu(isApp) {
 	// Starts out with mobile menu visible.  If we're on a browser, this gets converted to our menu
 	if (!isApp) {
-		console.log("replacing appStuff");
 		$('[data-role="header"]').html($(".browser-header").clone()[0].innerHTML);
 		$('[data-role="navbar"]').navbar();
 		$('[data-role="header"]').removeClass('header');
@@ -78,9 +77,14 @@ function addRepeatedElements() {
 }
 
 
+//TODO: Keep this if 
+function goToTerms() {
+	cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf", '_blank');
+}
+
+
 
 function insertSections() {
-	console.log("insert works")
 	$(".insert").each(function() {
 		//Get list of sections to insert
 		var sections = $(this).attr("insert").split(" ");

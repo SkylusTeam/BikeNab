@@ -44,7 +44,7 @@
 						<input class="login-input" type="email" name="email" placeholder="Log In"/>
 						<input class="login-input" type="password" name="password" placeholder="Password"/>	
 					</form>
-					<button class="login-input" onclick="goSomewhere('#home')">Log In</button>
+					<button class="login-input blue-button" onclick="goSomewhere('#home')">Log In</button>
 				</div>
 				<!-- Bottom Buttons -->
 				<div data-role="controlgroup" data-type="horizontal" class="bottom-buttons center">
@@ -311,7 +311,7 @@
 
 					<h2>About BikeNab</h2>
 					<button>About Us</button>
-					<button>Contact Us</button>
+					<button onclick="goSomewhere('#contact')"">Contact Us</button>
 
 					<h2>Goodbye</h2>
 					<button  onclick="goSomewhere('#login')">Log Out</button>
@@ -339,6 +339,8 @@
 								</font>
 								<br/>Status: Okay 
 						</a></li>
+					</ul>
+					<ul data-role="listview" data-inset="true">
 						<li data-icon="false"><a href="#bike-detail">
 							<img class="medium-pic" src="img/bike3.jpg">
 							<font style="white-space:normal" >
@@ -395,10 +397,10 @@
 
 					<h2>Bicycle Images</h2>
 					<div class="side-by-side-block">
-						<img class="small-pic ui-corner-all" src="img/bike2.jpg"><!--TODO: Should there be labels?-->
-						<img class="small-pic ui-corner-all" src="img/bike2.jpg">
-						<img class="small-pic ui-corner-all" src="img/bike2.jpg">
-						<img class="small-pic ui-corner-all" src="img/bike2.jpg">
+						<img class="small-pic" src="img/bike2.jpg"><!--TODO: Should there be labels?-->
+						<img class="small-pic" src="img/bike2.jpg">
+						<img class="small-pic" src="img/bike2.jpg">
+						<img class="small-pic" src="img/bike2.jpg">
 					</div>
 
 					<h2>Options</h2>
@@ -448,7 +450,7 @@
 					<input type="search" name="serial-lookup" placeholder="Enter a serial number...">
 					<h2 class="center" style="color: red">Status: Stolen</h2>
 					<br/>
-					<img class="medium-pic ui-corner-all center" src="img/bike2.jpg">
+					<img class="medium-pic center" src="img/bike2.jpg">
 
 					<h2>Bicycle Info</h2>
 
@@ -621,6 +623,26 @@
 		</div>
 
 
+		<div data-role="page" id="contact" class="stripey-background">
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
+			<div data-role="main" class="ui-content">
+				<div class="floating-box">
+					<h1 class="center">Contact Us</h1>
+					<form method="post" action="demoform.asp">
+						<div class="text-input" name="name" txt="Name:"></div>
+						<div class="text-input" name="name" txt="Email:"></div>
+						<label for="message">Message:</label>
+						<textarea name="message" id="message"></textarea>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
 
 				
 
@@ -650,6 +672,10 @@
 					<div class="text-input" name="username" txt="Username:"></div>
 					<div class="text-input" name="password1" txt="Password:"></div>
 					<div class="text-input" name="password2" txt="Confirm Password:"></div>
+					<fieldset data-role="controlgroup">
+						<label for="terms">I agree to the BikeNab <a onclick="goToTerms()" href="#" data-ajax=false>Terms of Service</a>.</label>
+						<input type="checkbox" name="terms" id="terms" value="red">
+					</fieldset>
 			</div>
 
 
@@ -787,8 +813,8 @@
 
 		</div> 
 
-		<!-- Javascript files --><!-- TODO: Add this -->
-		<!--<script type="text/javascript" src="cordova.js"></script>-->
+		<!-- Javascript files -->
+		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 	</body>
 </html>
