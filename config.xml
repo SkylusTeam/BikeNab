@@ -8,7 +8,7 @@
         PhoneGap Team
     </author>
     <feature name="StatusBar">
-        <param name="ios-package" value="CDVStatusBar" onload="true" />
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
     <content src="index.html" />
     <access origin="*" />
@@ -20,4 +20,5 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="blackopaque" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.6.1" />
 </widget>
