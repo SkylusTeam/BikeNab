@@ -10,6 +10,7 @@
 		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<!-- jQuery Mobile library -->
 		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<!-- <script src="jquery.url.js"></script> -->
 		<!-- CSS Stylesheet -->
 		<link href="css/style.css" rel="stylesheet">
 		<!-- Awesome open source icons & fonts!  Thank Google, you're the best! -->
@@ -114,21 +115,20 @@
 		</div>
 
 
-		<!-- Profile -->
-		<div data-role="page" id="profile" class="stripey-background">
+		 <!-- Profile -->
+		<!--<div data-role="page" id="profile" class="stripey-background">
 			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
-			<div data-role="main" class="ui-content">
-				<!-- Floating white box holding the form --> 
+			<div data-role="main" class="ui-content"> 
 				<div class="floating-box">
 					<form onSubmit="return false;">
 						<h1 class="center">Profile</h1>
 						<h2>Personal Info</h2>
 
-						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)
 						<div class="text-input" name="name" txt="Name:"></div>
 						<div class="text-input" name="primary-email" txt="Email Address:"></div>
 						<div class="text-input" name="backup-email" txt="Backup Email:"></div>
@@ -140,7 +140,7 @@
 
 						<h2>Privacy Settings</h2>
 
-						<!-- Flipswitch Input Form Fields (These will be dynamically replaced with styled input fields)-->
+						<!-- Flipswitch Input Form Fields (These will be dynamically replaced with styled input fields)
 						<h4>When any individual searches a serial number I marked stolen:</h4>
 
 						<fieldset class="ui-field-contain">
@@ -177,6 +177,19 @@
 						<button type="submit" class="blue-button">Save Changes</button>
 					</form>
 				</div>
+			</div>
+		</div> -->
+
+		<!-- Profile -->
+		<div data-role="page" id="profile" class="stripey-background">
+			
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
+
+			<div data-role="main" class="ui-content" id="profile-container">
 			</div>
 		</div>
 
@@ -231,9 +244,8 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Register Bike</h1>
-					<form onSubmit="return false;">
-						<div class="insert" insert="bike-info"></div>
-						<!-- Pyayment Options-->
+					<form onSubmit="return false;" id="register-bike-info-container">
+						<!-- Pyment Options-->
 						<div data-role="fieldcontain" class="flipswitch-holder">
 							<label for="le-s-none">I have a BikeNab app code:</label>
 							<input type="checkbox" data-role="flipswitch" name="le-s-none" id="le-s-none" checked="" data-mini="true"><!--TODO: Yes/no -->
@@ -258,8 +270,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Update Bike Info</h1>
-					<form onSubmit="return false;">
-						<div class="insert" insert="bike-info"></div>
+					<form onSubmit="return false;" id="edit-bike-info-container">
 						<!-- Submit Button-->
 						<input type="submit" value="Save" class="blue-button">
 					</form>
@@ -328,30 +339,7 @@
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
-			<div data-role="main" class="ui-content">
-				<div class="floating-box">
-					<h1 class="center">My Bikes</h1>
-					<ul data-role="listview" data-inset="true">
-						<li data-icon="false"><a href="#bike-detail">
-							<img class="medium-pic" src="img/bike2.jpg">
-								<font style="white-space:normal" >
-									Model: Diamondback Sorrento Hard Tail
-								</font>
-								<br/>Status: Okay 
-						</a></li>
-					</ul>
-					<ul data-role="listview" data-inset="true">
-						<li data-icon="false"><a href="#bike-detail">
-							<img class="medium-pic" src="img/bike3.jpg">
-							<font style="white-space:normal" >
-								Model: Schwinn Tango Tandem
-							</font>
-							<br/>Status: Stolen
-						</a></li>
-					</ul>
-					<button class="blue-button" onclick="goSomewhere('#register')">Register Another Bike</button>
-					<button class="blue-button" onclick="goSomewhere('#past-reports')">View Past Reports</button>
-				</div>
+			<div data-role="main" class="ui-content" id="my-bikes-container">
 			</div>
 		</div>
 
@@ -363,55 +351,7 @@
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
-			<div data-role="main" class="ui-content">
-				<div class="floating-box">
-					<h1 class="center">About My Bike</h1>
-					<h2>Bicycle Description</h2>
-					<ul data-role="listview" data-inset="true">
-						<li data-icon="false">
-							<font style="white-space:normal" >
-								<table>
-									<tr>
-										<td><b>Serial Number:</b></td>
-										<td>OK12345</td>
-									</tr>
-									<tr>
-										<td><b>Make:</b></td>
-										<td>Diamondback</td>
-									</tr>
-									<tr>
-										<td><b>Model:</b></td>
-										<td>Sorrento Hard Tail</td>
-									</tr>
-									<tr>
-										<td><b>Year:</b></td>
-										<td>2019</td>
-									</tr>
-									<tr>
-										<td><b>Place of Purchase:</b></td>
-										<td>Narnia</td>
-									</tr>
-								</table>
-								<br/>
-								<div>(Text from the additional info field): My bike has a uniquely shaped lightning-bolt indentation on the left handlebar which should make it easy to identify.
-								</div>
-							</font>
-						</li>
-					</ul>
-
-					<h2>Bicycle Images</h2>
-					<div class="side-by-side-block">
-						<img class="small-pic" src="img/bike2.jpg"><!--TODO: Should there be labels?-->
-						<img class="small-pic" src="img/bike2.jpg">
-						<img class="small-pic" src="img/bike2.jpg">
-						<img class="small-pic" src="img/bike2.jpg">
-					</div>
-
-					<h2>Options</h2>
-					<button class="blue-button" onclick="goSomewhere('#edit-bike-info')">Edit Info</button>
-					<button class="blue-button" onclick="goSomewhere('#report')">Report Bike Missing/Stolen</button>
-					<button class="blue-button" onclick="goSomewhere('#unregister')">Transfer/Unregister</button>
-				</div>
+			<div data-role="main" class="ui-content" id="bike-detail-container">
 			</div>
 		</div> 
 
@@ -569,9 +509,8 @@
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
 			<div data-role="main" class="ui-content">
-				<div class="floating-box">
+				<div class="floating-box" id="past-reports-container">
 					<h1 class="center">Past Reports</h1>
-					<div class="insert" insert="expandable-reports"></div>
 				</div>
 			</div>
 		</div>
@@ -580,7 +519,7 @@
 
 
 
-		<div data-role="page" id="test-mobile" class="stripey-background">
+		<div data-role="page" id="test" class="stripey-background">
 			
 			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
@@ -588,8 +527,7 @@
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
 			<div data-role="main" class="ui-content">
-				<div class="floating-box" style="height:800px;">
-					<p>Notice that we have added the CSS class of "ui-corner-all" and "ui-shadow" to the header buttons, to make them look a bit more desirable.</p>
+				<div class="floating-box" id="putHere" style="height:800px;">
 				</div>
 			</div>
 		</div>
@@ -734,17 +672,156 @@
 			</div>
 
 
+
+			<!--Mobile header-->
+			<div class="mobile-header">
+				<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+				<h1>BikeNab</h1>
+			</div>
+
+
+			<!-- Browser header -->
+ 			<div class="browser-header">
+				<div data-role="navbar">
+					<ul class="home-buttons">
+						<li><a href="#home">Home</a></li>
+						<li><a href="#my-bikes">My Bikes</a></li>
+						<li><a href="#lookup">Lookup</a></li> 
+						<li><a href="#profile">Profile</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+			
+
+
+			
+
+
+		<!-- 	<div class="browser-header likeLogin" data-role="controlgroup" data-type="horizontal">
+				<button class="ui-btn">Home</button>
+				<button class="ui-btn">My Bikes</button>
+				<button class="ui-btn">Lookup</button>
+				<button class="ui-btn">Profile</button>
+				<a href="#home">Home</a>
+				<a href="#lookup">Lookup</a> 
+				<a href="#profile">Profile</a>
+				<a href="#my-bikes">My Bikes</a>
+			</div> -->
+
+
+
+		 
+
+
+		<!-- 									Handlebars 									  -->
+		<!-- 									Handlebars 									  -->
+		<!-- 									Handlebars 									  -->
+		<!-- 									Handlebars 									  -->
+		<!-- 									Handlebars 									  -->
+
+		<script type="text/javascript" src="/js/handlebars-v4.0.5.js"></script>
+
+
+		<script id="text-input-content" type="text/x-handlebars-template">
+			<div data-role="fieldcontain">
+				<label for={{name}}>{{text}}</label>
+				<input type="text" name={{name}} id={{name}} value={{value}} data-clear-btn="true">
+			</div>'
+
+		</script>
+
+
+
+
+		<script id="reports-content" type="text/x-handlebars-template">
+			<div class="expandable-reports">
+				<div data-role="collapsibleset">
+				Hello world
+				{{#each reports}}
+					<div data-role="collapsible">
+						<h1>{{model}} bike reported {{lowercase status}} on {{date}}.</h1>
+						<div>
+							<img class="small-pic ui-corner-all center side-by-side five-mar" src="img/bike2.jpg">
+							<div class="side-by-side center">
+								<button class="blue-button medium-button five-mar" onclick="goSomewhere('#bike-detail')">Bike Details</button>
+								<button class="blue-button medium-button center five-mar" onclick="goSomewhere('#edit-report')">Edit Report</button>
+							</div>
+						</div>
+						<h3>Incident Information</h3>
+						<table cellpadding="3px">
+							<tr>
+								<td><b>Incident Number:</b></td>
+								<td>{{incidentNumber}}</td>
+							</tr>
+							<tr>
+								<td><b>Officer's Name:</b></td>
+								<td>{{officerName}}</td>
+							</tr>
+							<tr>
+								<td><b>Officer's Email:</b></td>
+								<td>{{officerEmail}}</td>
+							</tr>
+							<tr>
+								<td><b>Officer's Phone:</b></td>
+								<td>{{officerPhone}}</td>
+							</tr>
+							<tr>
+								<td><b>Reported:</b></td>
+								<td>{{status}}</td>
+							</tr>
+							<tr>
+								<td><b>Report Date:</b></td>
+								<td>{{date}}</td>
+							</tr>
+							<tr>
+								<td><b>When Found:</b></td>
+								<td>{{contact contactOwner contactPolice}}</td>
+							</tr>
+						</table>
+						<p>{{description}}</p>
+					</div>
+					{{/each}}
+				</div>
+			</div>
+		</script>
+
+
+		
+
+
+
+
+
+		<script id="bike-info-content" type="text/x-handlebars-template">
 			<!-- Bike info form-->
-			<!-- Used in #register and #edit-bike-info-->
 			<div class="bike-info">
-				<!-- Text Input Form Fields -->		
-				<!-- These will be dynamically replaced with styled input fields-->
-				<div class="text-input" name="serial-number" txt="Serial Number"></div>
-				<div class="text-input" name="bike-make" txt="Make"></div>
-				<div class="text-input" name="bike-model" txt="Model"></div>
-				<div class="text-input" name="bike-year" txt="Year"></div>
-				<div class="text-input" name="bike-purchase-place" txt="Place of Purchase"></div>
-				<div class="text-input" name="bike-cost" txt="Cost/Value"></div>
+				<!-- Text Input Form Fields -->
+				<div data-role="fieldcontain">
+					<label for="serial-number">Serial Number</label>
+					<input type="text" name="serial-number" value={{serial}} "" data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="bike-make">Make</label>
+					<input type="text" name="bike-make" value={{make}} "" data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="bike-model">Model</label>
+					<input type="text" name="bike-model" value={{model}} "" data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="bike-year">Year</label>
+					<input type="text" name="bike-year" value={{year}} "" data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="bike-purchase-place">Place of Purchase</label>
+					<input type="text" name="bike-purchase-place" value={{purchasePlace}} "" data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="bike-cost">Cost/Value</label>
+					<input type="text" name="bike-cost" value={{value}} "" data-clear-btn="true">
+				</div>
 
 				<!-- Photos of the bike -->
 				<p>Photo of Owner with Bike</p>
@@ -765,88 +842,159 @@
 
 
 				<label for="additional-info">Additional Information About Bike</label>
-				<textarea name="additional-info" id="additional-info"></textarea>
+				<textarea name="additional-info" id="additional-info">{{otherInfo}}</textarea>
 			</div>
+		</script>
 
 
-			<div class="expandable-reports">
-				<div data-role="collapsibleset">
-					<div data-role="collapsible">
-						<h1>Schwinn Tango Tandem bike reported missing on 1/1/2017.</h1>
-						<div>
-							<img class="small-pic ui-corner-all center side-by-side five-mar" src="img/bike2.jpg">
-							<div class="side-by-side center">
-								<button class="blue-button medium-button five-mar" onclick="goSomewhere('#bike-detail')">Bike Details</button>
-								<button class="blue-button medium-button center five-mar" onclick="goSomewhere('#edit-report')">Edit Report</button>
-							</div>
-						</div>
-						<h3>Incident Information</h3>
-						<table cellpadding="3px">
-							<tr>
-								<td><b>Incident Number:</b></td>
-								<td>1234567890</td>
-							</tr>
-							<tr>
-								<td><b>Officer's Email:</b></td>
-								<td>imacop@gmail.com</td>
-							</tr>
-							<tr>
-								<td><b>Officer's Phone:</b></td>
-								<td>(333) 444-5555</td>
-							</tr>
-							<tr>
-								<td><b>Reported:</b></td>
-								<td>Missing</td>
-							</tr>
-							<tr>
-								<td><b>When Found:</b></td>
-								<td>Contact owner and local police</td>
-							</tr>
-						</table>
-						<p>Data from the 'Additional Info' field will go here.  I'm not quite sure what people will put into it.</p>
-					</div>
-					<div data-role="collapsible">
-						<h1>Unicycle reported stolen on 3/4/15.</h1>
-						<p>[Sample Report]</p>
-					</div>
+
+
+
+		<!--- My Bikes Handlebars Script -->
+		<script id="bike-detail-content" type="text/x-handlebars-template">
+ 			<div class="floating-box">
+				<h1 class="center">About My Bike</h1>
+				<h2>Bicycle Description</h2>
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="false">
+						<font style="white-space:normal" >
+							<table>
+								<tr>
+									<td><b>Serial Number:</b></td>
+									<td>{{serial}}</td>
+								</tr>
+								<tr>
+									<td><b>Make:</b></td>
+									<td>{{make}}</td>
+								</tr>
+								<tr>
+									<td><b>Model:</b></td>
+									<td>{{model}}</td>
+								</tr>
+								<tr>
+									<td><b>Year:</b></td>
+									<td>{{year}}</td>
+								</tr>
+								<tr>
+									<td><b>Place of Purchase:</b></td>
+									<td>{{purchasePlace}}</td>
+								</tr>
+							</table>
+							<br/>
+							<div>{{otherInfo}}</div>
+						</font>
+					</li>
+				</ul>
+
+				<h2>Bicycle Images</h2>
+				<div class="side-by-side-block">
+					<img class="small-pic" src="img/bike2.jpg"><!--TODO: Should there be labels?-->
+					<img class="small-pic" src="img/bike2.jpg">
+					<img class="small-pic" src="img/bike2.jpg">
+					<img class="small-pic" src="img/bike2.jpg">
 				</div>
+
+				<h2>Options</h2>
+				<button class="blue-button" onclick="goSomewhere('#edit-bike-info')">Edit Info</button>
+				<button class="blue-button" onclick="goSomewhere('#report')">Report Bike Missing/Stolen</button>
+				<button class="blue-button" onclick="goSomewhere('#unregister')">Transfer/Unregister</button>
 			</div>
+		</script>
 
-			<div class="mobile-header">
-				<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
-				<h1>BikeNab</h1>
+
+
+
+
+		<!--- My Bikes Handlebars Script -->
+		<script id="my-bikes-content" type="text/x-handlebars-template">
+			<div class="floating-box">
+				<h1 class="center">My Bikes</h1>
+				{{#each bikes}}
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="false"><a class="toBikeDetail" serial={{serial}} >
+						<img class="medium-pic" src="img/bike2.jpg">
+							<font style="white-space:normal" >
+								Model: {{model}}
+							</font>
+							<br/>Status: {{status}} 
+					</a></li>
+				</ul>
+				{{/each}}
+				<button class="blue-button" onclick="goSomewhere('#register')">Register Another Bike</button>
+				<button class="blue-button" onclick="goSomewhere('#past-reports')">View Past Reports</button>
 			</div>
+		</script>
 
-			<!-- Browser header -->
- 			<div class="browser-header">
-				<div data-role="navbar">
-					<ul class="home-buttons">
-						<li><a href="#home">Home</a></li>
-						<li><a href="#my-bikes">My Bikes</a></li>
-						<li><a href="#lookup">Lookup</a></li> 
-						<li><a href="#profile">Profile</a></li>
-					</ul>
-				</div>
+
+
+		<!-- Profile Handlebars Script -->
+		<script id="profile-content" type="text/x-handlebars-template">
+			<div class="floating-box" >	
+				<form onSubmit="return false;">
+					<h1 class="center">Profile</h1>
+					<h2>Personal Info</h2>
+
+					<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+					<div class="text-input" value={{name}} name="name" txt="Name:"></div>
+					<div class="text-input" value={{email}} name="primary-email" txt="Email Address:"></div>
+					<div class="text-input" value={{backupEmail}} name="backup-email" txt="Backup Email:"></div>
+					<div class="text-input" value={{birthdate}} name="birthdate" txt="Date of Birth:"></div>
+					<div class="text-input" value={{address}} name="address" txt="Address:"></div>
+					<div class="text-input" value={{cellphone}} name="cell" txt="Cell Phone:"></div>
+					<div class="text-input" value={{socialMedia}} name="social-media" txt="Social Media:"></div>
+
+
+					<h2>Privacy Settings</h2>
+
+					<!-- Flipswitch Input Form Fields (These will be dynamically replaced with styled input fields)-->
+					<h4>When any individual searches a serial number I marked stolen:</h4>
+
+					<fieldset class="ui-field-contain">
+						<label for="ind-stolen">Visible Information:</label>
+						<select name="ind-stolen" id="ind-stolen">
+							<option value=2 {{#IF individualSearchStolen '===' 2}}selected{{/IF}}>All my personal info</option>
+							<option value=1 {{#IF individualSearchStolen '===' 1}}selected{{/IF}}>Bike info + contact info</option>
+							<option value=0 {{#IF individualSearchStolen '===' 0}}selected{{/IF}}>Basic bike info only</option>
+		
+						</select>
+					</fieldset>
+
+					<h4>When a law enforcement officer searches my bike's serial number:</h4>
+
+					<fieldset class="ui-field-contain">
+						<label for="le-normal">Visible Information:</label>
+						<select name="le-normal" id="le-normal">
+							<option value=2 {{#IF policeSearchNormal '===' 2}}selected{{/IF}}>All my personal info</option>
+							<option value=1 {{#IF policeSearchNormal '===' 1}}selected{{/IF}}>Bike info + contact info</option>
+							<option value=0 {{#IF policeSearchNormal '===' 0}}selected{{/IF}}>Basic bike info only</option>
+						</select>
+					</fieldset>
+
+					<h4>When a law enforcement officer searches a serial number I marked stolen:</h4>
+
+					<fieldset class="ui-field-contain">
+						<label for="le-stolen">Visible Information:</label>
+						<select name="le-stolen" id="le-stolen">
+							<option value=2 {{#IF policeSearchStolen '===' 2}}selected{{/IF}}>All my personal info</option>
+							<option value=1 {{#IF policeSearchStolen '===' 1}}selected{{/IF}}>Bike info + contact info</option>
+							<option value=0 {{#IF policeSearchStolens '===' 0}}selected{{/IF}}>Basic bike info only</option>
+						</select>
+					</fieldset>
+
+					<button type="submit" class="blue-button">Save Changes</button>
+				</form>
 			</div>
+		</script>
 
-
-			<div class="browser-header likeLogin" data-role="controlgroup" data-type="horizontal">
-				<!-- <button class="ui-btn">Home</button>
-				<button class="ui-btn">My Bikes</button>
-				<button class="ui-btn">Lookup</button>
-				<button class="ui-btn">Profile</button> -->
-				<a href="#home">Home</a>
-				<a href="#lookup">Lookup</a> 
-				<a href="#profile">Profile</a>
-				<a href="#my-bikes">My Bikes</a>
-			</div>
-
-
-
-		</div> 
+		 <script id="header" type="text/x-handlebars-template">​
+			<div> {{ headerTitle }} </div>​
+			Today is {{weekDay}}
+			<div class="text-input" value={{weekDay}} name="name" txt="Name:"></div>
+		</script>
 
 		<!-- Javascript files -->
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
+		
 	</body>
 </html>
