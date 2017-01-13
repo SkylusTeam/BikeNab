@@ -40,7 +40,7 @@ let testUser = '{' +
 '		"purchasePlace": "mypurchasePlace", '+
 '		"value": "myValue", '  +
 '		"otherInfo": "myOtherInfo", ' +
-'		"status": "Okay"' +
+'		"status": "Stolen"' +
 '	}' +
 '],' +
 '"reports": [' +
@@ -62,7 +62,8 @@ let testUser = '{' +
 '		"individualSearchStolen": 0, ' +
 '		"policeSearchNormal": 1, ' +
 '		"policeSearchStolen": 2 ' +
-'}' +
+'},' +
+'"police": false' +
 '}'
 
 //TODO: Add back in images
@@ -243,7 +244,6 @@ function reachedEditBikeInfo() {
 
 
 function reachedRegisterBike() {
-	console.log("reached register bike");
 	insertTemplate(null, "#bike-info-content", "#register-bike-info-container");
 }
 
@@ -286,10 +286,8 @@ function reachedReport() {
 
 
 function reachedEditReport() {
-	console.log("right func");
 	for (report of userData.reports) {
 		if (report.reportID === sessionStorage.reportID) {
-			console.log("got it");
 			insertTemplate(report, "#report-content", "#edit-report-container");
 		}
 	}
@@ -312,8 +310,18 @@ function reachedMyBikes() {
 }
 
 function reachedLookup() {
-	insertTemplate(userData, "#lookup-content", "#lookup-container");
+	//TODO: When we're actually searching, this won't be the user's own data.
+	// It will be the bike who's searial number matches
+	const privacy = getPrivacySetting(userData.bikes[1], userData.privacy); //TODO: Use the other person's
+	if (privacy === -1) {
+		insertTemplate(null, "#lookup-not-found", "#lookup-container");
+	} else {
+		const data = {privacy: privacy, owner: userData.profile, report: userData.reports[0], bike: userData.bikes[0]};//TODO: Take this line out later, replace w. database call
+		insertTemplate(data, "#lookup-content", "#lookup-container");
+	}
 }
+
+
 
 
 
@@ -336,7 +344,6 @@ function goSomewhere(screen) {
 
 //TODO: Reuse code here
 function toBikeDetail(serial) {
-	console.log("bike detail coming up");
 	if(typeof(Storage) != "undefined") {
   		sessionStorage.serial=serial;
   	}
@@ -382,10 +389,14 @@ function toUnregister(serial, model) {
 Handlebars.registerHelper('IF', function(var1, operator, var2, options) {
 	switch(operator) {
 		case "===":
-			return (var1 === var2) && options.fn(this);
+			return (var1 === var2) ? options.fn(this) : null;
 			//If we need more operations, add them
+		case "!=":
+			return (var1 != var2) ? options.fn(this) : null;
+		case ">=":
+			return (var1 >= var2) ? options.fn(this) : null;
 		default:
-			return;
+			return null;
 	}
 })
 
@@ -425,4 +436,26 @@ Handlebars.registerHelper('contact', function(contactOwner, contactPolice) {
 //Open the terms of service for people to read
 function showTerms() {
 	cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf", '_blank');
+}
+
+
+//Return the relevant privacy setting (-1, 0, 1, or 2), taking into account
+// 		a) Is the person police?
+//		b) Owner's listed privacy settings
+//		c) Bike's status (stolen or okay)
+function getPrivacySetting(bike, privacy) {
+	const stolen = (bike.status === "Missing" || bike.status === "Stolen");
+	if(stolen) {
+		if (userData.police) {
+			return privacy.policeSearchStolen;
+		} else {
+			return privacy.individualSearchStolen;
+		}
+	} else {
+		if (userData.police) {
+			return privacy.policeSearchNormal;
+		} else {
+			return -1; //Individuals can't see unstolen bikes.
+		}
+	}
 }
