@@ -244,14 +244,15 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Register Bike</h1>
-					<form onSubmit="return false;" id="register-bike-info-container">
+					<form onSubmit="return false;">
+						<div id="register-bike-info-container"></div>
 						<!-- Pyment Options-->
-						<div data-role="fieldcontain" class="flipswitch-holder">
-							<label for="le-s-none">I have a BikeNab app code:</label>
-							<input type="checkbox" data-role="flipswitch" name="le-s-none" id="le-s-none" checked="" data-mini="true"><!--TODO: Yes/no -->
-						</div>
+						<br>
+						<label for="app-code">I have a BikeNab app code.</label>
+						<input type="checkbox" name="app-code" id="app-code">
 
 						<input type="text" id="app-code" data-clear-btn="true" placeholder="App Code">
+						<br>
 						<!-- Submit Button-->
 						<button type="submit" class="blue-button">Register Bike</button>
 					</form>
@@ -319,9 +320,10 @@
 					<h4>Email: jdoe@hmc.edu</h4>
 					<button>Change Email</button>
 					<button>Change Password</button>
+					<button>Forgot Password</button>
 
 					<h2>About BikeNab</h2>
-					<button>About Us</button>
+					<button onclick="goSomewhere('#about')">About Us</button>
 					<button onclick="goSomewhere('#contact')"">Contact Us</button>
 
 					<h2>Goodbye</h2>
@@ -363,19 +365,7 @@
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
-			<div data-role="main" class="ui-content">
-				<div class="floating-box">
-					<h1 class="center">Unregister Bike</h1>
-					<form onSubmit="return false;">
-						<label for="transferring">Are you transferring your bike to someone else?</label>
-						<input type="checkbox" name="transferring" id="transferring" value="transferring"><!--TODO: Make the field below be hidden or visible based on this field.-->
-
-						<div class="text-input" name="transferee" txt="Recipient's Email:"></div>
-						<p>The recipient will recieve an email inviting them to add this bike to an existing acocunt or create a new account.  When this invitation is accepted, the bike will be removed from your account.</p>
-						<button type="submit" class="blue-button">Unregister Bike</button>
-					</form>
-					<br/>
-				</div>
+			<div data-role="main" class="ui-content" id="unregister-container">
 			</div>
 		</div>
 
@@ -387,77 +377,7 @@
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
-			<div data-role="main" class="ui-content">
-				<div class="floating-box">
-					<h1 class="center">Bike Lookup</h1>
-					<br/>
-					<input type="search" name="serial-lookup" placeholder="Enter a serial number...">
-					<h2 class="center" style="color: red">Status: Stolen</h2>
-					<br/>
-					<img class="medium-pic center" src="img/bike2.jpg">
-
-					<h2>Bicycle Info</h2>
-
-					<ul data-role="listview" data-inset="true">
-						<li data-icon="false">
-							<font style="white-space:normal" >
-								<table>
-								<tr>
-									<td><b>Make:</b></td>
-									<td>Schwinn</td>
-								</tr>
-								<tr>
-									<td><b>Model:</b></td>
-									<td>Tango Tandem</td>
-								</tr>
-							</table>
-								(ETC.  The specifics of what info appears here would depend on your role (police or not), the bike's status (stolen or not) & the owner's privacy settings)
-							</font>
-						</li>
-					</ul>
-
-
-					<h2>Owner Info</h2>
-
-					<ul data-role="listview" data-inset="true">
-						<li data-icon="false">
-							<font style="white-space:normal" >
-								<table>
-									<tr>
-										<td><b>Name:</b></td>
-										<td>Jane Doe</td>
-									</tr>
-									<tr>
-										<td><b>Owner Email:</b></td>
-										<td>jdoe@hmc.edu</td>
-									</tr>
-								</table>
-								(Of course, all this info would only show up when someone searches a serial number.)
-							</font>
-						</li>
-					</ul>
-
-					<h2>Law Enforcement Info</h2>
-
-					<ul data-role="listview" data-inset="true">
-						<li data-icon="false">
-							<font style="white-space:normal" >
-								<table>
-									<tr>
-										<td><b>Case Officer:  </b></td>
-										<td>Officer Smith</td>
-									</tr>
-									<tr>
-										<td><b>Police Phone Number:</b></td>
-										<td>(012) 345-6789</td>
-									</tr>
-								</table>
-								(IDK exactly what information we'd have here.)
-							</font>
-						</li>
-					</ul>
-
-				</div>
+			<div data-role="main" class="ui-content" id="lookup-container">
 			</div>
 		</div>
 
@@ -474,7 +394,7 @@
 				<div class="floating-box">
 					<h1 class="center">Report Bike</h1>
 					<form onSubmit="return false;">
-						<div class="insert" insert="report-form"></div>
+						<div id="report-container"></div>
 						<button type="submit" class="blue-button">Submit Report</button>
 					</form>
 				</div>
@@ -493,7 +413,7 @@
 				<div class="floating-box">
 					<h1 class="center">Edit Report</h1>
 					<form onSubmit="return false;">
-						<div class="insert" insert="report-form"></div>
+						<div id="edit-report-container"></div>
 						<button type="submit" class="blue-button">Edit Report</button>
 					</form>
 				</div>
@@ -509,8 +429,9 @@
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
 			<div data-role="main" class="ui-content">
-				<div class="floating-box" id="past-reports-container">
+				<div class="floating-box">
 					<h1 class="center">Past Reports</h1>
+					<div id="past-reports-container"></div>
 				</div>
 			</div>
 		</div>
@@ -541,24 +462,13 @@
 			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
-					<h1 class="center">Past Reports</h1>
-					<div class="insert" insert="expandable-reports"></div>
+					<h1 class="center">Reports</h1>
+					<h2>Past Reports</h2>
+					<div id="reports-container"></div>
 					<br>
-					<h1 class="center">Report A Bike</h1>
-					<ul data-role="listview" data-inset="true">
-						<li data-icon="false"><a href="#report">
-							<img class="medium-pic" src="img/bike2.jpg">
-							<font class="listview-text">
-								Report Sorrento Hard Tail bicycle as missing/stolen
-							</font>
-						</a></li>
-						<li data-icon="false"><a href="#bike-detail">
-							<img class="medium-pic" src="img/bike3.jpg">
-							<font class="listview-text">
-								Report Schwinn Tango Tandem bike as missing/stolen
-							</font>
-						</a></li>
-					</ul>
+					<h2>Report a Bike</h2>
+					<div id="report-a-bike-container"></div>
+
 				</div>
 			</div>
 		</div>
@@ -629,46 +539,9 @@
 					<div class="text-input" name="password1" txt="Password:"></div>
 					<div class="text-input" name="password2" txt="Confirm Password:"></div>
 					<fieldset data-role="controlgroup">
-						<label for="terms">I agree to the BikeNab <a onclick="goToTerms()" href="#" data-ajax=false>Terms of Service</a>.</label>
+						<label for="terms">I agree to the BikeNab <a onclick="showTerms()" href="#" data-ajax=false>Terms of Service</a>.</label>
 						<input type="checkbox" name="terms" id="terms" value="red">
 					</fieldset>
-			</div>
-
-
-			<!-- Report Form -->
-			<!-- Used in #report and #edit-report-->
-			<div class="report-form">
-				<div class="text-input" name="bike-serial" txt="Bike Serial Number:"></div>
-				<div class="text-input" name="incident-number" txt="Incident Report Number:"></div>
-				<br/>
-
-				<h4>Case Officer's Contact Info</h4>
-				<div class="text-input" name="le-case-name" txt="Officer Name:"></div>
-				<div class="text-input" name="le-case-email" txt="Officer Email:"></div>
-				<div class="text-input" name="le-phone-email" txt="Officer Phone:"></div>
-				</br>
-
-				<h4>Describe the Incident</h4>
-				<textarea name="additional-info" id="additional-info"></textarea>
-				</br>
-
-				<fieldset data-role="controlgroup">
-					<legend>My bike is:</legend>
-					<label for="missing">Missing</label>
-					<input type="radio" name="bike-status" id="missing" value="missing">
-					<label for="stolen">Stolen</label>
-					<input type="radio" name="bike-status" id="stolen" value="stolen">
-				</fieldset>
-				<br/>
-				<fieldset data-role="controlgroup">
-					<legend>When my bike is found:</legend>
-					<label for="contact-me">Contact me</label>
-					<input type="checkbox" name="when-found" id="contact-me" value="contact-me">
-					<label for="contact-police">Contact local police</label>
-					<input type="checkbox" name="when-found" id="contact-police" value="contact-police">
-				</fieldset>
-				<br/>
-
 			</div>
 
 
@@ -729,7 +602,210 @@
 				<label for={{name}}>{{text}}</label>
 				<input type="text" name={{name}} id={{name}} value={{value}} data-clear-btn="true">
 			</div>'
+		</script>
 
+
+
+
+		<script id="lookup-content" type="text/x-handlebars-template">
+			<div class="floating-box">
+				<h1 class="center">Bike Lookup</h1>
+				<br>
+				<input type="search" name="serial-lookup" placeholder="Enter a serial number...">
+				<h2 class="center" style="color: red">Status: Stolen</h2>
+				<br>
+				<img class="medium-pic center" src="img/bike2.jpg">
+
+				<h2>Bicycle Info</h2>
+
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="false">
+						<font style="white-space:normal" >
+							<table>
+							<tr>
+								<td><b>Make:</b></td>
+								<td>{{make}}</td>
+							</tr>
+							<tr>
+								<td><b>Model:</b></td>
+								<td>{{model}}</td>
+							</tr>
+						</table>
+							Have multiple boxes in here, some for each privary setting!!!
+						</font>
+					</li>
+				</ul>
+
+
+				<h2>Owner Info</h2>
+
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="false">
+						<font style="white-space:normal" >
+							<table>
+								<tr>
+									<td><b>Name:</b></td>
+									<td>Jane Doe</td>
+								</tr>
+								<tr>
+									<td><b>Owner Email:</b></td>
+									<td>jdoe@hmc.edu</td>
+								</tr>
+							</table>
+							(Of course, all this info would only show up when someone searches a serial number.)
+						</font>
+					</li>
+				</ul>
+
+				<h2>Law Enforcement Info</h2>
+
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="false">
+						<font style="white-space:normal" >
+							<table>
+								<tr>
+									<td><b>Case Officer:  </b></td>
+									<td>Officer Smith</td>
+								</tr>
+								<tr>
+									<td><b>Police Phone Number:</b></td>
+									<td>(012) 345-6789</td>
+								</tr>
+							</table>
+							(IDK exactly what information we'd have here.)
+						</font>
+					</li>
+				</ul>
+
+			</div>
+		</script>
+
+
+
+
+		<script id="unregister-content" type="text/x-handlebars-template">
+			<div class="floating-box">
+				<h1 class="center">Unregister Bike</h1>
+				<br>
+				<table>
+					<tbody>
+						<tr>
+							<td>Bike to Unregister:</td>
+							<td>{{model}}</td>
+						</tr>
+						<tr>
+							<td>Serial Number:</td>
+							<td>{{serial}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<form onSubmit="return false;">
+					<label for="transferring">Are you transferring your bike to someone else?</label>
+					<input type="checkbox" name="transferring" id="transferring" value="transferring"><!--TODO: Make the field below be hidden or visible based on this field.-->
+
+					<div class="text-input" name="transferee" txt="Recipient's Email:"></div>
+					<p>The recipient will recieve an email inviting them to add this bike to an existing acocunt or create a new account.  When this invitation is accepted, the bike will be removed from your account.</p>
+					<button type="submit" class="blue-button">Unregister Bike</button>
+				</form>
+				<br>
+			</div>
+		</script>
+
+
+		<!-- Report Form -->
+		<!-- Used in #report and #edit-report-->
+		<script id="report-content" type="text/x-handlebars-template">
+			<div>
+				<div class="text-input" name="bike-serial" txt="Bike Serial Number:"></div>
+				<div class="text-input" name="incident-number" txt="Incident Report Number:"></div>
+				<br>
+
+				<div data-role="fieldcontain">
+					<label for="serial">Bike's Serial Number:</label>
+					<input type="text" name="serial" value={{serial}} "" data-clear-btn="true">
+				</div>
+
+				<h4>Case Officer's Contact Info</h4>
+				<div data-role="fieldcontain">
+					<label for="le-case-namer">Officer Name:</label>
+					<input type="text" name="le-case-name" value={{officerName}} "" data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="le-case-email">Officer Email:</label>
+					<input type="text" name="le-case-email" value={{officerEmail}} "" data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="le-phone-email">Officer Phone:</label>
+					<input type="text" name="le-phone-email" value={{officerPhone}} "" data-clear-btn="true">
+				</div>
+
+				</br>
+
+				<h4>Describe the Incident</h4>
+				<textarea name="additional-info" id="additional-info">{{description}}</textarea>
+				</br>
+
+				<fieldset data-role="controlgroup">
+					<legend>My bike is:</legend>
+					<label for="missing">Missing</label>
+					<input 
+						type="radio" 
+						name="bike-status" 
+						id="missing" 
+						value="missing"
+						{{#IF status '===' 'Missing'}}checked{{/IF}}
+					>
+					<label for="stolen">Stolen</label>
+					<input 
+						type="radio" 
+						name="bike-status" 
+						id="stolen" 
+						value="stolen" 
+						{{#IF status '===' 'Stolen'}}checked{{/IF}}
+					>
+				</fieldset>
+				<br>
+				<fieldset data-role="controlgroup">
+					<legend>When my bike is found:</legend>
+					<label for="contact-me">Contact me</label>
+					<input 
+						type="checkbox" 
+						name="when-found" 
+						id="contact-me" 
+						value="contact-me" 
+						{{#if contactOwner}}checked{{/if}}
+					>
+					<label for="contact-police">Contact local police</label>
+					<input 
+						type="checkbox" 
+						name="when-found" 
+						id="contact-police" 
+						value="contact-police"
+						{{#if contactPolice}}checked{{/if}}
+					>
+				</fieldset>
+				<br>
+			</div>
+		</script>
+
+
+
+		<script id="report-a-bike-content" type="text/x-handlebars-template">
+
+			{{#each bikes}}
+			{{#IF status '===' 'Okay'}}
+			<ul data-role="listview" data-inset="true">
+				<li data-icon="false"><a onclick="toReport('{{serial}}')">
+					<img class="medium-pic" src="img/bike2.jpg">
+					<font class="listview-text">
+						Report {{model}} bicycle as missing/stolen
+					</font>
+				</a></li>
+			</ul>
+			{{/IF}}
+			{{/each}}
+			
 		</script>
 
 
@@ -738,15 +814,14 @@
 		<script id="reports-content" type="text/x-handlebars-template">
 			<div class="expandable-reports">
 				<div data-role="collapsibleset">
-				Hello world
 				{{#each reports}}
 					<div data-role="collapsible">
-						<h1>{{model}} bike reported {{lowercase status}} on {{date}}.</h1>
+						<h1>{{this.bike.model}} bike reported {{lowercase status}} on {{date}}.</h1>
 						<div>
 							<img class="small-pic ui-corner-all center side-by-side five-mar" src="img/bike2.jpg">
 							<div class="side-by-side center">
-								<button class="blue-button medium-button five-mar" onclick="goSomewhere('#bike-detail')">Bike Details</button>
-								<button class="blue-button medium-button center five-mar" onclick="goSomewhere('#edit-report')">Edit Report</button>
+								<button class="blue-button medium-button five-mar" onclick="toBikeDetail('{{serial}}')">Bike Details</button>
+								<button class="blue-button medium-button center five-mar toEditReport" onclick="toEditReport('{{reportID}}')">Edit Report</button>
 							</div>
 						</div>
 						<h3>Incident Information</h3>
@@ -779,18 +854,16 @@
 								<td><b>When Found:</b></td>
 								<td>{{contact contactOwner contactPolice}}</td>
 							</tr>
+							<tr>
+								<td><b>Incident Description:</b></td>
+								<td>{{description}}</td>
+							</tr>
 						</table>
-						<p>{{description}}</p>
 					</div>
 					{{/each}}
 				</div>
 			</div>
 		</script>
-
-
-		
-
-
 
 
 
@@ -840,7 +913,7 @@
 				<img class="medium-pic center">
 				<button class="medium-button blue-button center">Take Picture</button>
 
-
+				<br>
 				<label for="additional-info">Additional Information About Bike</label>
 				<textarea name="additional-info" id="additional-info">{{otherInfo}}</textarea>
 			</div>
@@ -880,7 +953,7 @@
 									<td>{{purchasePlace}}</td>
 								</tr>
 							</table>
-							<br/>
+							<br>
 							<div>{{otherInfo}}</div>
 						</font>
 					</li>
@@ -896,8 +969,8 @@
 
 				<h2>Options</h2>
 				<button class="blue-button" onclick="goSomewhere('#edit-bike-info')">Edit Info</button>
-				<button class="blue-button" onclick="goSomewhere('#report')">Report Bike Missing/Stolen</button>
-				<button class="blue-button" onclick="goSomewhere('#unregister')">Transfer/Unregister</button>
+				<button class="blue-button" onclick="toReport('{{serial}}')">Report Bike Missing/Stolen</button>
+				<button class="blue-button" onclick="toUnregister('{{serial}}','{{model}}')">Transfer/Unregister</button>
 			</div>
 		</script>
 
@@ -911,12 +984,12 @@
 				<h1 class="center">My Bikes</h1>
 				{{#each bikes}}
 				<ul data-role="listview" data-inset="true">
-					<li data-icon="false"><a class="toBikeDetail" serial={{serial}} >
+					<li data-icon="false"><a onclick="toBikeDetail('{{serial}}')" >
 						<img class="medium-pic" src="img/bike2.jpg">
 							<font style="white-space:normal" >
 								Model: {{model}}
 							</font>
-							<br/>Status: {{status}} 
+							<br>Status: {{status}} 
 					</a></li>
 				</ul>
 				{{/each}}

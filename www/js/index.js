@@ -3,53 +3,91 @@
 
 
 
-function goSomewhere(screen) {
-	$.mobile.pageContainer.pagecontainer("change", screen);
-}
-//{ dataUrl : "page2.html?paremeter=123", data : { 'paremeter' : '123' }, reloadPage : true, changeHash : true }
+  ///////////////////////////////////////
+ ////			TEMPORARY			////
+///////////////////////////////////////
 
+
+
+//TEST USER: Delete this when we have actual data
+
+let testUser = '{' +
+'"profile": {' +
+'	"name": "myname",' +
+'	"email": "myemail",' +
+'	"backupEmail": "mybackupemail",' +
+'	"birthdate": "mybirthdate",' +
+'	"address": "myaddress",' +
+'	"cellphone": "mycellphone",' +
+'	"socialMedia": "mysocialMedia"' +
+'},' +
+'"bikes": [' +
+'	{' +
+'		"serial": "mySerial",' +
+'		"make": "myMake" ,'+
+'		"model": "myModel", ' +
+'		"year": "myYear", '  +
+'		"purchasePlace": "mypurchasePlace", '+
+'		"value": "myValue", '  +
+'		"otherInfo": "myOtherInfo", ' +
+'		"status": "Okay"' +
+'	},' +
+'	{' +
+'		"serial": "12321",' +
+'		"make": "coolBike" ,'+
+'		"model": "reallycool", ' +
+'		"year": "myYear", '  +
+'		"purchasePlace": "mypurchasePlace", '+
+'		"value": "myValue", '  +
+'		"otherInfo": "myOtherInfo", ' +
+'		"status": "Okay"' +
+'	}' +
+'],' +
+'"reports": [' +
+'	{' +
+'		"reportID": "myReport", ' +
+'		"serial": "mySerial", ' +
+'		"incidentNumber": "myIncidentNumber", ' +
+'		"officerName": "myOfficerName", ' +
+'		"officerEmail": "myOfficerEmail", ' +
+'		"officerPhone": "myOfficerPhone", ' +
+'		"description": "myDescription", ' +
+'		"status": "Stolen",' +
+'		"contactOwner": true,' +
+'		"contactPolice": true,' +
+'		"date": "myDate" ' +
+'	}' +
+'],' +
+'"privacy": {' +
+'		"individualSearchStolen": 0, ' +
+'		"policeSearchNormal": 1, ' +
+'		"policeSearchStolen": 2 ' +
+'}' +
+'}'
+
+//TODO: Add back in images
+var userData = JSON.parse(testUser);
+
+
+
+  ///////////////////////////////////////
+ ////		SETUP FUNCTIONS			////
+///////////////////////////////////////
+
+
+// When the app first loads, insert templates for repeated elements 
+// (such as headers) in the correct locations.
 $( document ).ready(function() {
 	addRepeatedElements();
 });
 
+//TODO: Make sure all of these are relevant still.
 
-document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady() {
-	//Taken here:  //http://damien.antipa.at/blog/2014/02/08/3-ways-to-detect-that-your-application-is-running-in-cordova-slash-phonegap/
-	//This method differenetiates between apps & browsers (so mobile & desktop browsers count as the same)
-	//Useful for menus (deciding whether or not we want a back button)
-	//// ADD BACK: const isApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-	
-	//Taken here: http://stackoverflow.com/questions/8068052/phonegap-detect-if-running-on-desktop-browser
-	//This method differenetiates between desktop and mobil (so mobile browsers and apps count as the same)
-	const isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
-	addMenu(isMobile);
-}
-
- 
-$(document).bind('mobileinit',function(){
-    $.mobile.page.prototype.options.addBackBtn  = true;
-    $.mobile.page.prototype.options.backBtnText  = "Previous";
-    $.mobile.page.prototype.options.backBtnTheme  = "b";
-});
-
-
-
-function addMenu(isApp) {
-	// Starts out with mobile menu visible.  If we're on a browser, this gets converted to our menu
-	if (!isApp) {
-		$('[data-role="header"]').html($(".browser-header").clone()[0].innerHTML);
-		$('[data-role="navbar"]').navbar();
-		$('[data-role="header"]').removeClass('header');
-	} else {
-		StatusBar.styleBlackOpaque();
-	}
-	
-}
-
-
+//Insert repeated elements of code
 function addRepeatedElements() {
 
+	//Insert large sections of code which are used in multiple places.
+	//TODO: Do we need this anymore?
 	insertSections();
 
 	// Format floating white box.
@@ -77,13 +115,33 @@ function addRepeatedElements() {
 }
 
 
-//TODO: Keep this if 
-function goToTerms() {
-	cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf", '_blank');
+//Phonegap Stuff - make things look/act different depending on the platfom
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+
+	//Taken here:  //http://damien.antipa.at/blog/2014/02/08/3-ways-to-detect-that-your-application-is-running-in-cordova-slash-phonegap/
+	//This method differenetiates between apps & browsers (so mobile & desktop browsers count as the same)
+	//Useful for menus (deciding whether or not we want a back button)
+	const isApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+	
+	//Taken here: http://stackoverflow.com/questions/8068052/phonegap-detect-if-running-on-desktop-browser
+	//This method differenetiates between desktop and mobild (so mobile browsers and apps count as the same)
+	const isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
+	addMenu(isMobile);
 }
 
+//TODO: Make sure this is what it's really doing
+// Add Back button
+$(document).bind('mobileinit',function(){
+	$.mobile.page.prototype.options.addBackBtn = true;
+	$.mobile.page.prototype.options.backBtnText = "Previous";
+	$.mobile.page.prototype.options.backBtnTheme = "b";
+});
 
 
+//Insert large sections of code which are used in multiple places.
+//TODO: Do we need this anymore?
 function insertSections() {
 	$(".insert").each(function() {
 		//Get list of sections to insert
@@ -96,86 +154,250 @@ function insertSections() {
 }
 
 
-let testUser = '{' +
-'"profile": {' +
-'	"name": "myname",' +
-'	"email": "myemail",' +
-'	"backupEmail": "mybackupemail",' +
-'	"birthdate": "mybirthdate",' +
-'	"address": "myaddress",' +
-'	"cellphone": "mycellphone",' +
-'	"socialMedia": "mysocialMedia"' +
-'},' +
-'"bikes": [' +
-'	{' +
-'		"serial": "mySerial2",' +
-'		"make": "myMake" ,'+
-'		"model": "", ' +
-'		"year": "myYear", '  +
-'		"purchasePlace": "", '+
-'		"value": "myValue", '  +
-'		"otherInfo": "myOtherInfo", ' +
-'		"status": "Okay"' +
-'	},' +
-'	{' +
-'		"serial": "12321",' +
-'		"make": "coolBike" ,'+
-'		"model": "reallycool", ' +
-'		"year": "myYear", '  +
-'		"purchasePlace": "mypurchasePlace", '+
-'		"value": "myValue", '  +
-'		"otherInfo": "myOtherInfo", ' +
-'		"status": "Okay"' +
-'	}' +
-'],' +
-'"reports": [' +
-'	{' +
-'		"serial": "mySerial", ' +
-'		"incidentNumber": "myIncidentNumber", ' +
-'		"officerName": "myOfficerName", ' +
-'		"officerEmail": "myOfficerEmail", ' +
-'		"description": "myDescription", ' +
-'		"status": "stolen",' +
-'		"contactOwner": true,' +
-'		"contactPolice": true,' +
-'		"date": "myDate" ' +
-'	}' +
-'],' +
-'"privacy": {' +
-'		"individualSearchStolen": 0, ' +
-'		"policeSearchNormal": 1, ' +
-'		"policeSearchStolen": 2 ' +
-'}' +
-'}'
+// If we're in a browser, switch to a browser menu
+function addMenu(isApp) {
+	// Starts out with mobile menu visible.  If we're on a browser, this gets converted to our menu
+	if (!isApp) {
+		$('[data-role="header"]').html($(".browser-header").clone()[0].innerHTML);
+		$('[data-role="navbar"]').navbar();
+		$('[data-role="header"]').removeClass('header');
+	} else {
+		StatusBar.styleBlackOpaque();
+	}
+}
 
-var userData = JSON.parse(testUser);
-//TODO: Add back in images
-//http://doginthehat.com.au/2012/02/comparison-block-helper-for-handlebars-templates/
 
-//Sheer brilliance here: http://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
 
-//This one will return nothing if the condition is false
+
+
+  ///////////////////////////////////////////
+ ////		reachedPage FUNCTIONS		////
+///////////////////////////////////////////
+
+
+// These functions specify what should happen once we reach a new
+// page, typically involving shoving data into a Handlebars template
+
+
+
+//Huge mega switch statement telling what we should do when each page loads
+$("body").on('pagecontainerbeforeshow', function(event, data) {
+	switch (data.toPage[0].id) {
+		case 'bike-detail':
+			return reachedBikes();
+		case 'edit-bike-info':
+			return reachedEditBikeInfo();
+		case 'register':
+			return reachedRegisterBike();
+		case 'past-reports':
+			return reachedPastReports();
+		case 'reports':
+			return reachedReports();
+		case 'report':
+			return reachedReport();
+		case 'edit-report':
+			return reachedEditReport();
+		case 'unregister':
+			return reachedUnregister();
+		case 'profile':
+			return reachedProfile();
+		case 'my-bikes':
+			return reachedMyBikes();
+		case 'lookup':
+			return reachedLookup();
+		default:
+			console.log("You'd better do " + data.toPage[0].id);
+	}
+});
+
+
+
+//TODO: Can we reuse code among any of these?
+
+function insertTemplate(data, templateID, containerID) {
+	var templateScript = $(templateID).html();  
+	 var template = Handlebars.compile(templateScript);  
+	$(containerID).html(template(data));
+	$(containerID).enhanceWithin();
+}
+
+
+function reachedBikes() {
+	let bikesList = userData.bikes;
+	for (bike of bikesList) {
+		if (bike.serial === sessionStorage.serial) {
+			insertTemplate(bike, "#bike-detail-content", "#bike-detail-container");
+		}
+	}
+}
+
+
+function reachedEditBikeInfo() {
+	let bikesList = userData.bikes;
+	for (bike of bikesList) {
+		if (bike.serial === sessionStorage.serial) {
+			insertTemplate(bike, "#bike-info-content", "#edit-bike-info-container");
+		}
+	}
+}
+
+
+function reachedRegisterBike() {
+	console.log("reached register bike");
+	insertTemplate(null, "#bike-info-content", "#register-bike-info-container");
+}
+
+
+function reachedPastReports() {
+	let data = userData;
+	data.reports.forEach(function(report, index, reportArr) {
+		for (bike of data.bikes) {
+			if (bike.serial === report.serial) {
+				reportArr[index].bike = bike;
+			}
+		}
+	})
+	insertTemplate(data, "#reports-content", "#past-reports-container");
+}
+
+//TODO: Lots of repeat between here and the function above
+function reachedReports() {
+	let data = userData;
+	data.reports.forEach(function(report, index, reportArr) {
+		for (bike of data.bikes) {
+			if (bike.serial === report.serial) {
+				reportArr[index].bike = bike;
+			}
+		}
+	})
+	insertTemplate(data, "#reports-content", "#reports-container");
+	insertTemplate(userData, "#report-a-bike-content", "#report-a-bike-container");
+}
+
+
+function reachedReport() {
+	let data = null;
+	if (sessionStorage.newReportSerial) {
+		data={serial: sessionStorage.newReportSerial};
+		sessionStorage.removeItem("newReportSerial");
+	}
+	insertTemplate(data, "#report-content", "#report-container");
+}
+
+
+function reachedEditReport() {
+	console.log("right func");
+	for (report of userData.reports) {
+		if (report.reportID === sessionStorage.reportID) {
+			console.log("got it");
+			insertTemplate(report, "#report-content", "#edit-report-container");
+		}
+	}
+}
+
+function reachedUnregister() {
+	if (sessionStorage.serial && sessionStorage.model) {
+		insertTemplate({serial: sessionStorage.serial, model:sessionStorage.model}, "#unregister-content", "#unregister-container");
+	}
+}
+
+function reachedProfile() {
+	let profileData = userData.profile;
+	Object.assign(profileData, userData.privacy);
+	insertTemplate(profileData, "#profile-content", "#profile-container");
+}
+
+function reachedMyBikes() {
+	insertTemplate(userData, "#my-bikes-content", "#my-bikes-container");
+}
+
+function reachedLookup() {
+	insertTemplate(userData, "#lookup-content", "#lookup-container");
+}
+
+
+
+
+
+
+  ///////////////////////////////////////////
+ ////		toNewPage FUNCTIONS			////
+///////////////////////////////////////////
+
+// These functions specify what values you should save into 
+// session storage before going to each page
+
+
+//Switch to the given page of the app
+function goSomewhere(screen) {
+	$.mobile.pageContainer.pagecontainer("change", screen);
+}
+
+
+//TODO: Reuse code here
+function toBikeDetail(serial) {
+	console.log("bike detail coming up");
+	if(typeof(Storage) != "undefined") {
+  		sessionStorage.serial=serial;
+  	}
+	goSomewhere("#bike-detail");
+}
+
+function toReport(serial) {
+	if(typeof(Storage) != "undefined") {
+  		sessionStorage.newReportSerial = serial;
+  	}
+	goSomewhere("#report");
+}
+
+
+function toEditReport(id) {
+	if(typeof(Storage) != "undefined") {
+  		sessionStorage.reportID = id;
+  	}
+	goSomewhere("#edit-report");
+}
+
+
+function toUnregister(serial, model) {
+	sessionStorage.serial = serial;
+	sessionStorage.model = model;
+	goSomewhere('#unregister');
+}
+
+
+
+
+
+
+
+  ///////////////////////////////////////////
+ ////		HANDLEBARS HELPERS			////
+///////////////////////////////////////////
+
+
+
+
+//Only show element if 2 params are ===
 Handlebars.registerHelper('IF', function(var1, operator, var2, options) {
 	switch(operator) {
 		case "===":
 			return (var1 === var2) && options.fn(this);
+			//If we need more operations, add them
 		default:
-			//console.log("last case");
 			return;
 	}
 })
 
-// Handlebars.registerHelper('exists', function(value) {
-// 	console.log(value && "value=" + value);
-// 	return value && "value=" + value;
-// })
 
-//TODO: structure these
-
+//Converts a word to all lowercase
 Handlebars.registerHelper('lowercase', function(word) {
 	return word.toLowerCase();
 });
 
+
+// Reads params for whether the owner and/or police should be contacted if the bike is recovered
+// Formats them into a string for the report log
 Handlebars.registerHelper('contact', function(contactOwner, contactPolice) {
 	if (contactOwner) {
 		if (contactPolice) {
@@ -193,110 +415,14 @@ Handlebars.registerHelper('contact', function(contactOwner, contactPolice) {
 });
 
 
-allHandleBarsStuff();
 
-function allHandleBarsStuff() {
-	//insertTextFields();
-	let profileData = userData.profile;
-	Object.assign(profileData, userData.privacy);
-	insertTemplate(profileData, "#profile-content", "#profile-container");
-	insertTemplate(userData, "#my-bikes-content", "#my-bikes-container");
+  ///////////////////////////////////////////
+ ////	  MISCELLANEOUS FUNCTIONS		////
+///////////////////////////////////////////
+
+
+
+//Open the terms of service for people to read
+function showTerms() {
+	cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf", '_blank');
 }
-
-
-// function insertTextFields() {
-// 	let templateScript = $("#text-input-content").html();  
-// 	let template = Handlebars.compile(templateScript);  
-	
-// 	$(".text-input").each(function() {
-// 		let data = {
-// 			text: $(this).attr('text'), 
-// 			value: $(this).attr('value'),
-// 			name: $(this).name 
-// 		};
-// 		$(this).replaceWith(template(data));
-// 	});
-// 	$(".text-input").enhanceWithin();		
-// }
-
-
-function insertTemplate(data, templateID, containerID) {
-	var templateScript = $(templateID).html();  
-	 var template = Handlebars.compile(templateScript);  
-	$(containerID).html(template(data));
-	$(containerID).enhanceWithin();
-}
-
-
-$(".toBikeDetail").click(function() {
-	//data.currBike = $(this).attr('serial');
-	if(typeof(Storage) != "undefined") {
-		console.log($(this).attr('serial'));
-  		localStorage.serial=$(this).attr('serial');
-  		console.log("in storage: " + localStorage.serial);
-  		console.log($(this).attr('serial'));
-  	}
-	goSomewhere("#bike-detail");
-})
-
-
-$("body").on('pagecontainerbeforeshow', function(event, data) {
-	console.log("right function");
-	console.log(data.toPage[0].id);
-	switch (data.toPage[0].id) {
-		case 'bike-detail':
-			return reachedBikes();
-		case 'edit-bike-info':
-			return reachedEditBikeInfo();
-		case 'register':
-			return reachedRegisterBikeInfo();
-		case 'past-reports':
-			return reachedPastReports();
-	}
-});
-
-function reachedBikes() {
-	let bikesList = userData.bikes;
-	for (bike of bikesList) {
-		if (bike.serial === localStorage.serial) {
-			console.log("got it: " + localStorage.serial);
-			insertTemplate(bike, "#bike-detail-content", "#bike-detail-container");
-		}
-	}
-}
-
-
-function reachedEditBikeInfo() {
-	let bikesList = userData.bikes;
-	for (bike of bikesList) {
-		if (bike.serial === localStorage.serial) {
-			console.log("got it: " + localStorage.serial);
-			console.log(bike);
-			insertTemplate(bike, "#bike-info-content", "#edit-bike-info-container");
-		}
-	}
-}
-
-function reachedRegisterBikeInfo() {
-	insertTemplate(null, "#bike-info-content", "#register-bike-info-container");
-}
-
-function reachedPastReports() {
-	insertTemplate(userData, "#reports-content", "#past-reports-container");
-}
-
-
-
-//   $("body").on("pagecontainerbeforeshow", 
-//     function( event, ui ) {
-//     	console.log("HI");
-//          if(ui.toPage[0].id === "new_page"){
-//               // Do stuff
-//          }
-//     }
-// );
-
-
-  	//console.log(data.currBike);
-  	// let serial = data.prevPage.find('.toBikeDetail').attr('serial');
-  	// console.log(serial);
