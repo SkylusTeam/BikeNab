@@ -51,13 +51,13 @@
 				<div data-role="controlgroup" data-type="horizontal" class="bottom-buttons center">
 					<button><a class="pw-popup" href="#password-popup" data-rel="popup">Forgot Password?</a></button>	
 					<button class="ui-btn" id="other-one" onclick='goSomewhere("#create-account")'>Create Account</button>
-					<div data-role="popup" id="password-popup" class="ui-content">
+					<div data-role="popup" id="password-popup" class="ui-content popup">
 						<form onSubmit="return false;">
 							<div>
 								<h3>Password Recovery</h3>
 								<input type="text" name="email" id="user" placeholder="Enter your email">
 								We will send you a password recovery email.
-								<input type="submit" value="Submit">
+								<button type="submit" class="blue-button">Submit</button>
 							</div>
 						</form>
 					</div>
@@ -223,7 +223,8 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<form onSubmit="return false;">
-						<div class="insert" insert="create-account-form le-personal-info"></div>
+						<div class="insert" insert="create-account-form"></div>
+						<div id="le-personal-create-container"></div>
 						<button type="submit" class="blue-button">Create Account</button>
 					</form>
 					<a class="center account-link" href="#login">I already have an account.</a>
@@ -292,7 +293,7 @@
 				<div class="floating-box">
 					<form onSubmit="return false;">
 						<h1 class="center">Law Enforcement Profile</h1>
-						<div class="insert" insert="le-personal-info"></div>
+						<div id="le-personal-profile-container"></div>
 						<input type="submit" value="Save">
 					</form>
 				</div>
@@ -311,25 +312,7 @@
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
-			<div data-role="main" class="ui-content">
-				<div class="floating-box">
-
-					<h1 class="center">Settings</h1>
-
-					<h2>Account Info</h2>
-					<h4>Email: jdoe@hmc.edu</h4>
-					<button>Change Email</button>
-					<button>Change Password</button>
-					<button>Forgot Password</button>
-
-					<h2>About BikeNab</h2>
-					<button onclick="goSomewhere('#about')">About Us</button>
-					<button onclick="goSomewhere('#contact')"">Contact Us</button>
-
-					<h2>Goodbye</h2>
-					<button  onclick="goSomewhere('#login')">Log Out</button>
-					<button>Delete Account</button>
-				</div>
+			<div data-role="main" class="ui-content" id="settings-container">
 			</div>
 		</div>
 
@@ -495,16 +478,7 @@
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
-			<div data-role="main" class="ui-content">
-				<div class="floating-box">
-					<h1 class="center">Contact Us</h1>
-					<form method="post" action="demoform.asp">
-						<div class="text-input" name="name" txt="Name:"></div>
-						<div class="text-input" name="name" txt="Email:"></div>
-						<label for="message">Message:</label>
-						<textarea name="message" id="message"></textarea>
-					</form>
-				</div>
+			<div data-role="main" class="ui-content" id="contact-container">
 			</div>
 		</div>
 
@@ -515,19 +489,6 @@
 		<!-- Hidden page containing elements that pop up in various pages -->
 		<div data-role="page" id="hidden">
 
-			<!-- Law Enforcement Personal Info -->
-			<!-- used in #le-profile and #le-create-account-->
-			<div class="le-personal-info">
-				<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
-				<div class="text-input" name="le-name" txt="Name:"></div>
-				<div class="text-input" name="le-department" txt="Law Enforcement Department:"></div>
-				<div class="text-input" name="le-dept-zip" txt="Department Zip Code:"></div>
-				<div class="text-input" name="le-email" txt="Work Email:"></div>
-				<div class="text-input" name="le-work-phone" txt="Work Main Number:"></div>
-				<div class="text-input" name="le-cell" txt="Work Cell Number:"></div>
-				<div class="text-input" name="le-social-media" txt="Work Social Media:"></div>
-			</div>
-
 
 			<!--Create Account Form-->
 			<!--Used in #create-account and #le-create-account -->
@@ -535,13 +496,17 @@
 				
 					<h1 class="center">Create Account</h1>
 					<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
-					<div class="text-input" name="username" txt="Username:"></div>
-					<div class="text-input" name="password1" txt="Password:"></div>
-					<div class="text-input" name="password2" txt="Confirm Password:"></div>
+					<div class="text-input" value="''" name="username" txt="Username:"></div>
+					<div class="text-input" value="''" name="password1" txt="Password:"></div>
+					<div class="text-input" value="''" name="password2" txt="Confirm Password:"></div>
+					<br>
+					Please read the BikeNab <a onclick="showTerms()" href="#" data-ajax=false>Terms of Service</a>.
 					<fieldset data-role="controlgroup">
-						<label for="terms">I agree to the BikeNab <a onclick="showTerms()" href="#" data-ajax=false>Terms of Service</a>.</label>
+						<label for="terms">I agree to the Terms of Service.</label>
 						<input type="checkbox" name="terms" id="terms" value="red">
+						<div id="clicked"></div>
 					</fieldset>
+					<br>
 			</div>
 
 
@@ -601,7 +566,147 @@
 			<div data-role="fieldcontain">
 				<label for={{name}}>{{text}}</label>
 				<input type="text" name={{name}} id={{name}} value={{value}} data-clear-btn="true">
-			</div>'
+			</div>
+		</script>
+
+
+		<!-- Law Enforcement Personal Info -->
+		<!-- used in #le-profile and #le-create-account-->
+		<script id="le-personal-content" type="text/x-handlebars-template">
+			<div class="le-personal-info">
+				<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+				<div data-role="fieldcontain">
+					<label for="le-name">Name:</label>
+					<input type="text" id="le-name" value='{{name}}' data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="le-department">Law Enforcement Department:</label>
+					<input type="text" id="le-department" value='{{department}}' data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="le-dept-zip">Department Zip Code:</label>
+					<input type="text" id="le-dept-zip" value='{{zip}}' data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="le-email">Work Email:</label>
+					<input type="text" id="le-email" value='{{workEmail}}' data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="le-work-phone">Work Main Number:</label>
+					<input type="text" id="le-work-phone" value='{{workPhone}}' data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="le-cell">Work Cell Number:</label>
+					<input type="text" id="le-cell" value='{{workCell}}' data-clear-btn="true">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="le-social-media">Work Social Media:</label>
+					<input type="text" id="le-social-media" value='{{workSocialMedia}}'data-clear-btn="true">
+				</div>
+
+			</div>
+		</script>
+
+
+
+		<script id="settings-content" type="text/x-handlebars-template">
+			<div class="floating-box">
+
+				<h1 class="center">Settings</h1>
+
+				<h2>Account Info</h2>
+				<h4>Email: {{profile.email}}</h4>
+				<a class="ui-btn" href="#change-email-popup" data-rel="popup">Change Email</a>
+				<a class="ui-btn" href="#change-password-popup" data-rel="popup">Change Password</a>
+				<a class="ui-btn" href="#forgot-password-popup" data-rel="popup">Forgot Password</a>
+
+				<h2>About BikeNab</h2>
+				<button onclick="goSomewhere('#about')">About Us</button>
+				<button onclick="goSomewhere('#contact')">Contact Us</button>
+
+				<h2>Goodbye</h2>
+				<button  onclick="goSomewhere('#login')">Log Out</button>
+				<a class="ui-btn" href="#delete-account-popup" data-rel="popup">Delete Account</a>
+
+				<!-- Change Email popup -->
+				<div data-role="popup" id="change-email-popup" class="popup">
+					<form onSubmit="return false;">
+						<div>
+							<h3>Change Email</h3>
+							<label for="old-pw">Enter password to confirm this action:</label>
+							<input type="password" id="old-pw" placeholder="Password">
+							<label for="new-pw">New Email:</label>
+							<input type="text" id="new-pw" placeholder="New Email">
+							A verification email will be sent to this email address.
+							<button type="submit" class="blue-button">Change Email</button>
+						</div>
+					</form>
+				</div>
+
+				<!-- Change Password popup -->
+				<div data-role="popup" id="change-password-popup" class="popup">
+					<form onSubmit="return false;">
+						<div>
+							<h3>Change Password</h3>
+							<label for="old-pw">Old Password:</label>
+							<input type="password" id="old-pw" placeholder="Old Password">
+							<label for="new-pw">New Password:</label>
+							<input type="password" id="new-pw" placeholder="New Password">
+							<label for="confirm-new-pw">Confirm New Password:</label>
+							<input type="password" id="confirm-new-pw" placeholder="Confirm New Password">
+							<button type="submit" class="blue-button">Change Password</button>
+						</div>
+					</form>
+				</div>
+
+
+				<!-- Forgot Password popup -->
+				<div data-role="popup" id="forgot-password-popup" class="ui-content popup">
+					<form onSubmit="return false;">
+						<div>
+							<h3>Password Recovery</h3>
+							<input type="text" name="email" id="user" placeholder="Enter your email">
+							We will send you a password recovery email.
+							<button type="submit" class="blue-button">Submit</button>
+						</div>
+					</form>
+				</div>
+
+
+				<!-- Delete Account popup -->
+				<div data-role="popup" id="delete-account-popup" class="popup">
+					<form onSubmit="return false;">
+						<div>
+							<h3>Delete Account</h3>
+							<label for="pw-before-delete">Please enter your password to confirm this action.</label>
+							<input type="text" name="pw-before-delete" id="pw-before-delete" placeholder="Password">
+							<label for="are-you-sure">I understand that my personal information will be permanently deleted.</label>
+							<input type="checkbox" name="are-you-sure" id="are-you-sure" value="are-you-sure">
+							<button type="submit" class="blue-button">Delete Account Permanentely</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</script>
+
+
+
+		<script id="contact-content" type="text/x-handlebars-template">
+			<div class="floating-box">
+				<h1 class="center">Contact Us</h1>
+				<form method="post" action="demoform.asp">
+					<div data-role="fieldcontain">
+						<label for="contact-name">Name:</label>
+						<input type="text" id="contact-name" value={{name}} data-clear-btn="true">
+					</div>
+					<div data-role="fieldcontain">
+						<label for="contact-email">Email:</label>
+						<input type="text" id="contact-email" value={{email}} data-clear-btn="true">
+					</div>
+					<label for="message">Message:</label>
+					<textarea name="message" id="message"></textarea>
+				</form>
+			</div>
 		</script>
 
 
@@ -1053,15 +1158,33 @@
 					<h2>Personal Info</h2>
 
 					<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
-					<div class="text-input" value={{name}} name="name" txt="Name:"></div>
-					<div class="text-input" value={{email}} name="primary-email" txt="Email Address:"></div>
-					<div class="text-input" value={{backupEmail}} name="backup-email" txt="Backup Email:"></div>
-					<div class="text-input" value={{birthdate}} name="birthdate" txt="Date of Birth:"></div>
-					<div class="text-input" value={{address}} name="address" txt="Address:"></div>
-					<div class="text-input" value={{cellphone}} name="cell" txt="Cell Phone:"></div>
-					<div class="text-input" value={{socialMedia}} name="social-media" txt="Social Media:"></div>
+					<div data-role="fieldcontain">
+						<label for="contact-name">Name:</label>
+						<input type="text" id="contact-name" value={{name}} data-clear-btn="true">
+					</div>
+					<div data-role="fieldcontain">
+						<label for="backupEmail">Backup Email:</label>
+						<input type="text" id="backupEmail" value={{backupEmail}} data-clear-btn="true">
+					</div>
+					<div data-role="fieldcontain">
+						<label for="birthdate">Birthdate:</label>
+						<input type="text" id="birthdate" value={{birthdate}} data-clear-btn="true">
+					</div>
+					<div data-role="fieldcontain">
+						<label for="address">Address:</label>
+						<input type="text" id="address" value={{address}} data-clear-btn="true">
+					</div>
+					<div data-role="fieldcontain">
+						<label for="cell">Cell Phone:</label>
+						<input type="text" id="cell" value={{cellphone}} data-clear-btn="true">
+					</div>
+					<div data-role="fieldcontain">
+						<label for="social-media">Social Media:</label>
+						<input type="text" id="social-media" value={{socialMedia}} data-clear-btn="true">
+					</div>
 
-
+					You can change your account email or password in your <a href="#settings">Settings</a>.
+					<br>
 					<h2>Privacy Settings</h2>
 
 					<!-- Flipswitch Input Form Fields (These will be dynamically replaced with styled input fields)-->

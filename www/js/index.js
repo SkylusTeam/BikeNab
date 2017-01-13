@@ -206,6 +206,14 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 			return reachedMyBikes();
 		case 'lookup':
 			return reachedLookup();
+		case 'contact':
+			return reachedContact();
+		case 'settings':
+			return reachedSettings();
+		case 'le-create-account':
+			return reachedLeCreateAccount();
+		case 'le-profile':
+			return reachedLeProfile();
 		default:
 			console.log("You'd better do " + data.toPage[0].id);
 	}
@@ -321,6 +329,21 @@ function reachedLookup() {
 	}
 }
 
+function reachedContact() {
+	insertTemplate(userData.profile, "#contact-content", "#contact-container");
+}
+
+function reachedSettings() {
+	insertTemplate(userData, "#settings-content", "#settings-container");
+}
+
+function reachedLeCreateAccount() {
+	insertTemplate(null, "#le-personal-content", "#le-personal-create-container");
+}
+
+function reachedLeProfile() {
+	insertTemplate(userData.profile, "#le-personal-content", "#le-personal-profile-container");
+}
 
 
 
