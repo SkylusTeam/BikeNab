@@ -109,7 +109,7 @@
       z-index: -1;
       width: 100%; }
       .stripey .ok {
-        transform: translate(0, 50%); }
+        transform: translate(0, 70%); }
       .stripey hr {
         background-color: #ed1a3b;
         height: 2px;
@@ -258,5 +258,9 @@
   display: inline-block;
   border-width: 0px;
   font-size: 15px; }
+
+#spacer {
+  width: 100%;
+  min-height: 30px; }
 
 /*# sourceMappingURL=style.css.map */

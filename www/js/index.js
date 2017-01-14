@@ -120,16 +120,7 @@ function addRepeatedElements() {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-
-	//Taken here:  //http://damien.antipa.at/blog/2014/02/08/3-ways-to-detect-that-your-application-is-running-in-cordova-slash-phonegap/
-	//This method differenetiates between apps & browsers (so mobile & desktop browsers count as the same)
-	//Useful for menus (deciding whether or not we want a back button)
-	const isApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-	
-	//Taken here: http://stackoverflow.com/questions/8068052/phonegap-detect-if-running-on-desktop-browser
-	//This method differenetiates between desktop and mobild (so mobile browsers and apps count as the same)
-	const isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
-	addMenu(isMobile);
+	addMenu(isMobile());
 }
 
 //TODO: Make sure this is what it's really doing
@@ -139,6 +130,7 @@ $(document).bind('mobileinit',function(){
 	$.mobile.page.prototype.options.backBtnText = "Previous";
 	$.mobile.page.prototype.options.backBtnTheme = "b";
 });
+
 
 
 //Insert large sections of code which are used in multiple places.
@@ -458,7 +450,17 @@ Handlebars.registerHelper('contact', function(contactOwner, contactPolice) {
 
 //Open the terms of service for people to read
 function showTerms() {
-	cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf", '_blank');
+
+	console.log(isApp());
+	console.log()
+	//For whatever reason, the terms don't show up correctly on mobile browsers if you try to open them in the same page.
+	//TODO: Check whether this is universal or just my data.
+	if (!isApp() && isMobile()){
+		cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf");
+	} else {
+		alert("second option");
+		cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf", '_blank');
+	}
 }
 
 
@@ -481,4 +483,19 @@ function getPrivacySetting(bike, privacy) {
 			return -1; //Individuals can't see unstolen bikes.
 		}
 	}
+}
+
+
+function isMobile() {
+	//Taken here: http://stackoverflow.com/questions/8068052/phonegap-detect-if-running-on-desktop-browser
+	//This method differenetiates between desktop and mobile (so mobile browsers and apps count as the same)
+	return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
+}
+
+
+function isApp() {
+	//Taken here: //http://damien.antipa.at/blog/2014/02/08/3-ways-to-detect-that-your-application-is-running-in-cordova-slash-phonegap/
+	//This method differenetiates between apps & browsers (so mobile & desktop browsers count as the same)
+	//Useful for menus (deciding whether or not we want a back button)
+	return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
 }
