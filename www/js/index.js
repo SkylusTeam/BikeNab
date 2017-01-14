@@ -1,8 +1,6 @@
 // SOMETHING USEFUL ABOUT ADDING PLUGINS AND STUFF
 // http://stackoverflow.com/questions/29970885/cordova-5-0-0-which-files-should-i-commit-to-git
 
-
-
   ///////////////////////////////////////
  ////			TEMPORARY			////
 ///////////////////////////////////////
@@ -84,9 +82,9 @@ $( document ).ready(function() {
 
 //TODO: Make sure all of these are relevant still.
 
+
 //Insert repeated elements of code
 function addRepeatedElements() {
-
 	//Insert large sections of code which are used in multiple places.
 	//TODO: Do we need this anymore?
 	insertSections();
@@ -124,8 +122,10 @@ function addRepeatedElements() {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
+	console.log("")
 	addMenu(isApp());
 }
+
 
 //TODO: Make sure this is what it's really doing
 // Add Back button
@@ -219,9 +219,11 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 
 //TODO: Can we reuse code among any of these?
 
-function insertTemplate(data, template, containerID) {
-	//console.log("called insert template");
-	//console.log(myBikesTemplate);
+function insertTemplate(data, templateName, containerID) {
+	//alert("should be a second one " + templateName);
+	console.log("first");
+	let template = Handlebars.templates[templateName];
+	console.log("second");
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
@@ -231,7 +233,7 @@ function reachedBikes() {
 	let bikesList = userData.bikes;
 	for (bike of bikesList) {
 		if (bike.serial === sessionStorage.serial) {
-			insertTemplate(bike, bikeDetailTemplate, "#bike-detail-container");
+			insertTemplate(bike, "bikeDetail", "#bike-detail-container");
 		}
 	}
 }
@@ -241,14 +243,14 @@ function reachedEditBikeInfo() {
 	let bikesList = userData.bikes;
 	for (bike of bikesList) {
 		if (bike.serial === sessionStorage.serial) {
-			insertTemplate(bike, bikeInfoTemplate, "#edit-bike-info-container");
+			insertTemplate(bike, "bikeInfo", "#edit-bike-info-container");
 		}
 	}
 }
 
 
 function reachedRegisterBike() {
-	insertTemplate(null, bikeInfoTemplate, "#register-bike-info-container");
+	insertTemplate(null, "bikeInfo", "#register-bike-info-container");
 }
 
 
@@ -261,7 +263,7 @@ function reachedPastReports() {
 			}
 		}
 	})
-	insertTemplate(data, reportsTemplate, "#past-reports-container");
+	insertTemplate(data, "reports", "#past-reports-container");
 }
 
 //TODO: Lots of repeat between here and the function above
@@ -274,8 +276,8 @@ function reachedReports() {
 			}
 		}
 	})
-	insertTemplate(data, reportsTemplate, "#reports-container");
-	insertTemplate(userData, reportABikeTemplate, "#report-a-bike-container");
+	insertTemplate(data, "reports", "#reports-container");
+	insertTemplate(userData, "reportABike", "#report-a-bike-container");
 }
 
 
@@ -285,32 +287,32 @@ function reachedReport() {
 		data={serial: sessionStorage.newReportSerial};
 		sessionStorage.removeItem("newReportSerial");
 	}
-	insertTemplate(data, reportTemplate, "#report-container");
+	insertTemplate(data, "report", "#report-container");
 }
 
 
 function reachedEditReport() {
 	for (report of userData.reports) {
 		if (report.reportID === sessionStorage.reportID) {
-			insertTemplate(report, reportTemplate, "#edit-report-container");
+			insertTemplate(report, "report", "#edit-report-container");
 		}
 	}
 }
 
 function reachedUnregister() {
 	if (sessionStorage.serial && sessionStorage.model) {
-		insertTemplate({serial: sessionStorage.serial, model:sessionStorage.model}, unregisterTemplate, "#unregister-container");
+		insertTemplate({serial: sessionStorage.serial, model:sessionStorage.model}, "unregister", "#unregister-container");
 	}
 }
 
 function reachedProfile() {
 	let profileData = userData.profile;
 	Object.assign(profileData, userData.privacy);
-	insertTemplate(profileData, profileTemplate, "#profile-container");
+	insertTemplate(profileData, "profile", "#profile-container");
 }
 
 function reachedMyBikes() {
-	insertTemplate(userData, myBikesTemplate, "#my-bikes-container");
+	insertTemplate(userData, "myBikes", "#my-bikes-container");
 }
 
 function reachedLookup() {
@@ -318,32 +320,28 @@ function reachedLookup() {
 	// It will be the bike who's searial number matches
 	const privacy = getPrivacySetting(userData.bikes[1], userData.privacy); //TODO: Use the other person's
 	if (privacy === -1) {
-		insertTemplate(null, lookupTemplate, "#lookup-container");
+		insertTemplate(null, "lookup", "#lookup-container");
 	} else {
 		const data = {privacy: privacy, owner: userData.profile, report: userData.reports[0], bike: userData.bikes[0]};//TODO: Take this line out later, replace w. database call
-		insertTemplate(data, lookupTemplate, "#lookup-container");
+		insertTemplate(data, "lookup", "#lookup-container");
 	}
 }
 
 function reachedContact() {
-	insertTemplate(userData.profile, contactTemplate, "#contact-container");
+	insertTemplate(userData.profile, "contact", "#contact-container");
 }
 
 function reachedSettings() {
-	insertTemplate(userData, settingsTemplate, "#settings-container");
+	insertTemplate(userData, "settings", "#settings-container");
 }
 
 function reachedLeCreateAccount() {
-	insertTemplate(null, lePersonalTemplate, "#le-personal-create-container");
+	insertTemplate(null, "lePersonal", "#le-personal-create-container");
 }
 
 function reachedLeProfile() {
-	insertTemplate(userData.profile, lePersonalTemplate, "#le-personal-profile-container");
+	insertTemplate(userData.profile, "lePersonal", "#le-personal-profile-container");
 }
-
-
-
-
 
 
 
@@ -390,11 +388,6 @@ function toUnregister(serial, model) {
 	sessionStorage.model = model;
 	goSomewhere('#unregister');
 }
-
-
-
-
-
 
 
   ///////////////////////////////////////////
@@ -462,9 +455,7 @@ Handlebars.registerHelper('contact', function(contactOwner, contactPolice) {
 
 //Open the terms of service for people to read
 function showTerms() {
-
-	console.log(isApp());
-	console.log()
+	//cordova.InAppBrowser.open("Terms-of-service.pdf");
 	//For whatever reason, the terms don't show up correctly on mobile browsers if you try to open them in the same page.
 	//TODO: Check whether this is universal or just my data.
 	if (!isApp() && isMobile()){
@@ -511,23 +502,3 @@ function isApp() {
 	return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
 }
 
-
-
-//Templates//
-console.log("created templates");
-var textInputTemplate = Handlebars.compile($("#text-input-content").html()); //TODO: Maybe take this out
-var lePersonalTemplate = Handlebars.compile($("#le-personal-content").html());
-var settingsTemplate = Handlebars.compile($("#settings-content").html());
-var contactTemplate = Handlebars.compile($("#contact-content").html());
-var lookupNotFoundTemplate = Handlebars.compile($("#lookup-not-found-content").html());
-var lookupTemplate = Handlebars.compile($("#lookup-content").html());
-var unregisterTemplate = Handlebars.compile($("#unregister-content").html());
-var reportTemplate = Handlebars.compile($("#report-content").html());
-var reportABikeTemplate = Handlebars.compile($("#report-a-bike-content").html());
-var reportsTemplate = Handlebars.compile($("#reports-content").html());
-var bikeInfoTemplate = Handlebars.compile($("#bike-info-content").html());
-var bikeDetailTemplate = Handlebars.compile($("#bike-detail-content").html());
-var myBikesTemplate = Handlebars.compile($("#my-bikes-content").html());
-console.log("my bikes template");
-console.log(myBikesTemplate);
-var profileTemplate = Handlebars.compile($("#profile-content").html());

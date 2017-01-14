@@ -1,0 +1,16 @@
+<div class="floating-box">
+				<h1 class="center">My Bikes</h1>
+				{{#each bikes}}
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="false"><a onclick="toBikeDetail('{{serial}}')" >
+						<img class="medium-pic" src="img/bike2.jpg">
+							<font style="white-space:normal" >
+								Model: {{model}}
+							</font>
+							<br>Status: {{status}} 
+					</a></li>
+				</ul>
+				{{/each}}
+				<button class="blue-button" onclick="goSomewhere('#register')">Register Another Bike</button>
+				<button class="blue-button" onclick="goSomewhere('#past-reports')">View Past Reports</button>
+			</div>

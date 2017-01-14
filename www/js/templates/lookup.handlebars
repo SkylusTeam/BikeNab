@@ -1,0 +1,105 @@
+<div class="floating-box">
+				<h1 class="center">Bike Lookup</h1>
+				<br>
+				<input type="search" name="serial-lookup" placeholder="Enter a serial number...">
+				<h2 class="center" style="color: red">Status: 
+					{{#IF privacy '>=' 0}}{{bike.status}}{{/IF}}
+				</h2>
+				<br>
+				<img class="medium-pic center" src="img/bike2.jpg">
+
+				<h2>Bicycle Info</h2>
+
+				<ul data-role="listview" data-inset="true">
+					<li>
+						<font style="white-space:normal" >
+							<table>
+							<tr>
+								<td><b>Serial Number:</b></td>
+								<td>{{bike.serial}}</td>
+							</tr>
+							<tr>
+								<td><b>Make:</b></td>
+								<td>{{bike.make}}</td>
+							</tr>
+							<tr>
+								<td><b>Model:</b></td>
+								<td>{{bike.model}}</td>
+							</tr>
+							<tr>
+								<td><b>Year:</b></td>
+								<td>{{bike.year}}</td>
+							</tr>
+							{{#IF privacy '>=' 2}}
+							<tr>
+								<td><b>Place of Purchase:</b></td>
+								<td>{{bike.purchasePlace}}</td>
+							</tr>
+							<tr>
+								<td><b>Value:</b></td>
+								<td>{{bike.value}}</td>
+							</tr>
+							{{/IF}}
+							<tr>
+								<td><b>Other Info:</b></td>
+								<td>{{bike.otherInfo}}</td>
+							</tr>
+						</table>
+						</font>
+					</li>
+				</ul>
+
+
+		{{#IF privacy '>=' 1}}
+				<h2>Owner Info</h2>
+
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="false">
+						<font style="white-space:normal" >
+							<table>
+							
+								<tr>
+									<td><b>Name:</b></td>
+									<td>{{owner.name}}</td>
+								</tr>
+								<tr>
+									<td><b>Owner Email:</b></td>
+									<td>{{owner.email}}</td>
+								</tr>
+								<tr>
+									<td><b>Owner Phone Number:</b></td>
+									<td>{{owner.cellphone}}</td>
+								</tr>
+								
+							</table>
+						</font>
+					</li>
+				</ul>
+			{{/IF}}
+
+				{{#IF bike.status '===' 'Okay'}}
+				<h2>Law Enforcement Info</h2>
+
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="false">
+						<font style="white-space:normal" >
+							<table>
+								<tr>
+									<td><b>Case Officer:</b></td>
+									<td>{{report.officerName}}</td>
+								</tr>
+								<tr>
+									<td><b>Officer Email:</b></td>
+									<td>{{report.officerEmail}}</td>
+								</tr>
+								<tr>
+									<td><b>Officer Phone Number:</b></td>
+									<td>{{report.officerPhone}}</td>
+								</tr>
+							</table>
+						</font>
+					</li>
+				</ul>
+				{{/IF}}
+
+			</div>

@@ -1,0 +1,51 @@
+<div class="expandable-reports">
+				<div data-role="collapsibleset">
+				{{#each reports}}
+					<div data-role="collapsible">
+						<h1>{{capitalize this.bike.model}} bike reported {{lowercase status}} on {{date}}.</h1>
+						<div>
+							<img class="small-pic ui-corner-all center side-by-side five-mar" src="img/bike2.jpg">
+							<div class="side-by-side center">
+								<button class="blue-button medium-button five-mar" onclick="toBikeDetail('{{serial}}')">Bike Details</button>
+								<button class="blue-button medium-button center five-mar toEditReport" onclick="toEditReport('{{reportID}}')">Edit Report</button>
+							</div>
+						</div>
+						<h3>Incident Information</h3>
+						<table cellpadding="3px">
+							<tr>
+								<td><b>Incident Number:</b></td>
+								<td>{{incidentNumber}}</td>
+							</tr>
+							<tr>
+								<td><b>Officer's Name:</b></td>
+								<td>{{officerName}}</td>
+							</tr>
+							<tr>
+								<td><b>Officer's Email:</b></td>
+								<td>{{officerEmail}}</td>
+							</tr>
+							<tr>
+								<td><b>Officer's Phone:</b></td>
+								<td>{{officerPhone}}</td>
+							</tr>
+							<tr>
+								<td><b>Reported:</b></td>
+								<td>{{status}}</td>
+							</tr>
+							<tr>
+								<td><b>Report Date:</b></td>
+								<td>{{date}}</td>
+							</tr>
+							<tr>
+								<td><b>When Found:</b></td>
+								<td>{{contact contactOwner contactPolice}}</td>
+							</tr>
+							<tr>
+								<td><b>Incident Description:</b></td>
+								<td>{{description}}</td>
+							</tr>
+						</table>
+					</div>
+					{{/each}}
+				</div>
+			</div>
