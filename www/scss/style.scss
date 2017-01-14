@@ -198,11 +198,11 @@ $fancy-font: 'Archivo Black', sans-serif;
  .stripey {
  	height: 100%;
  	background-color: $light-blue;
+ 	width: 100%;
+ 	position: fixed;
+ 	z-index: -1;
 
  	@media screen and (min-height: 450px) {
- 		position: fixed;
- 		z-index: -1;
-		width: 100%;
 
  		.ok {
  			transform: translate(0, 70%);
@@ -224,7 +224,9 @@ $fancy-font: 'Archivo Black', sans-serif;
  	}
 
  	@media screen and (max-height: 450px) {
- 		display: none;
+ 		hr, .stripe {
+ 			display: none;
+ 		}
  	}
  }
 

@@ -116,71 +116,6 @@
 		</div>
 
 
-		 <!-- Profile -->
-		<!--<div data-role="page" id="profile" class="stripey-background">
-			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
-				<h1>BikeNab</h1>
-				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
-				<a href="#home" data-icon="home" data-theme="b">Home</a>
-			</div>
-			<div data-role="main" class="ui-content"> 
-				<div class="floating-box">
-					<form onSubmit="return false;">
-						<h1 class="center">Profile</h1>
-						<h2>Personal Info</h2>
-
-						<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)
-						<div class="text-input" name="name" txt="Name:"></div>
-						<div class="text-input" name="primary-email" txt="Email Address:"></div>
-						<div class="text-input" name="backup-email" txt="Backup Email:"></div>
-						<div class="text-input" name="birthdate" txt="Date of Birth:"></div>
-						<div class="text-input" name="address" txt="Address:"></div>
-						<div class="text-input" name="cell" txt="Cell Phone:"></div>
-						<div class="text-input" name="social-media" txt="Social Media:"></div>
-
-
-						<h2>Privacy Settings</h2>
-
-						<!-- Flipswitch Input Form Fields (These will be dynamically replaced with styled input fields)
-						<h4>When any individual searches a serial number I marked stolen:</h4>
-
-						<fieldset class="ui-field-contain">
-							<label for="ind-stolen">Visible Information:</label>
-							<select name="ind-stolen" id="ind-stolen">
-								<option value="2">All my personal info</option>
-								<option value="1">Bike info + contact info</option>
-								<option value="0">Basic bike info only</option>
-							</select>
-						</fieldset>
-
-						<h4>When a law enforcement officer searches my bike's serial number:</h4>
-
-						<fieldset class="ui-field-contain">
-							<label for="le-normal">Visible Information:</label>
-							<select name="le-normal" id="le-normal">
-								<option value="2">All my personal info</option>
-								<option value="1">Bike info + contact info</option>
-								<option value="0">Basic bike info only</option>
-							</select>
-						</fieldset>
-
-						<h4>When a law enforcement officer searches a serial number I marked stolen:</h4>
-
-						<fieldset class="ui-field-contain">
-							<label for="le-stolen">Visible Information:</label>
-							<select name="le-stolen" id="le-stolen">
-								<option value="2">All my personal info</option>
-								<option value="1">Bike info + contact info</option>
-								<option value="0">Basic bike info only</option>
-							</select>
-						</fieldset>
-
-						<button type="submit" class="blue-button">Save Changes</button>
-					</form>
-				</div>
-			</div>
-		</div> -->
-
 		<!-- Profile -->
 		<div data-role="page" id="profile" class="stripey-background">
 			
@@ -197,18 +132,13 @@
 
 		<!-- Create Account -->
 		<div data-role="page" id="create-account" class="stripey-background">
-			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
-				<h1>BikeNab</h1>
-				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
-				<a href="#home" data-icon="home" data-theme="b">Home</a>
-			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<form onSubmit="return false;">
 						<div class="insert" insert="create-account-form"></div>
 						<button type="submit" class="blue-button">Create Account</button>
 					</form>
-			<a class="center account-link" href="#login">I already have an account.</a>
+					<a class="center account-link" href="#login">I already have an account.</a>
 				</div>
 			</div>
 		</div>
@@ -216,11 +146,6 @@
 
 		<!-- Law Enforcement Create Account -->
 		<div data-role="page" id="le-create-account" class="stripey-background">
-			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
-				<h1>BikeNab</h1>
-				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
-				<a href="#home" data-icon="home" data-theme="b">Home</a>
-			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<form onSubmit="return false;">
@@ -716,7 +641,7 @@
 		</script>
 
 
-		<script id="lookup-not-found" type="text/x-handlebars-template">
+		<script id="lookup-not-found-content" type="text/x-handlebars-template">
 			<div class="floating-box">
 				<h1 class="center">Bike Lookup</h1>
 				<br>
@@ -955,7 +880,7 @@
 				<li data-icon="false"><a onclick="toReport('{{serial}}')">
 					<img class="medium-pic" src="img/bike2.jpg">
 					<font class="listview-text">
-						Report {{model}} bicycle as missing/stolen
+						Report this bike as missing/stolen
 					</font>
 				</a></li>
 			</ul>
@@ -972,7 +897,7 @@
 				<div data-role="collapsibleset">
 				{{#each reports}}
 					<div data-role="collapsible">
-						<h1>{{this.bike.model}} bike reported {{lowercase status}} on {{date}}.</h1>
+						<h1>{{capitalize this.bike.model}} bike reported {{lowercase status}} on {{date}}.</h1>
 						<div>
 							<img class="small-pic ui-corner-all center side-by-side five-mar" src="img/bike2.jpg">
 							<div class="side-by-side center">
@@ -1233,11 +1158,6 @@
 			</div>
 		</script>
 
-		 <script id="header" type="text/x-handlebars-template">​
-			<div> {{ headerTitle }} </div>​
-			Today is {{weekDay}}
-			<div class="text-input" value={{weekDay}} name="name" txt="Name:"></div>
-		</script>
 
 		<!-- Javascript files -->
 		<script type="text/javascript" src="cordova.js"></script>

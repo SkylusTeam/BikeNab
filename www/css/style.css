@@ -102,25 +102,24 @@
 /* Background Styling */
 .stripey {
   height: 100%;
-  background-color: #E0E2F0; }
+  background-color: #E0E2F0;
+  width: 100%;
+  position: fixed;
+  z-index: -1; }
   @media screen and (min-height: 450px) {
-    .stripey {
-      position: fixed;
-      z-index: -1;
-      width: 100%; }
-      .stripey .ok {
-        transform: translate(0, 70%); }
-      .stripey hr {
-        background-color: #ed1a3b;
-        height: 2px;
-        border: none;
-        margin: 3px 0px; }
-      .stripey .stripe {
-        height: 200px;
-        background-color: #254ea2;
-        margin: 0px; } }
+    .stripey .ok {
+      transform: translate(0, 70%); }
+    .stripey hr {
+      background-color: #ed1a3b;
+      height: 2px;
+      border: none;
+      margin: 3px 0px; }
+    .stripey .stripe {
+      height: 200px;
+      background-color: #254ea2;
+      margin: 0px; } }
   @media screen and (max-height: 450px) {
-    .stripey {
+    .stripey hr, .stripey .stripe {
       display: none; } }
 
 #body .center {

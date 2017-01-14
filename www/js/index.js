@@ -94,8 +94,12 @@ function addRepeatedElements() {
 	// Format floating white box.
 	$(".floating-box").addClass('ui-shadow ui-corner-all');
 	
-	// Add background
-	$(".stripey-background").prepend("<div class='stripey'><div class='ok'><hr><div class='stripe'></div><hr></div></div>");
+	// Add background (on big screens you get a stripe, not on mobile)
+	if(!isMobile()) {
+		$(".stripey-background").prepend("<div class='stripey'><div class='ok'><hr><div class='stripe'></div><hr></div></div>");
+	} else {
+		$(".stripey-background").prepend("<div class='stripey'></div>");
+	}
 
 	// Add text input fields
 	$(".text-input").each(function() {
@@ -120,7 +124,7 @@ function addRepeatedElements() {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-	addMenu(isMobile());
+	addMenu(isApp());
 }
 
 //TODO: Make sure this is what it's really doing
@@ -215,9 +219,9 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 
 //TODO: Can we reuse code among any of these?
 
-function insertTemplate(data, templateID, containerID) {
-	var templateScript = $(templateID).html();  
-	 var template = Handlebars.compile(templateScript);  
+function insertTemplate(data, template, containerID) {
+	//console.log("called insert template");
+	//console.log(myBikesTemplate);
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
@@ -227,7 +231,7 @@ function reachedBikes() {
 	let bikesList = userData.bikes;
 	for (bike of bikesList) {
 		if (bike.serial === sessionStorage.serial) {
-			insertTemplate(bike, "#bike-detail-content", "#bike-detail-container");
+			insertTemplate(bike, bikeDetailTemplate, "#bike-detail-container");
 		}
 	}
 }
@@ -237,14 +241,14 @@ function reachedEditBikeInfo() {
 	let bikesList = userData.bikes;
 	for (bike of bikesList) {
 		if (bike.serial === sessionStorage.serial) {
-			insertTemplate(bike, "#bike-info-content", "#edit-bike-info-container");
+			insertTemplate(bike, bikeInfoTemplate, "#edit-bike-info-container");
 		}
 	}
 }
 
 
 function reachedRegisterBike() {
-	insertTemplate(null, "#bike-info-content", "#register-bike-info-container");
+	insertTemplate(null, bikeInfoTemplate, "#register-bike-info-container");
 }
 
 
@@ -257,7 +261,7 @@ function reachedPastReports() {
 			}
 		}
 	})
-	insertTemplate(data, "#reports-content", "#past-reports-container");
+	insertTemplate(data, reportsTemplate, "#past-reports-container");
 }
 
 //TODO: Lots of repeat between here and the function above
@@ -270,8 +274,8 @@ function reachedReports() {
 			}
 		}
 	})
-	insertTemplate(data, "#reports-content", "#reports-container");
-	insertTemplate(userData, "#report-a-bike-content", "#report-a-bike-container");
+	insertTemplate(data, reportsTemplate, "#reports-container");
+	insertTemplate(userData, reportABikeTemplate, "#report-a-bike-container");
 }
 
 
@@ -281,32 +285,32 @@ function reachedReport() {
 		data={serial: sessionStorage.newReportSerial};
 		sessionStorage.removeItem("newReportSerial");
 	}
-	insertTemplate(data, "#report-content", "#report-container");
+	insertTemplate(data, reportTemplate, "#report-container");
 }
 
 
 function reachedEditReport() {
 	for (report of userData.reports) {
 		if (report.reportID === sessionStorage.reportID) {
-			insertTemplate(report, "#report-content", "#edit-report-container");
+			insertTemplate(report, reportTemplate, "#edit-report-container");
 		}
 	}
 }
 
 function reachedUnregister() {
 	if (sessionStorage.serial && sessionStorage.model) {
-		insertTemplate({serial: sessionStorage.serial, model:sessionStorage.model}, "#unregister-content", "#unregister-container");
+		insertTemplate({serial: sessionStorage.serial, model:sessionStorage.model}, unregisterTemplate, "#unregister-container");
 	}
 }
 
 function reachedProfile() {
 	let profileData = userData.profile;
 	Object.assign(profileData, userData.privacy);
-	insertTemplate(profileData, "#profile-content", "#profile-container");
+	insertTemplate(profileData, profileTemplate, "#profile-container");
 }
 
 function reachedMyBikes() {
-	insertTemplate(userData, "#my-bikes-content", "#my-bikes-container");
+	insertTemplate(userData, myBikesTemplate, "#my-bikes-container");
 }
 
 function reachedLookup() {
@@ -314,27 +318,27 @@ function reachedLookup() {
 	// It will be the bike who's searial number matches
 	const privacy = getPrivacySetting(userData.bikes[1], userData.privacy); //TODO: Use the other person's
 	if (privacy === -1) {
-		insertTemplate(null, "#lookup-not-found", "#lookup-container");
+		insertTemplate(null, lookupTemplate, "#lookup-container");
 	} else {
 		const data = {privacy: privacy, owner: userData.profile, report: userData.reports[0], bike: userData.bikes[0]};//TODO: Take this line out later, replace w. database call
-		insertTemplate(data, "#lookup-content", "#lookup-container");
+		insertTemplate(data, lookupTemplate, "#lookup-container");
 	}
 }
 
 function reachedContact() {
-	insertTemplate(userData.profile, "#contact-content", "#contact-container");
+	insertTemplate(userData.profile, contactTemplate, "#contact-container");
 }
 
 function reachedSettings() {
-	insertTemplate(userData, "#settings-content", "#settings-container");
+	insertTemplate(userData, settingsTemplate, "#settings-container");
 }
 
 function reachedLeCreateAccount() {
-	insertTemplate(null, "#le-personal-content", "#le-personal-create-container");
+	insertTemplate(null, lePersonalTemplate, "#le-personal-create-container");
 }
 
 function reachedLeProfile() {
-	insertTemplate(userData.profile, "#le-personal-content", "#le-personal-profile-container");
+	insertTemplate(userData.profile, lePersonalTemplate, "#le-personal-profile-container");
 }
 
 
@@ -353,7 +357,7 @@ function reachedLeProfile() {
 
 //Switch to the given page of the app
 function goSomewhere(screen) {
-	$.mobile.pageContainer.pagecontainer("change", screen);
+	$.mobile.pageContainer.pagecontainer("change", screen, {});
 }
 
 
@@ -422,6 +426,14 @@ Handlebars.registerHelper('lowercase', function(word) {
 });
 
 
+//Makes the first letter of the word capital
+Handlebars.registerHelper('capitalize', function(word) {
+	return word.charAt(0).toUpperCase() + word.slice(1);
+});
+
+
+
+
 // Reads params for whether the owner and/or police should be contacted if the bike is recovered
 // Formats them into a string for the report log
 Handlebars.registerHelper('contact', function(contactOwner, contactPolice) {
@@ -458,7 +470,6 @@ function showTerms() {
 	if (!isApp() && isMobile()){
 		cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf");
 	} else {
-		alert("second option");
 		cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf", '_blank');
 	}
 }
@@ -499,3 +510,24 @@ function isApp() {
 	//Useful for menus (deciding whether or not we want a back button)
 	return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
 }
+
+
+
+//Templates//
+console.log("created templates");
+var textInputTemplate = Handlebars.compile($("#text-input-content").html()); //TODO: Maybe take this out
+var lePersonalTemplate = Handlebars.compile($("#le-personal-content").html());
+var settingsTemplate = Handlebars.compile($("#settings-content").html());
+var contactTemplate = Handlebars.compile($("#contact-content").html());
+var lookupNotFoundTemplate = Handlebars.compile($("#lookup-not-found-content").html());
+var lookupTemplate = Handlebars.compile($("#lookup-content").html());
+var unregisterTemplate = Handlebars.compile($("#unregister-content").html());
+var reportTemplate = Handlebars.compile($("#report-content").html());
+var reportABikeTemplate = Handlebars.compile($("#report-a-bike-content").html());
+var reportsTemplate = Handlebars.compile($("#reports-content").html());
+var bikeInfoTemplate = Handlebars.compile($("#bike-info-content").html());
+var bikeDetailTemplate = Handlebars.compile($("#bike-detail-content").html());
+var myBikesTemplate = Handlebars.compile($("#my-bikes-content").html());
+console.log("my bikes template");
+console.log(myBikesTemplate);
+var profileTemplate = Handlebars.compile($("#profile-content").html());
