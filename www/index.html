@@ -38,10 +38,10 @@
 				<div id="spacer"></div>
 				<!-- Buttons at the top of the page -->
 				<div class="center">
-					<div data-role="controlgroup" data-type="horizontal">
-						<button class="ui-btn" onclick='goSomewhere("#about")'>About</button>
-						<button id="middle-button" class="ui-btn" onclick='goSomewhere("#le-create-account")'>Law Enforcement</button>
-						<button class="ui-btn">Bike Registry</button>
+					<div id="top-buttons" data-role="controlgroup" data-type="horizontal">
+						<button id="left-button" class="ui-btn" onclick='goSomewhere("#about")'>About</button>
+						<button id="middle-button" class="ui-btn center" onclick='goSomewhere("#le-create-account")'>Law Enforcement</button>
+						<button id="right-button" class="ui-btn">Bike Registry</button>
 					</div>
 				</div>
 				<!-- Login box -->
@@ -56,7 +56,7 @@
 					<button class="login-input blue-button" onclick="goSomewhere('#home')">Log In</button>
 				</div>
 				<!-- Bottom Buttons -->
-				<div data-role="controlgroup" data-type="horizontal" class="bottom-buttons center">
+				<div id="bottom-buttons" data-role="controlgroup" data-type="horizontal" class="center">
 					<button><a class="pw-popup" href="#password-popup" data-rel="popup">Forgot Password?</a></button>	
 					<button class="ui-btn" id="other-one" onclick='goSomewhere("#create-account")'>Create Account</button>
 					<div data-role="popup" id="password-popup" class="ui-content popup">

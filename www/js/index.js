@@ -6,6 +6,31 @@
 ///////////////////////////////////////
 
 
+// $(function() {
+// 	$("form[name='register-bike']").validate({
+// 		rules: {
+// 			"serial-number": "required",
+// 		},
+// 		messages: {
+// 			"serial-number": "Required"
+// 		}
+// 	});
+
+// 	$("form[name='report-bike']").validate({
+// 		rules: {
+// 			"serial": "required",
+// 			"bike-status": "required"
+// 		},
+// 		messages: {
+// 			"serial": "Required",
+// 			"bike-status": "Required"
+// 		}
+// 	});
+// });
+
+
+
+
 
 //TEST USER: Delete this when we have actual data
 
@@ -455,14 +480,14 @@ Handlebars.registerHelper('contact', function(contactOwner, contactPolice) {
 
 //Open the terms of service for people to read
 function showTerms() {
-	//cordova.InAppBrowser.open("Terms-of-service.pdf");
+	cordova.InAppBrowser.open("Terms-of-service.pdf");
 	//For whatever reason, the terms don't show up correctly on mobile browsers if you try to open them in the same page.
 	//TODO: Check whether this is universal or just my data.
-	if (!isApp() && isMobile()){
-		cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf");
-	} else {
-		cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf", '_blank');
-	}
+	// if (!isApp() && isMobile()){
+	// 	cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf");
+	// } else {
+	// 	cordova.InAppBrowser.open("https://skylusteam.github.io/BikeNab/www/Terms-of-service.pdf", '_blank');
+	// }
 }
 
 

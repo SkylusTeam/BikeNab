@@ -27,21 +27,20 @@
 
   #login img {
     height: 80px; } }
-#login .center button {
-  padding: 4px;
+#login button {
   background-color: #E0E2F0;
   color: #254ea2;
-  float: left;
-  display: inline-block;
+  border: none;
+  margin: 0px; }
+#login #top-buttons button {
+  margin: 0px;
+  padding: 8px;
   border-width: 0px;
   font-size: 15px; }
-#login #middle-button {
-  border-color: #254ea2;
-  border-left-width: 1px;
-  border-right-width: 1px; }
-#login #left-button {
-  border-color: #254ea2;
-  border-right-width: 1px; }
+#login #bottom-buttons button {
+  padding: 8px; }
+#login #top-buttons {
+  padding: 2px; }
 #login img {
   width: auto;
   display: block;
@@ -68,8 +67,6 @@
 #login .login-input {
   border: solid 1px #254ea2;
   color: #254ea2; }
-#login .bottom-buttons {
-  margin: 7px !important; }
 
 .ui-content {
   padding-left: 0px;
@@ -219,9 +216,6 @@
   text-decoration: none;
   color: inherit; }
 
-#body #other-one {
-  border-left: 1px solid #254ea2; }
-
 .popup {
   padding: 15px; }
 
@@ -261,5 +255,8 @@
 #spacer {
   width: 100%;
   min-height: 30px; }
+
+form .error {
+  color: #ff0000; }
 
 /*# sourceMappingURL=style.css.map */

@@ -35,10 +35,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 		width: 300px;
 		height: 360px;
 		@include side-padding(40px);
-		// top: 50%;
-		// bottom: 50%;
-		// position: absolute;
-		//margin-top
 	}
 
 	#bikenab {
@@ -76,26 +72,27 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 #login {
 
-	// Top and bottom buttons
-	.center button {
-		padding: 4px;
+	button {
 		background-color: $light-blue;
 		color: $blue-black;
-		float: left;
-		display: inline-block;
+		border: none;
+		margin: 0px;
+	}
+
+	// Top and bottom buttons
+	#top-buttons button {
+		margin: 0px;
+		padding: 8px;
 		border-width: 0px;
 		font-size: 15px; //TODO: If possible, have font size expand on big screens, contract on small
 	}
 
-	#middle-button {
-		border-color: $blue-black;
-		border-left-width: 1px;
-		border-right-width: 1px;
+	#bottom-buttons button {
+		padding: 8px;
 	}
 
-	#left-button {
-		border-color: $blue-black;
-		border-right-width: 1px;
+	#top-buttons {
+		padding: 2px;
 	}
 
 
@@ -137,9 +134,9 @@ $fancy-font: 'Archivo Black', sans-serif;
 		color: $blue-black;
 	}
 
-	.bottom-buttons {
-		margin: 7px !important;
-	}
+	// .bottom-buttons {
+	// 	margin: 7px !important;
+	// }
 }
 
 .ui-content {
@@ -363,9 +360,9 @@ $fancy-font: 'Archivo Black', sans-serif;
 	color: inherit;
 }
 
-#body #other-one {
-	border-left: 1px solid $blue-black;
-}
+// #body #other-one {
+// 	border-left: 1px solid $blue-black;
+// }
 
 
 // #password-popup {
@@ -424,4 +421,9 @@ $fancy-font: 'Archivo Black', sans-serif;
 	width: 100%;
 	min-height: 30px;
 	//background-color: purple;
+}
+
+
+form .error {
+  color: #ff0000;
 }
