@@ -1,0 +1,42 @@
+<!-- Home Buttons -->
+
+{{#unless police}}
+
+<!--Top Row-->
+<div class="side-by-side-block">
+	<button class="icon-button" onclick="goSomewhere('#my-bikes')">
+		<div>My Bikes</div>
+		<i class="material-icons md-48">directions_bike</i> <!--TODO: Does this work with IE?-->
+	</button>
+	<button class="icon-button" onclick="goSomewhere('#register')">
+		<div>Register Bike</div>
+		<i class="material-icons md-48">create</i>
+	</button>
+</div>
+
+{{/unless}}
+
+
+<!--Middle Row-->
+<div class="side-by-side-block">
+	<button class="icon-button"  onclick="goSomewhere('#lookup')">
+		<div>Lookup</div>
+		<i class="material-icons md-48">search</i>
+	</button>
+	<button class="icon-button" onclick="goSomewhere('#profile', '#le-profile')">
+		<div>Profile</div>
+		<i class="material-icons md-48">person_outline</i>
+	</button>
+</div>
+
+<!--Bottom Row-->
+<div class="side-by-side-block">
+	<button class="icon-button" onclick="goSomewhere('#reports', '#le-reports')">
+		<div>Reports</div>
+		<i class="material-icons md-48">library_books</i>
+	</button>
+	<button class="icon-button" onclick="goSomewhere('#settings')">
+		<div>Settings</div>
+		<i class="material-icons md-48">settings</i>
+	</button>
+</div>

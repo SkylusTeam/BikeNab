@@ -89,8 +89,55 @@ let testUser = '{' +
 '"police": false' +
 '}'
 
+
+let testCop = '{' +
+'"profile": {' +
+'	"name": "myname",' +
+'	"email": "myEmail@gmail.com",' +
+'	"department": "myDept",' +
+'	"zip": "myZip",' +
+'	"workEmail": "myWorkEmail",' +
+'	"workPhone": "myPhone",' +
+'	"workCell": "myCell",' +
+'	"workSocialMedia": "mysocialMedia"' +
+'},' +
+'"reports": [' +
+'	{' +
+'		"reportID": "myReport", ' +
+'		"serial": "mySerial", ' +
+'		"incidentNumber": "myIncidentNumber", ' +
+'		"officerName": "myOfficerName", ' +
+'		"officerEmail": "myOfficerEmail", ' +
+'		"officerPhone": "myOfficerPhone", ' +
+'		"description": "myDescription", ' +
+'		"status": "Stolen",' +
+'		"contactOwner": true,' +
+'		"contactPolice": true,' +
+'		"date": "myDate", ' +
+'		"bikeInfo":	{' +
+'			"serial": "mySerial",' +
+'			"make": "myMake" ,'+
+'			"model": "myModel", ' +
+'			"year": "myYear", '  +
+'			"purchasePlace": "mypurchasePlace", '+
+'			"value": "myValue", '  +
+'			"otherInfo": "myOtherInfo", ' +
+'			"status": "Okay"' +
+'		}' +
+'	}' +
+'],' +
+'"privacy": {' +
+'		"individualSearchStolen": 0, ' +
+'		"policeSearchNormal": 1, ' +
+'		"policeSearchStolen": 2 ' +
+'},' +
+'"police": true' +
+'}'
+
 //TODO: Add back in images
-var userData = JSON.parse(testUser);
+var normalData = JSON.parse(testUser);
+var policeData = JSON.parse(testCop);
+var userData = policeData;
 
 
 
@@ -110,6 +157,12 @@ $( document ).ready(function() {
 
 //Insert repeated elements of code
 function addRepeatedElements() {
+
+	let headerTemplate = Handlebars.templates["header"];
+	$("#header-container").html(headerTemplate({police: userData.police}));
+	$("#header-container").enhanceWithin();
+
+
 	//Insert large sections of code which are used in multiple places.
 	//TODO: Do we need this anymore?
 	insertSections();
@@ -206,7 +259,7 @@ function addMenu(isApp) {
 $("body").on('pagecontainerbeforeshow', function(event, data) {
 	switch (data.toPage[0].id) {
 		case 'bike-detail':
-			return reachedBikes();
+			return reachedBikeDetail();
 		case 'edit-bike-info':
 			return reachedEditBikeInfo();
 		case 'register':
@@ -235,6 +288,10 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 			return reachedLeCreateAccount();
 		case 'le-profile':
 			return reachedLeProfile();
+		case 'home':
+			return reachedHome();
+		case 'le-reports':
+			return reachedLeReports();
 		default:
 			console.log("You'd better do " + data.toPage[0].id);
 	}
@@ -245,21 +302,52 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 //TODO: Can we reuse code among any of these?
 
 function insertTemplate(data, templateName, containerID) {
-	//alert("should be a second one " + templateName);
-	console.log("first");
 	let template = Handlebars.templates[templateName];
-	console.log("second");
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
 
 
-function reachedBikes() {
-	let bikesList = userData.bikes;
-	for (bike of bikesList) {
-		if (bike.serial === sessionStorage.serial) {
-			insertTemplate(bike, "bikeDetail", "#bike-detail-container");
+function reachedLeReports() {
+	insertTemplate({reports: userData.reports, following: false}, "leReports", "#le-reports-container");
+	insertTemplate({reports: userData.reports, following: true}, "leReports", "#le-area-reports-container");
+}
+
+
+function reachedHome() {
+	insertTemplate({police: userData.police}, "home", "#home-container");
+}
+
+
+function reachedBikeDetail() {
+	let currBike = null;
+	if (userData.police) {
+		console.log("first case");
+		//TODO: Decide on the best place to save the bike object we get below.
+		// Inside the report?
+		// Lookup?
+		currBike = normalData.bikes[0];
+	} else {
+		let bikesList = userData.bikes;
+		for (let bike of bikesList) {
+			if (bike.serial === sessionStorage.serial) {
+				currBike = bike;
+			}
 		}
+	}
+	if (currBike) {
+		//If it's your bike, have a parameter that says that
+		currBike.mine = false;
+		if (userData.bikes) {
+			for (let bike of userData.bikes) {
+				if (bike.serial === currBike.serial) {
+					console.log("my bike!!!!!!!!!!!!!!!!!111");
+					currBike.mine = true;
+				}
+			}
+		}
+		console.log("got it");
+		insertTemplate(currBike, "bikeDetail", "#bike-detail-container");
 	}
 }
 
@@ -343,11 +431,11 @@ function reachedMyBikes() {
 function reachedLookup() {
 	//TODO: When we're actually searching, this won't be the user's own data.
 	// It will be the bike who's searial number matches
-	const privacy = getPrivacySetting(userData.bikes[1], userData.privacy); //TODO: Use the other person's
+	const privacy = getPrivacySetting(normalData.bikes[1], normalData.privacy); //TODO: Use the other person's
 	if (privacy === -1) {
 		insertTemplate(null, "lookup", "#lookup-container");
 	} else {
-		const data = {privacy: privacy, owner: userData.profile, report: userData.reports[0], bike: userData.bikes[0]};//TODO: Take this line out later, replace w. database call
+		const data = {privacy: privacy, owner: normalData.profile, report: normalData.reports[0], bike: normalData.bikes[0]};//TODO: Take this line out later, replace w. database call
 		insertTemplate(data, "lookup", "#lookup-container");
 	}
 }
@@ -379,31 +467,37 @@ function reachedLeProfile() {
 
 
 //Switch to the given page of the app
-function goSomewhere(screen) {
-	$.mobile.pageContainer.pagecontainer("change", screen, {});
+function goSomewhere(page, lePage) {
+	if (userData.police && lePage) {
+		console.log("First case");
+		$.mobile.pageContainer.pagecontainer("change", lePage, {});
+	} else {
+		console.log("second case");
+		$.mobile.pageContainer.pagecontainer("change", page, {});
+	}
 }
 
 
 //TODO: Reuse code here
 function toBikeDetail(serial) {
 	if(typeof(Storage) != "undefined") {
-  		sessionStorage.serial=serial;
-  	}
+		sessionStorage.serial=serial;
+	} //TODO: Where should we store LE data?
 	goSomewhere("#bike-detail");
 }
 
 function toReport(serial) {
 	if(typeof(Storage) != "undefined") {
-  		sessionStorage.newReportSerial = serial;
-  	}
+		sessionStorage.newReportSerial = serial;
+	}
 	goSomewhere("#report");
 }
 
 
 function toEditReport(id) {
 	if(typeof(Storage) != "undefined") {
-  		sessionStorage.reportID = id;
-  	}
+		sessionStorage.reportID = id;
+	}
 	goSomewhere("#edit-report");
 }
 
@@ -446,6 +540,8 @@ Handlebars.registerHelper('lowercase', function(word) {
 
 //Makes the first letter of the word capital
 Handlebars.registerHelper('capitalize', function(word) {
+	console.log("In capitalize function");
+	console.log(word);
 	return word.charAt(0).toUpperCase() + word.slice(1);
 });
 
@@ -527,3 +623,11 @@ function isApp() {
 	return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
 }
 
+
+function followUnfollow(reportID, following) {
+	//TODO: Make this function change something in the user's list of followed reports.
+}
+
+
+//cd into www
+//handlebars -m js/templates/> js/templates/templates.js

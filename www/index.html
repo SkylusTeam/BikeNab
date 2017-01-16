@@ -57,7 +57,7 @@
 				</div>
 				<!-- Bottom Buttons -->
 				<div id="bottom-buttons" data-role="controlgroup" data-type="horizontal" class="center">
-					<button><a class="pw-popup" href="#password-popup" data-rel="popup">Forgot Password?</a></button>	
+					<button><a class="pw-popup" href="#password-popup" data-rel="popup">Forgot Password</a></button>	
 					<button class="ui-btn" id="other-one" onclick='goSomewhere("#create-account")'>Create Account</button>
 					<div data-role="popup" id="password-popup" class="ui-content popup">
 						<form onSubmit="return false;">
@@ -82,43 +82,7 @@
 			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
 			</div>
-			<div data-role="main" class="ui-content">
-				<!-- Four Buttons -->
-				<!--Top Row-->
-				<div class="side-by-side-block">
-					<button class="icon-button" onclick="goSomewhere('#my-bikes')">
-						<div>My Bikes</div>
-						<i class="material-icons md-48">directions_bike</i> <!--TODO: Does this work with IE?-->
-					</button>
-					<button class="icon-button" onclick="goSomewhere('#register')">
-						<div>Register Bike</div>
-						<i class="material-icons md-48">create</i>
-					</button>
-				</div>
-
-				<!--Middle Row-->
-				<div class="side-by-side-block">
-					<button class="icon-button"  onclick="goSomewhere('#lookup')">
-						<div>Lookup</div>
-						<i class="material-icons md-48">search</i>
-					</button>
-					<button class="icon-button" onclick="goSomewhere('#profile')">
-						<div>Profile</div>
-						<i class="material-icons md-48">person_outline</i>
-					</button>
-				</div>
-
-				<!--Bottom Row-->
-				<div class="side-by-side-block">
-					<button class="icon-button" onclick="goSomewhere('#reports')">
-						<div>Reports</div>
-						<i class="material-icons md-48">library_books</i>
-					</button>
-					<button class="icon-button" onclick="goSomewhere('#settings')">
-						<div>Settings</div>
-						<i class="material-icons md-48">settings</i>
-					</button>
-				</div>
+			<div id="home-container" data-role="main" class="ui-content">
 			</div>
 		</div>
 
@@ -207,7 +171,7 @@
 					<h1 class="center">Update Bike Info</h1>
 					<form onSubmit="return false;" id="edit-bike-info-container">
 						<!-- Submit Button-->
-						<input type="submit" value="Save" class="blue-button">
+						<button type="submit" class="blue-button">Save</button>
 					</form>
 				</div>
 			</div>
@@ -227,15 +191,11 @@
 					<form onSubmit="return false;">
 						<h1 class="center">Law Enforcement Profile</h1>
 						<div id="le-personal-profile-container"></div>
-						<input type="submit" value="Save">
+						<button type="submit" class="blue-button">Save</button>
 					</form>
 				</div>
 			</div>
 		</div>
-
-
-
-
 
 
 		<!-- Settings -->
@@ -355,7 +315,29 @@
 
 
 
+		<!-- LE Reports -->
+		<div data-role="page" id="le-reports" class="stripey-background">
+			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
+			<div data-role="main" class="ui-content">
+				<div class="floating-box">
+					<h1 class="center">Reports</h1>
+					<h3>Past Reports</h3>
+					<div id="le-reports-container"></div>
+					<h3>Reports in My Area</h3>
+					<div id="le-area-reports-container"></div>
+				</div>
+			</div>
+		</div>
 
+
+
+
+		<!-- Test Page -->
+		<!-- TODO: Take this out later. -->
 		<div data-role="page" id="test" class="stripey-background">
 			
 			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
@@ -375,6 +357,7 @@
 		</div>
 
 
+		<!-- Reports -->
 		<div data-role="page" id="reports" class="stripey-background">
 			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
@@ -395,6 +378,7 @@
 		</div>
 
 
+		<!-- About Page -->
 		<div data-role="page" id="about" class="stripey-background">
 			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
@@ -410,6 +394,7 @@
 		</div>
 
 
+		<!-- Contact Page -->
 		<div data-role="page" id="contact" class="stripey-background">
 			<div data-role="header" class="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
@@ -458,13 +443,7 @@
 
 			<!-- Browser header -->
  			<div class="browser-header">
-				<div data-role="navbar">
-					<ul class="home-buttons">
-						<li><a href="#home">Home</a></li>
-						<li><a href="#my-bikes">My Bikes</a></li>
-						<li><a href="#lookup">Lookup</a></li> 
-						<li><a href="#profile">Profile</a></li>
-					</ul>
+				<div data-role="navbar" id="header-container">
 				</div>
 			</div>
 		</div>

@@ -1,47 +1,47 @@
 <div class="floating-box">
-				<h1 class="center">About My Bike</h1>
-				<h2>Bicycle Description</h2>
-				<ul data-role="listview" data-inset="true">
-					<li data-icon="false">
-						<font style="white-space:normal" >
-							<table>
-								<tr>
-									<td><b>Serial Number:</b></td>
-									<td>{{serial}}</td>
-								</tr>
-								<tr>
-									<td><b>Make:</b></td>
-									<td>{{make}}</td>
-								</tr>
-								<tr>
-									<td><b>Model:</b></td>
-									<td>{{model}}</td>
-								</tr>
-								<tr>
-									<td><b>Year:</b></td>
-									<td>{{year}}</td>
-								</tr>
-								<tr>
-									<td><b>Place of Purchase:</b></td>
-									<td>{{purchasePlace}}</td>
-								</tr>
-							</table>
-							<br>
-							<div>{{otherInfo}}</div>
-						</font>
-					</li>
-				</ul>
+	<h1 class="center">About My Bike</h1>
+	<h2>Bicycle Description</h2>
+	<ul data-role="listview" data-inset="true">
+		<li data-icon="false">
+			<font style="white-space:normal" >
+				<table>
+					<tr>
+						<td><b>Serial Number:</b></td>
+						<td>{{serial}}</td>
+					</tr>
+					<tr>
+						<td><b>Make:</b></td>
+						<td>{{make}}</td>
+					</tr>
+					<tr>
+						<td><b>Model:</b></td>
+						<td>{{model}}</td>
+					</tr>
+					<tr>
+						<td><b>Year:</b></td>
+						<td>{{year}}</td>
+					</tr>
+					<tr>
+						<td><b>Place of Purchase:</b></td>
+						<td>{{purchasePlace}}</td>
+					</tr>
+				</table>
+				<br>
+				<div>{{otherInfo}}</div>
+			</font>
+		</li>
+	</ul>
 
-				<h2>Bicycle Images</h2>
-				<div class="side-by-side-block">
-					<img class="small-pic" src="img/bike2.jpg"><!--TODO: Should there be labels?-->
-					<img class="small-pic" src="img/bike2.jpg">
-					<img class="small-pic" src="img/bike2.jpg">
-					<img class="small-pic" src="img/bike2.jpg">
-				</div>
+	<h2>Bicycle Images</h2>
+	<div class="side-by-side-block">
+		<img class="small-pic" src="img/bike2.jpg"><!--TODO: Should there be labels?-->
+		<img class="small-pic" src="img/bike2.jpg">
+		<img class="small-pic" src="img/bike2.jpg">
+		<img class="small-pic" src="img/bike2.jpg">
+	</div>
 
-				<h2>Options</h2>
-				<button class="blue-button" onclick="goSomewhere('#edit-bike-info')">Edit Info</button>
-				<button class="blue-button" onclick="toReport('{{serial}}')">Report Bike Missing/Stolen</button>
-				<button class="blue-button" onclick="toUnregister('{{serial}}','{{model}}')">Transfer/Unregister</button>
-			</div>
+	<h2 class="{{#unless mine}}hidden{{/unless}}">Options</h2>
+	<button class="blue-button {{#unless mine}}hidden{{/unless}}" onclick="goSomewhere('#edit-bike-info')">Edit Bike Info</button>
+	<button class="blue-button {{#unless mine}}hidden{{/unless}}" onclick="toReport('{{serial}}')">Report Bike Missing/Stolen</button>
+	<button class="blue-button {{#unless mine}}hidden{{/unless}}" onclick="toUnregister('{{serial}}','{{model}}')">Transfer/Unregister</button>
+</div>

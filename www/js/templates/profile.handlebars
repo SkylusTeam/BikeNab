@@ -1,73 +1,73 @@
 <div class="floating-box" >	
-				<form onSubmit="return false;">
-					<h1 class="center">Profile</h1>
-					<h2>Personal Info</h2>
+	<form onSubmit="return false;">
+		<h1 class="center">Profile</h1>
+		<h2>Personal Info</h2>
 
-					<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
-					<div data-role="fieldcontain">
-						<label for="contact-name">Name:</label>
-						<input type="text" id="contact-name" value={{name}} data-clear-btn="true">
-					</div>
-					<div data-role="fieldcontain">
-						<label for="backupEmail">Backup Email:</label>
-						<input type="text" id="backupEmail" value={{backupEmail}} data-clear-btn="true">
-					</div>
-					<div data-role="fieldcontain">
-						<label for="birthdate">Birthdate:</label>
-						<input type="text" id="birthdate" value={{birthdate}} data-clear-btn="true">
-					</div>
-					<div data-role="fieldcontain">
-						<label for="address">Address:</label>
-						<input type="text" id="address" value={{address}} data-clear-btn="true">
-					</div>
-					<div data-role="fieldcontain">
-						<label for="cell">Cell Phone:</label>
-						<input type="text" id="cell" value={{cellphone}} data-clear-btn="true">
-					</div>
-					<div data-role="fieldcontain">
-						<label for="social-media">Social Media:</label>
-						<input type="text" id="social-media" value={{socialMedia}} data-clear-btn="true">
-					</div>
+		<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+		<div data-role="fieldcontain">
+			<label for="contact-name">Name:</label>
+			<input type="text" id="contact-name" value={{name}} data-clear-btn="true">
+		</div>
+		<div data-role="fieldcontain">
+			<label for="backupEmail">Backup Email:</label>
+			<input type="text" id="backupEmail" value={{backupEmail}} data-clear-btn="true">
+		</div>
+		<div data-role="fieldcontain">
+			<label for="birthdate">Birthdate:</label>
+			<input type="text" id="birthdate" value={{birthdate}} data-clear-btn="true">
+		</div>
+		<div data-role="fieldcontain">
+			<label for="address">Address:</label>
+			<input type="text" id="address" value={{address}} data-clear-btn="true">
+		</div>
+		<div data-role="fieldcontain">
+			<label for="cell">Cell Phone:</label>
+			<input type="text" id="cell" value={{cellphone}} data-clear-btn="true">
+		</div>
+		<div data-role="fieldcontain">
+			<label for="social-media">Social Media:</label>
+			<input type="text" id="social-media" value={{socialMedia}} data-clear-btn="true">
+		</div>
 
-					You can change your account email or password in your <a href="#settings">Settings</a>.
-					<br>
-					<h2>Privacy Settings</h2>
+		You can change your account email or password in your <a href="#settings">Settings</a>.
+		<br>
+		<h2>Privacy Settings</h2>
 
-					<!-- Flipswitch Input Form Fields (These will be dynamically replaced with styled input fields)-->
-					<h4>When any individual searches a serial number I marked stolen:</h4>
+		<!-- Flipswitch Input Form Fields (These will be dynamically replaced with styled input fields)-->
+		<h4>When any individual searches a serial number I marked stolen:</h4>
 
-					<fieldset class="ui-field-contain">
-						<label for="ind-stolen">Visible Information:</label>
-						<select name="ind-stolen" id="ind-stolen">
-							<option value=2 {{#IF individualSearchStolen '===' 2}}selected{{/IF}}>All my personal info</option>
-							<option value=1 {{#IF individualSearchStolen '===' 1}}selected{{/IF}}>Bike info + contact info</option>
-							<option value=0 {{#IF individualSearchStolen '===' 0}}selected{{/IF}}>Basic bike info only</option>
-		
-						</select>
-					</fieldset>
+		<fieldset class="ui-field-contain">
+			<label for="ind-stolen">Visible Information:</label>
+			<select name="ind-stolen" id="ind-stolen">
+				<option value=2 {{#IF individualSearchStolen '===' 2}}selected{{/IF}}>All my personal info</option>
+				<option value=1 {{#IF individualSearchStolen '===' 1}}selected{{/IF}}>Bike info + contact info</option>
+				<option value=0 {{#IF individualSearchStolen '===' 0}}selected{{/IF}}>Basic bike info only</option>
 
-					<h4>When a law enforcement officer searches my bike's serial number:</h4>
+			</select>
+		</fieldset>
 
-					<fieldset class="ui-field-contain">
-						<label for="le-normal">Visible Information:</label>
-						<select name="le-normal" id="le-normal">
-							<option value=2 {{#IF policeSearchNormal '===' 2}}selected{{/IF}}>All my personal info</option>
-							<option value=1 {{#IF policeSearchNormal '===' 1}}selected{{/IF}}>Bike info + contact info</option>
-							<option value=0 {{#IF policeSearchNormal '===' 0}}selected{{/IF}}>Basic bike info only</option>
-						</select>
-					</fieldset>
+		<h4>When a law enforcement officer searches my bike's serial number:</h4>
 
-					<h4>When a law enforcement officer searches a serial number I marked stolen:</h4>
+		<fieldset class="ui-field-contain">
+			<label for="le-normal">Visible Information:</label>
+			<select name="le-normal" id="le-normal">
+				<option value=2 {{#IF policeSearchNormal '===' 2}}selected{{/IF}}>All my personal info</option>
+				<option value=1 {{#IF policeSearchNormal '===' 1}}selected{{/IF}}>Bike info + contact info</option>
+				<option value=0 {{#IF policeSearchNormal '===' 0}}selected{{/IF}}>Basic bike info only</option>
+			</select>
+		</fieldset>
 
-					<fieldset class="ui-field-contain">
-						<label for="le-stolen">Visible Information:</label>
-						<select name="le-stolen" id="le-stolen">
-							<option value=2 {{#IF policeSearchStolen '===' 2}}selected{{/IF}}>All my personal info</option>
-							<option value=1 {{#IF policeSearchStolen '===' 1}}selected{{/IF}}>Bike info + contact info</option>
-							<option value=0 {{#IF policeSearchStolens '===' 0}}selected{{/IF}}>Basic bike info only</option>
-						</select>
-					</fieldset>
+		<h4>When a law enforcement officer searches a serial number I marked stolen:</h4>
 
-					<button type="submit" class="blue-button">Save Changes</button>
-				</form>
-			</div>
+		<fieldset class="ui-field-contain">
+			<label for="le-stolen">Visible Information:</label>
+			<select name="le-stolen" id="le-stolen">
+				<option value=2 {{#IF policeSearchStolen '===' 2}}selected{{/IF}}>All my personal info</option>
+				<option value=1 {{#IF policeSearchStolen '===' 1}}selected{{/IF}}>Bike info + contact info</option>
+				<option value=0 {{#IF policeSearchStolens '===' 0}}selected{{/IF}}>Basic bike info only</option>
+			</select>
+		</fieldset>
+
+		<button type="submit" class="blue-button">Save Changes</button>
+	</form>
+</div>

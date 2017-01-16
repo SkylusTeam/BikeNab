@@ -1,26 +1,26 @@
 <div class="floating-box">
-				<h1 class="center">Unregister Bike</h1>
-				<br>
-				<table>
-					<tbody>
-						<tr>
-							<td>Bike to Unregister:</td>
-							<td>{{model}}</td>
-						</tr>
-						<tr>
-							<td>Serial Number:</td>
-							<td>{{serial}}</td>
-						</tr>
-					</tbody>
-				</table>
-				<br>
-				<form onSubmit="return false;">
-					<label for="transferring">Are you transferring your bike to someone else?</label>
-					<input type="checkbox" name="transferring" id="transferring" value="transferring"><!--TODO: Make the field below be hidden or visible based on this field.-->
+	<h1 class="center">Unregister Bike</h1>
+	<br>
+	<table>
+		<tbody>
+			<tr>
+				<td>Bike to Unregister:</td>
+				<td>{{model}}</td>
+			</tr>
+			<tr>
+				<td>Serial Number:</td>
+				<td>{{serial}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<form onSubmit="return false;">
+		<label for="transferring">Are you transferring your bike to someone else?</label>
+		<input type="checkbox" name="transferring" id="transferring" value="transferring"><!--TODO: Make the field below be hidden or visible based on this field.-->
 
-					<div class="text-input" name="transferee" txt="Recipient's Email:"></div>
-					<p>The recipient will recieve an email inviting them to add this bike to an existing acocunt or create a new account.  When this invitation is accepted, the bike will be removed from your account.</p>
-					<button type="submit" class="blue-button">Unregister Bike</button>
-				</form>
-				<br>
-			</div>
+		<div class="text-input" name="transferee" txt="Recipient's Email:"></div>
+		<p>The recipient will recieve an email inviting them to add this bike to an existing acocunt or create a new account.  When this invitation is accepted, the bike will be removed from your account.</p>
+		<button type="submit" class="blue-button">Unregister Bike</button>
+	</form>
+	<br>
+</div>

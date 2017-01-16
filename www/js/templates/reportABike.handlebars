@@ -1,12 +1,12 @@
-			{{#each bikes}}
-			{{#IF status '===' 'Okay'}}
-			<ul data-role="listview" data-inset="true">
-				<li data-icon="false"><a onclick="toReport('{{serial}}')">
-					<img class="medium-pic" src="img/bike2.jpg">
-					<font class="listview-text">
-						Report this bike as missing/stolen
-					</font>
-				</a></li>
-			</ul>
-			{{/IF}}
-			{{/each}}
+{{#each bikes}}
+{{#IF status '===' 'Okay'}}
+<ul data-role="listview" data-inset="true">
+	<li data-icon="false"><a onclick="toReport('{{serial}}')">
+		<img class="medium-pic" src="img/bike2.jpg">
+		<font class="listview-text">
+			Report this bike as missing/stolen
+		</font>
+	</a></li>
+</ul>
+{{/IF}}
+{{/each}}

@@ -1,71 +1,71 @@
 <div>
-				<div class="text-input" name="bike-serial" txt="Bike Serial Number:"></div>
-				<div class="text-input" name="incident-number" txt="Incident Report Number:"></div>
-				<br>
+	<div class="text-input" name="bike-serial" txt="Bike Serial Number:"></div>
+	<div class="text-input" name="incident-number" txt="Incident Report Number:"></div>
+	<br>
 
-				<div data-role="fieldcontain">
-					<label for="serial">Bike's Serial Number:</label>
-					<input type="text" name="serial" value={{serial}} "" data-clear-btn="true">
-				</div>
+	<div data-role="fieldcontain">
+		<label for="serial">Bike's Serial Number:</label>
+		<input type="text" name="serial" value={{serial}} "" data-clear-btn="true">
+	</div>
 
-				<h4>Case Officer's Contact Info</h4>
-				<div data-role="fieldcontain">
-					<label for="le-case-namer">Officer Name:</label>
-					<input type="text" name="le-case-name" value={{officerName}} "" data-clear-btn="true">
-				</div>
-				<div data-role="fieldcontain">
-					<label for="le-case-email">Officer Email:</label>
-					<input type="text" name="le-case-email" value={{officerEmail}} "" data-clear-btn="true">
-				</div>
-				<div data-role="fieldcontain">
-					<label for="le-phone-email">Officer Phone:</label>
-					<input type="text" name="le-phone-email" value={{officerPhone}} "" data-clear-btn="true">
-				</div>
+	<h4>Case Officer's Contact Info</h4>
+	<div data-role="fieldcontain">
+		<label for="le-case-namer">Officer Name:</label>
+		<input type="text" name="le-case-name" value={{officerName}} "" data-clear-btn="true">
+	</div>
+	<div data-role="fieldcontain">
+		<label for="le-case-email">Officer Email:</label>
+		<input type="text" name="le-case-email" value={{officerEmail}} "" data-clear-btn="true">
+	</div>
+	<div data-role="fieldcontain">
+		<label for="le-phone-email">Officer Phone:</label>
+		<input type="text" name="le-phone-email" value={{officerPhone}} "" data-clear-btn="true">
+	</div>
 
-				</br>
+	</br>
 
-				<h4>Describe the Incident</h4>
-				<textarea name="additional-info" id="additional-info">{{description}}</textarea>
-				</br>
+	<h4>Describe the Incident</h4>
+	<textarea name="additional-info" id="additional-info">{{description}}</textarea>
+	</br>
 
-				<fieldset data-role="controlgroup">
-					<legend>My bike is:</legend>
-					<label for="missing">Missing</label>
-					<input 
-						type="radio" 
-						name="bike-status" 
-						id="missing" 
-						value="missing"
-						{{#IF status '===' 'Missing'}}checked{{/IF}}
-					>
-					<label for="stolen">Stolen</label>
-					<input 
-						type="radio" 
-						name="bike-status" 
-						id="stolen" 
-						value="stolen" 
-						{{#IF status '===' 'Stolen'}}checked{{/IF}}
-					>
-				</fieldset>
-				<br>
-				<fieldset data-role="controlgroup">
-					<legend>When my bike is found:</legend>
-					<label for="contact-me">Contact me</label>
-					<input 
-						type="checkbox" 
-						name="when-found" 
-						id="contact-me" 
-						value="contact-me" 
-						{{#if contactOwner}}checked{{/if}}
-					>
-					<label for="contact-police">Contact local police</label>
-					<input 
-						type="checkbox" 
-						name="when-found" 
-						id="contact-police" 
-						value="contact-police"
-						{{#if contactPolice}}checked{{/if}}
-					>
-				</fieldset>
-				<br>
-			</div>
+	<fieldset data-role="controlgroup">
+		<legend>My bike is:</legend>
+		<label for="missing">Missing</label>
+		<input 
+			type="radio" 
+			name="bike-status" 
+			id="missing" 
+			value="missing"
+			{{#IF status '===' 'Missing'}}checked{{/IF}}
+		>
+		<label for="stolen">Stolen</label>
+		<input 
+			type="radio" 
+			name="bike-status" 
+			id="stolen" 
+			value="stolen" 
+			{{#IF status '===' 'Stolen'}}checked{{/IF}}
+		>
+	</fieldset>
+	<br>
+	<fieldset data-role="controlgroup">
+		<legend>When my bike is found:</legend>
+		<label for="contact-me">Contact me</label>
+		<input 
+			type="checkbox" 
+			name="when-found" 
+			id="contact-me" 
+			value="contact-me" 
+			{{#if contactOwner}}checked{{/if}}
+		>
+		<label for="contact-police">Contact local police</label>
+		<input 
+			type="checkbox" 
+			name="when-found" 
+			id="contact-police" 
+			value="contact-police"
+			{{#if contactPolice}}checked{{/if}}
+		>
+	</fieldset>
+	<br>
+</div>
