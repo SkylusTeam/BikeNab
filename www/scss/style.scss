@@ -135,7 +135,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 	}
 
 	// .bottom-buttons {
-	// 	margin: 7px !important;
+	//  margin: 7px !important;
 	// }
 }
 
@@ -193,17 +193,17 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 
  .stripey {
- 	height: 100%;
- 	background-color: $light-blue;
- 	width: 100%;
- 	position: fixed;
- 	z-index: -1;
+	height: 100%;
+	background-color: $light-blue;
+	width: 100%;
+	position: fixed;
+	z-index: -1;
 
- 	@media screen and (min-height: 450px) {
+	@media screen and (min-height: 450px) {
 
- 		.ok {
- 			transform: translate(0, 70%);
- 		}
+		.ok {
+			transform: translate(0, 70%);
+		}
 
 
 		hr {
@@ -213,18 +213,18 @@ $fancy-font: 'Archivo Black', sans-serif;
 			margin: 3px 0px;
 		}
 
- 		.stripe {
- 			height: 200px;
- 			background-color: $blue-black;
- 			margin: 0px;
- 		}
- 	}
+		.stripe {
+			height: 200px;
+			background-color: $blue-black;
+			margin: 0px;
+		}
+	}
 
- 	@media screen and (max-height: 450px) {
- 		hr, .stripe {
- 			display: none;
- 		}
- 	}
+	@media screen and (max-height: 450px) {
+		hr, .stripe {
+			display: none;
+		}
+	}
  }
 
 
@@ -239,16 +239,16 @@ $fancy-font: 'Archivo Black', sans-serif;
 /* Menu Styling */
 
 #body .home-buttons { //TODO: better name
- 	a {
- 		height: 30px;
- 		border: none;
- 		line-height: 30px;
- 		@include side-margin(0px);
- 		@include side-padding(0px);
- 		background-color: #444;
- 		color: white;
- 		text-shadow:0 0 0;
- 	}
+	a {
+		height: 30px;
+		border: none;
+		line-height: 30px;
+		@include side-margin(0px);
+		@include side-padding(0px);
+		background-color: #444;
+		color: white;
+		text-shadow:0 0 0;
+	}
  }
 
 
@@ -256,11 +256,11 @@ $fancy-font: 'Archivo Black', sans-serif;
 /* White box floating over the background */
 
  #body .floating-box {
-  	background-color: white;
- 	padding-top: 20px;
- 	padding-bottom: 20px;
- 	margin:auto;
- 	min-height: 350px;
+		background-color: white;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin:auto;
+	min-height: 350px;
  }
 
 // Big Screens
@@ -306,11 +306,11 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 	.medium-pic {
 		width: 250px;
-		height: 250px;
+		height: 141px;
 	}
 
 	.small-pic {
-		width: 140px;
+		width: 249px;
 		height: 140px;
 	}
 
@@ -331,14 +331,14 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 	}
 
- 	.five-mar{
+	.five-mar{
 		margin: 5px;
 	}
 }
 
 // http://stackoverflow.com/questions/10253917/prevent-jquery-mobile-collapsible-set-header-from-being-truncated
 .ui-mobile .ui-page .ui-content .ui-collapsible .ui-collapsible-heading .ui-btn {
-    white-space : normal;
+		white-space : normal;
 }
 
 
@@ -361,12 +361,12 @@ $fancy-font: 'Archivo Black', sans-serif;
 }
 
 // #body #other-one {
-// 	border-left: 1px solid $blue-black;
+//  border-left: 1px solid $blue-black;
 // }
 
 
 // #password-popup {
-// 	padding: 15px; 
+//  padding: 15px; 
 // }
 
 .popup {
@@ -388,22 +388,22 @@ $fancy-font: 'Archivo Black', sans-serif;
 .header {
 	padding-top: 20px;
 	background-color: #444;
- 	color: white;
- 	text-shadow:0 0 0;
+	color: white;
+	text-shadow:0 0 0;
 
- 	.ui-btn-active {
- 		border-color: black !important;
- 		color: white !important;
- 		background-color: #444 !important; //TODO: Make this a variable
+	.ui-btn-active {
+		border-color: black !important;
+		color: white !important;
+		background-color: #444 !important; //TODO: Make this a variable
 	}
 
- 	.ui-btn {
+	.ui-btn {
 		margin-top: 20px;
- 	} //TODO: If there's an easy way to change the status bar color, do that
+	} //TODO: If there's an easy way to change the status bar color, do that
 }
 
 #body .ui-controlgroup-controls .ui-checkbox .ui-btn, #body .ui-controlgroup-controls .ui-checkbox #terms {
- 	z-index: 0;
+	z-index: 0;
  }
 
 
@@ -425,10 +425,36 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 
 form .error {
-  color: #ff0000;
+	color: #ff0000;
 }
 
 
 .hidden {
 	display: none;
 }
+
+
+#fontTest {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+// .pleasework {
+// 	height: 
+// 	//height: 100% !important;
+// 	//margin: 0px;
+// }
+
+//My bikes page, make sure thumbnails are the right dimensions
+#body .ui-listview li a img {
+
+	height: 80px !important;
+	width: 142px !important;
+	max-width: 10000px;
+}
+
+
+#body .ui-listview li a  {
+	padding-left: 147px;
+}
+
+

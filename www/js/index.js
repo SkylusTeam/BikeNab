@@ -135,9 +135,22 @@ let testCop = '{' +
 '}'
 
 //TODO: Add back in images
+
 var normalData = JSON.parse(testUser);
 var policeData = JSON.parse(testCop);
-var userData = policeData;
+
+// var imageData = file_get_contents("img/canyon.jpg");
+// imageData = base64_encode(imagedata);
+// console.log("image data");
+// console.log(imageData);
+// for (let i = 0; i < normalData.bikes.length; i++) {
+// 	normalData.bikes[i].image = imageData;
+// }
+// for (let i = 0; i < policeData.bikes.length; i++) {
+// 	policeData.bikes[i].image = imageData;
+// }
+
+var userData = normalData;
 
 
 
