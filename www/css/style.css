@@ -65,6 +65,7 @@
   text-align: center;
   font-size: 20px; }
 #login .login-input {
+  font-size: 15px;
   border: solid 1px #254ea2;
   color: #254ea2; }
 
@@ -127,6 +128,7 @@
 
 /* Menu Styling */
 #body .home-buttons a {
+  background-color: #E0E2F0;
   height: 30px;
   border: none;
   line-height: 30px;
@@ -134,9 +136,12 @@
   margin-right: 0px;
   padding-left: 0px;
   padding-right: 0px;
-  background-color: #444;
-  color: white;
-  text-shadow: 0 0 0; }
+  color: #254ea2;
+  border: 2px green;
+  font-size: 15px; }
+
+.ui-header {
+  box-shadow: 0px 1px gray; }
 
 /* White box floating over the background */
 #body .floating-box {
@@ -222,9 +227,6 @@
 #home {
   background-color: #E0E2F0; }
 
-.ui-page {
-  background: transparent; }
-
 .ui-content {
   background: transparent; }
 
@@ -272,5 +274,8 @@ form .error {
 
 #body .ui-listview li a {
   padding-left: 147px; }
+
+.ui-page {
+  background-color: transparent; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,4 +1,4 @@
-<div class="floating-box">
+<div class="floating-box ui-shadow ui-corner-all">
 	<h1 class="center">My Bikes</h1>
 	{{#each bikes}}
 	<ul data-role="listview" data-inset="true">
@@ -8,12 +8,6 @@
 					{{model}}
 				<!-- </font> -->
 				<br>Status: {{status}} 
-		</a></li>
-	</ul>
-	<ul data-role="listview" data-inset="true">
-		<li data-icon="false"><a onclick="toBikeDetail('{{serial}}')" >
-			<img src="img/bike2.jpg" class="pleasework">
-					Model: {{model}}
 		</a></li>
 	</ul>
 	{{/each}}

@@ -181,6 +181,7 @@ function addRepeatedElements() {
 	insertSections();
 
 	// Format floating white box.
+	console.log("repeated elements being added");
 	$(".floating-box").addClass('ui-shadow ui-corner-all');
 	
 	// Add background (on big screens you get a stripe, not on mobile)
@@ -252,6 +253,7 @@ function addMenu(isApp) {
 	} else {
 		StatusBar.styleBlackOpaque();
 	}
+	//$('[data-role="header"]').removeClass('invisible');
 }
 
 

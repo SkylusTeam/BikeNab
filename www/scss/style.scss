@@ -130,13 +130,11 @@ $fancy-font: 'Archivo Black', sans-serif;
 	}
 
 	.login-input {
+		font-size: 15px;
 		border: solid 1px $blue-black;
 		color: $blue-black;
 	}
 
-	// .bottom-buttons {
-	//  margin: 7px !important;
-	// }
 }
 
 .ui-content {
@@ -238,30 +236,37 @@ $fancy-font: 'Archivo Black', sans-serif;
 
 /* Menu Styling */
 
-#body .home-buttons { //TODO: better name
+ #body .home-buttons { //TODO: better name
+
 	a {
+ 		background-color: $light-blue;
 		height: 30px;
 		border: none;
 		line-height: 30px;
 		@include side-margin(0px);
 		@include side-padding(0px);
-		background-color: #444;
-		color: white;
-		text-shadow:0 0 0;
+		color: $blue-black;
+		border: 2px green;
+		font-size: 15px;
 	}
  }
+
+
+ .ui-header {
+ 	box-shadow: 0px 1px gray;	
+}
 
 
 
 /* White box floating over the background */
 
  #body .floating-box {
-		background-color: white;
+	background-color: white;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	margin:auto;
 	min-height: 350px;
- }
+}
 
 // Big Screens
 @media screen and (min-width: 655px) {
@@ -377,10 +382,6 @@ $fancy-font: 'Archivo Black', sans-serif;
 	background-color: $light-blue;
 }
 
-.ui-page {
-	background: transparent;
-}
-
 .ui-content {
 	background: transparent;
 }
@@ -438,11 +439,6 @@ form .error {
 	font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-// .pleasework {
-// 	height: 
-// 	//height: 100% !important;
-// 	//margin: 0px;
-// }
 
 //My bikes page, make sure thumbnails are the right dimensions
 #body .ui-listview li a img {
@@ -458,3 +454,17 @@ form .error {
 }
 
 
+// .invisible {
+// 	a {
+// 			visibility: none !important;
+// 			background-color: $light-blue !important;
+// 			color: $blue-black !important;
+// 			//border: none;
+// 			//margin: 0px;
+// 		}
+	
+// }
+
+.ui-page {
+	background-color: transparent;
+}
