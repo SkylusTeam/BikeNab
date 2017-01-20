@@ -13,19 +13,38 @@
 		<!-- <script src="jquery.url.js"></script> -->
 		<!-- CSS Stylesheet -->
 		<link href="css/style.css" rel="stylesheet">
-		<!-- Awesome open source icons & fonts!  Thank Google, you're the best! -->
+		<!-- Awesome open source icons & fonts!  Thanks Google, you're the best! -->
 		<link href="https://fonts.googleapis.com/css?family=Archivo+Black&amp;subset=latin-ext" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet">
 
 		<!-- <link rel="icon" href="favicon.ico"> -->
 
 		<title>BikeNab</title>
+
+		<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+		<script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyDDBST8naZsZSn1r0e8XYdVei8F0BwulZw",
+		    authDomain: "authexam.firebaseapp.com",
+		    databaseURL: "https://authexam.firebaseio.com",
+		    storageBucket: "authexam.appspot.com",
+		    messagingSenderId: "100387542683"
+		  };
+		  firebase.initializeApp(config);
+		  var database = firebase.database();
+		</script>
+
+
 	</head>
 
 
 
 	<body id="body">
+
 
 
 		<script id="home-tpl" type="text/x-handlebars-template">
@@ -144,7 +163,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Register Bike</h1>
-					<form onSubmit="return false;">
+					<form onsubmit="return testSubmit();">
 						<div id="register-bike-info-container"></div>
 						<!-- Pyment Options-->
 						<br>
@@ -270,7 +289,7 @@
 			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
-					<h1 class="center">Report Bike</h1>
+					<h1 class="center">Report Bike!!!</h1>
 					<form onSubmit="return false;">
 						<div id="report-container"></div>
 						<button type="submit" class="blue-button">Submit Report</button>
@@ -349,6 +368,13 @@
 			</div>
 			<div data-role="main" class="ui-content">
 					<div id="fontTest">Hello World</div>
+					<div class="ui-field-contain">
+					  <fieldset data-role="controlgroup">
+					    <legend>Agree to the terms:</legend>
+					    <input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom">
+					    <label for="checkbox-2">I agree</label>
+					  </fieldset>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -473,7 +499,7 @@
 		<!-- 									Handlebars 									  -->
 		<!-- 									Handlebars 									  -->
 
-		<script type="text/javascript" src="/js/handlebars-v4.0.5.js"></script>
+		<script type="text/javascript" src="js/handlebars-v4.0.5.js"></script>
 		<script src="js/templates/templates.js"></script>
 
 		<!-- Javascript files -->

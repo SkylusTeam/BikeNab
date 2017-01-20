@@ -5,6 +5,7 @@ $normal-font: Arial;
 $fancy-font: 'Archivo Black', sans-serif;
 
 
+
 @mixin side-padding($pixels) {
 	padding-left: $pixels;
 	padding-right: $pixels;
@@ -16,11 +17,22 @@ $fancy-font: 'Archivo Black', sans-serif;
 }
 
 
+* {
+	font-family: 'Raleway', sans-serif;
+}
+
+
+
+
 //===================================================//
 
 /* Page-Specific Styling */
 
 //===================================================//
+
+
+
+
 
 
 

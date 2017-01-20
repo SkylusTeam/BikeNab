@@ -1,5 +1,10 @@
 <div class="floating-box ui-shadow ui-corner-all">
-	<h1 class="center">My Bikes</h1>
+	<h1 class="center">My Bikes {{bikes.length}}</h1>
+		{{#IF bikes.length '===' 0}}
+			<br>
+			<h3 class="center">It looks like you don't have any bikes yet.</h3>
+			<br>
+		{{/IF}}
 	{{#each bikes}}
 	<ul data-role="listview" data-inset="true">
 		<li data-icon="false"><a onclick="toBikeDetail('{{serial}}')" >

@@ -644,5 +644,23 @@ function followUnfollow(reportID, following) {
 }
 
 
+function testSubmit() {
+	console.log("hi");
+	console.log($("#serial-number").val());
+	database.ref('meow').set({
+		serial: $("#serial-number").val()
+	});
+
+	goSomewhere("#home");
+
+	return false;
+} 
+
+
+
+
+
+
 //cd into www
 //handlebars -m js/templates/> js/templates/templates.js
+
