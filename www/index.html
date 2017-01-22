@@ -18,6 +18,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet">
+		<script src="lib/js/jquery.Jcrop.min.js"></script>
+		<link rel="stylesheet" href="lib/css/jquery.Jcrop.css" type="text/css" />
 
 		<!-- <link rel="icon" href="favicon.ico"> -->
 
@@ -28,11 +30,11 @@
 		<script>
 		  // Initialize Firebase
 		  var config = {
-		    apiKey: "AIzaSyDDBST8naZsZSn1r0e8XYdVei8F0BwulZw",
-		    authDomain: "authexam.firebaseapp.com",
-		    databaseURL: "https://authexam.firebaseio.com",
-		    storageBucket: "authexam.appspot.com",
-		    messagingSenderId: "100387542683"
+			apiKey: "AIzaSyDDBST8naZsZSn1r0e8XYdVei8F0BwulZw",
+			authDomain: "authexam.firebaseapp.com",
+			databaseURL: "https://authexam.firebaseio.com",
+			storageBucket: "authexam.appspot.com",
+			messagingSenderId: "100387542683"
 		  };
 		  firebase.initializeApp(config);
 		  var database = firebase.database();
@@ -48,9 +50,9 @@
 
 
 		<script id="home-tpl" type="text/x-handlebars-template">
-		    <div class='header'><h1>Home</h1></div>
-		    <div class='search-bar'><input class='search-key' type="search"/></div>
-		    <div class="scroll"><ul class='employee-list'></ul></div>
+			<div class='header'><h1>Home</h1></div>
+			<div class='search-bar'><input class='search-key' type="search"/></div>
+			<div class="scroll"><ul class='employee-list'></ul></div>
 		</script>
 
 		<!-- Login Page -->
@@ -355,6 +357,38 @@
 		</div>
 
 
+ 		<script language="Javascript">
+			jQuery(function($) {
+
+				var boundx, boundy
+
+				$('#test-pic').Jcrop({
+					setSelect:   [ 0, 0, 160, 90 ],
+					aspectRatio: 16 / 9,
+					onSelect: updatePic
+				},function(){
+					// Use the API to get the real image size
+					var bounds = this.getBounds();
+					boundx = bounds[0];
+					boundy = bounds[1];
+				});
+
+				function updatePic(c) {
+					let xsize =  $("#test-container").width();
+					let ysize =  $("#test-container").height();
+					var rx = xsize / c.w;
+					var ry = ysize / c.h;
+					$("#test-pic-cropped").css({
+						width: Math.round(rx * boundx) + 'px',
+						height: Math.round(ry * boundy) + 'px',
+						marginLeft: '-' + Math.round(rx * c.x) + 'px',
+						marginTop: '-' + Math.round(ry * c.y) + 'px'
+					});
+				}
+			});
+
+
+		</script>
 
 
 		<!-- Test Page -->
@@ -367,15 +401,18 @@
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
 			<div data-role="main" class="ui-content">
-					<div id="fontTest">Hello World</div>
-					<div class="ui-field-contain">
-					  <fieldset data-role="controlgroup">
-					    <legend>Agree to the terms:</legend>
-					    <input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom">
-					    <label for="checkbox-2">I agree</label>
-					  </fieldset>
-					</div>
+				<div id="test-container" class="medium-pic-container">
+					<img class="center" id="test-pic-cropped" src="Canyon Background.jpg">
+					<!-- style="width: 400px; height: 300px; margin: -75px 0 0 -100px;"  -->
 				</div>
+				<a class="ui-btn medium-button blue-button center" href="#test-popup" data-rel="popup">Show Pic</a>
+
+
+				<!-- Change Email popup -->
+				<div data-role="popup" id="test-popup" class="popup">
+					<img id="test-pic" src="Canyon Background.jpg" width="600px" height="400px" id="target" />
+				</div>
+
 			</div>
 		</div>
 
@@ -443,7 +480,7 @@
 
 
 			<!-- Browser header -->
- 			<div class="browser-header">
+			<div class="browser-header">
 				<div data-role="navbar" id="header-container">
 				</div>
 			</div>

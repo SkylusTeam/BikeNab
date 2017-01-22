@@ -324,6 +324,14 @@ $fancy-font: 'Archivo Black', sans-serif;
 	.medium-pic {
 		width: 250px;
 		height: 141px;
+	} //TODO: Can we get rid of this?
+
+	.medium-pic-container {
+		display:block;
+		overflow:hidden;
+		width: 250px;
+		height: 141px;
+		margin: auto;
 	}
 
 	.small-pic {

@@ -183,6 +183,12 @@
 #body .medium-pic {
   width: 250px;
   height: 141px; }
+#body .medium-pic-container {
+  display: block;
+  overflow: hidden;
+  width: 250px;
+  height: 141px;
+  margin: auto; }
 #body .small-pic {
   width: 249px;
   height: 140px; }
