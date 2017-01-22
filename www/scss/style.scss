@@ -480,3 +480,38 @@ form .error {
 .ui-page {
 	background-color: transparent;
 }
+
+
+#reports {
+	//background-color: $light-blue !important;
+	.stripey {
+		margin: 0px !important;
+	}
+
+	.ui-content {
+		margin: 0px;
+		border: none;
+		margin-top: 0px !important;
+		top: -10px !important;
+	}
+}
+
+
+.ui-content {
+		border: none !important;
+	}
+
+.stripey-background {
+	margin: 0px;
+}
+
+body {
+	background-color: $light-blue !important;
+}
+
+
+
+// .stripey-background {
+// 	background-color: purple !important;
+// }
+

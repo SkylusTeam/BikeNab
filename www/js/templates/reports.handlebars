@@ -1,5 +1,10 @@
 <div>
 	<div data-role="collapsibleset">
+	{{#IF bikes.length '===' 0}}
+		<br>
+		<h3 class="center">It looks like you haven't created any reports yet.</h3>
+		<br>
+	{{/IF}}
 	{{#each reports}}
 		<div data-role="collapsible">
 			<h1>{{capitalize this.bike.model}} bike reported {{lowercase status}} on {{date}}.</h1>
@@ -12,35 +17,35 @@
 			</div>
 			<h3>Incident Information</h3>
 			<table cellpadding="3px">
-				<tr>
+				<tr class="{{no incidentNumber 'hidden'}}">
 					<td><b>Incident Number:</b></td>
 					<td>{{incidentNumber}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no officerName 'hidden'}}">
 					<td><b>Officer's Name:</b></td>
 					<td>{{officerName}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no officerEmail 'hidden'}}">
 					<td><b>Officer's Email:</b></td>
 					<td>{{officerEmail}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no officerPhone 'hidden'}}">
 					<td><b>Officer's Phone:</b></td>
 					<td>{{officerPhone}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no status 'hidden'}}">
 					<td><b>Reported:</b></td>
 					<td>{{status}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no date 'hidden'}}">
 					<td><b>Report Date:</b></td>
 					<td>{{date}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no contactOwner 'hidden'}}">
 					<td><b>When Found:</b></td>
 					<td>{{contact contactOwner contactPolice}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no description 'hidden'}}">
 					<td><b>Incident Description:</b></td>
 					<td>{{description}}</td>
 				</tr>

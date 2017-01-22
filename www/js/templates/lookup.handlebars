@@ -14,33 +14,31 @@
 		<li>
 			<font style="white-space:normal" >
 				<table>
-				<tr>
+				<tr class="{{no bike.serial 'hidden'}}">
 					<td><b>Serial Number:</b></td>
 					<td>{{bike.serial}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no bike.make 'hidden'}}">
 					<td><b>Make:</b></td>
 					<td>{{bike.make}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no bike.model 'hidden'}}">
 					<td><b>Model:</b></td>
 					<td>{{bike.model}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no bike.year 'hidden'}}">
 					<td><b>Year:</b></td>
 					<td>{{bike.year}}</td>
 				</tr>
-				{{#IF privacy '>=' 2}}
-				<tr>
+				<tr class="{{no bike.purchasePlace 'hidden'}}">
 					<td><b>Place of Purchase:</b></td>
 					<td>{{bike.purchasePlace}}</td>
 				</tr>
-				<tr>
+				<tr class="{{no bike.value 'hidden'}}">
 					<td><b>Value:</b></td>
 					<td>{{bike.value}}</td>
 				</tr>
-				{{/IF}}
-				<tr>
+				<tr class="{{no bike.otherInfo 'hidden'}}">
 					<td><b>Other Info:</b></td>
 					<td>{{bike.otherInfo}}</td>
 				</tr>
@@ -49,8 +47,6 @@
 		</li>
 	</ul>
 
-
-{{#IF privacy '>=' 1}}
 	<h2>Owner Info</h2>
 
 	<ul data-role="listview" data-inset="true">
@@ -58,15 +54,15 @@
 			<font style="white-space:normal" >
 				<table>
 				
-					<tr>
+					<tr class="{{no owner.name 'hidden'}}">
 						<td><b>Name:</b></td>
 						<td>{{owner.name}}</td>
 					</tr>
-					<tr>
+					<tr class="{{no owner.email 'hidden'}}">
 						<td><b>Owner Email:</b></td>
 						<td>{{owner.email}}</td>
 					</tr>
-					<tr>
+					<tr class="{{no owner.cellphone 'hidden'}}">
 						<td><b>Owner Phone Number:</b></td>
 						<td>{{owner.cellphone}}</td>
 					</tr>
@@ -75,31 +71,31 @@
 			</font>
 		</li>
 	</ul>
-{{/IF}}
 
-	{{#IF bike.status '===' 'Okay'}}
-	<h2>Law Enforcement Info</h2>
+	<div  class="{{#IF bike.status '===' 'Okay'}}hidden{{/IF}}">
+		
+		<h2>Law Enforcement Info</h2>
 
-	<ul data-role="listview" data-inset="true">
-		<li data-icon="false">
-			<font style="white-space:normal" >
-				<table>
-					<tr>
-						<td><b>Case Officer:</b></td>
-						<td>{{report.officerName}}</td>
-					</tr>
-					<tr>
-						<td><b>Officer Email:</b></td>
-						<td>{{report.officerEmail}}</td>
-					</tr>
-					<tr>
-						<td><b>Officer Phone Number:</b></td>
-						<td>{{report.officerPhone}}</td>
-					</tr>
-				</table>
-			</font>
-		</li>
-	</ul>
-	{{/IF}}
+		<ul data-role="listview" data-inset="true">
+			<li data-icon="false">
+				<font style="white-space:normal" >
+					<table>
+						<tr class="{{no report.officerName 'hidden'}}">
+							<td><b>Case Officer:</b></td>
+							<td>{{report.officerName}}</td>
+						</tr>
+						<tr class="{{no report.officerEmail 'hidden'}}">
+							<td><b>Officer Email:</b></td>
+							<td>{{report.officerEmail}}</td>
+						</tr>
+						<tr class="{{no report.officerPhone 'hidden'}}">
+							<td><b>Officer Phone Number:</b></td>
+							<td>{{report.officerPhone}}</td>
+						</tr>
+					</table>
+				</font>
+			</li>
+		</ul>
+	</div>
 
 </div>

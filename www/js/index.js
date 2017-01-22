@@ -36,56 +36,56 @@
 
 let testUser = '{' +
 '"profile": {' +
-'	"name": "myname",' +
-'	"email": "myemail",' +
-'	"backupEmail": "mybackupemail",' +
-'	"birthdate": "mybirthdate",' +
-'	"address": "myaddress",' +
-'	"cellphone": "mycellphone",' +
-'	"socialMedia": "mysocialMedia"' +
+// '	"name": "myname",' +
+ '	"email": "myemail"' +
+// '	"backupEmail": "mybackupemail",' +
+// '	"birthdate": "mybirthdate",' +
+// '	"address": "myaddress",' +
+// '	"cellphone": "mycellphone",' +
+// '	"socialMedia": "mysocialMedia"' +
 '},' +
 '"bikes": [' +
 '	{' +
 '		"serial": "mySerial",' +
-'		"make": "myMake" ,'+
-'		"model": "myModel", ' +
-'		"year": "myYear", '  +
-'		"purchasePlace": "mypurchasePlace", '+
-'		"value": "myValue", '  +
-'		"otherInfo": "myOtherInfo", ' +
-'		"status": "Okay"' +
-'	},' +
-'	{' +
-'		"serial": "12321",' +
-'		"make": "coolBike" ,'+
-'		"model": "reallycool", ' +
-'		"year": "myYear", '  +
-'		"purchasePlace": "mypurchasePlace", '+
-'		"value": "myValue", '  +
-'		"otherInfo": "myOtherInfo", ' +
-'		"status": "Stolen"' +
+//'		"make": "myMake" ,'+
+//'		"model": "myModel", ' +
+//'		"year": "myYear", '  +
+// '		"purchasePlace": "mypurchasePlace", '+
+// '		"value": "myValue", '  +
+// '		"otherInfo": "myOtherInfo", ' +
+ '		"status": "Okay"' +
 '	}' +
+// '	{' +
+// '		"serial": "12321",' +
+// '		"make": "coolBike" ,'+
+// '		"model": "reallycool", ' +
+// '		"year": "myYear", '  +
+// '		"purchasePlace": "mypurchasePlace", '+
+// '		"value": "myValue", '  +
+// '		"otherInfo": "myOtherInfo", ' +
+// '		"status": "Stolen"' +
+// '	}' +
 '],' +
 '"reports": [' +
 '	{' +
-'		"reportID": "myReport", ' +
+//'		"reportID": "myReport", ' +
 '		"serial": "mySerial", ' +
-'		"incidentNumber": "myIncidentNumber", ' +
-'		"officerName": "myOfficerName", ' +
-'		"officerEmail": "myOfficerEmail", ' +
-'		"officerPhone": "myOfficerPhone", ' +
-'		"description": "myDescription", ' +
-'		"status": "Stolen",' +
-'		"contactOwner": true,' +
-'		"contactPolice": true,' +
-'		"date": "myDate" ' +
+// '		"incidentNumber": "myIncidentNumber", ' +
+// '		"officerName": "myOfficerName", ' +
+// '		"officerEmail": "myOfficerEmail", ' +
+// '		"officerPhone": "myOfficerPhone", ' +
+// '		"description": "myDescription", ' +
+ '		"status": "Stolen",' +
+// '		"contactOwner": true,' +
+// '		"contactPolice": true,' +
+ '		"date": "myDate" ' +
 '	}' +
 '],' +
-'"privacy": {' +
-'		"individualSearchStolen": 0, ' +
-'		"policeSearchNormal": 1, ' +
-'		"policeSearchStolen": 2 ' +
-'},' +
+// '"privacy": {' +
+// '		"individualSearchStolen": 0, ' +
+// '		"policeSearchNormal": 1, ' +
+// '		"policeSearchStolen": 2 ' +
+// '},' +
 '"police": false' +
 '}'
 
@@ -301,6 +301,8 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 			return reachedSettings();
 		case 'le-create-account':
 			return reachedLeCreateAccount();
+		case 'create-account':
+			return reachedCreateAccount();
 		case 'le-profile':
 			return reachedLeProfile();
 		case 'home':
@@ -318,6 +320,8 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 
 function insertTemplate(data, templateName, containerID) {
 	let template = Handlebars.templates[templateName];
+	console.log("here's the template! " + containerID);
+	console.log($(containerID).html());
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
@@ -337,7 +341,6 @@ function reachedHome() {
 function reachedBikeDetail() {
 	let currBike = null;
 	if (userData.police) {
-		console.log("first case");
 		//TODO: Decide on the best place to save the bike object we get below.
 		// Inside the report?
 		// Lookup?
@@ -356,12 +359,10 @@ function reachedBikeDetail() {
 		if (userData.bikes) {
 			for (let bike of userData.bikes) {
 				if (bike.serial === currBike.serial) {
-					console.log("my bike!!!!!!!!!!!!!!!!!111");
 					currBike.mine = true;
 				}
 			}
 		}
-		console.log("got it");
 		insertTemplate(currBike, "bikeDetail", "#bike-detail-container");
 	}
 }
@@ -428,9 +429,9 @@ function reachedEditReport() {
 }
 
 function reachedUnregister() {
-	if (sessionStorage.serial && sessionStorage.model) {
-		insertTemplate({serial: sessionStorage.serial, model:sessionStorage.model}, "unregister", "#unregister-container");
-	}
+	console.log("reached unregister: " + sessionStorage.model);
+	console.log(sessionStorage.model === "");
+	insertTemplate({serial: sessionStorage.serial , model:sessionStorage.model}, "unregister", "#unregister-container");
 }
 
 function reachedProfile() {
@@ -446,7 +447,7 @@ function reachedMyBikes() {
 function reachedLookup() {
 	//TODO: When we're actually searching, this won't be the user's own data.
 	// It will be the bike who's searial number matches
-	const privacy = getPrivacySetting(normalData.bikes[1], normalData.privacy); //TODO: Use the other person's
+	const privacy = getPrivacySetting(normalData.bikes[0], normalData.privacy); //TODO: Use the other person's
 	if (privacy === -1) {
 		insertTemplate(null, "lookup", "#lookup-container");
 	} else {
@@ -464,11 +465,16 @@ function reachedSettings() {
 }
 
 function reachedLeCreateAccount() {
+	insertTemplate(null, "createAccount", "#le-create-account-container");
 	insertTemplate(null, "lePersonal", "#le-personal-create-container");
 }
 
 function reachedLeProfile() {
 	insertTemplate(userData.profile, "lePersonal", "#le-personal-profile-container");
+}
+
+function reachedCreateAccount() {
+	insertTemplate(null, "createAccount", "#create-account-container");
 }
 
 
@@ -547,6 +553,33 @@ Handlebars.registerHelper('IF', function(var1, operator, var2, options) {
 })
 
 
+Handlebars.registerHelper('no', function(condition, text) {
+	if (condition === undefined || condition === "") {
+		return text;
+	} else {
+		return;
+	}
+});
+
+
+Handlebars.registerHelper('exists', function(condition, text) {
+	if (condition !== undefined || condition === "") {
+		return;
+	} else {
+		return text;
+	}
+});
+
+
+// Handlebars.registerHelper('exists', function(condition, text) {
+// 	if (condition !== undefined) {
+// 		return;
+// 	} else {
+// 		return text;
+// 	}
+// });
+
+
 //Converts a word to all lowercase
 Handlebars.registerHelper('lowercase', function(word) {
 	return word.toLowerCase();
@@ -555,8 +588,9 @@ Handlebars.registerHelper('lowercase', function(word) {
 
 //Makes the first letter of the word capital
 Handlebars.registerHelper('capitalize', function(word) {
-	console.log("In capitalize function");
-	console.log(word);
+	if (!word) {
+		return "";
+	}
 	return word.charAt(0).toUpperCase() + word.slice(1);
 });
 
@@ -607,6 +641,7 @@ function showTerms() {
 //		b) Owner's listed privacy settings
 //		c) Bike's status (stolen or okay)
 function getPrivacySetting(bike, privacy) {
+	console.log(bike);
 	const stolen = (bike.status === "Missing" || bike.status === "Stolen");
 	if(stolen) {
 		if (userData.police) {
@@ -635,7 +670,11 @@ function isApp() {
 	//Taken here: //http://damien.antipa.at/blog/2014/02/08/3-ways-to-detect-that-your-application-is-running-in-cordova-slash-phonegap/
 	//This method differenetiates between apps & browsers (so mobile & desktop browsers count as the same)
 	//Useful for menus (deciding whether or not we want a back button)
-	return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+	let hi = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+	if (hi) {
+		alert("hi we're in trouble");
+	}
+	return hi;
 }
 
 

@@ -281,4 +281,21 @@ form .error {
 .ui-page {
   background-color: transparent; }
 
+#reports .stripey {
+  margin: 0px !important; }
+#reports .ui-content {
+  margin: 0px;
+  border: none;
+  margin-top: 0px !important;
+  top: -10px !important; }
+
+.ui-content {
+  border: none !important; }
+
+.stripey-background {
+  margin: 0px; }
+
+body {
+  background-color: #E0E2F0 !important; }
+
 /*# sourceMappingURL=style.css.map */

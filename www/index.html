@@ -68,7 +68,7 @@
 				<!-- Login box -->
 				<div id="login-box" class="ui-shadow ui-corner-all">
 					<img src="img/logo.png">
-					<div id="bikenab">BIKENAB</div>
+					<div id="bikenab">BIKENAB!!!!</div>
 					<div id="register">Register. Report. <b>Recover.</b></div>
 					<form onSubmit="return false;">
 						<input class="login-input" type="email" name="email" placeholder="Log In"/>
@@ -127,7 +127,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<form onSubmit="return false;">
-						<div class="insert" insert="create-account-form"></div>
+						<div id="create-account-container">Hello</div>
 						<button type="submit" class="blue-button">Create Account</button>
 					</form>
 					<a class="center account-link" href="#login">I already have an account.</a>
@@ -141,7 +141,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<form onSubmit="return false;">
-						<div class="insert" insert="create-account-form"></div>
+						<div id="le-create-account-container"></div>
 						<div id="le-personal-create-container"></div>
 						<button type="submit" class="blue-button">Create Account</button>
 					</form>
@@ -434,28 +434,6 @@
 
 		<!-- Hidden page containing elements that pop up in various pages -->
 		<div data-role="page" id="hidden">
-
-
-			<!--Create Account Form-->
-			<!--Used in #create-account and #le-create-account -->
-			<div class="create-account-form">
-				
-					<h1 class="center">Create Account</h1>
-					<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
-					<div class="text-input" value="''" name="username" txt="Username:"></div>
-					<div class="text-input" value="''" name="password1" txt="Password:"></div>
-					<div class="text-input" value="''" name="password2" txt="Confirm Password:"></div>
-					<br>
-					Please read the BikeNab <a onclick="showTerms()" href="#" data-ajax=false>Terms of Service</a>.
-					<fieldset data-role="controlgroup">
-						<label for="terms">I agree to the Terms of Service.</label>
-						<input type="checkbox" name="terms" id="terms" value="red">
-						<div id="clicked"></div>
-					</fieldset>
-					<br>
-			</div>
-
-
 
 			<!--Mobile header-->
 			<div class="mobile-header">

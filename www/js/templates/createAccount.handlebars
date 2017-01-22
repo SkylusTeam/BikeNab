@@ -1,0 +1,24 @@
+<h1 class="center">Create Account</h1>
+<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
+<div data-role="fieldcontain">
+	<label for="username">Username:</label>
+	<input type="text" id="username" data-clear-btn="true">
+</div>
+
+<div data-role="fieldcontain">
+	<label for="password1">Password:</label>
+	<input type="text" id="password1" data-clear-btn="true">
+</div>
+
+<div data-role="fieldcontain">
+	<label for="password2">Confirm Password:</label>
+	<input type="text" id="password2" data-clear-btn="true">
+</div>
+<br>
+Please read the BikeNab <a onclick="showTerms()" href="#" data-ajax=false>Terms of Service</a>.
+<fieldset data-role="controlgroup">
+	<label for="terms">I agree to the Terms of Service.</label>
+	<input type="checkbox" name="terms" id="terms" value="red">
+	<div id="clicked"></div>
+</fieldset>
+<br>

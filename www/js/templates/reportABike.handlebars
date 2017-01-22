@@ -1,3 +1,8 @@
+{{#IF bikes.length '===' 0}}
+		<br>
+		<h3 class="center">It looks like you don't have any bikes to report yet.</h3>
+		<br>
+	{{/IF}}
 {{#each bikes}}
 {{#IF status '===' 'Okay'}}
 <ul data-role="listview" data-inset="true">
