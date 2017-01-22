@@ -88,7 +88,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 		background-color: $light-blue;
 		color: $blue-black;
 		border: none;
-		margin: 0px;
+		margin: 5px 0px;
 	}
 
 	// Top and bottom buttons
@@ -375,6 +375,11 @@ $fancy-font: 'Archivo Black', sans-serif;
 #body .pw-popup {
 	text-decoration: none;
 	color: inherit;
+	background: none;
+	margin-top: 10px;
+	margin: 0px;
+	padding: 0px;
+	border: none;
 }
 
 // #body #other-one {

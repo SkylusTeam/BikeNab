@@ -34,7 +34,7 @@
   background-color: #E0E2F0;
   color: #254ea2;
   border: none;
-  margin: 0px; }
+  margin: 5px 0px; }
 #login #top-buttons button {
   margin: 0px;
   padding: 8px;
@@ -222,7 +222,12 @@
 
 #body .pw-popup {
   text-decoration: none;
-  color: inherit; }
+  color: inherit;
+  background: none;
+  margin-top: 10px;
+  margin: 0px;
+  padding: 0px;
+  border: none; }
 
 .popup {
   padding: 15px; }
