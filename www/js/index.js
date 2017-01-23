@@ -686,6 +686,64 @@ function testSubmit() {
 
 
 
+//http://deepliquid.com/content/Jcrop_Manual.html
+
+function cropBoxSetup(totalWidth) {
+	$('#test-pic').Jcrop({
+		setSelect:   [ 0, 0, 160, 90 ],
+		aspectRatio: 16 / 9,
+		boxWidth: Math.round(totalWidth * .85),
+		onSelect: updatePic
+	},function(){
+		// Use the API to get the real image size
+		var bounds = this.getBounds();
+		boundx = bounds[0];
+		boundy = bounds[1];
+	});
+}
+
+var boundx, boundy
+
+function setUpPhotoCrop() {
+	let totalWidth = $('[data-role="page"]').first().width();
+	$('#test-popup').width(totalWidth * .9);
+	cropBoxSetup(totalWidth);
+}
+
+
+function updatePic(c) {
+	let xsize =  $("#test-container").width();
+	let ysize =  $("#test-container").height();
+	var rx = xsize / c.w;
+	var ry = ysize / c.h;
+	$("#test-pic-cropped").css({
+		width: Math.round(rx * boundx) + 'px',
+		height: Math.round(ry * boundy) + 'px',
+		marginLeft: '-' + Math.round(rx * c.x) + 'px',
+		marginTop: '-' + Math.round(ry * c.y) + 'px'
+	});
+}
+
+
+
+
+jQuery(function($) {
+	setUpPhotoCrop();
+});
+
+
+
+function closePopup(popup) {
+	$("#" + popup).popup("close");
+}
+
+
+$( window ).resize(function() {
+	//Anything window-size-dependent changes here!
+	setUpPhotoCrop();
+});
+
+
 
 
 

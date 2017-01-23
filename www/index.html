@@ -356,41 +356,6 @@
 			</div>
 		</div>
 
-
- 		<script language="Javascript">
-			jQuery(function($) {
-
-				var boundx, boundy
-
-				$('#test-pic').Jcrop({
-					setSelect:   [ 0, 0, 160, 90 ],
-					aspectRatio: 16 / 9,
-					onSelect: updatePic
-				},function(){
-					// Use the API to get the real image size
-					var bounds = this.getBounds();
-					boundx = bounds[0];
-					boundy = bounds[1];
-				});
-
-				function updatePic(c) {
-					let xsize =  $("#test-container").width();
-					let ysize =  $("#test-container").height();
-					var rx = xsize / c.w;
-					var ry = ysize / c.h;
-					$("#test-pic-cropped").css({
-						width: Math.round(rx * boundx) + 'px',
-						height: Math.round(ry * boundy) + 'px',
-						marginLeft: '-' + Math.round(rx * c.x) + 'px',
-						marginTop: '-' + Math.round(ry * c.y) + 'px'
-					});
-				}
-			});
-
-
-		</script>
-
-
 		<!-- Test Page -->
 		<!-- TODO: Take this out later. -->
 		<div data-role="page" id="test" class="stripey-background">
@@ -407,10 +372,11 @@
 				</div>
 				<a class="ui-btn medium-button blue-button center" href="#test-popup" data-rel="popup">Show Pic</a>
 
-
-				<!-- Change Email popup -->
+				<!-- Crop Photo popup -->
 				<div data-role="popup" id="test-popup" class="popup">
-					<img id="test-pic" src="Canyon Background.jpg" width="600px" height="400px" id="target" />
+					<img id="test-pic" src="Canyon Background.jpg" />
+					<!-- width="600px" height="400px" -->
+					<btton onclick="closePopup('test-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
 				</div>
 
 			</div>
