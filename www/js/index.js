@@ -692,6 +692,52 @@ function testSubmit() {
 	return false;
 } 
 
+function testCreate() {
+	console.log("hi");
+	//console.log($("#serial-number").val());
+	//database.ref('meow').set({serial: $("#serial-number").val()	});
+	var email = $('#username').val();
+    var password = $('#password1').val();
+    var password2 = $('#password2').val();
+    console.log(email);
+    console.log(password);
+    /*
+      if (email.length < 4) {
+        alert('Please enter an email address.');
+        return;
+      }
+      */
+      if (password != password2) {
+        alert('Passwords do not match');
+        return;
+      }
+      /*
+      if (password.length < 4) {
+        alert('Please enter a password.');
+        return;
+      }
+      */
+      // Sign in with email and pass.
+      // [START createwithemail]
+      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+      });
+      // [END createwithemail]
+	goSomewhere("#home");
+} ;
+
+
+
 
 
 //http://deepliquid.com/content/Jcrop_Manual.html
