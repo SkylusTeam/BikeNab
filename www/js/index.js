@@ -203,8 +203,16 @@ function addRepeatedElements() {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-	console.log("")
 	addMenu(isApp());
+	braintreeStuff();
+}
+
+
+function braintreeStuff() {
+	console.log("brintree starting")
+	braintree.setup('CLIENT-TOKEN-FROM-SERVER', 'dropin', {
+		container: 'dropin-container'
+	});
 }
 
 
