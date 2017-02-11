@@ -88,7 +88,7 @@ $fancy-font: 'Archivo Black', sans-serif;
 		background-color: $light-blue;
 		color: $blue-black;
 		border: none;
-		margin: 0px;
+		margin: 5px 0px;
 	}
 
 	// Top and bottom buttons
@@ -324,6 +324,14 @@ $fancy-font: 'Archivo Black', sans-serif;
 	.medium-pic {
 		width: 250px;
 		height: 141px;
+	} //TODO: Can we get rid of this?
+
+	.medium-pic-container {
+		display:block;
+		overflow:hidden;
+		width: 250px;
+		height: 141px;
+		margin: auto;
 	}
 
 	.small-pic {
@@ -375,6 +383,11 @@ $fancy-font: 'Archivo Black', sans-serif;
 #body .pw-popup {
 	text-decoration: none;
 	color: inherit;
+	background: none;
+	margin-top: 10px;
+	margin: 0px;
+	padding: 0px;
+	border: none;
 }
 
 // #body #other-one {
@@ -508,6 +521,35 @@ form .error {
 body {
 	background-color: $light-blue !important;
 }
+
+
+// #test-pic {
+// 	display: none;
+// 	//max-width: 95%;
+// 	//width: 95%;important
+// 	//width:95%;
+// 	//height: 95%;
+// 	//position: absolute;
+// 	//border: 3px purple;
+// }
+
+#test-popup {
+	background-color: green;
+	//width: 100%;
+	//max-width: 98%;
+	//width: 98%;
+}
+
+// .jcrop-holder .ui-radio {
+// 	display: none !important;
+
+// 	 img {
+// 		display: none;
+// 		//width: 500px;
+// 		// width:95%;
+// 		// height: 95%;
+// 	}
+// }
 
 
 

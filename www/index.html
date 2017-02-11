@@ -18,6 +18,9 @@
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet">
+		<script src="lib/js/jquery.Jcrop.min.js"></script>
+		<link rel="stylesheet" href="lib/css/jquery.Jcrop.css" type="text/css" />
+		<script src="https://js.braintreegateway.com/js/braintree-2.30.0.min.js"></script>
 
 		<!-- <link rel="icon" href="favicon.ico"> -->
 
@@ -28,11 +31,11 @@
 		<script>
 		  // Initialize Firebase
 		  var config = {
-		    apiKey: "AIzaSyDDBST8naZsZSn1r0e8XYdVei8F0BwulZw",
-		    authDomain: "authexam.firebaseapp.com",
-		    databaseURL: "https://authexam.firebaseio.com",
-		    storageBucket: "authexam.appspot.com",
-		    messagingSenderId: "100387542683"
+			apiKey: "AIzaSyDDBST8naZsZSn1r0e8XYdVei8F0BwulZw",
+			authDomain: "authexam.firebaseapp.com",
+			databaseURL: "https://authexam.firebaseio.com",
+			storageBucket: "authexam.appspot.com",
+			messagingSenderId: "100387542683"
 		  };
 		  firebase.initializeApp(config);
 		  var database = firebase.database();
@@ -48,9 +51,9 @@
 
 
 		<script id="home-tpl" type="text/x-handlebars-template">
-		    <div class='header'><h1>Home</h1></div>
-		    <div class='search-bar'><input class='search-key' type="search"/></div>
-		    <div class="scroll"><ul class='employee-list'></ul></div>
+			<div class='header'><h1>Home</h1></div>
+			<div class='search-bar'><input class='search-key' type="search"/></div>
+			<div class="scroll"><ul class='employee-list'></ul></div>
 		</script>
 
 		<!-- Login Page -->
@@ -78,7 +81,7 @@
 				</div>
 				<!-- Bottom Buttons -->
 				<div id="bottom-buttons" data-role="controlgroup" data-type="horizontal" class="center">
-					<button><a class="pw-popup" href="#password-popup" data-rel="popup">Forgot Password</a></button>	
+					<button><a class="pw-popup ui-btn" href="#password-popup" data-rel="popup">Forgot Password</a></button>	
 					<button class="ui-btn" id="other-one" onclick='goSomewhere("#create-account")'>Create Account</button>
 					<div data-role="popup" id="password-popup" class="ui-content popup">
 						<form onSubmit="return false;">
@@ -354,9 +357,6 @@
 			</div>
 		</div>
 
-
-
-
 		<!-- Test Page -->
 		<!-- TODO: Take this out later. -->
 		<div data-role="page" id="test" class="stripey-background">
@@ -367,17 +367,42 @@
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
 			<div data-role="main" class="ui-content">
-					<div id="fontTest">Hello World</div>
-					<div class="ui-field-contain">
-					  <fieldset data-role="controlgroup">
-					    <legend>Agree to the terms:</legend>
-					    <input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom">
-					    <label for="checkbox-2">I agree</label>
-					  </fieldset>
-					</div>
+				<div id="test-container" class="medium-pic-container">
+					<img class="center" id="test-pic-cropped" src="Canyon Background.jpg">
+					<!-- style="width: 400px; height: 300px; margin: -75px 0 0 -100px;"  -->
 				</div>
+				<a class="ui-btn medium-button blue-button center" href="#test-popup" data-rel="popup">Show Pic</a>
+
+				<!-- Crop Photo popup -->
+				<div data-role="popup" id="test-popup" class="popup">
+					<img id="test-pic" src="Canyon Background.jpg" />
+					<!-- width="600px" height="400px" -->
+					<btton onclick="closePopup('test-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
+				</div>
+
 			</div>
 		</div>
+
+
+		<!-- Test Page -->
+		<!-- TODO: Take this out later. -->
+		<div data-role="page" id="test2" class="stripey-background">
+			
+			<div data-role="header" class="header invisible" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
+			<div data-role="main" class="ui-content">
+				<form>
+					<div id="dropin-container"></div>
+				</form>
+
+			</div>
+		</div>
+
+
+
 
 
 		<!-- Reports -->
@@ -443,7 +468,7 @@
 
 
 			<!-- Browser header -->
- 			<div class="browser-header">
+			<div class="browser-header">
 				<div data-role="navbar" id="header-container">
 				</div>
 			</div>

@@ -36,56 +36,56 @@
 
 let testUser = '{' +
 '"profile": {' +
-// '	"name": "myname",' +
- '	"email": "myemail"' +
-// '	"backupEmail": "mybackupemail",' +
-// '	"birthdate": "mybirthdate",' +
-// '	"address": "myaddress",' +
-// '	"cellphone": "mycellphone",' +
-// '	"socialMedia": "mysocialMedia"' +
+'	"name": "myname",' +
+ '	"email": "myemail",' +
+'	"backupEmail": "mybackupemail",' +
+'	"birthdate": "mybirthdate",' +
+'	"address": "myaddress",' +
+'	"cellphone": "mycellphone",' +
+'	"socialMedia": "mysocialMedia"' +
 '},' +
 '"bikes": [' +
 '	{' +
 '		"serial": "mySerial",' +
-//'		"make": "myMake" ,'+
-//'		"model": "myModel", ' +
-//'		"year": "myYear", '  +
-// '		"purchasePlace": "mypurchasePlace", '+
-// '		"value": "myValue", '  +
-// '		"otherInfo": "myOtherInfo", ' +
+'		"make": "myMake" ,'+
+'		"model": "myModel", ' +
+'		"year": "myYear", '  +
+'		"purchasePlace": "mypurchasePlace", '+
+'		"value": "myValue", '  +
+'		"otherInfo": "myOtherInfo", ' +
  '		"status": "Okay"' +
+'	},' +
+'	{' +
+'		"serial": "12321",' +
+'		"make": "coolBike" ,'+
+'		"model": "reallycool", ' +
+'		"year": "myYear", '  +
+'		"purchasePlace": "mypurchasePlace", '+
+'		"value": "myValue", '  +
+'		"otherInfo": "myOtherInfo", ' +
+'		"status": "Stolen"' +
 '	}' +
-// '	{' +
-// '		"serial": "12321",' +
-// '		"make": "coolBike" ,'+
-// '		"model": "reallycool", ' +
-// '		"year": "myYear", '  +
-// '		"purchasePlace": "mypurchasePlace", '+
-// '		"value": "myValue", '  +
-// '		"otherInfo": "myOtherInfo", ' +
-// '		"status": "Stolen"' +
-// '	}' +
 '],' +
 '"reports": [' +
 '	{' +
-//'		"reportID": "myReport", ' +
+'		"reportID": "myReport", ' +
 '		"serial": "mySerial", ' +
-// '		"incidentNumber": "myIncidentNumber", ' +
-// '		"officerName": "myOfficerName", ' +
-// '		"officerEmail": "myOfficerEmail", ' +
-// '		"officerPhone": "myOfficerPhone", ' +
-// '		"description": "myDescription", ' +
+'		"incidentNumber": "myIncidentNumber", ' +
+'		"officerName": "myOfficerName", ' +
+'		"officerEmail": "myOfficerEmail", ' +
+'		"officerPhone": "myOfficerPhone", ' +
+'		"description": "myDescription", ' +
  '		"status": "Stolen",' +
-// '		"contactOwner": true,' +
-// '		"contactPolice": true,' +
+'		"contactOwner": true,' +
+'		"contactPolice": true,' +
  '		"date": "myDate" ' +
 '	}' +
 '],' +
-// '"privacy": {' +
-// '		"individualSearchStolen": 0, ' +
-// '		"policeSearchNormal": 1, ' +
-// '		"policeSearchStolen": 2 ' +
-// '},' +
+'"privacy": {' +
+'		"individualSearchStolen": 0, ' +
+'		"policeSearchNormal": 1, ' +
+'		"policeSearchStolen": 2 ' +
+'},' +
 '"police": false' +
 '}'
 
@@ -93,7 +93,7 @@ let testUser = '{' +
 let testCop = '{' +
 '"profile": {' +
 '	"name": "myname",' +
-'	"email": "myEmail@gmail.com",' +
+ '	"email": "myEmail@gmail.com",' +
 '	"department": "myDept",' +
 '	"zip": "myZip",' +
 '	"workEmail": "myWorkEmail",' +
@@ -139,18 +139,7 @@ let testCop = '{' +
 var normalData = JSON.parse(testUser);
 var policeData = JSON.parse(testCop);
 
-// var imageData = file_get_contents("img/canyon.jpg");
-// imageData = base64_encode(imagedata);
-// console.log("image data");
-// console.log(imageData);
-// for (let i = 0; i < normalData.bikes.length; i++) {
-// 	normalData.bikes[i].image = imageData;
-// }
-// for (let i = 0; i < policeData.bikes.length; i++) {
-// 	policeData.bikes[i].image = imageData;
-// }
-
-var userData = normalData;
+var userData = policeData;
 
 
 
@@ -214,8 +203,16 @@ function addRepeatedElements() {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-	console.log("")
 	addMenu(isApp());
+	braintreeStuff();
+}
+
+
+function braintreeStuff() {
+	console.log("brintree starting")
+	braintree.setup('CLIENT-TOKEN-FROM-SERVER', 'dropin', {
+		container: 'dropin-container'
+	});
 }
 
 
@@ -903,6 +900,65 @@ function makeReport() {
 	updates['/reports/'+reportKey] = reportData;
 	 return firebase.database().ref().update(updates);
 }
+
+//http://deepliquid.com/content/Jcrop_Manual.html
+
+function cropBoxSetup(totalWidth) {
+	$('#test-pic').Jcrop({
+		setSelect:   [ 0, 0, 160, 90 ],
+		aspectRatio: 16 / 9,
+		boxWidth: Math.round(totalWidth * .85),
+		onSelect: updatePic
+	},function(){
+		// Use the API to get the real image size
+		var bounds = this.getBounds();
+		boundx = bounds[0];
+		boundy = bounds[1];
+	});
+}
+
+var boundx, boundy
+
+function setUpPhotoCrop() {
+	let totalWidth = $('[data-role="page"]').first().width();
+	$('#test-popup').width(totalWidth * .9);
+	cropBoxSetup(totalWidth);
+}
+
+
+function updatePic(c) {
+	let xsize =  $("#test-container").width();
+	let ysize =  $("#test-container").height();
+	var rx = xsize / c.w;
+	var ry = ysize / c.h;
+	$("#test-pic-cropped").css({
+		width: Math.round(rx * boundx) + 'px',
+		height: Math.round(ry * boundy) + 'px',
+		marginLeft: '-' + Math.round(rx * c.x) + 'px',
+		marginTop: '-' + Math.round(ry * c.y) + 'px'
+	});
+}
+
+
+
+
+jQuery(function($) {
+	setUpPhotoCrop();
+});
+
+
+
+function closePopup(popup) {
+	$("#" + popup).popup("close");
+}
+
+
+$( window ).resize(function() {
+	//Anything window-size-dependent changes here!
+	setUpPhotoCrop();
+});
+
+
 
 
 //cd into www
