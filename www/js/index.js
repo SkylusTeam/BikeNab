@@ -139,7 +139,7 @@ let testCop = '{' +
 var normalData = JSON.parse(testUser);
 var policeData = JSON.parse(testCop);
 
-var userData = policeData;
+var userData = normalData;
 
 
 
@@ -438,7 +438,35 @@ function reachedProfile() {
 }
 
 function reachedMyBikes() {
-	insertTemplate(userData, "myBikes", "#my-bikes-container");
+	var user = firebase.auth().currentUser;
+	console.log('reached bike detail')
+
+	if (user) {
+		var userId = user.uid;
+		var bikes = firebase.database().ref('/users/' + userId+'/bikes');
+		console.log('bd user');
+		var bikeDict = {bikes:[]};
+
+		bikes.on("value", function(snapshot) {
+		   console.log(snapshot.val());
+		   jQuery.each(snapshot.val(), function() {
+				console.log(this.serial) // will stop running to skip "five"
+				var getBike = firebase.database().ref('/bikes/'+this.serial);
+				getBike.on("value", function(theBike) {
+					console.log(theBike.val());
+					bikeDict["bikes"].push( theBike.val());
+				});
+			});
+		}, function (error) {
+		   console.log("Error: " + error.code);
+		});
+		console.log('bike dict below)');
+		console.log(bikeDict);
+		console.log(userData);
+		insertTemplate(bikeDict, "myBikes", "#my-bikes-container");
+		} else {
+			insertTemplate(userData, "myBikes", "#my-bikes-container");
+		}
 }
 
 function reachedLookup() {
@@ -696,7 +724,7 @@ function testCreate() {
 	console.log("hi");
 	//console.log($("#serial-number").val());
 	//database.ref('meow').set({serial: $("#serial-number").val()	});
-	var email = $('#username').val();
+	var email = $('#email').val();
     var password = $('#password1').val();
     var password2 = $('#password2').val();
     console.log(email);
@@ -736,13 +764,11 @@ function testCreate() {
 	goSomewhere("#home");
 } ;
 
-function toggleSignIn() {
+function signIn() {
       if (firebase.auth().currentUser) {
         // [START signout]
 
-      console.log('already logged in?')
-        firebase.auth().signOut();
-        // [END signout]
+      console.log('already logged in?')        // [END signout]
       } else {
         var email = $('#loginemail').val();
         var password = $('#loginpassword').val();
@@ -820,22 +846,20 @@ function registerBike(){
 		firebase.database().ref('bikes/' + serial).set({
 			make: make,
 			model: model,
-			year: year,
-			place: place,
-			cost: cost,
-			info: info
+			otherInfo: info,
+			purchasePlace: place,
+			serial:serial,
+			status: "okay",
+			value: cost,
+			year: year
 			}).then(function() {
 			    console.log('success bike1');
 			}, function(error) {
 			    console.log('fail bike1');
 			});
-		firebase.database().ref('bikes/' + make).set({
-			data: 'thing'
-		});
-		firebase.database().ref('users/' + userId).set({
-		    username: "leroy",
-		    email: "jenkins",
-		    profile_picture : "prof"
+		var userId = user.uid;
+		firebase.database().ref('users/' + userId).child("bikes").push({
+		    serial:serial
 		  });
 	} else {
 	// No user is signed in.
