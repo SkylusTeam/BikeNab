@@ -739,11 +739,170 @@ function testCreate() {
 	goSomewhere("#home");
 } ;
 
+function toggleSignIn() {
+      if (firebase.auth().currentUser) {
+        // [START signout]
+
+      console.log('already logged in?')
+        firebase.auth().signOut();
+        // [END signout]
+      } else {
+        var email = $('#loginemail').val();
+        var password = $('#loginpassword').val();
+        if (email.length < 4) {
+          alert('Please enter an email address.');
+          return;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return;
+        }
+        // Sign in with email and pass.
+        // [START authwithemail]
+
+         console.log('attempted sign in')
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+          } else {
+            alert(errorMessage);
+          }
+          if(error){
+          	console.log('error happened');
+          }
+          console.log('fail login');
+          // [END_EXCLUDE]
+        });
+        // [END authwithemail]
+      }
+      console.log('attempted login');
+      var user = firebase.auth().currentUser;
+      setTimeout(function(){console.log(user.email);}, 5000);
+      
+    };
+
+function registerBike(){
+	var serial = $('#serial-number').val();
+    var make = $('#bike-make').val();
+    var model = $('#bike-model').val();
+    var year = $('#bike-year').val();
+    var place = $('#bike-purchase-place').val();
+    var cost = $('#bike-cost').val();
+    var info = $('#additional-info').val();
+    
+    var user = firebase.auth().currentUser;
+	if (user) {
+	// User is signed in.
+		
+		if(user.bikes) {
+			console.log('bikee');
+			user.updateProfile({
+			    bikes: user.bikes + ", " + serial+"mayo",
+			    displayName: 'changed by register bike'
+			}).then(function() {
+			    console.log('success prof');
+			}, function(error) {
+			    console.log('fail prof');
+			});
+		} else {
+			console.log('no bikee');
+			user.updateProfile({
+			    bikes: serial + 'salted',
+			    displayName: 'changed by register bike salted'
+			}).then(function() {
+			    console.log('success prof2');
+			}, function(error) {
+			    console.log('fail prof2');
+			});
+		}
+
+		firebase.database().ref('bikes/' + serial).set({
+			make: make,
+			model: model,
+			year: year,
+			place: place,
+			cost: cost,
+			info: info
+			}).then(function() {
+			    console.log('success bike1');
+			}, function(error) {
+			    console.log('fail bike1');
+			});
+		firebase.database().ref('bikes/' + make).set({
+			data: 'thing'
+		});
+		firebase.database().ref('users/' + userId).set({
+		    username: "leroy",
+		    email: "jenkins",
+		    profile_picture : "prof"
+		  });
+	} else {
+	// No user is signed in.
+	console.log("no user");
+	}
+}
+
+function updateProfile(){
+	console.log('update profile');
+	//This relies on the fields being prefilled with original values, otherwise it could delete everything
+	var contact = $('#contact-name').val();
+    var backupEmail = $('#backupEmail').val(); //TODO convert to dashed style?
+    var birthdate = $('#birthdate').val();
+    var address = $('#address').val();
+    var cell = $('#cell').val();
+    var socialMedia = $('#social-media').val();
+
+    var indStolen = $('#ind-stolen').val();
+    var leNormal = $('#le-normal').val();
+    var leStolen = $('#le-stolen').val();
+    var userId = firebase.auth().currentUser.uid;
+
+    firebase.database().ref('users/' + userId).update({
+		    contact: contact,
+		    backupEmail: backupEmail,
+		    birthdate: birthdate,
+		    address: address,
+		    cell: cell,
+		    socialMedia: socialMedia,
+		    indStolen: indStolen,
+		    leNormal: leNormal,
+		    leStolen: leStolen
+		  });
 
 
+}
 
-
-
+function makeReport() {
+//need to change the id's of the fields
+	console.log('report');
+	var reportSerial = $('#report-serial').val();
+	var officerName = $('#officer-name').val();
+	var officerEmail = $('#officer-email').val();
+	var officerPhone = $('#officer-phone').val();
+	var incidentReport = $('#additional-info').val(); //missing stolen may be better as dragdown?
+	console.log("need to handle the buttons");
+	var level = $('#level').val();
+	var contactme =$('#contact-me').val();
+	var contactle = $('#contact-le').val();
+	var reportData = {
+		reportSerial : reportSerial,
+		officerName : officerName,
+		officerEmail : officerEmail,
+		officerPhone : officerPhone,
+		incidentReport : incidentReport //missing stolen may be better as dragdown?
+		
+	}
+	var reportKey = firebase.database().ref().child('reports').push().key;
+	console.log(reportData);
+	console.log(reportKey);
+	var updates = {};
+	updates['/reports/'+reportKey] = reportData;
+	 return firebase.database().ref().update(updates);
+}
 
 
 //cd into www
