@@ -18,6 +18,9 @@
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet">
+		<script src="lib/js/jquery.Jcrop.min.js"></script>
+		<link rel="stylesheet" href="lib/css/jquery.Jcrop.css" type="text/css" />
+		<script src="https://js.braintreegateway.com/js/braintree-2.30.0.min.js"></script>
 
 		<!-- <link rel="icon" href="favicon.ico"> -->
 
@@ -28,11 +31,11 @@
 		<script>
 		  // Initialize Firebase
 		  var config = {
-		    apiKey: "AIzaSyDDBST8naZsZSn1r0e8XYdVei8F0BwulZw",
-		    authDomain: "authexam.firebaseapp.com",
-		    databaseURL: "https://authexam.firebaseio.com",
-		    storageBucket: "authexam.appspot.com",
-		    messagingSenderId: "100387542683"
+			apiKey: "AIzaSyDDBST8naZsZSn1r0e8XYdVei8F0BwulZw",
+			authDomain: "authexam.firebaseapp.com",
+			databaseURL: "https://authexam.firebaseio.com",
+			storageBucket: "authexam.appspot.com",
+			messagingSenderId: "100387542683"
 		  };
 		  firebase.initializeApp(config);
 		  var database = firebase.database();
@@ -48,9 +51,9 @@
 
 
 		<script id="home-tpl" type="text/x-handlebars-template">
-		    <div class='header'><h1>Home</h1></div>
-		    <div class='search-bar'><input class='search-key' type="search"/></div>
-		    <div class="scroll"><ul class='employee-list'></ul></div>
+			<div class='header'><h1>Home</h1></div>
+			<div class='search-bar'><input class='search-key' type="search"/></div>
+			<div class="scroll"><ul class='employee-list'></ul></div>
 		</script>
 
 		<!-- Login Page -->
@@ -68,17 +71,17 @@
 				<!-- Login box -->
 				<div id="login-box" class="ui-shadow ui-corner-all">
 					<img src="img/logo.png">
-					<div id="bikenab">BIKENAB</div>
+					<div id="bikenab">BIKENAB!!!!</div>
 					<div id="register">Register. Report. <b>Recover.</b></div>
 					<form onSubmit="return false;">
-						<input class="login-input" type="email" name="email" placeholder="Log In"/>
-						<input class="login-input" type="password" name="password" placeholder="Password"/>	
+						<input class="login-input" type="email" id="loginemail" placeholder="Log In"/>
+						<input class="login-input" type="password" id="loginpassword" placeholder="Password"/>	
 					</form>
-					<button class="login-input blue-button" onclick="goSomewhere('#home')">Log In</button>
+					<button class="login-input blue-button" onclick="signIn(); goSomewhere('#home')">Log In</button>
 				</div>
 				<!-- Bottom Buttons -->
 				<div id="bottom-buttons" data-role="controlgroup" data-type="horizontal" class="center">
-					<button><a class="pw-popup" href="#password-popup" data-rel="popup">Forgot Password</a></button>	
+					<button><a class="pw-popup ui-btn" href="#password-popup" data-rel="popup">Forgot Password</a></button>	
 					<button class="ui-btn" id="other-one" onclick='goSomewhere("#create-account")'>Create Account</button>
 					<div data-role="popup" id="password-popup" class="ui-content popup">
 						<form onSubmit="return false;">
@@ -126,8 +129,8 @@
 		<div data-role="page" id="create-account" class="stripey-background">
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
-					<form onSubmit="return false;">
-						<div class="insert" insert="create-account-form"></div>
+					<form onSubmit="testCreate()">
+						<div id="create-account-container">Hello</div>
 						<button type="submit" class="blue-button">Create Account</button>
 					</form>
 					<a class="center account-link" href="#login">I already have an account.</a>
@@ -141,7 +144,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<form onSubmit="return false;">
-						<div class="insert" insert="create-account-form"></div>
+						<div id="le-create-account-container"></div>
 						<div id="le-personal-create-container"></div>
 						<button type="submit" class="blue-button">Create Account</button>
 					</form>
@@ -163,7 +166,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Register Bike</h1>
-					<form onsubmit="return testSubmit();">
+					<form onsubmit="return registerBike();">
 						<div id="register-bike-info-container"></div>
 						<!-- Pyment Options-->
 						<br>
@@ -290,7 +293,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Report Bike!!!</h1>
-					<form onSubmit="return false;">
+					<form onSubmit="makeReport()">
 						<div id="report-container"></div>
 						<button type="submit" class="blue-button">Submit Report</button>
 					</form>
@@ -354,9 +357,6 @@
 			</div>
 		</div>
 
-
-
-
 		<!-- Test Page -->
 		<!-- TODO: Take this out later. -->
 		<div data-role="page" id="test" class="stripey-background">
@@ -367,17 +367,68 @@
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
 			<div data-role="main" class="ui-content">
-					<div id="fontTest">Hello World</div>
-					<div class="ui-field-contain">
-					  <fieldset data-role="controlgroup">
-					    <legend>Agree to the terms:</legend>
-					    <input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom">
-					    <label for="checkbox-2">I agree</label>
-					  </fieldset>
-					</div>
+				<div id="test-container" class="medium-pic-container">
+					<img class="center" id="test-pic-cropped" src="Canyon Background.jpg">
+					<!-- style="width: 400px; height: 300px; margin: -75px 0 0 -100px;"  -->
 				</div>
+				<a class="ui-btn medium-button blue-button center" href="#test-popup" data-rel="popup">Show Pic</a>
+
+				<!-- Crop Photo popup -->
+				<div data-role="popup" id="test-popup" class="popup">
+					<img id="test-pic" src="Canyon Background.jpg" />
+					<!-- width="600px" height="400px" -->
+					<btton onclick="closePopup('test-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
+				</div>
+
 			</div>
 		</div>
+
+
+		<!-- Test Page -->
+		<!-- TODO: Take this out later. -->
+		<div data-role="page" id="test2" class="stripey-background">
+			
+			<div data-role="header" class="header invisible" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<h1>BikeNab</h1>
+				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
+				<a href="#home" data-icon="home" data-theme="b">Home</a>
+			</div>
+			<div data-role="main" class="ui-content">
+				HELLO WORLD!
+				<div id="plzWork"></div>
+				<form>
+					<div id="dropin-container"></div>
+				</form>
+				<script type="text/javascript" src="cordova.js"></script>
+				<script src="https://js.braintreegateway.com/js/braintree-2.30.0.min.js"></script><script>
+
+				$("#plzWork").html("First showing up!");
+
+				$( document ).ready(function() {
+
+					var clientToken = "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJiZTM0NmY1M2JlMTg4ODM0ZWE4YzMwM2Q1YWU1NzIxNjQ3ZTM1ZGNjOWNiNWY1NGYxZWZiZmRjMjZjMzNiYTYzfGNyZWF0ZWRfYXQ9MjAxNy0wMi0wN1QwMDowMDo0OS44MDE3NzM1MjArMDAwMFx1MDAyNm1lcmNoYW50X2lkPTM0OHBrOWNnZjNiZ3l3MmJcdTAwMjZwdWJsaWNfa2V5PTJuMjQ3ZHY4OWJxOXZtcHIiLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvMzQ4cGs5Y2dmM2JneXcyYi9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJjaGFsbGVuZ2VzIjpbXSwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwiY2xpZW50QXBpVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzLzM0OHBrOWNnZjNiZ3l3MmIvY2xpZW50X2FwaSIsImFzc2V0c1VybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXV0aFVybCI6Imh0dHBzOi8vYXV0aC52ZW5tby5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwiYW5hbHl0aWNzIjp7InVybCI6Imh0dHBzOi8vY2xpZW50LWFuYWx5dGljcy5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tLzM0OHBrOWNnZjNiZ3l3MmIifSwidGhyZWVEU2VjdXJlRW5hYmxlZCI6dHJ1ZSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImRpc3BsYXlOYW1lIjoiQWNtZSBXaWRnZXRzLCBMdGQuIChTYW5kYm94KSIsImNsaWVudElkIjpudWxsLCJwcml2YWN5VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3BwIiwidXNlckFncmVlbWVudFVybCI6Imh0dHA6Ly9leGFtcGxlLmNvbS90b3MiLCJiYXNlVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhc3NldHNVcmwiOiJodHRwczovL2NoZWNrb3V0LnBheXBhbC5jb20iLCJkaXJlY3RCYXNlVXJsIjpudWxsLCJhbGxvd0h0dHAiOnRydWUsImVudmlyb25tZW50Tm9OZXR3b3JrIjp0cnVlLCJlbnZpcm9ubWVudCI6Im9mZmxpbmUiLCJ1bnZldHRlZE1lcmNoYW50IjpmYWxzZSwiYnJhaW50cmVlQ2xpZW50SWQiOiJtYXN0ZXJjbGllbnQzIiwiYmlsbGluZ0FncmVlbWVudHNFbmFibGVkIjp0cnVlLCJtZXJjaGFudEFjY291bnRJZCI6ImFjbWV3aWRnZXRzbHRkc2FuZGJveCIsImN1cnJlbmN5SXNvQ29kZSI6IlVTRCJ9LCJjb2luYmFzZUVuYWJsZWQiOmZhbHNlLCJtZXJjaGFudElkIjoiMzQ4cGs5Y2dmM2JneXcyYiIsInZlbm1vIjoib2ZmIn0=";
+
+					braintree.setup(clientToken, 'dropin', {
+						container: 'dropin-container',
+						  paypal: {
+						    singleUse: true,
+						    amount: 10.00,
+						    currency: 'USD'
+						  }
+					});
+					$("#plzWork").html("hi: ", braintree == null);
+					
+
+				});
+			
+				
+			</script>
+
+			</div>
+		</div>
+
+
+
 
 
 		<!-- Reports -->
@@ -435,28 +486,6 @@
 		<!-- Hidden page containing elements that pop up in various pages -->
 		<div data-role="page" id="hidden">
 
-
-			<!--Create Account Form-->
-			<!--Used in #create-account and #le-create-account -->
-			<div class="create-account-form">
-				
-					<h1 class="center">Create Account</h1>
-					<!-- Text Input Form Fields (These will be dynamically replaced with styled input fields)-->
-					<div class="text-input" value="''" name="username" txt="Username:"></div>
-					<div class="text-input" value="''" name="password1" txt="Password:"></div>
-					<div class="text-input" value="''" name="password2" txt="Confirm Password:"></div>
-					<br>
-					Please read the BikeNab <a onclick="showTerms()" href="#" data-ajax=false>Terms of Service</a>.
-					<fieldset data-role="controlgroup">
-						<label for="terms">I agree to the Terms of Service.</label>
-						<input type="checkbox" name="terms" id="terms" value="red">
-						<div id="clicked"></div>
-					</fieldset>
-					<br>
-			</div>
-
-
-
 			<!--Mobile header-->
 			<div class="mobile-header">
 				<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
@@ -465,7 +494,7 @@
 
 
 			<!-- Browser header -->
- 			<div class="browser-header">
+			<div class="browser-header">
 				<div data-role="navbar" id="header-container">
 				</div>
 			</div>

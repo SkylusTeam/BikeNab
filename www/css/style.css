@@ -34,7 +34,7 @@
   background-color: #E0E2F0;
   color: #254ea2;
   border: none;
-  margin: 0px; }
+  margin: 5px 0px; }
 #login #top-buttons button {
   margin: 0px;
   padding: 8px;
@@ -183,6 +183,12 @@
 #body .medium-pic {
   width: 250px;
   height: 141px; }
+#body .medium-pic-container {
+  display: block;
+  overflow: hidden;
+  width: 250px;
+  height: 141px;
+  margin: auto; }
 #body .small-pic {
   width: 249px;
   height: 140px; }
@@ -222,7 +228,12 @@
 
 #body .pw-popup {
   text-decoration: none;
-  color: inherit; }
+  color: inherit;
+  background: none;
+  margin-top: 10px;
+  margin: 0px;
+  padding: 0px;
+  border: none; }
 
 .popup {
   padding: 15px; }
@@ -280,5 +291,25 @@ form .error {
 
 .ui-page {
   background-color: transparent; }
+
+#reports .stripey {
+  margin: 0px !important; }
+#reports .ui-content {
+  margin: 0px;
+  border: none;
+  margin-top: 0px !important;
+  top: -10px !important; }
+
+.ui-content {
+  border: none !important; }
+
+.stripey-background {
+  margin: 0px; }
+
+body {
+  background-color: #E0E2F0 !important; }
+
+#test-popup {
+  background-color: green; }
 
 /*# sourceMappingURL=style.css.map */

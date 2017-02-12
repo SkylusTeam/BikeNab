@@ -21,4 +21,18 @@
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="blackopaque" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.6.1" />
+    <engine name="ios" spec="~4.3.1" />
+    <platform name="android">
+        <icon density="xxxdpi" src="www/img/android-icon-192x192.png" />
+        <icon density="xxhdpi" src="www/img/android-icon-144x144.png" />
+        <icon density="xhpi" src="www/img/android-icon-96x96.png" />
+        <icon density="hdpi" src="www/img/android-icon-72x72.png" />
+        <icon density="mdpi" src="www/img/android-icon-48x48.png" />
+        <icon density="lhdpi" src="www/img/android-icon-36x36.png" />
+    </platform>
+    <platform>
+        <icon density="ldpi" height="180" src="www/img/apple-icon-180x180.png" width="180" />
+    </platform>
+    <icon src="icon.png" />
+    <engine name="android" spec="~6.0.0" />
 </widget>

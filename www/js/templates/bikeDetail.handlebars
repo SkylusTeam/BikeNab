@@ -5,29 +5,29 @@
 		<li data-icon="false">
 			<font style="white-space:normal" >
 				<table>
-					<tr>
+					<tr class="{{no serial 'hidden'}}">
 						<td><b>Serial Number:</b></td>
 						<td>{{serial}}</td>
 					</tr>
-					<tr>
-						<td><b>Make:</b></td>
+					<tr class="{{no make 'hidden'}}">
+						<td><b>Make:</b></td> 
 						<td>{{make}}</td>
 					</tr>
-					<tr>
+					<tr class="{{no model 'hidden'}}">
 						<td><b>Model:</b></td>
 						<td>{{model}}</td>
 					</tr>
-					<tr>
+					<tr class="{{no year 'hidden'}}">
 						<td><b>Year:</b></td>
 						<td>{{year}}</td>
 					</tr>
-					<tr>
+					<tr class="{{no purchasePlace 'hidden'}}">
 						<td><b>Place of Purchase:</b></td>
 						<td>{{purchasePlace}}</td>
 					</tr>
 				</table>
 				<br>
-				<div>{{otherInfo}}</div>
+				<div class="{{no otherInfo 'hidden'}}">{{otherInfo}}</div>
 			</font>
 		</li>
 	</ul>
@@ -40,8 +40,8 @@
 		<img class="medium-pic five-mar" src="img/bike2.jpg">
 	</div>
 
-	<h2 class="{{#unless mine}}hidden{{/unless}}">Options</h2>
+	<h2 class="{{no mine 'hidden'}}">Options</h2>
 	<button class="blue-button {{#unless mine}}hidden{{/unless}}" onclick="goSomewhere('#edit-bike-info')">Edit Bike Info</button>
-	<button class="blue-button {{#unless mine}}hidden{{/unless}}" onclick="toReport('{{serial}}')">Report Bike Missing/Stolen</button>
-	<button class="blue-button {{#unless mine}}hidden{{/unless}}" onclick="toUnregister('{{serial}}','{{model}}')">Transfer/Unregister</button>
+	<button class="blue-button {{no mine 'hidden'}}" onclick="toReport('{{serial}}')">Report Bike Missing/Stolen</button>
+	<button class="blue-button {{no mine 'hidden'}}" onclick="toUnregister('{{serial}}','{{model}}')">Transfer/Unregister</button>
 </div>

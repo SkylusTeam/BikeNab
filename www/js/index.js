@@ -37,7 +37,7 @@
 let testUser = '{' +
 '"profile": {' +
 '	"name": "myname",' +
-'	"email": "myemail",' +
+ '	"email": "myemail",' +
 '	"backupEmail": "mybackupemail",' +
 '	"birthdate": "mybirthdate",' +
 '	"address": "myaddress",' +
@@ -53,7 +53,7 @@ let testUser = '{' +
 '		"purchasePlace": "mypurchasePlace", '+
 '		"value": "myValue", '  +
 '		"otherInfo": "myOtherInfo", ' +
-'		"status": "Okay"' +
+ '		"status": "Okay"' +
 '	},' +
 '	{' +
 '		"serial": "12321",' +
@@ -75,10 +75,10 @@ let testUser = '{' +
 '		"officerEmail": "myOfficerEmail", ' +
 '		"officerPhone": "myOfficerPhone", ' +
 '		"description": "myDescription", ' +
-'		"status": "Stolen",' +
+ '		"status": "Stolen",' +
 '		"contactOwner": true,' +
 '		"contactPolice": true,' +
-'		"date": "myDate" ' +
+ '		"date": "myDate" ' +
 '	}' +
 '],' +
 '"privacy": {' +
@@ -93,7 +93,7 @@ let testUser = '{' +
 let testCop = '{' +
 '"profile": {' +
 '	"name": "myname",' +
-'	"email": "myEmail@gmail.com",' +
+ '	"email": "myEmail@gmail.com",' +
 '	"department": "myDept",' +
 '	"zip": "myZip",' +
 '	"workEmail": "myWorkEmail",' +
@@ -138,17 +138,6 @@ let testCop = '{' +
 
 var normalData = JSON.parse(testUser);
 var policeData = JSON.parse(testCop);
-
-// var imageData = file_get_contents("img/canyon.jpg");
-// imageData = base64_encode(imagedata);
-// console.log("image data");
-// console.log(imageData);
-// for (let i = 0; i < normalData.bikes.length; i++) {
-// 	normalData.bikes[i].image = imageData;
-// }
-// for (let i = 0; i < policeData.bikes.length; i++) {
-// 	policeData.bikes[i].image = imageData;
-// }
 
 var userData = normalData;
 
@@ -214,8 +203,16 @@ function addRepeatedElements() {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-	console.log("")
 	addMenu(isApp());
+	braintreeStuff();
+}
+
+
+function braintreeStuff() {
+	console.log("brintree starting")
+	braintree.setup('CLIENT-TOKEN-FROM-SERVER', 'dropin', {
+		container: 'dropin-container'
+	});
 }
 
 
@@ -301,6 +298,8 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 			return reachedSettings();
 		case 'le-create-account':
 			return reachedLeCreateAccount();
+		case 'create-account':
+			return reachedCreateAccount();
 		case 'le-profile':
 			return reachedLeProfile();
 		case 'home':
@@ -318,6 +317,8 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 
 function insertTemplate(data, templateName, containerID) {
 	let template = Handlebars.templates[templateName];
+	console.log("here's the template! " + containerID);
+	console.log($(containerID).html());
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
@@ -337,7 +338,6 @@ function reachedHome() {
 function reachedBikeDetail() {
 	let currBike = null;
 	if (userData.police) {
-		console.log("first case");
 		//TODO: Decide on the best place to save the bike object we get below.
 		// Inside the report?
 		// Lookup?
@@ -356,12 +356,10 @@ function reachedBikeDetail() {
 		if (userData.bikes) {
 			for (let bike of userData.bikes) {
 				if (bike.serial === currBike.serial) {
-					console.log("my bike!!!!!!!!!!!!!!!!!111");
 					currBike.mine = true;
 				}
 			}
 		}
-		console.log("got it");
 		insertTemplate(currBike, "bikeDetail", "#bike-detail-container");
 	}
 }
@@ -428,9 +426,9 @@ function reachedEditReport() {
 }
 
 function reachedUnregister() {
-	if (sessionStorage.serial && sessionStorage.model) {
-		insertTemplate({serial: sessionStorage.serial, model:sessionStorage.model}, "unregister", "#unregister-container");
-	}
+	console.log("reached unregister: " + sessionStorage.model);
+	console.log(sessionStorage.model === "");
+	insertTemplate({serial: sessionStorage.serial , model:sessionStorage.model}, "unregister", "#unregister-container");
 }
 
 function reachedProfile() {
@@ -440,13 +438,25 @@ function reachedProfile() {
 }
 
 function reachedMyBikes() {
-	insertTemplate(userData, "myBikes", "#my-bikes-container");
+	var user = firebase.auth().currentUser;
+	console.log('reached my bikes')
+
+	if (user) {
+		var userId = user.uid;
+		bikeDict = myBikes(userId);
+		console.log('bike dict below)');
+		console.log(bikeDict);
+		console.log(userData);
+		insertTemplate(bikeDict, "myBikes", "#my-bikes-container");
+		} else {
+			insertTemplate(userData, "myBikes", "#my-bikes-container");
+		}
 }
 
 function reachedLookup() {
 	//TODO: When we're actually searching, this won't be the user's own data.
 	// It will be the bike who's searial number matches
-	const privacy = getPrivacySetting(normalData.bikes[1], normalData.privacy); //TODO: Use the other person's
+	const privacy = getPrivacySetting(normalData.bikes[0], normalData.privacy); //TODO: Use the other person's
 	if (privacy === -1) {
 		insertTemplate(null, "lookup", "#lookup-container");
 	} else {
@@ -464,11 +474,16 @@ function reachedSettings() {
 }
 
 function reachedLeCreateAccount() {
+	insertTemplate(null, "createAccount", "#le-create-account-container");
 	insertTemplate(null, "lePersonal", "#le-personal-create-container");
 }
 
 function reachedLeProfile() {
 	insertTemplate(userData.profile, "lePersonal", "#le-personal-profile-container");
+}
+
+function reachedCreateAccount() {
+	insertTemplate(null, "createAccount", "#create-account-container");
 }
 
 
@@ -498,7 +513,7 @@ function toBikeDetail(serial) {
 	if(typeof(Storage) != "undefined") {
 		sessionStorage.serial=serial;
 	} //TODO: Where should we store LE data?
-	goSomewhere("#bike-detail");
+	goSomewhere("#bike-detail/"+serial);
 }
 
 function toReport(serial) {
@@ -547,6 +562,33 @@ Handlebars.registerHelper('IF', function(var1, operator, var2, options) {
 })
 
 
+Handlebars.registerHelper('no', function(condition, text) {
+	if (condition === undefined || condition === "") {
+		return text;
+	} else {
+		return;
+	}
+});
+
+
+Handlebars.registerHelper('exists', function(condition, text) {
+	if (condition !== undefined || condition === "") {
+		return;
+	} else {
+		return text;
+	}
+});
+
+
+// Handlebars.registerHelper('exists', function(condition, text) {
+// 	if (condition !== undefined) {
+// 		return;
+// 	} else {
+// 		return text;
+// 	}
+// });
+
+
 //Converts a word to all lowercase
 Handlebars.registerHelper('lowercase', function(word) {
 	return word.toLowerCase();
@@ -555,8 +597,9 @@ Handlebars.registerHelper('lowercase', function(word) {
 
 //Makes the first letter of the word capital
 Handlebars.registerHelper('capitalize', function(word) {
-	console.log("In capitalize function");
-	console.log(word);
+	if (!word) {
+		return "";
+	}
 	return word.charAt(0).toUpperCase() + word.slice(1);
 });
 
@@ -607,6 +650,7 @@ function showTerms() {
 //		b) Owner's listed privacy settings
 //		c) Bike's status (stolen or okay)
 function getPrivacySetting(bike, privacy) {
+	console.log(bike);
 	const stolen = (bike.status === "Missing" || bike.status === "Stolen");
 	if(stolen) {
 		if (userData.police) {
@@ -635,7 +679,8 @@ function isApp() {
 	//Taken here: //http://damien.antipa.at/blog/2014/02/08/3-ways-to-detect-that-your-application-is-running-in-cordova-slash-phonegap/
 	//This method differenetiates between apps & browsers (so mobile & desktop browsers count as the same)
 	//Useful for menus (deciding whether or not we want a back button)
-	return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+	let hi = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+	return hi;
 }
 
 
@@ -656,7 +701,292 @@ function testSubmit() {
 	return false;
 } 
 
+function testCreate() {
+	console.log("hi");
+	//console.log($("#serial-number").val());
+	//database.ref('meow').set({serial: $("#serial-number").val()	});
+	var email = $('#email').val();
+    var password = $('#password1').val();
+    var password2 = $('#password2').val();
+    console.log(email);
+    console.log(password);
+    /*
+      if (email.length < 4) {
+        alert('Please enter an email address.');
+        return;
+      }
+      */
+      if (password != password2) {
+        alert('Passwords do not match');
+        return;
+      }
+      /*
+      if (password.length < 4) {
+        alert('Please enter a password.');
+        return;
+      }
+      */
+      // Sign in with email and pass.
+      // [START createwithemail]
+      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+      });
+      // [END createwithemail]
+	goSomewhere("#home");
+} ;
 
+function signIn() {
+      if (firebase.auth().currentUser) {
+        // [START signout]
+
+      console.log('already logged in?')        // [END signout]
+      } else {
+        var email = $('#loginemail').val();
+        var password = $('#loginpassword').val();
+        if (email.length < 4) {
+          alert('Please enter an email address.');
+          return;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return;
+        }
+        // Sign in with email and pass.
+        // [START authwithemail]
+
+         console.log('attempted sign in')
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+          } else {
+            alert(errorMessage);
+          }
+          if(error){
+          	console.log('error happened');
+          }
+          console.log('fail login');
+          // [END_EXCLUDE]
+        });
+        // [END authwithemail]
+      }
+      console.log('attempted login');
+      var user = firebase.auth().currentUser;
+      setTimeout(function(){console.log(user.email);}, 5000);
+      
+    };
+
+function registerBike(){
+	var serial = $('#serial-number').val();
+    var make = $('#bike-make').val();
+    var model = $('#bike-model').val();
+    var year = $('#bike-year').val();
+    var place = $('#bike-purchase-place').val();
+    var cost = $('#bike-cost').val();
+    var info = $('#additional-info').val();
+    
+    var user = firebase.auth().currentUser;
+	if (user) {
+	// User is signed in.
+		
+		if(user.bikes) {
+			console.log('bikee');
+			user.updateProfile({
+			    bikes: user.bikes + ", " + serial+"mayo",
+			    displayName: 'changed by register bike'
+			}).then(function() {
+			    console.log('success prof');
+			}, function(error) {
+			    console.log('fail prof');
+			});
+		} else {
+			console.log('no bikee');
+			user.updateProfile({
+			    bikes: serial + 'salted',
+			    displayName: 'changed by register bike salted'
+			}).then(function() {
+			    console.log('success prof2');
+			}, function(error) {
+			    console.log('fail prof2');
+			});
+		}
+
+		firebase.database().ref('bikes/' + serial).set({
+			make: make,
+			model: model,
+			otherInfo: info,
+			purchasePlace: place,
+			serial:serial,
+			status: "okay",
+			value: cost,
+			year: year
+			}).then(function() {
+			    console.log('success bike1');
+			}, function(error) {
+			    console.log('fail bike1');
+			});
+		var userId = user.uid;
+		firebase.database().ref('users/' + userId).child("bikes").push({
+		    serial:serial
+		  });
+	} else {
+	// No user is signed in.
+	console.log("no user");
+	}
+}
+
+function updateProfile(){
+	console.log('update profile');
+	//This relies on the fields being prefilled with original values, otherwise it could delete everything
+	var contact = $('#contact-name').val();
+    var backupEmail = $('#backupEmail').val(); //TODO convert to dashed style?
+    var birthdate = $('#birthdate').val();
+    var address = $('#address').val();
+    var cell = $('#cell').val();
+    var socialMedia = $('#social-media').val();
+
+    var indStolen = $('#ind-stolen').val();
+    var leNormal = $('#le-normal').val();
+    var leStolen = $('#le-stolen').val();
+    var userId = firebase.auth().currentUser.uid;
+
+    firebase.database().ref('users/' + userId).update({
+		    contact: contact,
+		    backupEmail: backupEmail,
+		    birthdate: birthdate,
+		    address: address,
+		    cell: cell,
+		    socialMedia: socialMedia,
+		    indStolen: indStolen,
+		    leNormal: leNormal,
+		    leStolen: leStolen
+		  });
+
+
+}
+
+function makeReport() {
+//need to change the id's of the fields
+	console.log('report');
+	var reportSerial = $('#report-serial').val();
+	var officerName = $('#officer-name').val();
+	var officerEmail = $('#officer-email').val();
+	var officerPhone = $('#officer-phone').val();
+	var incidentReport = $('#additional-info').val(); //missing stolen may be better as dragdown?
+	console.log("need to handle the buttons");
+	if($('#missing').attr('data-cacheval')=="true") {
+		var level = "missing";
+	} else {
+		var level = "stolen";
+	}
+	var contactme =$('#contact-me').val();
+	var contactle = $('#contact-le').val();
+	var reportData = {
+		reportSerial : reportSerial,
+		officerName : officerName,
+		officerEmail : officerEmail,
+		officerPhone : officerPhone,
+		incidentReport : incidentReport //missing stolen may be better as dragdown?
+		
+	}
+	var reportKey = firebase.database().ref().child('reports').push().key;
+	console.log(reportData);
+	console.log(reportKey);
+	var updates = {};
+	updates['/reports/'+reportKey] = reportData;
+	firebase.database().ref('/bikes/'+reportSerial).update({status:level});
+	 return firebase.database().ref().update(updates);
+}
+
+//http://deepliquid.com/content/Jcrop_Manual.html
+
+function cropBoxSetup(totalWidth) {
+	$('#test-pic').Jcrop({
+		setSelect:   [ 0, 0, 160, 90 ],
+		aspectRatio: 16 / 9,
+		boxWidth: Math.round(totalWidth * .85),
+		onSelect: updatePic
+	},function(){
+		// Use the API to get the real image size
+		var bounds = this.getBounds();
+		boundx = bounds[0];
+		boundy = bounds[1];
+	});
+}
+
+var boundx, boundy
+
+function setUpPhotoCrop() {
+	let totalWidth = $('[data-role="page"]').first().width();
+	$('#test-popup').width(totalWidth * .9);
+	cropBoxSetup(totalWidth);
+}
+
+
+function updatePic(c) {
+	let xsize =  $("#test-container").width();
+	let ysize =  $("#test-container").height();
+	var rx = xsize / c.w;
+	var ry = ysize / c.h;
+	$("#test-pic-cropped").css({
+		width: Math.round(rx * boundx) + 'px',
+		height: Math.round(ry * boundy) + 'px',
+		marginLeft: '-' + Math.round(rx * c.x) + 'px',
+		marginTop: '-' + Math.round(ry * c.y) + 'px'
+	});
+}
+
+function myBikes(userId) {
+	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
+	console.log('bd user');
+	var bikeDict = {bikes:[]};
+	console.log(bikes);
+
+	bikes.on("value", function(snapshot) {
+	   console.log(snapshot.val());
+	   jQuery.each(snapshot.val(), function() {
+			console.log(this.serial) // will stop running to skip "five"
+			var getBike = firebase.database().ref('/bikes/'+this.serial);
+			getBike.on("value", function(theBike) {
+				console.log(theBike.val());
+				bikeDict["bikes"].push( theBike.val());
+			});
+		});
+	}, function (error) {
+	   console.log("Error: " + error.code);
+	});
+	return bikeDict;
+}
+
+
+jQuery(function($) {
+	setUpPhotoCrop();
+});
+
+
+
+function closePopup(popup) {
+	$("#" + popup).popup("close");
+}
+
+
+$( window ).resize(function() {
+	//Anything window-size-dependent changes here!
+	setUpPhotoCrop();
+});
 
 
 
