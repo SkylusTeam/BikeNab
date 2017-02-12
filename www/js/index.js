@@ -668,9 +668,6 @@ function isApp() {
 	//This method differenetiates between apps & browsers (so mobile & desktop browsers count as the same)
 	//Useful for menus (deciding whether or not we want a back button)
 	let hi = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-	if (hi) {
-		alert("hi we're in trouble");
-	}
 	return hi;
 }
 
