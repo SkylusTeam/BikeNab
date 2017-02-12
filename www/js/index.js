@@ -439,27 +439,11 @@ function reachedProfile() {
 
 function reachedMyBikes() {
 	var user = firebase.auth().currentUser;
-	console.log('reached bike detail')
+	console.log('reached my bikes')
 
 	if (user) {
 		var userId = user.uid;
-		var bikes = firebase.database().ref('/users/' + userId+'/bikes');
-		console.log('bd user');
-		var bikeDict = {bikes:[]};
-
-		bikes.on("value", function(snapshot) {
-		   console.log(snapshot.val());
-		   jQuery.each(snapshot.val(), function() {
-				console.log(this.serial) // will stop running to skip "five"
-				var getBike = firebase.database().ref('/bikes/'+this.serial);
-				getBike.on("value", function(theBike) {
-					console.log(theBike.val());
-					bikeDict["bikes"].push( theBike.val());
-				});
-			});
-		}, function (error) {
-		   console.log("Error: " + error.code);
-		});
+		bikeDict = myBikes(userId);
 		console.log('bike dict below)');
 		console.log(bikeDict);
 		console.log(userData);
@@ -529,7 +513,7 @@ function toBikeDetail(serial) {
 	if(typeof(Storage) != "undefined") {
 		sessionStorage.serial=serial;
 	} //TODO: Where should we store LE data?
-	goSomewhere("#bike-detail");
+	goSomewhere("#bike-detail/"+serial);
 }
 
 function toReport(serial) {
@@ -906,7 +890,11 @@ function makeReport() {
 	var officerPhone = $('#officer-phone').val();
 	var incidentReport = $('#additional-info').val(); //missing stolen may be better as dragdown?
 	console.log("need to handle the buttons");
-	var level = $('#level').val();
+	if($('#missing').attr('data-cacheval')=="true") {
+		var level = "missing";
+	} else {
+		var level = "stolen";
+	}
 	var contactme =$('#contact-me').val();
 	var contactle = $('#contact-le').val();
 	var reportData = {
@@ -922,6 +910,7 @@ function makeReport() {
 	console.log(reportKey);
 	var updates = {};
 	updates['/reports/'+reportKey] = reportData;
+	firebase.database().ref('/bikes/'+reportSerial).update({status:level});
 	 return firebase.database().ref().update(updates);
 }
 
@@ -963,7 +952,27 @@ function updatePic(c) {
 	});
 }
 
+function myBikes(userId) {
+	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
+	console.log('bd user');
+	var bikeDict = {bikes:[]};
+	console.log(bikes);
 
+	bikes.on("value", function(snapshot) {
+	   console.log(snapshot.val());
+	   jQuery.each(snapshot.val(), function() {
+			console.log(this.serial) // will stop running to skip "five"
+			var getBike = firebase.database().ref('/bikes/'+this.serial);
+			getBike.on("value", function(theBike) {
+				console.log(theBike.val());
+				bikeDict["bikes"].push( theBike.val());
+			});
+		});
+	}, function (error) {
+	   console.log("Error: " + error.code);
+	});
+	return bikeDict;
+}
 
 
 jQuery(function($) {
