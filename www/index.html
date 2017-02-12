@@ -74,10 +74,10 @@
 					<div id="bikenab">BIKENAB!!!!</div>
 					<div id="register">Register. Report. <b>Recover.</b></div>
 					<form onSubmit="return false;">
-						<input class="login-input" type="email" name="email" placeholder="Log In"/>
-						<input class="login-input" type="password" name="password" placeholder="Password"/>	
+						<input class="login-input" type="email" id="loginemail" placeholder="Log In"/>
+						<input class="login-input" type="password" id="loginpassword" placeholder="Password"/>	
 					</form>
-					<button class="login-input blue-button" onclick="goSomewhere('#test2')">Log In</button>
+					<button class="login-input blue-button" onclick="signIn(); goSomewhere('#home')">Log In</button>
 				</div>
 				<!-- Bottom Buttons -->
 				<div id="bottom-buttons" data-role="controlgroup" data-type="horizontal" class="center">
@@ -166,7 +166,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Register Bike</h1>
-					<form onsubmit="return testSubmit();">
+					<form onsubmit="return registerBike();">
 						<div id="register-bike-info-container"></div>
 						<!-- Pyment Options-->
 						<br>
@@ -293,7 +293,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Report Bike!!!</h1>
-					<form onSubmit="return false;">
+					<form onSubmit="makeReport()">
 						<div id="report-container"></div>
 						<button type="submit" class="blue-button">Submit Report</button>
 					</form>

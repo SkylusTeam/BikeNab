@@ -139,7 +139,7 @@ let testCop = '{' +
 var normalData = JSON.parse(testUser);
 var policeData = JSON.parse(testCop);
 
-var userData = policeData;
+var userData = normalData;
 
 
 
@@ -438,7 +438,19 @@ function reachedProfile() {
 }
 
 function reachedMyBikes() {
-	insertTemplate(userData, "myBikes", "#my-bikes-container");
+	var user = firebase.auth().currentUser;
+	console.log('reached my bikes')
+
+	if (user) {
+		var userId = user.uid;
+		bikeDict = myBikes(userId);
+		console.log('bike dict below)');
+		console.log(bikeDict);
+		console.log(userData);
+		insertTemplate(bikeDict, "myBikes", "#my-bikes-container");
+		} else {
+			insertTemplate(userData, "myBikes", "#my-bikes-container");
+		}
 }
 
 function reachedLookup() {
@@ -501,7 +513,7 @@ function toBikeDetail(serial) {
 	if(typeof(Storage) != "undefined") {
 		sessionStorage.serial=serial;
 	} //TODO: Where should we store LE data?
-	goSomewhere("#bike-detail");
+	goSomewhere("#bike-detail/"+serial);
 }
 
 function toReport(serial) {
@@ -693,7 +705,7 @@ function testCreate() {
 	console.log("hi");
 	//console.log($("#serial-number").val());
 	//database.ref('meow').set({serial: $("#serial-number").val()	});
-	var email = $('#username').val();
+	var email = $('#email').val();
     var password = $('#password1').val();
     var password2 = $('#password2').val();
     console.log(email);
@@ -733,9 +745,171 @@ function testCreate() {
 	goSomewhere("#home");
 } ;
 
+function signIn() {
+      if (firebase.auth().currentUser) {
+        // [START signout]
+
+      console.log('already logged in?')        // [END signout]
+      } else {
+        var email = $('#loginemail').val();
+        var password = $('#loginpassword').val();
+        if (email.length < 4) {
+          alert('Please enter an email address.');
+          return;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return;
+        }
+        // Sign in with email and pass.
+        // [START authwithemail]
+
+         console.log('attempted sign in')
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+          } else {
+            alert(errorMessage);
+          }
+          if(error){
+          	console.log('error happened');
+          }
+          console.log('fail login');
+          // [END_EXCLUDE]
+        });
+        // [END authwithemail]
+      }
+      console.log('attempted login');
+      var user = firebase.auth().currentUser;
+      setTimeout(function(){console.log(user.email);}, 5000);
+      
+    };
+
+function registerBike(){
+	var serial = $('#serial-number').val();
+    var make = $('#bike-make').val();
+    var model = $('#bike-model').val();
+    var year = $('#bike-year').val();
+    var place = $('#bike-purchase-place').val();
+    var cost = $('#bike-cost').val();
+    var info = $('#additional-info').val();
+    
+    var user = firebase.auth().currentUser;
+	if (user) {
+	// User is signed in.
+		
+		if(user.bikes) {
+			console.log('bikee');
+			user.updateProfile({
+			    bikes: user.bikes + ", " + serial+"mayo",
+			    displayName: 'changed by register bike'
+			}).then(function() {
+			    console.log('success prof');
+			}, function(error) {
+			    console.log('fail prof');
+			});
+		} else {
+			console.log('no bikee');
+			user.updateProfile({
+			    bikes: serial + 'salted',
+			    displayName: 'changed by register bike salted'
+			}).then(function() {
+			    console.log('success prof2');
+			}, function(error) {
+			    console.log('fail prof2');
+			});
+		}
+
+		firebase.database().ref('bikes/' + serial).set({
+			make: make,
+			model: model,
+			otherInfo: info,
+			purchasePlace: place,
+			serial:serial,
+			status: "okay",
+			value: cost,
+			year: year
+			}).then(function() {
+			    console.log('success bike1');
+			}, function(error) {
+			    console.log('fail bike1');
+			});
+		var userId = user.uid;
+		firebase.database().ref('users/' + userId).child("bikes").push({
+		    serial:serial
+		  });
+	} else {
+	// No user is signed in.
+	console.log("no user");
+	}
+}
+
+function updateProfile(){
+	console.log('update profile');
+	//This relies on the fields being prefilled with original values, otherwise it could delete everything
+	var contact = $('#contact-name').val();
+    var backupEmail = $('#backupEmail').val(); //TODO convert to dashed style?
+    var birthdate = $('#birthdate').val();
+    var address = $('#address').val();
+    var cell = $('#cell').val();
+    var socialMedia = $('#social-media').val();
+
+    var indStolen = $('#ind-stolen').val();
+    var leNormal = $('#le-normal').val();
+    var leStolen = $('#le-stolen').val();
+    var userId = firebase.auth().currentUser.uid;
+
+    firebase.database().ref('users/' + userId).update({
+		    contact: contact,
+		    backupEmail: backupEmail,
+		    birthdate: birthdate,
+		    address: address,
+		    cell: cell,
+		    socialMedia: socialMedia,
+		    indStolen: indStolen,
+		    leNormal: leNormal,
+		    leStolen: leStolen
+		  });
 
 
+}
 
+function makeReport() {
+//need to change the id's of the fields
+	console.log('report');
+	var reportSerial = $('#report-serial').val();
+	var officerName = $('#officer-name').val();
+	var officerEmail = $('#officer-email').val();
+	var officerPhone = $('#officer-phone').val();
+	var incidentReport = $('#additional-info').val(); //missing stolen may be better as dragdown?
+	console.log("need to handle the buttons");
+	if($('#missing').attr('data-cacheval')=="true") {
+		var level = "missing";
+	} else {
+		var level = "stolen";
+	}
+	var contactme =$('#contact-me').val();
+	var contactle = $('#contact-le').val();
+	var reportData = {
+		reportSerial : reportSerial,
+		officerName : officerName,
+		officerEmail : officerEmail,
+		officerPhone : officerPhone,
+		incidentReport : incidentReport //missing stolen may be better as dragdown?
+		
+	}
+	var reportKey = firebase.database().ref().child('reports').push().key;
+	console.log(reportData);
+	console.log(reportKey);
+	var updates = {};
+	updates['/reports/'+reportKey] = reportData;
+	firebase.database().ref('/bikes/'+reportSerial).update({status:level});
+	 return firebase.database().ref().update(updates);
+}
 
 //http://deepliquid.com/content/Jcrop_Manual.html
 
@@ -775,7 +949,27 @@ function updatePic(c) {
 	});
 }
 
+function myBikes(userId) {
+	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
+	console.log('bd user');
+	var bikeDict = {bikes:[]};
+	console.log(bikes);
 
+	bikes.on("value", function(snapshot) {
+	   console.log(snapshot.val());
+	   jQuery.each(snapshot.val(), function() {
+			console.log(this.serial) // will stop running to skip "five"
+			var getBike = firebase.database().ref('/bikes/'+this.serial);
+			getBike.on("value", function(theBike) {
+				console.log(theBike.val());
+				bikeDict["bikes"].push( theBike.val());
+			});
+		});
+	}, function (error) {
+	   console.log("Error: " + error.code);
+	});
+	return bikeDict;
+}
 
 
 jQuery(function($) {
@@ -793,7 +987,6 @@ $( window ).resize(function() {
 	//Anything window-size-dependent changes here!
 	setUpPhotoCrop();
 });
-
 
 
 
