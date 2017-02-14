@@ -318,7 +318,7 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 function insertTemplate(data, templateName, containerID) {
 	let template = Handlebars.templates[templateName];
 	console.log("here's the template! " + containerID);
-	console.log($(containerID).html());
+	//console.log($(containerID).html());
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
@@ -336,30 +336,25 @@ function reachedHome() {
 
 
 function reachedBikeDetail() {
-	let currBike = null;
-	if (userData.police) {
-		//TODO: Decide on the best place to save the bike object we get below.
-		// Inside the report?
-		// Lookup?
-		currBike = normalData.bikes[0];
-	} else {
-		let bikesList = userData.bikes;
-		for (let bike of bikesList) {
-			if (bike.serial === sessionStorage.serial) {
-				currBike = bike;
-			}
-		}
-	}
+	
+	var serial = sessionStorage.serial;
+	console.log(serial+ " --- rbd serial");
+	var currBike;
+	var getBike = firebase.database().ref('/bikes/'+serial);
+			getBike.on("value", function(theBike) {
+				console.log(theBike.val());
+				console.log("waited for bike val rbd")
+				currBike = theBike.val();
+			});
+	
+	console.log("should have bikeval rbd")
 	if (currBike) {
 		//If it's your bike, have a parameter that says that
-		currBike.mine = false;
-		if (userData.bikes) {
-			for (let bike of userData.bikes) {
-				if (bike.serial === currBike.serial) {
-					currBike.mine = true;
-				}
-			}
-		}
+		if(serial in mySerials())
+			currBike.mine = false;
+		else
+			currBike.mine = true;
+		
 		insertTemplate(currBike, "bikeDetail", "#bike-detail-container");
 	}
 }
@@ -443,7 +438,7 @@ function reachedMyBikes() {
 
 	if (user) {
 		var userId = user.uid;
-		bikeDict = myBikes(userId);
+		bikeDict = myBikes();
 		console.log('bike dict below)');
 		console.log(bikeDict);
 		console.log(userData);
@@ -512,8 +507,9 @@ function goSomewhere(page, lePage) {
 function toBikeDetail(serial) {
 	if(typeof(Storage) != "undefined") {
 		sessionStorage.serial=serial;
+		console.log("serial passed to bike detail: "+ serial)
 	} //TODO: Where should we store LE data?
-	goSomewhere("#bike-detail/"+serial);
+	goSomewhere("#bike-detail");
 }
 
 function toReport(serial) {
@@ -952,7 +948,9 @@ function updatePic(c) {
 	});
 }
 
-function myBikes(userId) {
+function myBikes() {
+	var user = firebase.auth().currentUser;
+	var userId = user.uid;
 	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
 	console.log('bd user');
 	var bikeDict = {bikes:[]};
@@ -974,6 +972,22 @@ function myBikes(userId) {
 	return bikeDict;
 }
 
+function mySerials() {
+	var user = firebase.auth().currentUser;
+	var userId = user.uid;
+	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
+	var myserials = [];
+	bikes.on("value", function(snapshot) {
+	   console.log(snapshot.val());
+	   jQuery.each(snapshot.val(), function() {
+			console.log(this.serial) 
+			myserials.push(this.serial);
+		});
+	});
+	console.log(myserials)
+	return myserials;
+}
+
 
 jQuery(function($) {
 	setUpPhotoCrop();
@@ -991,7 +1005,19 @@ $( window ).resize(function() {
 	setUpPhotoCrop();
 });
 
-
+function searchSerial() {
+	var searchId = $('#serialSearch').val();
+	console.log(searchId);
+	var bikeDict = {};
+	var getBike = firebase.database().ref('/bikes/'+searchId);
+			getBike.on("value", function(theBike) {
+				console.log(theBike.val());
+				bikeDict["bike"] = ( theBike.val());
+				
+			});
+	console.log(bikeDict);
+	insertTemplate(bikeDict, "lookup", "#lookup-container");
+};
 
 
 //cd into www

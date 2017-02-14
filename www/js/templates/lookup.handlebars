@@ -1,7 +1,8 @@
 <div class="floating-box ui-shadow ui-corner-all">
 	<h1 class="center">Bike Lookup</h1>
 	<br>
-	<input type="search" name="serial-lookup" placeholder="Enter a serial number...">
+	<input id="serialSearch" type="search" name="serial-lookup" placeholder="Enter a serial number...">
+	<button class="blue-button ui-btn ui-shadow ui-corner-all" onclick="searchSerial()">Lookup Serial</button>
 	<h2 class="center" style="color: red">Status: 
 		{{#IF privacy '>=' 0}}{{bike.status}}{{/IF}}
 	</h2>
