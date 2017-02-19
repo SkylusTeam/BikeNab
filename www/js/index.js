@@ -141,6 +141,9 @@ var policeData = JSON.parse(testCop);
 
 var userData = normalData;
 
+var loadedUser;
+var loadedBikes;
+
 
 
   ///////////////////////////////////////
@@ -319,6 +322,7 @@ function insertTemplate(data, templateName, containerID) {
 	let template = Handlebars.templates[templateName];
 	console.log("here's the template! " + containerID);
 	//console.log($(containerID).html());
+	console.log(data);
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
@@ -427,8 +431,11 @@ function reachedUnregister() {
 }
 
 function reachedProfile() {
-	let profileData = userData.profile;
-	Object.assign(profileData, userData.privacy);
+	//let profileData = userData.profile;
+	//Object.assign(profileData, userData.privacy);
+	//console.log(profileData);
+	var profileData = loadedUser;
+	console.log(loadedUser);
 	insertTemplate(profileData, "profile", "#profile-container");
 }
 
@@ -438,7 +445,8 @@ function reachedMyBikes() {
 
 	if (user) {
 		var userId = user.uid;
-		bikeDict = myBikes();
+		//bikeDict = myBikes();
+		bikeDict = loadedBikes;
 		console.log('bike dict below)');
 		console.log(bikeDict);
 		console.log(userData);
@@ -474,6 +482,7 @@ function reachedLeCreateAccount() {
 }
 
 function reachedLeProfile() {
+	console.log(userData.profile)
 	insertTemplate(userData.profile, "lePersonal", "#le-personal-profile-container");
 }
 
@@ -743,9 +752,9 @@ function testCreate() {
 
 function signIn() {
       if (firebase.auth().currentUser) {
-        // [START signout]
+        // used to be signout
 
-      console.log('already logged in?')        // [END signout]
+      	console.log('already logged in?')
       } else {
         var email = $('#loginemail').val();
         var password = $('#loginpassword').val();
@@ -781,7 +790,12 @@ function signIn() {
       }
       console.log('attempted login');
       var user = firebase.auth().currentUser;
-      setTimeout(function(){console.log(user.email);}, 5000);
+      
+      setTimeout(function(){
+      	console.log(user.email);
+      	loadedUser = initProfile();
+      	loadedBikes = myBikes();
+      }, 1000);
       
     };
 
@@ -837,7 +851,7 @@ function registerBike(){
 		var userId = user.uid;
 		firebase.database().ref('users/' + userId).child("bikes").push({
 		    serial:serial
-		  });
+		  }).then(function() {loadedBikes = myBikes();});
 	} else {
 	// No user is signed in.
 	console.log("no user");
@@ -860,16 +874,16 @@ function updateProfile(){
     var userId = firebase.auth().currentUser.uid;
 
     firebase.database().ref('users/' + userId).update({
-		    contact: contact,
+		    name: contact,
 		    backupEmail: backupEmail,
 		    birthdate: birthdate,
 		    address: address,
-		    cell: cell,
+		    cellphone: cell,
 		    socialMedia: socialMedia,
 		    indStolen: indStolen,
 		    leNormal: leNormal,
 		    leStolen: leStolen
-		  });
+		  }).then(function() {loadedUser = initProfile()});
 
 
 }
@@ -985,6 +999,21 @@ function mySerials() {
 	return myserials;
 }
 
+function initProfile() {
+	var user = firebase.auth().currentUser;
+	var userId = user.uid;
+	var prof = firebase.database().ref('/users/' + userId)
+
+	var retProf;
+	prof.on("value", function(snapshot) {
+		console.log('snapshotting');
+	   	console.log(snapshot.val());
+	   	if(snapshot.val()) {
+	   		loadedUser = snapshot.val();
+		}
+
+	});
+}
 
 jQuery(function($) {
 	setUpPhotoCrop();
