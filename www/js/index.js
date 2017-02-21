@@ -148,10 +148,24 @@ var userData = normalData;
 ///////////////////////////////////////
 
 
-// When the app first loads, insert templates for repeated elements 
+// When the app first loads, insert templates for repeated elements
 // (such as headers) in the correct locations.
 $( document ).ready(function() {
 	addRepeatedElements();
+
+  $("#please").click( function () {
+    let target = $(this).attr('displayBox');
+    if (isApp()) {
+      alert("two options");
+    } else {
+      alert("file sys")
+    }
+  });
+
+  $( "#please" ).bind( "click", function() {
+      alert("yeah!!!");
+});
+
 });
 
 //TODO: Make sure all of these are relevant still.
@@ -172,7 +186,7 @@ function addRepeatedElements() {
 	// Format floating white box.
 	console.log("repeated elements being added");
 	$(".floating-box").addClass('ui-shadow ui-corner-all');
-	
+
 	// Add background (on big screens you get a stripe, not on mobile)
 	if(!isMobile()) {
 		$(".stripey-background").prepend("<div class='stripey'><div class='ok'><hr><div class='stripe'></div><hr></div></div>");
@@ -204,16 +218,16 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 	addMenu(isApp());
-	braintreeStuff();
+//	braintreeStuff();
 }
 
 
-function braintreeStuff() {
-	console.log("brintree starting")
-	braintree.setup('CLIENT-TOKEN-FROM-SERVER', 'dropin', {
-		container: 'dropin-container'
-	});
-}
+// function braintreeStuff() {
+// 	console.log("brintree starting")
+// 	braintree.setup('CLIENT-TOKEN-FROM-SERVER', 'dropin', {
+// 		container: 'dropin-container'
+// 	});
+// }
 
 
 //TODO: Make sure this is what it's really doing
@@ -223,6 +237,7 @@ $(document).bind('mobileinit',function(){
 	$.mobile.page.prototype.options.backBtnText = "Previous";
 	$.mobile.page.prototype.options.backBtnTheme = "b";
 });
+
 
 
 
@@ -492,7 +507,7 @@ function reachedCreateAccount() {
  ////		toNewPage FUNCTIONS			////
 ///////////////////////////////////////////
 
-// These functions specify what values you should save into 
+// These functions specify what values you should save into
 // session storage before going to each page
 
 
@@ -537,6 +552,78 @@ function toUnregister(serial, model) {
 	sessionStorage.model = model;
 	goSomewhere('#unregister');
 }
+
+
+///////////////////////////
+
+
+//var id = "please"
+
+function doSomething (id) {
+  if (!isMobile()) {
+    alert("not mobile case");
+    //Only open file system
+    if (!navigator.camera) {
+      alert("Error - camera not supported (browser).");
+    }
+  } else {
+    // Option for either
+    if (!navigator.camera) {
+      alert("Error - camera not supported.");
+    } else {
+
+
+      function testFunc(img) {
+          $("#" + id).attr('src', "data:image/jpeg;base64," + img);
+      }
+
+
+      var options =   {   quality: 50,
+                          destinationType: Camera.DestinationType.DATA_URL, //TODO: Which is best?
+                          sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+                          encodingType: 0     // 0=JPG 1=PNG
+                      };
+      navigator.camera.getPicture(
+        testFunc,
+        onError, options);
+      }
+    }
+  }
+
+
+
+function onError(message) {
+  alert("Uh oh! " + message);
+}
+
+
+
+this.changePicture = function(event) {
+    event.preventDefault();
+    console.log('changePicture');
+    if (!navigator.camera) {
+        app.showAlert("Camera API not supported", "Error");
+        return;
+    }
+    var options =   {   quality: 50,
+                        destinationType: Camera.DestinationType.DATA_URL,
+                        sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+                        encodingType: 0     // 0=JPG 1=PNG
+                    };
+
+    navigator.camera.getPicture(
+        function(imageData) {
+            $('#image').attr('src', "data:image/jpeg;base64," + imageData);
+        },
+        function() {
+            alert('Error taking picture');
+        },
+        options);
+
+    return false;
+};
+
+
 
 
   ///////////////////////////////////////////
@@ -699,7 +786,7 @@ function testSubmit() {
 	goSomewhere("#home");
 
 	return false;
-} 
+}
 
 function testCreate() {
 	console.log("hi");
@@ -786,7 +873,7 @@ function signIn() {
       console.log('attempted login');
       var user = firebase.auth().currentUser;
       setTimeout(function(){console.log(user.email);}, 5000);
-      
+
     };
 
 function registerBike(){
@@ -797,11 +884,11 @@ function registerBike(){
     var place = $('#bike-purchase-place').val();
     var cost = $('#bike-cost').val();
     var info = $('#additional-info').val();
-    
+
     var user = firebase.auth().currentUser;
 	if (user) {
 	// User is signed in.
-		
+
 		if(user.bikes) {
 			console.log('bikee');
 			user.updateProfile({
@@ -900,7 +987,7 @@ function makeReport() {
 		officerEmail : officerEmail,
 		officerPhone : officerPhone,
 		incidentReport : incidentReport //missing stolen may be better as dragdown?
-		
+
 	}
 	var reportKey = firebase.database().ref().child('reports').push().key;
 	console.log(reportData);
@@ -993,4 +1080,3 @@ $( window ).resize(function() {
 
 //cd into www
 //handlebars -m js/templates/> js/templates/templates.js
-
