@@ -559,7 +559,7 @@ function toUnregister(serial, model) {
 
 //var id = "please"
 
-function doSomething (id) {
+function takePhoto (id) {
   if (!isMobile()) {
     alert("not mobile case");
     //Only open file system
@@ -569,7 +569,7 @@ function doSomething (id) {
   } else {
     // Option for either
     if (!navigator.camera) {
-      alert("Error - camera not supported.");
+      alert("Error - camera not supported!");
     } else {
 
 
