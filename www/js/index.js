@@ -143,6 +143,7 @@ var userData = normalData;
 
 var loadedUser;
 var loadedBikes;
+var loadedReports;
 
 
 
@@ -380,7 +381,9 @@ function reachedRegisterBike() {
 
 
 function reachedPastReports() {
-	let data = userData;
+	var data = loadedReports;
+	console.log('past loaded rep');
+	console.log(data)
 	data.reports.forEach(function(report, index, reportArr) {
 		for (bike of data.bikes) {
 			if (bike.serial === report.serial) {
@@ -393,14 +396,19 @@ function reachedPastReports() {
 
 //TODO: Lots of repeat between here and the function above
 function reachedReports() {
-	let data = userData;
-	data.reports.forEach(function(report, index, reportArr) {
+	var data = loadedUser;
+	console.log(loadedReports);
+	data.reports = loadedReports.reports;
+	console.log(' reg loaded rep');
+	console.log(data)	
+	
+	/*data.reports.forEach(function(report, index, reportArr) {
 		for (bike of data.bikes) {
 			if (bike.serial === report.serial) {
 				reportArr[index].bike = bike;
 			}
 		}
-	})
+	}) */
 	insertTemplate(data, "reports", "#reports-container");
 	insertTemplate(userData, "reportABike", "#report-a-bike-container");
 }
@@ -749,7 +757,9 @@ function testCreate() {
       // [END createwithemail]
 	goSomewhere("#home");
 } ;
-
+function signOut() {
+	firebase.auth().signOut().then(function(){goSomewhere('#login');})
+}
 function signIn() {
       if (firebase.auth().currentUser) {
         // used to be signout
@@ -785,19 +795,50 @@ function signIn() {
           }
           console.log('fail login');
           // [END_EXCLUDE]
-        });
-        // [END authwithemail]
-      }
-      console.log('attempted login');
-      var user = firebase.auth().currentUser;
-      
-      setTimeout(function(){
+        }).then(function(){
+      	var user = firebase.auth().currentUser;
       	console.log(user.email);
       	loadedUser = initProfile();
       	loadedBikes = myBikes();
-      }, 1000);
+      	loadedReports = loadReports();
+      	console.log('done loading');
+      });
+        // [END authwithemail]
+      }
+      console.log('attempted login');
+      
+      
+      
       
     };
+
+function loadReports(){
+	var user = firebase.auth().currentUser;
+	var userId = user.uid;
+	var reports = firebase.database().ref('/users/' + userId+'/reports');
+	console.log('lr user');
+	var reportDict = {reports:[]};
+	console.log(reports);
+
+	reports.on("value", function(snapshot) {
+	   console.log(snapshot.val());
+	   jQuery.each(snapshot.val(), function() {
+	   		console.log('getting report');
+			console.log(this.toString()) // will stop running to skip "five"
+			var getReport = firebase.database().ref('/reports/'+this.toString());
+			getReport.on("value", function(theReport) {
+				console.log('report value:')
+				console.log(theReport.val());
+				reportDict["reports"].push( theReport.val());
+			});
+		});
+	}, function (error) {
+	   console.log("Error: " + error.code);
+	});
+	console.log('report dict');
+	console.log(reportDict);
+	return reportDict;
+}
 
 function registerBike(){
 	var serial = $('#serial-number').val();
@@ -890,6 +931,7 @@ function updateProfile(){
 
 function makeReport() {
 //need to change the id's of the fields
+	var user = firebase.auth().currentUser;
 	console.log('report');
 	var reportSerial = $('#report-serial').val();
 	var officerName = $('#officer-name').val();
@@ -905,17 +947,23 @@ function makeReport() {
 	var contactme =$('#contact-me').val();
 	var contactle = $('#contact-le').val();
 	var reportData = {
-		reportSerial : reportSerial,
+		serial : reportSerial,
 		officerName : officerName,
 		officerEmail : officerEmail,
 		officerPhone : officerPhone,
-		incidentReport : incidentReport //missing stolen may be better as dragdown?
-		
-	}
+		incidentReport : incidentReport, //missing stolen may be better as dragdown?
+		incidentNumber : 'fakeincidentnumber',
+		conactOwner : true,
+		date : 'fakedate',
+		reportID : 'fakereportid',
+		status : level
+
+		}
 	var reportKey = firebase.database().ref().child('reports').push().key;
 	console.log(reportData);
 	console.log(reportKey);
 	var updates = {};
+	firebase.database().ref('/users/'+user.uid+'/reports/').push(reportKey);
 	updates['/reports/'+reportKey] = reportData;
 	firebase.database().ref('/bikes/'+reportSerial).update({status:level});
 	 return firebase.database().ref().update(updates);
