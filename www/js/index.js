@@ -184,7 +184,6 @@ function addRepeatedElements() {
 	insertSections();
 
 	// Format floating white box.
-	console.log("repeated elements being added");
 	$(".floating-box").addClass('ui-shadow ui-corner-all');
 
 	// Add background (on big screens you get a stripe, not on mobile)
@@ -322,7 +321,7 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 		case 'le-reports':
 			return reachedLeReports();
 		default:
-			console.log("You'd better do " + data.toPage[0].id);
+			return;
 	}
 });
 
@@ -332,8 +331,6 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 
 function insertTemplate(data, templateName, containerID) {
 	let template = Handlebars.templates[templateName];
-	console.log("here's the template! " + containerID);
-	console.log($(containerID).html());
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
@@ -392,6 +389,7 @@ function reachedEditBikeInfo() {
 
 function reachedRegisterBike() {
 	insertTemplate(null, "bikeInfo", "#register-bike-info-container");
+  $("#bikeOwnerPic").attr('src', 'canyon.jpg');
 }
 
 
@@ -441,8 +439,6 @@ function reachedEditReport() {
 }
 
 function reachedUnregister() {
-	console.log("reached unregister: " + sessionStorage.model);
-	console.log(sessionStorage.model === "");
 	insertTemplate({serial: sessionStorage.serial , model:sessionStorage.model}, "unregister", "#unregister-container");
 }
 
@@ -454,14 +450,10 @@ function reachedProfile() {
 
 function reachedMyBikes() {
 	var user = firebase.auth().currentUser;
-	console.log('reached my bikes')
 
 	if (user) {
 		var userId = user.uid;
 		bikeDict = myBikes(userId);
-		console.log('bike dict below)');
-		console.log(bikeDict);
-		console.log(userData);
 		insertTemplate(bikeDict, "myBikes", "#my-bikes-container");
 		} else {
 			insertTemplate(userData, "myBikes", "#my-bikes-container");
@@ -514,10 +506,8 @@ function reachedCreateAccount() {
 //Switch to the given page of the app
 function goSomewhere(page, lePage) {
 	if (userData.police && lePage) {
-		console.log("First case");
 		$.mobile.pageContainer.pagecontainer("change", lePage, {});
 	} else {
-		console.log("second case");
 		$.mobile.pageContainer.pagecontainer("change", page, {});
 	}
 }
@@ -572,8 +562,7 @@ function takePhoto (id) {
       alert("Error - camera not supported!");
     } else {
 
-
-      function testFunc(img) {
+      function onSuccess(img) {
           $("#" + id).attr('src', "data:image/jpeg;base64," + img);
       }
 
@@ -584,7 +573,7 @@ function takePhoto (id) {
                           encodingType: 0     // 0=JPG 1=PNG
                       };
       navigator.camera.getPicture(
-        testFunc,
+        onSuccess,
         onError, options);
       }
     }
@@ -600,7 +589,6 @@ function onError(message) {
 
 this.changePicture = function(event) {
     event.preventDefault();
-    console.log('changePicture');
     if (!navigator.camera) {
         app.showAlert("Camera API not supported", "Error");
         return;
@@ -737,7 +725,6 @@ function showTerms() {
 //		b) Owner's listed privacy settings
 //		c) Bike's status (stolen or okay)
 function getPrivacySetting(bike, privacy) {
-	console.log(bike);
 	const stolen = (bike.status === "Missing" || bike.status === "Stolen");
 	if(stolen) {
 		if (userData.police) {
@@ -777,8 +764,6 @@ function followUnfollow(reportID, following) {
 
 
 function testSubmit() {
-	console.log("hi");
-	console.log($("#serial-number").val());
 	database.ref('meow').set({
 		serial: $("#serial-number").val()
 	});
@@ -789,14 +774,10 @@ function testSubmit() {
 }
 
 function testCreate() {
-	console.log("hi");
-	//console.log($("#serial-number").val());
 	//database.ref('meow').set({serial: $("#serial-number").val()	});
 	var email = $('#email').val();
     var password = $('#password1').val();
     var password2 = $('#password2').val();
-    console.log(email);
-    console.log(password);
     /*
       if (email.length < 4) {
         alert('Please enter an email address.');
@@ -835,8 +816,7 @@ function testCreate() {
 function signIn() {
       if (firebase.auth().currentUser) {
         // [START signout]
-
-      console.log('already logged in?')        // [END signout]
+        // [END signout]
       } else {
         var email = $('#loginemail').val();
         var password = $('#loginpassword').val();
@@ -851,7 +831,6 @@ function signIn() {
         // Sign in with email and pass.
         // [START authwithemail]
 
-         console.log('attempted sign in')
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
@@ -865,12 +844,10 @@ function signIn() {
           if(error){
           	console.log('error happened');
           }
-          console.log('fail login');
           // [END_EXCLUDE]
         });
         // [END authwithemail]
       }
-      console.log('attempted login');
       var user = firebase.auth().currentUser;
       setTimeout(function(){console.log(user.email);}, 5000);
 
@@ -884,13 +861,17 @@ function registerBike(){
     var place = $('#bike-purchase-place').val();
     var cost = $('#bike-cost').val();
     var info = $('#additional-info').val();
+    var bikeOwnerPic = $('#bikeOwnerPic').attr('src');
+    var bikePic = $('#bikePic').attr('src');
+    var bikeSerialPic = $('#bikeSerialPic').attr('src');
+    var receiptPic = $('#receiptPic').attr('src');
+    var pics = [bikeOwnerPic, bikePic, bikeSerialPic, receiptPic];
 
     var user = firebase.auth().currentUser;
 	if (user) {
 	// User is signed in.
 
 		if(user.bikes) {
-			console.log('bikee');
 			user.updateProfile({
 			    bikes: user.bikes + ", " + serial+"mayo",
 			    displayName: 'changed by register bike'
@@ -900,7 +881,6 @@ function registerBike(){
 			    console.log('fail prof');
 			});
 		} else {
-			console.log('no bikee');
 			user.updateProfile({
 			    bikes: serial + 'salted',
 			    displayName: 'changed by register bike salted'
@@ -910,6 +890,24 @@ function registerBike(){
 			    console.log('fail prof2');
 			});
 		}
+
+    var userId = user.uid;
+
+    console.log("PICS!!!");
+    console.log(pics);
+    console.log($('#receiptPic'));
+    for (var pic of pics) {
+      console.log("PIC IS", pic, "ya");
+      if (pic != undefined) {
+        console.log("TYPE, ", pic);
+        firebase.storage().ref().child("users/" + userId + "/bikes/" + serial).putString(pic, 'base64').then(
+            function(snapshot) {
+              console.log("It's working people!!!");
+              console.log(snapshot);
+            }
+        );
+      }
+    }
 
 		firebase.database().ref('bikes/' + serial).set({
 			make: make,
@@ -925,7 +923,7 @@ function registerBike(){
 			}, function(error) {
 			    console.log('fail bike1');
 			});
-		var userId = user.uid;
+
 		firebase.database().ref('users/' + userId).child("bikes").push({
 		    serial:serial
 		  });
@@ -936,7 +934,6 @@ function registerBike(){
 }
 
 function updateProfile(){
-	console.log('update profile');
 	//This relies on the fields being prefilled with original values, otherwise it could delete everything
 	var contact = $('#contact-name').val();
     var backupEmail = $('#backupEmail').val(); //TODO convert to dashed style?
@@ -967,13 +964,11 @@ function updateProfile(){
 
 function makeReport() {
 //need to change the id's of the fields
-	console.log('report');
 	var reportSerial = $('#report-serial').val();
 	var officerName = $('#officer-name').val();
 	var officerEmail = $('#officer-email').val();
 	var officerPhone = $('#officer-phone').val();
 	var incidentReport = $('#additional-info').val(); //missing stolen may be better as dragdown?
-	console.log("need to handle the buttons");
 	if($('#missing').attr('data-cacheval')=="true") {
 		var level = "missing";
 	} else {
@@ -990,8 +985,6 @@ function makeReport() {
 
 	}
 	var reportKey = firebase.database().ref().child('reports').push().key;
-	console.log(reportData);
-	console.log(reportKey);
 	var updates = {};
 	updates['/reports/'+reportKey] = reportData;
 	firebase.database().ref('/bikes/'+reportSerial).update({status:level});
@@ -1038,17 +1031,12 @@ function updatePic(c) {
 
 function myBikes(userId) {
 	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
-	console.log('bd user');
 	var bikeDict = {bikes:[]};
-	console.log(bikes);
 
 	bikes.on("value", function(snapshot) {
-	   console.log(snapshot.val());
 	   jQuery.each(snapshot.val(), function() {
-			console.log(this.serial) // will stop running to skip "five"
 			var getBike = firebase.database().ref('/bikes/'+this.serial);
 			getBike.on("value", function(theBike) {
-				console.log(theBike.val());
 				bikeDict["bikes"].push( theBike.val());
 			});
 		});

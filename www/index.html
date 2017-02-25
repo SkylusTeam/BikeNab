@@ -70,8 +70,8 @@
 				</div>
 				<!-- Login box -->
 				<div id="login-box" class="ui-shadow ui-corner-all">
-					<img src="img/logo.png">
-					<div id="bikenab">BIKENAB</div>
+					<img src="img/logoCropped.jpg">
+					<!-- <div id="bikenab">BIKENAB</div> -->
 					<div id="register">Register. Report. <b>Recover.</b></div>
 					<form onSubmit="return false;">
 						<input class="login-input" type="email" id="loginemail" placeholder="Log In"/>
@@ -166,7 +166,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Register Bike</h1>
-					<form onsubmit="return false;"><!--return registerBike();"> -->
+					<form onsubmit="return registerBike();">
 						<div id="register-bike-info-container"></div>
 						<!-- Pyment Options-->
 						<br>
@@ -363,19 +363,23 @@
 
 			<div data-role="header" class="header invisible" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
+
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
 			<div data-role="main" class="ui-content">
 				<div id="test-container" class="medium-pic-container">
-					<img class="center" id="test-pic-cropped" src="Canyon Background.jpg">
+					<img class="center" id="test-pic-cropped">
 					<!-- style="width: 400px; height: 300px; margin: -75px 0 0 -100px;"  -->
 				</div>
 				<a class="ui-btn medium-button blue-button center" href="#test-popup" data-rel="popup">Show Pic</a>
+				BEFORE
+				<input type="file" id="files" name="files[]" multiple />
+				AFTER
 
 				<!-- Crop Photo popup -->
 				<div data-role="popup" id="test-popup" class="popup">
-					<img id="test-pic" src="Canyon Background.jpg" />
+					<img id="test-pic" src="canyon.jpg" />
 					<!-- width="600px" height="400px" -->
 					<btton onclick="closePopup('test-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
 				</div>
