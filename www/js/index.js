@@ -28,7 +28,11 @@
 // 	});
 // });
 
-
+// Object.prototype.getName = function() {
+//    var funcNameRegex = /function (.{1,})\(/;
+//    var results = (funcNameRegex).exec((this).constructor.toString());
+//    return (results && results.length > 1) ? results[1] : "";
+// };
 
 
 
@@ -865,7 +869,10 @@ function registerBike(){
     var bikePic = $('#bikePic').attr('src');
     var bikeSerialPic = $('#bikeSerialPic').attr('src');
     var receiptPic = $('#receiptPic').attr('src');
-    var pics = [bikeOwnerPic, bikePic, bikeSerialPic, receiptPic];
+    var pics = [[bikeOwnerPic,"bikeOwnerPic"],
+                [bikePic, "bikePic"],
+                [bikeSerialPic,"bikeSerialPic"],
+                [receiptPic,"receiptPic"]];
 
     var user = firebase.auth().currentUser;
 	if (user) {
@@ -896,11 +903,13 @@ function registerBike(){
     console.log("PICS!!!");
     console.log(pics);
     console.log($('#receiptPic'));
-    for (var pic of pics) {
+    for (var picList of pics) {
+      pic = picList[0]
       console.log("PIC IS", pic, "ya");
+      console.log(Object.prototype.toString.call(pic));
       if (pic != undefined) {
         console.log("TYPE, ", pic);
-        firebase.storage().ref().child("users/" + userId + "/bikes/" + serial).putString(pic, 'base64').then(
+        firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + picList[1]).putString(pic).then(
             function(snapshot) {
               console.log("It's working people!!!");
               console.log(snapshot);
@@ -932,6 +941,7 @@ function registerBike(){
 	console.log("no user");
 	}
 }
+
 
 function updateProfile(){
 	//This relies on the fields being prefilled with original values, otherwise it could delete everything
