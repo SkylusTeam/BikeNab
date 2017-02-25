@@ -455,9 +455,6 @@ function reachedMyBikes() {
 		var userId = user.uid;
 		//bikeDict = myBikes();
 		bikeDict = loadedBikes;
-		console.log('bike dict below)');
-		console.log(bikeDict);
-		console.log(userData);
 		insertTemplate(bikeDict, "myBikes", "#my-bikes-container");
 		} else {
 			insertTemplate(userData, "myBikes", "#my-bikes-container");
@@ -510,6 +507,15 @@ function reachedCreateAccount() {
 
 //Switch to the given page of the app
 function goSomewhere(page, lePage) {
+	if(page=='#home') {
+		if(firebase.auth().currentUser && !loadedBikes) {
+
+      	loadedUser = initProfile();
+      	loadedBikes = myBikes();
+      	loadedReports = loadReports();
+      	console.log('had to reget the loaded info');
+		}
+	}
 	if (userData.police && lePage) {
 		console.log("First case");
 		$.mobile.pageContainer.pagecontainer("change", lePage, {});
@@ -702,18 +708,6 @@ function followUnfollow(reportID, following) {
 }
 
 
-function testSubmit() {
-	console.log("hi");
-	console.log($("#serial-number").val());
-	database.ref('meow').set({
-		serial: $("#serial-number").val()
-	});
-
-	goSomewhere("#home");
-
-	return false;
-} 
-
 function testCreate() {
 	console.log("hi");
 	//console.log($("#serial-number").val());
@@ -763,8 +757,8 @@ function signOut() {
 function signIn() {
       if (firebase.auth().currentUser) {
         // used to be signout
-
-      	console.log('already logged in?')
+        goSomewhere('#home');
+      	console.log('already logged in?, fix this from working')
       } else {
         var email = $('#loginemail').val();
         var password = $('#loginpassword').val();
@@ -802,6 +796,7 @@ function signIn() {
       	loadedBikes = myBikes();
       	loadedReports = loadReports();
       	console.log('done loading');
+      	goSomewhere('#home');
       });
         // [END authwithemail]
       }
@@ -819,22 +814,25 @@ function loadReports(){
 	console.log('lr user');
 	var reportDict = {reports:[]};
 	console.log(reports);
-
-	reports.on("value", function(snapshot) {
-	   console.log(snapshot.val());
-	   jQuery.each(snapshot.val(), function() {
-	   		console.log('getting report');
-			console.log(this.toString()) // will stop running to skip "five"
-			var getReport = firebase.database().ref('/reports/'+this.toString());
-			getReport.on("value", function(theReport) {
-				console.log('report value:')
-				console.log(theReport.val());
-				reportDict["reports"].push( theReport.val());
-			});
+	if (reports) {
+		reports.on("value", function(snapshot) {
+		   console.log(snapshot.val());
+		   if(snapshot.val()) {
+			   jQuery.each(snapshot.val(), function() {
+			   		console.log('getting report');
+					console.log(this.toString()) 
+					var getReport = firebase.database().ref('/reports/'+this.toString());
+					getReport.on("value", function(theReport) {
+						console.log('report value:')
+						console.log(theReport.val());
+						reportDict["reports"].push( theReport.val());
+					});
+				});
+			}
+		}, function (error) {
+		   console.log("Error: " + error.code);
 		});
-	}, function (error) {
-	   console.log("Error: " + error.code);
-	});
+	}
 	console.log('report dict');
 	console.log(reportDict);
 	return reportDict;
@@ -938,23 +936,31 @@ function makeReport() {
 	var officerEmail = $('#officer-email').val();
 	var officerPhone = $('#officer-phone').val();
 	var incidentReport = $('#additional-info').val(); //missing stolen may be better as dragdown?
+	var contactle = false;
+	var contactme = false;
 	console.log("need to handle the buttons");
-	if($('#missing').attr('data-cacheval')=="true") {
-		var level = "missing";
-	} else {
-		var level = "stolen";
-	}
-	var contactme =$('#contact-me').val();
-	var contactle = $('#contact-le').val();
+	$( "input[type=checkbox]:checked" ).each(function() {
+		console.log($(this).val());
+		if("contact-me"==$(this).val())
+			contactme = true;
+		if("contact-police"==$(this).val())
+			contactle = true;
+	} );
+
+	var level = $( "input[type=checkbox]" ) .val();
+	
+	var d = new Date();
+	var seconds = Math.round(d.getTime() / 1000);
 	var reportData = {
 		serial : reportSerial,
 		officerName : officerName,
 		officerEmail : officerEmail,
 		officerPhone : officerPhone,
 		incidentReport : incidentReport, //missing stolen may be better as dragdown?
-		incidentNumber : 'fakeincidentnumber',
-		conactOwner : true,
-		date : 'fakedate',
+		incidentNumber : 'Waiting for an incident number',
+		contactOwner : contactme,
+		contactLaw : contactle,
+		date : seconds,
 		reportID : 'fakereportid',
 		status : level
 
@@ -1014,20 +1020,25 @@ function myBikes() {
 	console.log('bd user');
 	var bikeDict = {bikes:[]};
 	console.log(bikes);
-
-	bikes.on("value", function(snapshot) {
-	   console.log(snapshot.val());
-	   jQuery.each(snapshot.val(), function() {
-			console.log(this.serial) // will stop running to skip "five"
-			var getBike = firebase.database().ref('/bikes/'+this.serial);
-			getBike.on("value", function(theBike) {
-				console.log(theBike.val());
-				bikeDict["bikes"].push( theBike.val());
+	if (bikes) {
+		console.log("in bikes mybikes")
+		bikes.on("value", function(snapshot) {
+			bikeDict = {bikes:[]};
+		    console.log("in on bikes.value if " +snapshot.val());
+		    if (snapshot.val()) {
+		   		jQuery.each(snapshot.val(), function() {
+					console.log("mybikes snapshot val serial: " + this.serial) 
+					var getBike = firebase.database().ref('/bikes/'+this.serial);
+					getBike.once("value", function(theBike) {
+						console.log(theBike.val());
+						bikeDict["bikes"].push( theBike.val());
+				});
 			});
+		}
+		}, function (error) {
+		   console.log("Error: " + error.code);
 		});
-	}, function (error) {
-	   console.log("Error: " + error.code);
-	});
+	}
 	return bikeDict;
 }
 
