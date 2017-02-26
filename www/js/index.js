@@ -511,7 +511,7 @@ function goSomewhere(page, lePage) {
 		if(firebase.auth().currentUser && !loadedBikes) {
 
       	loadedUser = initProfile();
-      	loadedBikes = myBikes();
+      	myBikes();
       	loadedReports = loadReports();
       	console.log('had to reget the loaded info');
 		}
@@ -793,7 +793,7 @@ function signIn() {
       	var user = firebase.auth().currentUser;
       	console.log(user.email);
       	loadedUser = initProfile();
-      	loadedBikes = myBikes();
+      	myBikes();
       	loadedReports = loadReports();
       	console.log('done loading');
       	goSomewhere('#home');
@@ -850,29 +850,7 @@ function registerBike(){
     var user = firebase.auth().currentUser;
 	if (user) {
 	// User is signed in.
-		
-		if(user.bikes) {
-			console.log('bikee');
-			user.updateProfile({
-			    bikes: user.bikes + ", " + serial+"mayo",
-			    displayName: 'changed by register bike'
-			}).then(function() {
-			    console.log('success prof');
-			}, function(error) {
-			    console.log('fail prof');
-			});
-		} else {
-			console.log('no bikee');
-			user.updateProfile({
-			    bikes: serial + 'salted',
-			    displayName: 'changed by register bike salted'
-			}).then(function() {
-			    console.log('success prof2');
-			}, function(error) {
-			    console.log('fail prof2');
-			});
-		}
-
+		//should probably have firebase security check this
 		firebase.database().ref('bikes/' + serial).set({
 			make: make,
 			model: model,
@@ -884,13 +862,15 @@ function registerBike(){
 			year: year
 			}).then(function() {
 			    console.log('success bike1');
+
+				var userId = user.uid;
+			    firebase.database().ref('users/' + userId).child("bikes").push({
+		    		serial:serial
+		  }).then(function() {myBikes();});
 			}, function(error) {
 			    console.log('fail bike1');
 			});
-		var userId = user.uid;
-		firebase.database().ref('users/' + userId).child("bikes").push({
-		    serial:serial
-		  }).then(function() {loadedBikes = myBikes();});
+		
 	} else {
 	// No user is signed in.
 	console.log("no user");
@@ -1035,11 +1015,11 @@ function myBikes() {
 				});
 			});
 		}
+		loadedBikes = bikeDict;
 		}, function (error) {
 		   console.log("Error: " + error.code);
 		});
 	}
-	return bikeDict;
 }
 
 function mySerials() {
@@ -1063,7 +1043,6 @@ function initProfile() {
 	var userId = user.uid;
 	var prof = firebase.database().ref('/users/' + userId)
 
-	var retProf;
 	prof.on("value", function(snapshot) {
 		console.log('snapshotting');
 	   	console.log(snapshot.val());
