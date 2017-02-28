@@ -28,7 +28,11 @@
 // 	});
 // });
 
-
+// Object.prototype.getName = function() {
+//    var funcNameRegex = /function (.{1,})\(/;
+//    var results = (funcNameRegex).exec((this).constructor.toString());
+//    return (results && results.length > 1) ? results[1] : "";
+// };
 
 
 
@@ -152,10 +156,24 @@ var loadedReports;
 ///////////////////////////////////////
 
 
-// When the app first loads, insert templates for repeated elements 
+// When the app first loads, insert templates for repeated elements
 // (such as headers) in the correct locations.
 $( document ).ready(function() {
 	addRepeatedElements();
+
+  $("#please").click( function () {
+    let target = $(this).attr('displayBox');
+    if (isApp()) {
+      alert("two options");
+    } else {
+      alert("file sys")
+    }
+  });
+
+  $( "#please" ).bind( "click", function() {
+      alert("yeah!!!");
+});
+
 });
 
 //TODO: Make sure all of these are relevant still.
@@ -174,9 +192,8 @@ function addRepeatedElements() {
 	insertSections();
 
 	// Format floating white box.
-	console.log("repeated elements being added");
 	$(".floating-box").addClass('ui-shadow ui-corner-all');
-	
+
 	// Add background (on big screens you get a stripe, not on mobile)
 	if(!isMobile()) {
 		$(".stripey-background").prepend("<div class='stripey'><div class='ok'><hr><div class='stripe'></div><hr></div></div>");
@@ -208,16 +225,16 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 	addMenu(isApp());
-	braintreeStuff();
+//	braintreeStuff();
 }
 
 
-function braintreeStuff() {
-	console.log("brintree starting")
-	braintree.setup('CLIENT-TOKEN-FROM-SERVER', 'dropin', {
-		container: 'dropin-container'
-	});
-}
+// function braintreeStuff() {
+// 	console.log("brintree starting")
+// 	braintree.setup('CLIENT-TOKEN-FROM-SERVER', 'dropin', {
+// 		container: 'dropin-container'
+// 	});
+// }
 
 
 //TODO: Make sure this is what it's really doing
@@ -227,6 +244,7 @@ $(document).bind('mobileinit',function(){
 	$.mobile.page.prototype.options.backBtnText = "Previous";
 	$.mobile.page.prototype.options.backBtnTheme = "b";
 });
+
 
 
 
@@ -311,7 +329,7 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 		case 'le-reports':
 			return reachedLeReports();
 		default:
-			console.log("You'd better do " + data.toPage[0].id);
+			return;
 	}
 });
 
@@ -321,9 +339,6 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 
 function insertTemplate(data, templateName, containerID) {
 	let template = Handlebars.templates[templateName];
-	console.log("here's the template! " + containerID);
-	//console.log($(containerID).html());
-	console.log(data);
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
@@ -355,10 +370,10 @@ function reachedBikeDetail() {
 	console.log("should have bikeval rbd")
 	if (currBike) {
 		//If it's your bike, have a parameter that says that
-		if(serial in mySerials())
-			currBike.mine = false;
-		else
+		if(currBike.ownerid == firebase.auth().currentUser.uid) //could be a one liner
 			currBike.mine = true;
+		else
+			currBike.mine = false;
 		
 		insertTemplate(currBike, "bikeDetail", "#bike-detail-container");
 	}
@@ -377,6 +392,7 @@ function reachedEditBikeInfo() {
 
 function reachedRegisterBike() {
 	insertTemplate(null, "bikeInfo", "#register-bike-info-container");
+  $("#bikeOwnerPic").attr('src', 'canyon.jpg');
 }
 
 
@@ -433,8 +449,6 @@ function reachedEditReport() {
 }
 
 function reachedUnregister() {
-	console.log("reached unregister: " + sessionStorage.model);
-	console.log(sessionStorage.model === "");
 	insertTemplate({serial: sessionStorage.serial , model:sessionStorage.model}, "unregister", "#unregister-container");
 }
 
@@ -449,11 +463,9 @@ function reachedProfile() {
 
 function reachedMyBikes() {
 	var user = firebase.auth().currentUser;
-	console.log('reached my bikes')
 
 	if (user) {
 		var userId = user.uid;
-		//bikeDict = myBikes();
 		bikeDict = loadedBikes;
 		insertTemplate(bikeDict, "myBikes", "#my-bikes-container");
 		} else {
@@ -501,7 +513,7 @@ function reachedCreateAccount() {
  ////		toNewPage FUNCTIONS			////
 ///////////////////////////////////////////
 
-// These functions specify what values you should save into 
+// These functions specify what values you should save into
 // session storage before going to each page
 
 
@@ -517,10 +529,8 @@ function goSomewhere(page, lePage) {
 		}
 	}
 	if (userData.police && lePage) {
-		console.log("First case");
 		$.mobile.pageContainer.pagecontainer("change", lePage, {});
 	} else {
-		console.log("second case");
 		$.mobile.pageContainer.pagecontainer("change", page, {});
 	}
 }
@@ -556,6 +566,76 @@ function toUnregister(serial, model) {
 	sessionStorage.model = model;
 	goSomewhere('#unregister');
 }
+
+
+///////////////////////////
+
+
+//var id = "please"
+
+function takePhoto (id) {
+  if (!isMobile()) {
+    alert("not mobile case");
+    //Only open file system
+    if (!navigator.camera) {
+      alert("Error - camera not supported (browser).");
+    }
+  } else {
+    // Option for either
+    if (!navigator.camera) {
+      alert("Error - camera not supported!");
+    } else {
+
+      function onSuccess(img) {
+          $("#" + id).attr('src', "data:image/jpeg;base64," + img);
+      }
+
+
+      var options =   {   quality: 50,
+                          destinationType: Camera.DestinationType.DATA_URL, //TODO: Which is best?
+                          sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+                          encodingType: 0     // 0=JPG 1=PNG
+                      };
+      navigator.camera.getPicture(
+        onSuccess,
+        onError, options);
+      }
+    }
+  }
+
+
+
+function onError(message) {
+  alert("Uh oh! " + message);
+}
+
+
+
+this.changePicture = function(event) {
+    event.preventDefault();
+    if (!navigator.camera) {
+        app.showAlert("Camera API not supported", "Error");
+        return;
+    }
+    var options =   {   quality: 50,
+                        destinationType: Camera.DestinationType.DATA_URL,
+                        sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+                        encodingType: 0     // 0=JPG 1=PNG
+                    };
+
+    navigator.camera.getPicture(
+        function(imageData) {
+            $('#image').attr('src', "data:image/jpeg;base64," + imageData);
+        },
+        function() {
+            alert('Error taking picture');
+        },
+        options);
+
+    return false;
+};
+
+
 
 
   ///////////////////////////////////////////
@@ -669,7 +749,6 @@ function showTerms() {
 //		b) Owner's listed privacy settings
 //		c) Bike's status (stolen or okay)
 function getPrivacySetting(bike, privacy) {
-	console.log(bike);
 	const stolen = (bike.status === "Missing" || bike.status === "Stolen");
 	if(stolen) {
 		if (userData.police) {
@@ -709,14 +788,10 @@ function followUnfollow(reportID, following) {
 
 
 function testCreate() {
-	console.log("hi");
-	//console.log($("#serial-number").val());
 	//database.ref('meow').set({serial: $("#serial-number").val()	});
 	var email = $('#email').val();
     var password = $('#password1').val();
     var password2 = $('#password2').val();
-    console.log(email);
-    console.log(password);
     /*
       if (email.length < 4) {
         alert('Please enter an email address.');
@@ -756,7 +831,6 @@ function signOut() {
 }
 function signIn() {
       if (firebase.auth().currentUser) {
-        // used to be signout
         goSomewhere('#home');
       	console.log('already logged in?, fix this from working')
       } else {
@@ -773,7 +847,6 @@ function signIn() {
         // Sign in with email and pass.
         // [START authwithemail]
 
-         console.log('attempted sign in')
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
@@ -787,7 +860,6 @@ function signIn() {
           if(error){
           	console.log('error happened');
           }
-          console.log('fail login');
           // [END_EXCLUDE]
         }).then(function(){
       	var user = firebase.auth().currentUser;
@@ -801,10 +873,7 @@ function signIn() {
         // [END authwithemail]
       }
       console.log('attempted login');
-      
-      
-      
-      
+
     };
 
 function loadReports(){
@@ -846,7 +915,15 @@ function registerBike(){
     var place = $('#bike-purchase-place').val();
     var cost = $('#bike-cost').val();
     var info = $('#additional-info').val();
-    
+    var bikeOwnerPic = $('#bikeOwnerPic').attr('src');
+    var bikePic = $('#bikePic').attr('src');
+    var bikeSerialPic = $('#bikeSerialPic').attr('src');
+    var receiptPic = $('#receiptPic').attr('src');
+    var pics = [[bikeOwnerPic,"bikeOwnerPic"],
+                [bikePic, "bikePic"],
+                [bikeSerialPic,"bikeSerialPic"],
+                [receiptPic,"receiptPic"]];
+
     var user = firebase.auth().currentUser;
     var userId = user.uid;
     //not sure I want to wait for this or not...
@@ -855,6 +932,27 @@ function registerBike(){
 	if (user) {
 	// User is signed in.
 		//should probably have firebase security check this
+
+    var userId = user.uid;
+
+    console.log("PICS!!!");
+    console.log(pics);
+    console.log($('#receiptPic'));
+    for (var picList of pics) {
+      pic = picList[0]
+      console.log("PIC IS", pic, "ya");
+      console.log(Object.prototype.toString.call(pic));
+      if (pic != undefined) {
+        console.log("TYPE, ", pic);
+        firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + picList[1]).putString(pic).then(
+            function(snapshot) {
+              console.log("It's working people!!!");
+              console.log(snapshot);
+            }
+        );
+      }
+    }
+
 		firebase.database().ref('bikes/' + serial).set({
 			make: make,
 			model: model,
@@ -874,15 +972,15 @@ function registerBike(){
 			}, function(error) {
 			    console.log('fail bike1');
 			});
-		
+
 	} else {
 	// No user is signed in.
 	console.log("no user");
 	}
 }
 
+
 function updateProfile(){
-	console.log('update profile');
 	//This relies on the fields being prefilled with original values, otherwise it could delete everything
 	var contact = $('#contact-name').val();
     var backupEmail = $('#backupEmail').val(); //TODO convert to dashed style?
@@ -913,6 +1011,7 @@ function updateProfile(){
 
 function makeReport() {
 //need to change the id's of the fields
+
 	var user = firebase.auth().currentUser;
 	console.log('report');
 	var reportSerial = $('#report-serial').val();
@@ -935,6 +1034,7 @@ function makeReport() {
 	
 	var d = new Date();
 	var seconds = Math.round(d.getTime() / 1000);
+
 	var reportData = {
 		serial : reportSerial,
 		officerName : officerName,
@@ -950,8 +1050,6 @@ function makeReport() {
 
 		}
 	var reportKey = firebase.database().ref().child('reports').push().key;
-	console.log(reportData);
-	console.log(reportKey);
 	var updates = {};
 	firebase.database().ref('/users/'+user.uid+'/reports/').push(reportKey);
 	updates['/reports/'+reportKey] = reportData;
@@ -1001,7 +1099,6 @@ function myBikes() {
 	var user = firebase.auth().currentUser;
 	var userId = user.uid;
 	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
-	console.log('bd user');
 	var bikeDict = {bikes:[]};
 	console.log(bikes);
 	if (bikes) {
@@ -1024,22 +1121,6 @@ function myBikes() {
 		   console.log("Error: " + error.code);
 		});
 	}
-}
-
-function mySerials() {
-	var user = firebase.auth().currentUser;
-	var userId = user.uid;
-	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
-	var myserials = [];
-	bikes.on("value", function(snapshot) {
-	   console.log(snapshot.val());
-	   jQuery.each(snapshot.val(), function() {
-			console.log(this.serial) 
-			myserials.push(this.serial);
-		});
-	});
-	console.log(myserials)
-	return myserials;
 }
 
 function initProfile() {
@@ -1090,4 +1171,3 @@ function searchSerial() {
 
 //cd into www
 //handlebars -m js/templates/> js/templates/templates.js
-

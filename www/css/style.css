@@ -7,7 +7,7 @@
   #login-box {
     margin: auto;
     width: 300px;
-    height: 360px;
+    height: 380px;
     padding-left: 40px;
     padding-right: 40px; }
 
@@ -15,11 +15,11 @@
     font-size: 50px; }
 
   #login img {
-    height: 120px; } }
+    height: 200px; } }
 @media screen and (max-width: 340px) {
   #login-box {
     margin: auto;
-    height: 320px;
+    height: 380px;
     margin-left: 20px;
     margin-right: 20px;
     padding-left: 20px;

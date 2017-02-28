@@ -70,18 +70,18 @@
 				</div>
 				<!-- Login box -->
 				<div id="login-box" class="ui-shadow ui-corner-all">
-					<img src="img/logo.png">
-					<div id="bikenab">BIKENAB!!!!</div>
+					<img src="img/logoCropped.jpg">
+					<!-- <div id="bikenab">BIKENAB</div> -->
 					<div id="register">Register. Report. <b>Recover.</b></div>
 					<form onSubmit="return false;">
 						<input class="login-input" type="email" id="loginemail" placeholder="Log In"/>
-						<input class="login-input" type="password" id="loginpassword" placeholder="Password"/>	
+						<input class="login-input" type="password" id="loginpassword" placeholder="Password"/>
 					</form>
 					<button class="login-input blue-button" onclick="signIn()">Log In</button>
 				</div>
 				<!-- Bottom Buttons -->
 				<div id="bottom-buttons" data-role="controlgroup" data-type="horizontal" class="center">
-					<button><a class="pw-popup ui-btn" href="#password-popup" data-rel="popup">Forgot Password</a></button>	
+					<button><a class="pw-popup ui-btn" href="#password-popup" data-rel="popup">Forgot Password</a></button>
 					<button class="ui-btn" id="other-one" onclick='goSomewhere("#create-account")'>Create Account</button>
 					<div data-role="popup" id="password-popup" class="ui-content popup">
 						<form onSubmit="return false;">
@@ -113,7 +113,7 @@
 
 		<!-- Profile -->
 		<div data-role="page" id="profile" class="stripey-background">
-			
+
 			<div data-role="header" class="header invisible" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
@@ -255,7 +255,7 @@
 			</div>
 			<div data-role="main" class="ui-content" id="bike-detail-container">
 			</div>
-		</div> 
+		</div>
 
 
 		<!-- Unregister Page -->
@@ -360,22 +360,26 @@
 		<!-- Test Page -->
 		<!-- TODO: Take this out later. -->
 		<div data-role="page" id="test" class="stripey-background">
-			
+
 			<div data-role="header" class="header invisible" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
+
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
 			<div data-role="main" class="ui-content">
 				<div id="test-container" class="medium-pic-container">
-					<img class="center" id="test-pic-cropped" src="Canyon Background.jpg">
+					<img class="center" id="test-pic-cropped">
 					<!-- style="width: 400px; height: 300px; margin: -75px 0 0 -100px;"  -->
 				</div>
 				<a class="ui-btn medium-button blue-button center" href="#test-popup" data-rel="popup">Show Pic</a>
+				BEFORE
+				<input type="file" id="files" name="files[]" multiple />
+				AFTER
 
 				<!-- Crop Photo popup -->
 				<div data-role="popup" id="test-popup" class="popup">
-					<img id="test-pic" src="Canyon Background.jpg" />
+					<img id="test-pic" src="canyon.jpg" />
 					<!-- width="600px" height="400px" -->
 					<btton onclick="closePopup('test-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
 				</div>
@@ -387,7 +391,7 @@
 		<!-- Test Page -->
 		<!-- TODO: Take this out later. -->
 		<div data-role="page" id="test2" class="stripey-background">
-			
+
 			<div data-role="header" class="header invisible" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<h1>BikeNab</h1>
 				<a href="#" data-rel="back" data-theme="b" data-icon="carat-l">Back</a>
@@ -417,11 +421,11 @@
 						  }
 					});
 					$("#plzWork").html("hi: ", braintree == null);
-					
+
 
 				});
-			
-				
+
+
 			</script>
 
 			</div>
@@ -481,7 +485,7 @@
 
 
 
-				
+
 
 		<!-- Hidden page containing elements that pop up in various pages -->
 		<div data-role="page" id="hidden">
@@ -500,10 +504,10 @@
 			</div>
 		</div>
 
-			
 
 
-			
+
+
 
 
 		<!-- 	<div class="browser-header likeLogin" data-role="controlgroup" data-type="horizontal">
@@ -512,14 +516,14 @@
 				<button class="ui-btn">Lookup</button>
 				<button class="ui-btn">Profile</button>
 				<a href="#home">Home</a>
-				<a href="#lookup">Lookup</a> 
+				<a href="#lookup">Lookup</a>
 				<a href="#profile">Profile</a>
 				<a href="#my-bikes">My Bikes</a>
 			</div> -->
 
 
 
-		 
+
 
 
 		<!-- 									Handlebars 									  -->
@@ -532,10 +536,8 @@
 		<script src="js/templates/templates.js"></script>
 
 		<!-- Javascript files -->
-		<script type="text/javascript" src="cordova.js"></script>
+		<!-- <script type="text/javascript" src="cordova.js"></script> -->
 		<script type="text/javascript" src="js/index.js"></script>
-		
+
 	</body>
 </html>
-
-
