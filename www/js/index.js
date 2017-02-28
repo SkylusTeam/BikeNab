@@ -848,6 +848,10 @@ function registerBike(){
     var info = $('#additional-info').val();
     
     var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    //not sure I want to wait for this or not...
+    //firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+  	//	var ownerName = snapshot.val().name; });
 	if (user) {
 	// User is signed in.
 		//should probably have firebase security check this
@@ -859,11 +863,11 @@ function registerBike(){
 			serial:serial,
 			status: "okay",
 			value: cost,
-			year: year
+			year: year,
+			ownerid: userId
 			}).then(function() {
 			    console.log('success bike1');
 
-				var userId = user.uid;
 			    firebase.database().ref('users/' + userId).child("bikes").push({
 		    		serial:serial
 		  }).then(function() {myBikes();});
