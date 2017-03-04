@@ -1319,7 +1319,7 @@ function searchSerial() {
 			getBike.on("value", function(theBike) {
 				console.log(theBike.val());
 				bikeDict["bike"] = ( theBike.val());
-				if(bikeDict) {
+				if(theBike.val()) {
 					console.log("found bike")
 					console.log(bikeDict);
 					insertTemplate(bikeDict, "lookup", "#lookup-container");
