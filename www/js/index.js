@@ -304,7 +304,7 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 		case 'past-reports':
 			return reachedPastReports();
 		case 'reports':
-			return reachedReports();
+			return loadUser(reachedReports);
 		case 'report':
 			return reachedReport();
 		case 'edit-report':
@@ -342,6 +342,7 @@ $("body").on('pagecontainerbeforeshow', function(event, data) {
 
 function insertTemplate(data, templateName, containerID) {
 	let template = Handlebars.templates[templateName];
+	console.log(templateName);
 	$(containerID).html(template(data));
 	$(containerID).enhanceWithin();
 }
@@ -364,22 +365,22 @@ function reachedBikeDetail() {
 	console.log(serial+ " --- rbd serial");
 	var currBike;
 	var getBike = firebase.database().ref('/bikes/'+serial);
-			getBike.on("value", function(theBike) {
-				console.log(theBike.val());
-				console.log("waited for bike val rbd")
-				currBike = theBike.val();
-			});
+	getBike.on("value", function(theBike) {
+		console.log(theBike.val());
+		console.log("waited for bike val rbd")
+		currBike = theBike.val();
+		console.log("should have bikeval rbd")
+		if (currBike) {
+			//If it's your bike, have a parameter that says that
+			if(currBike.ownerid == firebase.auth().currentUser.uid) //could be a one liner
+				currBike.mine = true;
+			else
+				currBike.mine = false;
 
-	console.log("should have bikeval rbd")
-	if (currBike) {
-		//If it's your bike, have a parameter that says that
-		if(currBike.ownerid == firebase.auth().currentUser.uid) //could be a one liner
-			currBike.mine = true;
-		else
-			currBike.mine = false;
+			insertTemplate(currBike, "bikeDetail", "#bike-detail-container");
+		}
+	})
 
-		insertTemplate(currBike, "bikeDetail", "#bike-detail-container");
-	}
 }
 
 
@@ -403,6 +404,8 @@ function reachedPastReports() {
 	var data = loadedReports;
 	console.log('past loaded rep');
 	console.log(data)
+	//fairly confident this does nothing
+	/*
 	data.reports.forEach(function(report, index, reportArr) {
 		for (bike of data.bikes) {
 			if (bike.serial === report.serial) {
@@ -410,6 +413,7 @@ function reachedPastReports() {
 			}
 		}
 	})
+	*/
 	insertTemplate(data, "reports", "#past-reports-container");
 }
 
@@ -417,6 +421,7 @@ function reachedPastReports() {
 function reachedReports() {
 	var data = loadedUser;
 	console.log(loadedReports);
+<<<<<<< HEAD
 	data.reports = loadedReports.reports;
 	console.log(' reg loaded rep');
 	console.log(data)
@@ -425,11 +430,54 @@ function reachedReports() {
 		for (bike of data.bikes) {
 			if (bike.serial === report.serial) {
 				reportArr[index].bike = bike;
+=======
+	if (loadedReports) {
+		data.reports = loadedReports.reports;
+		console.log(' loaded reports load');
+		console.log(data)
+
+		/*data.reports.forEach(function(report, index, reportArr) {
+			for (bike of data.bikes) {
+				if (bike.serial === report.serial) {
+					reportArr[index].bike = bike;
+				}
+>>>>>>> 76f46a132aa27c879c8df0bf49aa95c85c158aee
 			}
+		}) */
+		insertTemplate(data, "reports", "#reports-container");
+		insertTemplate(userData, "reportABike", "#report-a-bike-container");
+	} else {
+		var user = firebase.auth().currentUser;
+		var userId = user.uid;
+		var reports = firebase.database().ref('/users/' + userId+'/reports');
+		console.log('active report load');
+		var reportDict = {reports:[]};
+		console.log(reports);
+		if (reports) {
+			reports.on("value", function(snapshot) {
+			   console.log(snapshot.val());
+			   if(snapshot.val()) {
+				   jQuery.each(snapshot.val(), function() {
+				   		console.log('getting report');
+						console.log(this.toString())
+						var getReport = firebase.database().ref('/reports/'+this.toString());
+						getReport.on("value", function(theReport) {
+							console.log('report value:')
+							console.log(theReport.val());
+							reportDict["reports"].push( theReport.val());
+						});
+					});
+				}
+				data.reports = reportDict
+				insertTemplate(data, "reports", "#reports-container");
+				insertTemplate(userData, "reportABike", "#report-a-bike-container");
+			}, function (error) {
+			   console.log("Error: " + error.code);
+			});
+
 		}
-	}) */
-	insertTemplate(data, "reports", "#reports-container");
-	insertTemplate(userData, "reportABike", "#report-a-bike-container");
+	}
+
 }
 
 
@@ -815,7 +863,22 @@ function testCreate() {
       */
       // Sign in with email and pass.
       // [START createwithemail]
-      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
+      	var user = firebase.auth().currentUser;
+      	console.log('tried to send sendEmailVerification')
+		user.sendEmailVerification().then(function() {
+ 			 // Email sent.
+ 			 	console.log('sent sendEmailVerification')
+			}, function(error) {
+				console.log('failed to send sendEmailVerification')
+  			// An error happened.
+			});
+		firebase.database().ref('users/' + user.uid).update({
+		    email:email
+			});
+     	}
+
+      	, function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -831,9 +894,82 @@ function testCreate() {
       // [END createwithemail]
 	goSomewhere("#home");
 } ;
+
+
+function leCreate() {
+	//database.ref('meow').set({serial: $("#serial-number").val()	});
+	var email = $('#email').val();
+    var password = $('#password1').val();
+    var password2 = $('#password2').val();
+    var leName = $('#le-name').val();
+    var leDep = $('#le-department').val();
+    var deZip = $('#le-dept-zip').val();
+    var wEmail = $('#le-email').val();
+    var wLandline = $('#le-work-phone').val();
+    var wCell = $('#le-cell').val();
+    var wSocial = $('#le-social-media').val();
+    /*
+      if (email.length < 4) {
+        alert('Please enter an email address.');
+        return;
+      }
+      */
+      if (password != password2) {
+        alert('Passwords do not match');
+        return;
+      }
+      /*
+      if (password.length < 4) {
+        alert('Please enter a password.');
+        return;
+      }
+      */
+      // Sign in with email and pass.
+      // [START createwithemail]
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
+      	var user = firebase.auth().currentUser;
+      	console.log('tried to send sendEmailVerification')
+		user.sendEmailVerification().then(function() {
+ 			 // Email sent.
+ 			 	console.log('sent sendEmailVerification')
+			}, function(error) {
+				console.log('failed to send sendEmailVerification')
+  			// An error happened.
+			});
+		firebase.database().ref('users/' + user.uid).update({
+		    name: leName,
+		    department: leDep,
+		    departmentZip: deZip,
+		    workEmail: wEmail,
+		    workLandline:wLandline,
+		    workSocialMedia: wSocial,
+		    workCell: wCell,
+		    email:email
+			});
+     	}
+
+      	, function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+      });
+      // [END createwithemail]
+	goSomewhere("#home");
+} ;
+
 function signOut() {
 	firebase.auth().signOut().then(function(){goSomewhere('#login');})
 }
+
+
 function signIn() {
       if (firebase.auth().currentUser) {
         goSomewhere('#home');
@@ -931,6 +1067,7 @@ function registerBike(){
 
     var user = firebase.auth().currentUser;
     var userId = user.uid;
+
     //not sure I want to wait for this or not...
     //firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
   	//	var ownerName = snapshot.val().name; });
@@ -967,7 +1104,9 @@ function registerBike(){
 			status: "okay",
 			value: cost,
 			year: year,
-			ownerid: userId
+			ownerid: userId,
+			owneremail: user.email
+
 			}).then(function() {
 			    console.log('success bike1');
 
@@ -1156,6 +1295,33 @@ function initProfile() {
 	});
 }
 
+function loadUser(callback) {
+	if (loadedUser) {
+		console.log("already was loaded user")
+		console.log(loadedUser)
+		callback();
+
+	}
+	else{
+	var user = firebase.auth().currentUser;
+	var userId = user.uid;
+	var prof = firebase.database().ref('/users/' + userId)
+
+	prof.on("value", function(snapshot) {
+		console.log('snapshotting');
+	   	console.log(snapshot.val());
+	   	if(snapshot.val()) {
+	   		loadedUser = snapshot.val();
+
+			console.log("new loaded user")
+			console.log(loadedUser)
+	   		callback();
+		}
+
+	});
+	}
+}
+
 jQuery(function($) {
 	setUpPhotoCrop();
 });
@@ -1180,10 +1346,16 @@ function searchSerial() {
 			getBike.on("value", function(theBike) {
 				console.log(theBike.val());
 				bikeDict["bike"] = ( theBike.val());
-
+				if(bikeDict) {
+					console.log("found bike")
+					console.log(bikeDict);
+					insertTemplate(bikeDict, "lookup", "#lookup-container");
+				} else {
+					console.log("no bike found")
+					insertTemplate({},"noSerial","#lookup-container")
+				}
 			});
-	console.log(bikeDict);
-	insertTemplate(bikeDict, "lookup", "#lookup-container");
+
 };
 
 // // TESTING PIßC UPLOADING
