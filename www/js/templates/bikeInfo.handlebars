@@ -26,22 +26,23 @@
 	</div>
 
 	<!-- Photos of the bike -->
-	<p>Photo of Owner with Bike</p>
-	<img class="center medium-pic" id="bikeOwnerPic">
-	<button class="medium-button blue-button center photo-button" type="button" onclick="takePhoto('bikeWithOwner')">Insert Picture</button>
+	<div id="bike-photos">
+		<p>Photo of Owner with Bike</p>
+		<img class="center medium-pic" id="bikeOwnerPic">
+		<input id="bikeOwnerButton" type="file" accept="image/*"}>
 
-	<p>Photo of Bike Alone</p>
-	<img class="medium-pic center" id="bikePic">
-	<button class="medium-button center blue-button photo-button" type="button" onclick="takePhoto('bikePic')">Insert Picture</button>
+		<p>Photo of Bike Alone</p>
+		<img class="medium-pic center" id="bikePic">
+		<input id="bikeButton" type="file" accept="image/*"}>
 
-	<p>Photo of Serial Number</p>
-	<img class="medium-pic center" id="bikeSerialPic">
-	<button class="medium-button blue-button center photo-button" type="button" onclick="takePhoto('bikeSerialPic')">Insert Picture</button>
+		<p>Photo of Serial Number</p>
+		<img class="medium-pic center" id="bikeSerialPic">
+		<input id="bikeSerialButton" type="file" accept="image/*"}>
 
-	<p>Photo of Receipt</p>
-	<img class="medium-pic center" id="receiptPic">
-	<button class="medium-button blue-button center photo-button" type="button" onclick="takePhoto('receiptPic')">Insert Picture</button>
-
+		<p>Photo of Receipt</p>
+		<img class="medium-pic center" id="receiptPic">
+		<input id="receiptButton" type="file" accept="image/*"}>
+	</div>
 	<br>
 	<label for="additional-info">Additional Information About Bike</label>
 	<textarea id="additional-info" id="additional-info">{{otherInfo}}</textarea>

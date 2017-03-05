@@ -161,18 +161,15 @@ var loadedReports;
 $( document ).ready(function() {
 	addRepeatedElements();
 
-  $("#please").click( function () {
-    let target = $(this).attr('displayBox');
-    if (isApp()) {
-      alert("two options");
-    } else {
-      alert("file sys")
-    }
-  });
+     $(document).on('change',  function(e) {
+      var target = e.target;
+      if ($(e.target).attr('type') == 'file') {
+        var pic = $(target).parent().prev();
+        var file = e.target.files[0];
+        pic.attr('src', URL.createObjectURL(file));
+      }
+    });
 
-  $( "#please" ).bind( "click", function() {
-      alert("yeah!!!");
-});
 
 });
 
@@ -217,6 +214,12 @@ function addRepeatedElements() {
 	$("[data-role=fieldcontain]").fieldcontain();
 	$("[data-role=flipswitch]").flipswitch();
 
+  //If browser, replace app photos with browser photos
+  // if (!isApp()) { //TODO: Should this be isApp or isMobile???
+  //   var browserFile = '<input id="testPicInput" class="blue-button medium-button browser-file" type="file" accept="image/*"}>';
+  //   $(".photo-button").replaceWith(browserFile);
+  //   $(".photo-button").fieldcontain();
+  // }
 }
 
 
@@ -356,7 +359,7 @@ function reachedHome() {
 
 
 function reachedBikeDetail() {
-	
+
 	var serial = sessionStorage.serial;
 	console.log(serial+ " --- rbd serial");
 	var currBike;
@@ -366,7 +369,7 @@ function reachedBikeDetail() {
 				console.log("waited for bike val rbd")
 				currBike = theBike.val();
 			});
-	
+
 	console.log("should have bikeval rbd")
 	if (currBike) {
 		//If it's your bike, have a parameter that says that
@@ -374,7 +377,7 @@ function reachedBikeDetail() {
 			currBike.mine = true;
 		else
 			currBike.mine = false;
-		
+
 		insertTemplate(currBike, "bikeDetail", "#bike-detail-container");
 	}
 }
@@ -384,6 +387,7 @@ function reachedEditBikeInfo() {
 	let bikesList = userData.bikes;
 	for (bike of bikesList) {
 		if (bike.serial === sessionStorage.serial) {
+      bike.app = isApp();
 			insertTemplate(bike, "bikeInfo", "#edit-bike-info-container");
 		}
 	}
@@ -392,7 +396,6 @@ function reachedEditBikeInfo() {
 
 function reachedRegisterBike() {
 	insertTemplate(null, "bikeInfo", "#register-bike-info-container");
-  $("#bikeOwnerPic").attr('src', 'canyon.jpg');
 }
 
 
@@ -416,8 +419,8 @@ function reachedReports() {
 	console.log(loadedReports);
 	data.reports = loadedReports.reports;
 	console.log(' reg loaded rep');
-	console.log(data)	
-	
+	console.log(data)
+
 	/*data.reports.forEach(function(report, index, reportArr) {
 		for (bike of data.bikes) {
 			if (bike.serial === report.serial) {
@@ -467,6 +470,8 @@ function reachedMyBikes() {
 	if (user) {
 		var userId = user.uid;
 		bikeDict = loadedBikes;
+      console.log("Bike dict");
+      console.log(bikeDict);
 		insertTemplate(bikeDict, "myBikes", "#my-bikes-container");
 		} else {
 			insertTemplate(userData, "myBikes", "#my-bikes-container");
@@ -889,7 +894,7 @@ function loadReports(){
 		   if(snapshot.val()) {
 			   jQuery.each(snapshot.val(), function() {
 			   		console.log('getting report');
-					console.log(this.toString()) 
+					console.log(this.toString())
 					var getReport = firebase.database().ref('/reports/'+this.toString());
 					getReport.on("value", function(theReport) {
 						console.log('report value:')
@@ -1031,7 +1036,7 @@ function makeReport() {
 	} );
 
 	var level = $( "input[type=checkbox]" ) .val();
-	
+
 	var d = new Date();
 	var seconds = Math.round(d.getTime() / 1000);
 
@@ -1100,21 +1105,36 @@ function myBikes() {
 	var userId = user.uid;
 	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
 	var bikeDict = {bikes:[]};
-	console.log(bikes);
 	if (bikes) {
-		console.log("in bikes mybikes")
 		bikes.on("value", function(snapshot) {
 			bikeDict = {bikes:[]};
-		    console.log("in on bikes.value if " +snapshot.val());
 		    if (snapshot.val()) {
 		   		jQuery.each(snapshot.val(), function() {
-					console.log("mybikes snapshot val serial: " + this.serial) 
-					var getBike = firebase.database().ref('/bikes/'+this.serial);
-					getBike.once("value", function(theBike) {
-						console.log(theBike.val());
-						bikeDict["bikes"].push( theBike.val());
+                  var getBike = firebase.database().ref('/bikes/'+this.serial);
+                  getBike.once("value", function(theBike) {
+                     console.log("HERE's THE BIKE!");
+                     var bikeData = theBike.val();
+                     console.log(bikeData);
+                     console.log(bikeData.serial);
+                     //Get images
+                     var imagePath = firebase.storage().ref('/users/' + userId + '/bikes/' + bikeData.serial);
+                     imagePath.child('bikeOwnerPic').getDownloadURL().then(function(url) {
+                        //alert("Getting pic from + imagePath");
+                        bikeData.bikeOwnerPic = url;
+                     });
+                     imagePath.child('bikePic').getDownloadURL().then(function(url) {
+                        bikeData.bikePic = url;
+                     });
+                     imagePath.child('bikeSerialPic').getDownloadURL().then(function(url) {
+                        bikeData.bikeSerialPic = url;
+                     });
+                     imagePath.child('receiptPic').getDownloadURL().then(function(url) {
+                        bikeData.receiptPic = url;
+                     });
+                     bikeDict["bikes"].push(bikeData);
+                  });
+
 				});
-			});
 		}
 		loadedBikes = bikeDict;
 		}, function (error) {
@@ -1129,8 +1149,6 @@ function initProfile() {
 	var prof = firebase.database().ref('/users/' + userId)
 
 	prof.on("value", function(snapshot) {
-		console.log('snapshotting');
-	   	console.log(snapshot.val());
 	   	if(snapshot.val()) {
 	   		loadedUser = snapshot.val();
 		}
@@ -1162,12 +1180,32 @@ function searchSerial() {
 			getBike.on("value", function(theBike) {
 				console.log(theBike.val());
 				bikeDict["bike"] = ( theBike.val());
-				
+
 			});
 	console.log(bikeDict);
 	insertTemplate(bikeDict, "lookup", "#lookup-container");
 };
 
+// // TESTING PIßC UPLOADING
+// $("#testPicInput").attr()
+
+// function showPic(e, pic) {
+//   console.log("FUNCTION IS BEING CALLED!!!!!");
+//   //console.log(fileName);
+//   var file = e.target.file;
+//   console.log("FILE: ", file);
+// //  console.log("FILE TYPE ", type(file));
+//   // var reader = new FileReader();
+//   // reader.onload = (function(file) {
+//   //   console.log("I think it's working!");
+//   //   $("#" + pic).attr('src', 'canyon.jpg');
+//   // })
+//   // reader.readAsDataURL(file);
+// }
+
+
+
+//sass --watch scss:cs
 
 //cd into www
 //handlebars -m js/templates/> js/templates/templates.js

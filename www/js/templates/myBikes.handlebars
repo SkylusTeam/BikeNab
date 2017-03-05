@@ -8,11 +8,11 @@
 	{{#each bikes}}
 	<ul data-role="listview" data-inset="true">
 		<li data-icon="false"><a onclick="toBikeDetail('{{serial}}')" >
-			<img src="img/bike2.jpg">
+			<img src="{{bikePic}}">
 				<!-- <font style="white-space:normal" > -->
 					{{model}}
 				<!-- </font> -->
-				<br>Status: {{status}} 
+				<br>Status: {{status}}
 		</a></li>
 	</ul>
 	{{/each}}
