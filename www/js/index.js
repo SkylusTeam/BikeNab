@@ -1293,7 +1293,9 @@ function loadUser(callback) {
 	if (loadedUser) {
 		console.log("already was loaded user")
 		console.log(loadedUser)
-		callback();
+		if(typeof callback === "function") {
+			callback();
+		}
 
 	}
 	else{
