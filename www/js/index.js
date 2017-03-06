@@ -1080,28 +1080,30 @@ function registerBike(){
         );
       }
     }
+    if(serial) {
+			firebase.database().ref('bikes/' + serial).set({
+				make: make,
+				model: model,
+				otherInfo: info,
+				purchasePlace: place,
+				serial:serial,
+				status: "okay",
+				value: cost,
+				year: year,
+				ownerid: userId,
+				owneremail: user.email
 
-		firebase.database().ref('bikes/' + serial).set({
-			make: make,
-			model: model,
-			otherInfo: info,
-			purchasePlace: place,
-			serial:serial,
-			status: "okay",
-			value: cost,
-			year: year,
-			ownerid: userId,
-			owneremail: user.email
+				}).then(function() {
+				    console.log('success bike1');
 
-			}).then(function() {
-			    console.log('success bike1');
-
-			    firebase.database().ref('users/' + userId).child("bikes").push({
-		    		serial:serial
-		  }).then(function() {myBikes();});
-			}, function(error) {
-			    console.log('fail bike1');
-			});
+				    firebase.database().ref('users/' + userId).child("bikes").push({
+			    		serial:serial
+			  }).then(function() {myBikes();});
+				}, function(error) {
+				    console.log('fail bike1');
+				});
+		}
+    }
 
 	} else {
 	// No user is signed in.
@@ -1183,7 +1185,9 @@ function makeReport() {
 	var updates = {};
 	firebase.database().ref('/users/'+user.uid+'/reports/').push(reportKey);
 	updates['/reports/'+reportKey] = reportData;
-	firebase.database().ref('/bikes/'+reportSerial).update({status:level});
+	if(reportSerial) {
+		firebase.database().ref('/bikes/'+reportSerial).update({status:level});
+	}
 	 return firebase.database().ref().update(updates);
 }
 
