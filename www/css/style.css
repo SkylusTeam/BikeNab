@@ -7,7 +7,7 @@
   #login-box {
     margin: auto;
     width: 300px;
-    height: 380px;
+    height: 360px;
     padding-left: 40px;
     padding-right: 40px; }
 
@@ -15,11 +15,11 @@
     font-size: 50px; }
 
   #login img {
-    height: 200px; } }
+    height: 120px; } }
 @media screen and (max-width: 340px) {
   #login-box {
     margin: auto;
-    height: 380px;
+    height: 320px;
     margin-left: 20px;
     margin-right: 20px;
     padding-left: 20px;
@@ -311,5 +311,13 @@ body {
 
 #test-popup {
   background-color: green; }
+
+#bike-photos .ui-input-text {
+  width: 250px !important;
+  background-color: #254ea2 !important;
+  color: white;
+  text-shadow: 0 0 0;
+  display: block;
+  margin: 5px auto; }
 
 /*# sourceMappingURL=style.css.map */
