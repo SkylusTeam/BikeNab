@@ -421,16 +421,7 @@ function reachedPastReports() {
 function reachedReports() {
 	var data = loadedUser;
 	console.log(loadedReports);
-<<<<<<< HEAD
-	data.reports = loadedReports.reports;
-	console.log(' reg loaded rep');
-	console.log(data)
 
-	/*data.reports.forEach(function(report, index, reportArr) {
-		for (bike of data.bikes) {
-			if (bike.serial === report.serial) {
-				reportArr[index].bike = bike;
-=======
 	if (loadedReports) {
 		data.reports = loadedReports.reports;
 		console.log(' loaded reports load');
@@ -441,7 +432,6 @@ function reachedReports() {
 				if (bike.serial === report.serial) {
 					reportArr[index].bike = bike;
 				}
->>>>>>> 76f46a132aa27c879c8df0bf49aa95c85c158aee
 			}
 		}) */
 		insertTemplate(data, "reports", "#reports-container");
@@ -469,6 +459,7 @@ function reachedReports() {
 					});
 				}
 				data.reports = reportDict
+				console.log(data);
 				insertTemplate(data, "reports", "#reports-container");
 				insertTemplate(userData, "reportABike", "#report-a-bike-container");
 			}, function (error) {
@@ -1072,54 +1063,52 @@ function registerBike(){
     //firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
   	//	var ownerName = snapshot.val().name; });
 	if (user) {
-	// User is signed in.
-		//should probably have firebase security check this
+		// User is signed in.
+			//should probably have firebase security check this
 
-    var userId = user.uid;
+	    var userId = user.uid;
 
-    console.log("PICS!!!");
-    console.log(pics);
-    console.log($('#receiptPic'));
-    for (var picList of pics) {
-      pic = picList[0]
-      console.log("PIC IS", pic, "ya");
-      console.log(Object.prototype.toString.call(pic));
-      if (pic != undefined) {
-        console.log("TYPE, ", pic);
-        firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + picList[1]).putString(pic).then(
-            function(snapshot) {
-              console.log("It's working people!!!");
-              console.log(snapshot);
-            }
-        );
-      }
-    }
-    if(serial) {
-			firebase.database().ref('bikes/' + serial).set({
-				make: make,
-				model: model,
-				otherInfo: info,
-				purchasePlace: place,
-				serial:serial,
-				status: "okay",
-				value: cost,
-				year: year,
-				ownerid: userId,
-				owneremail: user.email
+	    console.log("PICS!!!");
+	    console.log(pics);
+	    console.log($('#receiptPic'));
+	    for (var picList of pics) {
+	      pic = picList[0]
+	      console.log("PIC IS", pic, "ya");
+	      console.log(Object.prototype.toString.call(pic));
+	      if (pic != undefined) {
+	        console.log("TYPE, ", pic);
+	        firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + picList[1]).putString(pic).then(
+	            function(snapshot) {
+	              console.log("It's working people!!!");
+	              console.log(snapshot);
+	            }
+	        );
+	      }
+	    }
+	    if(serial) {
+				firebase.database().ref('bikes/' + serial).set({
+					make: make,
+					model: model,
+					otherInfo: info,
+					purchasePlace: place,
+					serial:serial,
+					status: "okay",
+					value: cost,
+					year: year,
+					ownerid: userId,
+					owneremail: user.email
 
-				}).then(function() {
-				    console.log('success bike1');
+					}).then(function() {
+					    console.log('success bike1');
 
-				    firebase.database().ref('users/' + userId).child("bikes").push({
-			    		serial:serial
-			  }).then(function() {myBikes();});
-				}, function(error) {
-				    console.log('fail bike1');
-				});
-		}
-    }
-
-	} else {
+					    firebase.database().ref('users/' + userId).child("bikes").push({
+				    		serial:serial
+				  }).then(function() {myBikes();});
+					}, function(error) {
+					    console.log('fail bike1');
+					});
+			}
+    } else {
 	// No user is signed in.
 	console.log("no user");
 	}
@@ -1201,6 +1190,7 @@ function makeReport() {
 	updates['/reports/'+reportKey] = reportData;
 	if(reportSerial) {
 		firebase.database().ref('/bikes/'+reportSerial).update({status:level});
+		firebase.database().ref('/bikes/'+reportSerial+"/reports/").push({serial:reportKey});
 	}
 	 return firebase.database().ref().update(updates);
 }
