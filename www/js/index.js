@@ -175,9 +175,30 @@ $( document ).ready(function() {
 
 //TODO: Make sure all of these are relevant still.
 
+function firebaseHatesMe() {
+   firebase.storage().ref().child("testing/canyon").put("../canyon.jpg").then(
+       function(snapshot) {
+         // alert("it ran!");
+         console.log("Saved the canyon");
+         console.log(snapshot);
+       }
+   );
+
+}
+
+function firebaseHatesMe2(){
+   var imagePath = firebase.storage().ref("testing/canyon");
+   imagePath.getDownloadURL().then(function(url) {
+      $("#testPic").attr('src', url);
+   });
+}
+
+
 
 //Insert repeated elements of code
 function addRepeatedElements() {
+
+   firebaseHatesMe();
 
 	let headerTemplate = Handlebars.templates["header"];
 	$("#header-container").html(headerTemplate({police: userData.police}));
@@ -421,29 +442,19 @@ function reachedPastReports() {
 function reachedReports() {
 	var data = loadedUser;
 	console.log(loadedReports);
-<<<<<<< HEAD
-	data.reports = loadedReports.reports;
-	console.log(' reg loaded rep');
-	console.log(data)
 
-	/*data.reports.forEach(function(report, index, reportArr) {
-		for (bike of data.bikes) {
-			if (bike.serial === report.serial) {
-				reportArr[index].bike = bike;
-=======
 	if (loadedReports) {
 		data.reports = loadedReports.reports;
 		console.log(' loaded reports load');
 		console.log(data)
 
-		/*data.reports.forEach(function(report, index, reportArr) {
+		data.reports.forEach(function(report, index, reportArr) {
 			for (bike of data.bikes) {
 				if (bike.serial === report.serial) {
 					reportArr[index].bike = bike;
 				}
->>>>>>> 76f46a132aa27c879c8df0bf49aa95c85c158aee
 			}
-		}) */
+		});
 		insertTemplate(data, "reports", "#reports-container");
 		insertTemplate(userData, "reportABike", "#report-a-bike-container");
 	} else {
@@ -1239,7 +1250,7 @@ function updatePic(c) {
 	});
 }
 
-function myBikes() {
+function myBikes() { //*kangaroo
 	var user = firebase.auth().currentUser;
 	var userId = user.uid;
 	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
@@ -1262,7 +1273,13 @@ function myBikes() {
                         bikeData.bikeOwnerPic = url;
                      });
                      imagePath.child('bikePic').getDownloadURL().then(function(url) {
-                        bikeData.bikePic = url;
+                        //alert("at least this line runs");
+                        console.log("PIC IS THIS: ", url);
+                        var urlCreator = window.URL || window.webkitURL;
+                        console.log("NEXT LINE");
+                        var imageUrl = urlCreator.createObjectURL(url);
+                        console.log("FANCY THING: ", imageUrl);
+                        bikeData.bikePic = URL.createObjectURL(url);
                      });
                      imagePath.child('bikeSerialPic').getDownloadURL().then(function(url) {
                         bikeData.bikeSerialPic = url;
