@@ -1040,6 +1040,11 @@ function loadReports(){
 }
 
 function registerBike(){
+	var appcode = $('#app-code').val();
+	var dbAppcode = firebase.database().ref("appcodes/"+appcode);
+	dbAppcode.once("value", function(snapshot){
+		console.log(snapshot.val())
+	});
 	var serial = $('#serial-number').val();
     var make = $('#bike-make').val();
     var model = $('#bike-model').val();
@@ -1096,21 +1101,19 @@ function registerBike(){
 					value: cost,
 					year: year,
 					ownerid: userId,
-					owneremail: user.email
+					owneremail: user.email,
+					appcode:appcode
 
 					}).then(function() {
-					    console.log('success bike1');
-
 					    firebase.database().ref('users/' + userId).child("bikes").push({
 				    		serial:serial
 				  }).then(function() {myBikes();});
 					}, function(error) {
-					    console.log('fail bike1');
 					});
 			}
     } else {
 	// No user is signed in.
-	console.log("no user");
+	console.log("no user signed in on bike registration");
 	}
 }
 
@@ -1156,9 +1159,7 @@ function makeReport() {
 	var incidentReport = $('#additional-info').val(); //missing stolen may be better as dragdown?
 	var contactle = false;
 	var contactme = false;
-	console.log("need to handle the buttons");
 	$( "input[type=checkbox]:checked" ).each(function() {
-		console.log($(this).val());
 		if("contact-me"==$(this).val())
 			contactme = true;
 		if("contact-police"==$(this).val())
