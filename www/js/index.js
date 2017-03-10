@@ -1091,6 +1091,7 @@ function registerBike(){
 	      }
 	    }
 	    if(serial) {
+	    		console.log(appcode + ", " + serial)
 				firebase.database().ref('bikes/' + serial).set({
 					make: make,
 					model: model,
@@ -1107,7 +1108,14 @@ function registerBike(){
 					}).then(function() {
 					    firebase.database().ref('users/' + userId).child("bikes").push({
 				    		serial:serial
-				  }).then(function() {myBikes();});
+				  }).then(function() {myBikes();}).then(function(){
+				  	firebase.database().ref('appcodes/' + appcode).set({
+					status:"used",
+					owner:user.email,
+					bike:serial
+
+					})
+				  });
 					}, function(error) {
 					});
 			}
