@@ -474,6 +474,7 @@ function reachedReports() {
 					});
 				}
 				data.reports = reportDict
+				console.log(data);
 				insertTemplate(data, "reports", "#reports-container");
 				insertTemplate(userData, "reportABike", "#report-a-bike-container");
 			}, function (error) {
@@ -1030,7 +1031,8 @@ function registerBike(){
 	var serial = $('#serial-number').val();
 
 	if (serial) { // If the serial number is blank, don't register bike
-
+		var appcode = $('#app-code').val();
+	
 		// Text-based fields
 		var make = $('#bike-make').val();
 		var model = $('#bike-model').val();
@@ -1053,10 +1055,6 @@ function registerBike(){
 		for (pic of pics) {
 			if (pic[0]) {
 				firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + pic[1]).put(pic[0]);
-
-				// .catch(function(error) {
-				// 	console.log("ERROR storing pic: ", error.code);
-				// });
 			}
 		}
 
@@ -1071,7 +1069,8 @@ function registerBike(){
 			value: cost,
 			year: year,
 			ownerid: userId,
-			owneremail: user.email
+			owneremail: user.email,
+			appcode:appcode
 
 			}).then(function() {
 				// store the serial number under the user's data as well.
@@ -1085,7 +1084,7 @@ function registerBike(){
 
 	} else {
 	// No user is signed in.
-	console.log("no user");
+	console.log("no user signed in on bike registration");
 	}
 }
 
@@ -1162,6 +1161,7 @@ function makeReport() {
 	updates['/reports/'+reportKey] = reportData;
 	if(reportSerial) {
 		firebase.database().ref('/bikes/'+reportSerial).update({status:level});
+		firebase.database().ref('/bikes/'+reportSerial+"/reports/").push({serial:reportKey});
 	}
 	 return firebase.database().ref().update(updates);
 }
@@ -1251,7 +1251,11 @@ function initProfile() {
 
 function loadUser(callback) {
 	if (loadedUser) {
-		callback();
+		console.log("already was loaded user")
+		console.log(loadedUser)
+		if(typeof callback === "function") {
+			callback();
+		}
 
 	}
 	else{
