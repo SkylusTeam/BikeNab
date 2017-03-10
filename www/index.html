@@ -368,14 +368,17 @@
 				<a href="#home" data-icon="home" data-theme="b">Home</a>
 			</div>
 			<div data-role="main" class="ui-content">
-				<div id="test-container" class="medium-pic-container">
+				<!-- <div id="test-container" class="medium-pic-container">
 					<img class="center" id="test-pic-cropped">
-					<!-- style="width: 400px; height: 300px; margin: -75px 0 0 -100px;"  -->
-				</div>
-				<a class="ui-btn medium-button blue-button center" href="#test-popup" data-rel="popup">Show Pic</a>
-				BEFORE
-				<input type="file" id="files" name="files[]" multiple />
-				AFTER
+					<!-- style="width: 400px; height: 300px; margin: -75px 0 0 -100px;"
+				</div> -->
+				
+				<form>
+
+					<img id="testPic" class="medium-pic">
+					<input id="testPicInput" class="blue-button medium-button browser-file" type="file" accept="image/*"}>
+				</form>
+				<a class="ui-btn medium-button blue-button center" href="#test-popup" onclick="coolFunc()" data-rel="popup">Show Pic</a>
 
 				<!-- Crop Photo popup -->
 				<div data-role="popup" id="test-popup" class="popup">
@@ -400,7 +403,6 @@
 			<div data-role="main" class="ui-content">
 				HELLO WORLD!
 				<!-- <div id="plzWork"></div> -->
-				<button onclick="firebaseHatesMe2()">Plz Please Por Favor work!</button>
 				<form>
 
 					<img id="testPic" class="medium-pic">
@@ -541,6 +543,11 @@
 		<!-- Javascript files -->
 		<!-- <script type="text/javascript" src="cordova.js"></script> -->
 		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/handlebarsHelpers.js"></script>
+		<script type="text/javascript" src="js/picHandling.js?v=1"></script>
+		<script type="text/javascript" src="js/reachedPage.js"></script>
+		<script type="text/javascript" src="js/navigation.js"></script>
+		<script type="text/javascript" src="js/setup.js"></script>
 
 	</body>
 </html>
