@@ -374,18 +374,26 @@
 				</div> -->
 				
 				<form>
+					<div id="test-container" class="medium-pic-container">
+						<img id="testPic" class="medium-pic" picindex="0">
+					</div>
 
-					<img id="testPic" class="medium-pic">
 					<input id="testPicInput" class="blue-button medium-button browser-file" type="file" accept="image/*"}>
 				</form>
-				<a class="ui-btn medium-button blue-button center" href="#test-popup" onclick="coolFunc()" data-rel="popup">Show Pic</a>
+				<a class="ui-btn medium-button blue-button center" href="#test-popup" onclick="savePic(0)" data-rel="popup">Save Pic</a>
 
 				<!-- Crop Photo popup -->
 				<div data-role="popup" id="test-popup" class="popup">
-					<img id="test-pic" src="canyon.jpg" />
-					<!-- width="600px" height="400px" -->
+					<img id="pic-to-crop"/>
 					<btton onclick="closePopup('test-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
 				</div>
+
+				<canvas id="cropCanvas" style="display:none"></canvas>
+
+				<!-- <div data-role="popup" id="test-popup" class="popup" style="width:600px height:600px" height="600px">
+					<img id="pic-to-crop"/>
+					<btton onclick="closePopup('test-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
+				</div> -->
 
 			</div>
 		</div>
@@ -544,7 +552,7 @@
 		<!-- <script type="text/javascript" src="cordova.js"></script> -->
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/handlebarsHelpers.js"></script>
-		<script type="text/javascript" src="js/picHandling.js?v=1"></script>
+		<script type="text/javascript" src="js/picHandling.js?v=5"></script>
 		<script type="text/javascript" src="js/reachedPage.js"></script>
 		<script type="text/javascript" src="js/navigation.js"></script>
 		<script type="text/javascript" src="js/setup.js"></script>

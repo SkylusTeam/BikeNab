@@ -178,7 +178,8 @@ function reachedReports() {
 		data.reports = loadedReports.reports;
 
 		data.reports.forEach(function(report, index, reportArr) {
-			for (bike of data.bikes) {
+			console.log("DATA.BIKES IS: ", data.bikes);
+			for (bike in data.bikes) {
 				if (bike.serial === report.serial) {
 					reportArr[index].bike = bike;
 				}
