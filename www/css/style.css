@@ -188,7 +188,8 @@
   overflow: hidden;
   width: 250px;
   height: 141px;
-  margin: auto; }
+  margin: auto;
+  border: 1px solid #254ea2; }
 #body .small-pic {
   width: 249px;
   height: 140px; }

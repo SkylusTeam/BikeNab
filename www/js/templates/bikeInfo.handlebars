@@ -28,22 +28,47 @@
 	<!-- Photos of the bike -->
 	<div id="bike-photos">
 		<p>Photo of Owner with Bike</p>
-		<img class="center medium-pic" id="bikeOwnerPic">
+		<div class="medium-pic-container">
+			<img id="bikeOwnerPic" picindex="0">
+		</div>
 		<input id="bikeOwnerButton" type="file" accept="image/*"}>
+		<button class="clearFile" onclick="clearFile('bikeOwner')" type="button">X</button>
 
 		<p>Photo of Bike Alone</p>
-		<img class="medium-pic center" id="bikePic">
+		<div class="medium-pic-container">
+			<img id="bikePic" picindex="1">
+		</div>
 		<input id="bikeButton" type="file" accept="image/*"}>
+		<button class="clearFile" onclick="clearFile('bike')" type="button">X</button>
 
 		<p>Photo of Serial Number</p>
-		<img class="medium-pic center" id="bikeSerialPic">
+		<div class="medium-pic-container">
+			<img id="bikeSerialPic" picindex="2">
+		</div>
 		<input id="bikeSerialButton" type="file" accept="image/*"}>
+		<button class="clearFile" onclick="clearFile('bikeSerial')" type="button">X</button>
 
 		<p>Photo of Receipt</p>
-		<img class="medium-pic center" id="receiptPic">
+		<div class="medium-pic-container">
+			<img id="receiptPic" picindex="3">
+		</div>
 		<input id="receiptButton" type="file" accept="image/*"}>
+		<button class="clearFile" onclick="clearFile('receipt')" type="button">X</button>
+
 	</div>
 	<br>
 	<label for="additional-info">Additional Information About Bike</label>
 	<textarea id="additional-info" id="additional-info">{{otherInfo}}</textarea>
+
+
+	<!-- Crop Photo popup -->
+	<div data-role="popup" id="crop-popup" class="popup">
+		<img id="pic-to-crop"/>
+		<btton onclick="closePopup('crop-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
+	</div>
+
+	<canvas id="cropCanvas" style="display:none"></canvas>
+
+
+
 </div>

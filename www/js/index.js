@@ -328,11 +328,17 @@ function registerBike(){
 					[receiptFile,'receiptPic']];
 
 		// Store pics in firebase
-		for (pic of pics) {
-			if (pic[0]) {
-				firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + pic[1]).put(pic[0]);
-			}
+		for (int i = 0; i < 4; i++) {
+			savePic(i, pic[i], userId, serial);
 		}
+
+
+		// for (pic of pics) {
+		// 	if (pic[0]) {
+
+		// 		firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + pic[1]).put(pic[0]);
+		// 	}
+		// }
 
 		// Store text data in Firebase
 		firebase.database().ref('bikes/' + serial).set({

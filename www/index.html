@@ -375,17 +375,19 @@
 				
 				<form>
 					<div id="test-container" class="medium-pic-container">
-						<img id="testPic" class="medium-pic" picindex="0">
+						<img id="testPic" picindex="0">
 					</div>
 
-					<input id="testPicInput" class="blue-button medium-button browser-file" type="file" accept="image/*"}>
+					<input id="testPicInput" class="blue-button medium-button browser-file" type="file" accept="image/*"}/>
+					<button class="clearFile" onclick="clearFile('testPicInput', 'testPic')" type="button">X</button>
+
 				</form>
 				<a class="ui-btn medium-button blue-button center" href="#test-popup" onclick="savePic(0)" data-rel="popup">Save Pic</a>
 
 				<!-- Crop Photo popup -->
-				<div data-role="popup" id="test-popup" class="popup">
+				<div data-role="popup" id="crop-popup" class="popup">
 					<img id="pic-to-crop"/>
-					<btton onclick="closePopup('test-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
+					<btton onclick="closePopup('crop-popup')" class="ui-btn medium-button blue-button center" >Crop</button>
 				</div>
 
 				<canvas id="cropCanvas" style="display:none"></canvas>
@@ -415,6 +417,7 @@
 
 					<img id="testPic" class="medium-pic">
 					<input id="testPicInput" class="blue-button medium-button browser-file" type="file" accept="image/*"}>
+					
 				</form>
 				<!-- <script type="text/javascript" src="cordova.js"></script>
 				<script src="https://js.braintreegateway.com/js/braintree-2.30.0.min.js"></script><script>
