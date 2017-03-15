@@ -299,19 +299,19 @@ function loadReports(){
 }
 
 function registerBike(){
-
+	console.log("register bike called")
 	var user = firebase.auth().currentUser;
 	var userId = user.uid;
 	if (user) {
 		// User is signed in.
 			//should probably have firebase security check this
-
+			console.log("is user")
 	    var userId = user.uid;
 		var serial = $('#serial-number').val();
 
 	if (serial) { // If the serial number is blank, don't register bike
 		var appcode = $('#app-code').val();
-	
+			console.log("is serial")
 		// Text-based fields
 		var make = $('#bike-make').val();
 		var model = $('#bike-model').val();
@@ -329,7 +329,7 @@ function registerBike(){
 					[bikeOwnerFile, 'bikeOwnerPic'], 
 					[bikeSerialFile, 'bikeSerialPic'], 
 					[receiptFile,'receiptPic']];
-
+		console.log("about to pics")
 		// Store pics in firebase
 		for (pic of pics) {
 			if (pic[0]) {
@@ -374,7 +374,7 @@ function registerBike(){
 			owner:user.email,
 			bike:serial
 
-			})		  });			}, function(error) {			});			}
+			})		  });			}, function(error) {	console.log(error)		});			}
 		}
 
 		}
@@ -460,6 +460,7 @@ function makeReport() {
 		firebase.database().ref('/bikes/'+reportSerial).update({status:level});
 		firebase.database().ref('/bikes/'+reportSerial+"/reports/").push({serial:reportKey});
 	}
+	goSomewhere("#home");
 	 return firebase.database().ref().update(updates);
 }
 

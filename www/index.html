@@ -77,7 +77,7 @@
 						<input class="login-input" type="email" id="loginemail" placeholder="Log In"/>
 						<input class="login-input" type="password" id="loginpassword" placeholder="Password"/>
 					</form>
-					<button class="login-input blue-button" onclick="signIn()">Log In</button>
+					<button class="login-input blue-button" type="button" onclick="signIn()">Log In</button>
 				</div>
 				<!-- Bottom Buttons -->
 				<div id="bottom-buttons" data-role="controlgroup" data-type="horizontal" class="center">
@@ -293,9 +293,9 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Report Bike!!!</h1>
-					<form onSubmit="makeReport()">
+					<form>
 						<div id="report-container"></div>
-						<button type="submit" class="blue-button">Submit Report</button>
+						<button type="button" class="blue-button" onclick="makeReport();">Submit Report</button>
 					</form>
 				</div>
 			</div>
