@@ -305,16 +305,18 @@ function loadReports(){
 }
 
 function registerBike() {
-
 	var user = firebase.auth().currentUser;
 	var userId = user.uid;
 	if (user) {
-
-	var serial = $('#serial-number').val();
+		// User is signed in.
+			//should probably have firebase security check this
+			console.log("is user")
+	    var userId = user.uid;
+		var serial = $('#serial-number').val();
 
 	if (serial) { // If the serial number is blank, don't register bike
 		var appcode = $('#app-code').val();
-	
+			console.log("is serial")
 		// Text-based fields
 		var make = $('#bike-make').val();
 		var model = $('#bike-model').val();
@@ -353,9 +355,22 @@ function registerBike() {
 				// store the serial number under the user's data as well.
 				firebase.database().ref('users/' + userId).child("bikes").push({
 					serial:serial
-		}).then(function() {myBikes();});
-			}, function(error) {
-				console.log('ERROR saving data: ', error.code);
+				}).then(
+
+					function() {
+						myBikes();
+					}).then(
+
+						function(){
+						  	firebase.database().ref('appcodes/' + appcode).set({
+								status:"used",
+								owner:user.email,
+								bike:serial
+							}, 
+							function(error) {
+								console.log('Error saving data: ', error.code);
+							})
+						});
 			});
 		} else {
 			alert("Every bike requires a serial number.");
@@ -408,6 +423,7 @@ function updateProfile() {
 }
 
 function makeReport() {
+	alert("making report correctly");
 //need to change the id's of the fields
 
 	var user = firebase.auth().currentUser;

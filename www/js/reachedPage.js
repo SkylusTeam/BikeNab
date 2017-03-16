@@ -173,12 +173,11 @@ function reachedPastReports() {
 //TODO: Lots of repeat between here and the function above
 function reachedReports() {
 	var data = loadedUser;
-
+	console.log(data)
 	if (loadedReports) {
 		data.reports = loadedReports.reports;
 
 		data.reports.forEach(function(report, index, reportArr) {
-			console.log("DATA.BIKES IS: ", data.bikes);
 			for (bike in data.bikes) {
 				if (bike.serial === report.serial) {
 					reportArr[index].bike = bike;
