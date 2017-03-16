@@ -108,7 +108,7 @@ function followUnfollow(reportID, following) {
 }
 
 
-function testCreate() {
+function createUser() {
 	//database.ref('meow').set({serial: $("#serial-number").val()	});
 	var email = $('#email').val();
 	var password = $('#password1').val();
@@ -121,7 +121,7 @@ function testCreate() {
 	  */
 	if (password != password2) {
 		alert('Passwords do not match');
-		return;
+		return false;
 	}
 	/*
 	  if (password.length < 4) {
@@ -135,6 +135,8 @@ function testCreate() {
 		var user = firebase.auth().currentUser;
 		user.sendEmailVerification().then(function() {
 		 // Email sent.
+			goSomewhere("#home");
+			
 		}, function(error) {
 			console.log('failed to send sendEmailVerification')
 		// An error happened.
@@ -158,7 +160,7 @@ function testCreate() {
 		// [END_EXCLUDE]
 	});
 	// [END createwithemail]
-	goSomewhere("#home");
+	return false;
 } ;
 
 
@@ -194,7 +196,8 @@ function leCreate() {
 	firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
 		var user = firebase.auth().currentUser;
 		user.sendEmailVerification().then(function() {
-			 // Email sent.
+			// Email sent.
+			goSomewhere("#home");
 			}, function(error) {
 				console.log('failed to send sendEmailVerification')
 			// An error happened.
@@ -225,8 +228,11 @@ function leCreate() {
 		// [END_EXCLUDE]
 	});
 	// [END createwithemail]
-	goSomewhere("#home");
+	return false;
 };
+
+
+
 
 function signOut() {
 	firebase.auth().signOut().then(function(){goSomewhere('#login');})
@@ -361,7 +367,7 @@ function registerBike() {
 		console.log("no user signed in on bike registration");
 		return false;
 	}
-	//goSomewhere("#home");
+	goSomewhere("#home");
 	return false;
 }
 
@@ -446,7 +452,9 @@ function makeReport() {
 		firebase.database().ref('/bikes/'+reportSerial).update({status:level});
 		firebase.database().ref('/bikes/'+reportSerial+"/reports/").push({serial:reportKey});
 	}
-	 return firebase.database().ref().update(updates);
+	firebase.database().ref().update(updates);
+	goSomewhere("#reports");
+	return false;
 }
 
 //http://deepliquid.com/content/Jcrop_Manual.html

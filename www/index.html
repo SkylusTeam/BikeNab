@@ -73,7 +73,7 @@
 					<img src="img/logoCropped.jpg">
 					<!-- <div id="bikenab">BIKENAB</div> -->
 					<div id="register">Register. Report. <b>Recover.</b></div>
-					<form onSubmit="return false;">
+					<form onsubmit="return false;">
 						<input class="login-input" type="email" id="loginemail" placeholder="Log In"/>
 						<input class="login-input" type="password" id="loginpassword" placeholder="Password"/>
 					</form>
@@ -84,7 +84,7 @@
 					<button><a class="pw-popup ui-btn" href="#password-popup" data-rel="popup">Forgot Password</a></button>
 					<button class="ui-btn" id="other-one" onclick='goSomewhere("#create-account")'>Create Account</button>
 					<div data-role="popup" id="password-popup" class="ui-content popup">
-						<form onSubmit="return false;">
+						<form onsubmit="return false;">
 							<div>
 								<h3>Password Recovery</h3>
 								<input type="text" name="email" id="user" placeholder="Enter your email">
@@ -129,7 +129,7 @@
 		<div data-role="page" id="create-account" class="stripey-background">
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
-					<form onSubmit="testCreate()">
+					<form onsubmit="return createUser();">
 						<div id="create-account-container">Hello</div>
 						<button type="submit" class="blue-button">Create Account</button>
 					</form>
@@ -143,7 +143,7 @@
 		<div data-role="page" id="le-create-account" class="stripey-background">
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
-					<form onSubmit="leCreate();">
+					<form onsubmit="return leCreate();">
 						<div id="le-create-account-container"></div>
 						<div id="le-personal-create-container"></div>
 						<button type="submit" class="blue-button">Create Account</button>
@@ -193,7 +193,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Update Bike Info</h1>
-					<form onSubmit="return false;" id="edit-bike-info-container">
+					<form onsubmit="return false;" id="edit-bike-info-container">
 						<!-- Submit Button-->
 						<button type="submit" class="blue-button">Save</button>
 					</form>
@@ -212,7 +212,7 @@
 			</div>
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
-					<form onSubmit="return false;">
+					<form onsubmit="return false;">
 						<h1 class="center">Law Enforcement Profile</h1>
 						<div id="le-personal-profile-container"></div>
 						<button type="submit" class="blue-button">Save</button>
@@ -293,7 +293,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Report Bike!!!</h1>
-					<form onSubmit="makeReport()">
+					<form onsubmit="return makeReport();">
 						<div id="report-container"></div>
 						<button type="submit" class="blue-button">Submit Report</button>
 					</form>
@@ -312,7 +312,7 @@
 			<div data-role="main" class="ui-content">
 				<div class="floating-box">
 					<h1 class="center">Edit Report</h1>
-					<form onSubmit="return false;">
+					<form onsubmit="return false;">
 						<div id="edit-report-container"></div>
 						<button type="submit" class="blue-button">Edit Report</button>
 					</form>
