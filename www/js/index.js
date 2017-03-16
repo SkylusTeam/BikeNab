@@ -98,8 +98,8 @@ function isApp() {
 	//Taken here: //http://damien.antipa.at/blog/2014/02/08/3-ways-to-detect-that-your-application-is-running-in-cordova-slash-phonegap/
 	//This method differenetiates between apps & browsers (so mobile & desktop browsers count as the same)
 	//Useful for menus (deciding whether or not we want a back button)
-	let hi = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-	return hi;
+	let isapp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+	return isapp;
 }
 
 
@@ -298,7 +298,7 @@ function loadReports(){
 	return reportDict;
 }
 
-function registerBike(){
+function registerBike() {
 
 	var user = firebase.auth().currentUser;
 	var userId = user.uid;
@@ -322,23 +322,12 @@ function registerBike(){
 		var bikeOwnerFile = document.getElementById('bikeOwnerButton').files[0];
 		var bikeSerialFile = document.getElementById('bikeSerialButton').files[0];
 		var receiptFile = document.getElementById('receiptButton').files[0];
-		var pics = [[bikeFile,'bikePic'], 
-					[bikeOwnerFile, 'bikeOwnerPic'], 
-					[bikeSerialFile, 'bikeSerialPic'], 
-					[receiptFile,'receiptPic']];
+		var pics = ['bikeOwnerPic', 'bikePic', 'bikeSerialPic','receiptPic'];
 
 		// Store pics in firebase
-		for (int i = 0; i < 4; i++) {
-			savePic(i, pic[i], userId, serial);
+		for (var i = 0; i < 4; i++) {
+			savePic(i, pics[i], userId, serial);
 		}
-
-
-		// for (pic of pics) {
-		// 	if (pic[0]) {
-
-		// 		firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + pic[1]).put(pic[0]);
-		// 	}
-		// }
 
 		// Store text data in Firebase
 		firebase.database().ref('bikes/' + serial).set({
@@ -362,16 +351,22 @@ function registerBike(){
 			}, function(error) {
 				console.log('ERROR saving data: ', error.code);
 			});
+		} else {
+			alert("Every bike requires a serial number.");
+			return false;
 		}
 
 	} else {
-	// No user is signed in.
-	console.log("no user signed in on bike registration");
+		// No user is signed in.
+		console.log("no user signed in on bike registration");
+		return false;
 	}
+	//goSomewhere("#home");
+	return false;
 }
 
 
-function updateProfile(){
+function updateProfile() {
 	//This relies on the fields being prefilled with original values, otherwise it could delete everything
 	var contact = $('#contact-name').val();
 	var backupEmail = $('#backupEmail').val(); //TODO convert to dashed style?
@@ -395,9 +390,15 @@ function updateProfile(){
 			indStolen: indStolen,
 			leNormal: leNormal,
 			leStolen: leStolen
-		  }).then(function() {loadedUser = initProfile()});
+		  }).then(function() {
+		  	loadedUser = initProfile();
+		  	goSomewhere("#home");
+			return false;
+		  });
 
-
+	console.log("going home");
+	goSomewhere("#home");
+	return false;
 }
 
 function makeReport() {

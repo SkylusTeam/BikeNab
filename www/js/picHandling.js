@@ -117,25 +117,39 @@ function updatePic(c) {
 
 function savePic(index, picName, userId, serial) {
 	console.log("saving pic");
+	console.log("index is ", index);
+	console.log("picData is ", picData);
 	var data = picData[index];
 	//Save cropped pic in firebases
 	var canvas = document.getElementById("cropCanvas");
 	var context = canvas.getContext('2d');
 	var newPic = new Image();
 
-	newPic.onload = function() {
-		console.log("about to draw image");
-		context.drawImage(newPic, data.origX, data.origY, data.origW, data.origH, data.finalX, data.finalY, data.finalW, data.finalH);
-		console.log("drew image");
-		canvas.toBlob(function(blob) {
-			console.log("got blob");
-			firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + picName).put(blob);
-		})
-	}
-	if (data.src) {
+	if (data) {
 		console.log("got a src");
+		newPic.onload = function() {
+			console.log("about to draw image");
+			context.drawImage(newPic, data.finalX, data.finalY, data.finalW, data.finalH);//, data.finalX, data.finalY, data.finalW, data.finalH);
+			console.log("drew image");
+			var dataURL = canvas.toDataURL();
+			//$("#receiptPic").attr('src', dataURL);
+			//$("#bikeSerialPic").attr('src', newPic.src);
+			//firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + picName).put(dataURL);
+			canvas.toBlob(function(blob) {
+				console.log("got blob");
+				console.log("about to put " + picName);
+				firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + picName).put(blob);
+				//console.log("about to put receiptPic");
+				//firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + "receiptPic").put(dataURL);
+				//console.log("just about to display");
+				//$("#bikeOwnerPic").attr('src', URL.createObjectURL(blob));
+				//console.log("displayed");
+			})
+		}
 		newPic.src = data.src;
+
 	}
+	console.log("about to go home");
 	
 }
 

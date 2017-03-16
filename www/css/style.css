@@ -90,6 +90,19 @@
   padding-left: 0px;
   padding-right: 0px;
   height: 150px; }
+#home .fullwidth-icon-button {
+  width: 93%;
+  max-width: 512px;
+  background-color: #254ea2;
+  text-shadow: 0 0 0;
+  color: white;
+  font-size: 20px;
+  display: inline-block;
+  text-align: center;
+  margin: 6px 4px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 150px; }
 
 /* Create Account Page  */
 .account-link {
