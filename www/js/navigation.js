@@ -10,12 +10,12 @@
 
 //Switch to the given page of the app
 function goSomewhere(page, lePage) {
-	if(page=='#home' && firebase.auth().currentUser && !loadedBikes) {
+	if(page =='#home' && firebase.auth().currentUser && !loadedBikes) {
 		loadedUser = initProfile();
 		myBikes();
 		loadedReports = loadReports();
 	} else {
-		if (loadedUser.police && lePage) {
+		if (loadedUser && loadedUser.police && lePage) {
 			alert("going to le page");
 			$.mobile.pageContainer.pagecontainer("change", lePage, {});
 		} else {

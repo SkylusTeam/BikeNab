@@ -54,7 +54,7 @@ function addRepeatedElements() {
 
 
 //Phonegap Stuff - make things look/act different depending on the platfom
-document.addEventListener("deviceready", onDeviceReady, false);
+//document.addEventListener("deviceready", onDeviceReady, false);
 
 // function onDeviceReady() {
 // 	//addMenu();

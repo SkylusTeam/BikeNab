@@ -12,51 +12,63 @@
 
 //Huge mega switch statement telling what we should do when each page loads
 $("body").on('pagecontainerbeforeshow', function(event, data) {
-
+	console.log("hello");
+	// Typically called when the person has just reloaded the page
 	if (!loadedUser) {
 		loadedUser = localStorage.getItem('loadedUser');
-		addMenu(loadedUser.police);
-	} 
+		if (loadedUser) {
+			addMenu(loadedUser.police);
+		}
+	}  
 
-	switch (data.toPage[0].id) {
-		case 'bike-detail':
-			return reachedBikeDetail();
-		case 'edit-bike-info':
-			return reachedEditBikeInfo();
-		case 'register':
-			return reachedRegisterBike();
-		case 'past-reports':
-			return reachedPastReports();
-		case 'reports':
-			return loadUser(reachedReports);
-		case 'report':
-			return reachedReport();
-		case 'edit-report':
-			return reachedEditReport();
-		case 'unregister':
-			return reachedUnregister();
-		case 'profile':
-			return reachedProfile();
-		case 'my-bikes':
-			return reachedMyBikes();
-		case 'lookup':
-			return reachedLookup();
-		case 'contact':
-			return reachedContact();
-		case 'settings':
-			return reachedSettings();
-		case 'le-create-account':
-			return reachedLeCreateAccount();
-		case 'create-account':
-			return reachedCreateAccount();
-		case 'le-profile':
-			return reachedLeProfile();
-		case 'home':
-			return reachedHome();
-		case 'le-reports':
-			return reachedLeReports();
-		default:
-			return;
+	// Pages you can navigate to w/o being logged in.
+	var loggedOutPages = ['login', 'create-account', 'le-create-account', 'about'];
+
+	if (!loadedUser && ($.inArray(data.toPage[0].id, loggedOutPages) === -1)) {
+		//Uh oh!  Someone's trying to access a logged-in page when they're not logged in.
+		goSomewhere('#login');
+		alert("To access this page, please log in.");
+	} else {
+		switch (data.toPage[0].id) {
+			case 'bike-detail':
+				return reachedBikeDetail();
+			case 'edit-bike-info':
+				return reachedEditBikeInfo();
+			case 'register':
+				return reachedRegisterBike();
+			case 'past-reports':
+				return reachedPastReports();
+			case 'reports':
+				return loadUser(reachedReports);
+			case 'report':
+				return reachedReport();
+			case 'edit-report':
+				return reachedEditReport();
+			case 'unregister':
+				return reachedUnregister();
+			case 'profile':
+				return reachedProfile();
+			case 'my-bikes':
+				return reachedMyBikes();
+			case 'lookup':
+				return reachedLookup();
+			case 'contact':
+				return reachedContact();
+			case 'settings':
+				return reachedSettings();
+			case 'le-create-account':
+				return reachedLeCreateAccount();
+			case 'create-account':
+				return reachedCreateAccount();
+			case 'le-profile':
+				return reachedLeProfile();
+			case 'home':
+				return reachedHome();
+			case 'le-reports':
+				return reachedLeReports();
+			default:
+				return;
+		}
 	}
 });
 

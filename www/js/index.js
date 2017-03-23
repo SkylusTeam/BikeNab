@@ -215,6 +215,10 @@ function leCreate() {
 
 
 function signOut() {
+	//Delete relevant stuf from local storage
+	localStorage.clear();
+	alert("all clear");
+
 	firebase.auth().signOut().then(function(){goSomewhere('#login');})
 }
 
