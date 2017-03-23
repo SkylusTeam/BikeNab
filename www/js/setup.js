@@ -14,13 +14,11 @@ $( document ).ready(function() {
 
 
 
+
+
+
 //Insert repeated elements of code
 function addRepeatedElements() {
-
-	let headerTemplate = Handlebars.templates["header"];
-	//TODO: Make this actually work!
-	$("#header-container").html(headerTemplate({police: userData.police}));
-	$("#header-container").enhanceWithin();
 
 
 	//Insert large sections of code which are used in multiple places.
@@ -58,10 +56,10 @@ function addRepeatedElements() {
 //Phonegap Stuff - make things look/act different depending on the platfom
 document.addEventListener("deviceready", onDeviceReady, false);
 
-function onDeviceReady() {
-	addMenu(isApp());
-//	braintreeStuff();
-}
+// function onDeviceReady() {
+// 	//addMenu();
+// //	braintreeStuff();
+// }
 
 
 // function braintreeStuff() {
@@ -98,9 +96,15 @@ function insertSections() {
 
 
 // If we're in a browser, switch to a browser menu
-function addMenu(isApp) {
+function addMenu(isPolice = false) {
+	console.log("add MEnu: ", isPolice);
 	// Starts out with mobile menu visible.  If we're on a browser, this gets converted to our menu
-	if (!isApp) {
+	if (!isApp()) {
+		let headerTemplate = Handlebars.templates["header"];
+
+		//TODO: weird, but this works.  But we should really fix this sometime.
+		$("#header-container").html(headerTemplate({police: isPolice}));
+		$("#header-container").enhanceWithin();
 		$('[data-role="header"]').html($(".browser-header").clone()[0].innerHTML);
 		$('[data-role="navbar"]').navbar();
 		$('[data-role="header"]').removeClass('header');

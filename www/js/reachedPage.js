@@ -12,6 +12,12 @@
 
 //Huge mega switch statement telling what we should do when each page loads
 $("body").on('pagecontainerbeforeshow', function(event, data) {
+
+	if (!loadedUser) {
+		loadedUser = localStorage.getItem('loadedUser');
+		addMenu(loadedUser.police);
+	} 
+
 	switch (data.toPage[0].id) {
 		case 'bike-detail':
 			return reachedBikeDetail();
@@ -72,7 +78,7 @@ function reachedLeReports() {
 
 
 function reachedHome() {
-	insertTemplate({police: userData.police}, "home", "#home-container");
+	insertTemplate({police: loadedUser.police}, "home", "#home-container");
 }
 
 
@@ -82,7 +88,7 @@ function reachedHome() {
 
 function reachedBikeDetail() { //*kangaroo
 
-	var serial = sessionStorage.serial;
+	var serial = localStorage.getItem('serial');
 	var currBike;
 	var getBike = firebase.database().ref('/bikes/' + serial);
 	getBike.on("value", function(theBike) {
@@ -142,7 +148,7 @@ function reachedBikeDetail() { //*kangaroo
 function reachedEditBikeInfo() {
 	let bikesList = userData.bikes;
 	for (bike of bikesList) {
-		if (bike.serial === sessionStorage.serial) {
+		if (bike.serial === localStorage.getItem('serial')) {
 			bike.app = isApp();
 			insertTemplate(bike, "bikeInfo", "#edit-bike-info-container");
 		}
@@ -217,9 +223,9 @@ function reachedReports() {
 
 function reachedReport() {
 	let data = null;
-	if (sessionStorage.newReportSerial) {
-		data={serial: sessionStorage.newReportSerial};
-		sessionStorage.removeItem("newReportSerial");
+	if (localStorage.getItem('newReportSerial')) {
+		data={serial: localStorage.getItem('newReportSerial')};
+		localStorage.removeItem('newReportSerial');
 	}
 	insertTemplate(data, "report", "#report-container");
 }
@@ -227,14 +233,14 @@ function reachedReport() {
 
 function reachedEditReport() {
 	for (report of userData.reports) {
-		if (report.reportID === sessionStorage.reportID) {
+		if (report.reportID === localStorage.getItem('reportID')) {
 			insertTemplate(report, "report", "#edit-report-container");
 		}
 	}
 }
 
 function reachedUnregister() {
-	insertTemplate({serial: sessionStorage.serial , model:sessionStorage.model}, "unregister", "#unregister-container");
+	insertTemplate({serial: localStorage.getItem('serial') , model:localStorage.getItem('model')}, "unregister", "#unregister-container");
 }
 
 function reachedProfile() {

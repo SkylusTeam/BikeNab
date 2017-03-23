@@ -113,22 +113,12 @@ function createUser() {
 	var email = $('#email').val();
 	var password = $('#password1').val();
 	var password2 = $('#password2').val();
-	/*
-	  if (email.length < 4) {
-		alert('Please enter an email address.');
-		return;
-	  }
-	  */
+
 	if (password != password2) {
 		alert('Passwords do not match');
 		return false;
 	}
-	/*
-	  if (password.length < 4) {
-		alert('Please enter a password.');
-		return;
-	  }
-	  */
+
 	// Sign in with email and pass.
 	// [START createwithemail]
 	firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
@@ -175,22 +165,12 @@ function leCreate() {
 	var wLandline = $('#le-work-phone').val();
 	var wCell = $('#le-cell').val();
 	var wSocial = $('#le-social-media').val();
-	/*
-	  if (email.length < 4) {
-		alert('Please enter an email address.');
-		return;
-	  }
-	  */
+
 	if (password != password2) {
 		alert('Passwords do not match');
 		return;
 	}
-	/*
-	  if (password.length < 4) {
-		alert('Please enter a password.');
-		return;
-	  }
-	*/
+
 	// Sign in with email and pass.
 	// [START createwithemail]
 	firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
@@ -271,16 +251,16 @@ function signIn() {
 			console.log('error happened');
 			}
 			// [END_EXCLUDE]
-		}).then(function(){
+	 	})
+	 	.then(function(){
 			var user = firebase.auth().currentUser;
 			loadedUser = initProfile();
 			myBikes();
 			loadedReports = loadReports();
-			goSomewhere('#home');
 		});
 		// [END authwithemail]
 		}
-	};
+	}
 
 function loadReports(){
 	var user = firebase.auth().currentUser;
@@ -351,32 +331,31 @@ function registerBike() {
 			owneremail: user.email,
 			appcode:appcode
 
-			}).then(function() {
-				// store the serial number under the user's data as well.
-				firebase.database().ref('users/' + userId).child("bikes").push({
-					serial:serial
+		}).then(function() {
+			// store the serial number under the user's data as well.
+			firebase.database().ref('users/' + userId).child("bikes").push({
+				serial:serial
+			}).then(
+
+				function() {
+					myBikes();
 				}).then(
 
-					function() {
-						myBikes();
-					}).then(
-
-						function(){
-						  	firebase.database().ref('appcodes/' + appcode).set({
-								status:"used",
-								owner:user.email,
-								bike:serial
-							}, 
-							function(error) {
-								console.log('Error saving data: ', error.code);
-							})
-						});
+					function(){
+					  	firebase.database().ref('appcodes/' + appcode).set({
+							status:"used",
+							owner:user.email,
+							bike:serial
+						}, 
+						function(error) {
+							console.log('Error saving data: ', error);
+						})
+					});
 			});
 		} else {
 			alert("Every bike requires a serial number.");
 			return false;
 		}
-
 	} else {
 		// No user is signed in.
 		console.log("no user signed in on bike registration");
@@ -423,7 +402,6 @@ function updateProfile() {
 }
 
 function makeReport() {
-	alert("making report correctly");
 //need to change the id's of the fields
 
 	var user = firebase.auth().currentUser;
@@ -519,6 +497,9 @@ function initProfile() {
 	prof.on("value", function(snapshot) {
 		if(snapshot.val()) {
 			loadedUser = snapshot.val();
+			localStorage.setItem('loadedUser', loadedUser);
+			addMenu(loadedUser.police); //TODO: If police, this should be true.  kangaroo
+			goSomewhere('#home');
 		}
 
 	});

@@ -1,33 +1,39 @@
 <!-- Home Buttons -->
 
-{{#unless police}}
+{{#if police}}
+	<!--Top Row-->
+	<div class="side-by-side-block">
+		<button class="icon-button"  onclick="goSomewhere('#lookup')">
+			<div>Lookup</div>
+			<i class="material-icons md-48">&#xE8B6;</i>
+		</button>
+		<button class="icon-button" onclick="goSomewhere('#le-profile')">
+			<div>Profile</div>
+			<i class="material-icons md-48">&#xE7FF;</i>
+		</button>
+	</div>
+{{else}}
+	<!--Top Row-->
+	<div class="side-by-side-block">
+		<button class="fullwidth-icon-button" onclick="goSomewhere('#register')">
+			<div>Register Bike</div>
+			<i class="material-icons md-48">&#xE150;</i>
+		</button>
+	</div>
 
-<!--Top Row-->
-<div class="side-by-side-block">
-	<button class="fullwidth-icon-button" onclick="goSomewhere('#register')">
-		<div>Register Bike</div>
-		<i class="material-icons md-48">&#xE150;</i>
-	</button>
-</div>
+	<!--Middle Row-->
+	<div class="side-by-side-block">
+		<button class="icon-button" onclick="goSomewhere('#my-bikes')">
+			<div>My Bikes</div>
+			<i class="material-icons md-48">&#xE52F;</i> <!--TODO: Does this work with IE?-->
+		</button>
+		<button class="icon-button" onclick="goSomewhere('#profile')">
+			<div>Profile</div>
+			<i class="material-icons md-48">&#xE7FF;</i>
+		</button>
+	</div>
 
-{{/unless}}
-
-
-<!--Middle Row-->
-<div class="side-by-side-block">
-	<!-- <button class="icon-button"  onclick="goSomewhere('#lookup')">
-		<div>Lookup</div>
-		<i class="material-icons md-48">&#xE8B6;</i>
-	</button> -->
-	<button class="icon-button" onclick="goSomewhere('#my-bikes')">
-		<div>My Bikes</div>
-		<i class="material-icons md-48">&#xE52F;</i> <!--TODO: Does this work with IE?-->
-	</button>
-	<button class="icon-button" onclick="goSomewhere('#profile', '#le-profile')">
-		<div>Profile</div>
-		<i class="material-icons md-48">&#xE7FF;</i>
-	</button>
-</div>
+{{/if}}
 
 <!--Bottom Row-->
 <div class="side-by-side-block">
