@@ -13,7 +13,7 @@
 //Huge mega switch statement telling what we should do when each page loads
 $("body").on('pagecontainerbeforeshow', function(event, data) {
 	// Typically called when the person has just reloaded the page
-	if (!loadedUser) {
+	if (typeof loadedUser == "undefined") {
 		loadedUser = localStorage.getItem('loadedUser');
 		if (loadedUser && loadedUser.police) {
 			addMenu(loadedUser.police);

@@ -560,7 +560,7 @@ function searchSerial() {
 function printMissingFields(strings) {
 	var returnString = "Missing fields: ";
 	var fieldsString = ""
-	for(int i = 0; i < strings.length; i++){
+	for(var i = 0; i < strings.length; i++){
 		if( i != 0){
 			fieldsString = fieldsString + ", " + strings[i];
 		} else {
