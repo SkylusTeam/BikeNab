@@ -12,18 +12,16 @@
 
 //Huge mega switch statement telling what we should do when each page loads
 $("body").on('pagecontainerbeforeshow', function(event, data) {
-	console.log("hello");
 	// Typically called when the person has just reloaded the page
 	if (!loadedUser) {
 		loadedUser = localStorage.getItem('loadedUser');
-		if (loadedUser) {
+		if (loadedUser && loadedUser.police) {
 			addMenu(loadedUser.police);
 		}
 	}  
 
 	// Pages you can navigate to w/o being logged in.
 	var loggedOutPages = ['login', 'create-account', 'le-create-account', 'about'];
-
 	if (!loadedUser && ($.inArray(data.toPage[0].id, loggedOutPages) === -1)) {
 		//Uh oh!  Someone's trying to access a logged-in page when they're not logged in.
 		goSomewhere('#login');
