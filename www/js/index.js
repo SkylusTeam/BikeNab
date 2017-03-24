@@ -557,6 +557,19 @@ function searchSerial() {
 			});
 };
 
+function printMissingFields(strings) {
+	var returnString = "Missing fields: ";
+	var fieldsString = ""
+	for(int i = 0; i < strings.length; i++){
+		if( i != 0){
+			fieldsString = fieldsString + ", " + strings[i];
+		} else {
+			fieldsString = strings[i];
+		}
+	}
+	return returnString + fieldsString;
+}
+
 //sass --watch scss:cs
 
 //cd into www
