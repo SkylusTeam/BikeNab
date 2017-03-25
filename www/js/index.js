@@ -547,14 +547,53 @@ function searchSerial() {
 	var searchId = $('#serialSearch').val();
 	var bikeDict = {};
 	var getBike = firebase.database().ref('/bikes/'+searchId);
-			getBike.on("value", function(theBike) {
-				bikeDict["bike"] = ( theBike.val());
-				if(theBike.val()) {
-					insertTemplate(bikeDict, "lookup", "#lookup-container");
-				} else {
-					insertTemplate({},"noSerial","#lookup-container")
+		getBike.once("value", function(theBike) {
+			bikeDict["bike"] = ( theBike.val());
+			console.log(theBike.val())
+			if(theBike.val()) {
+				var reportArr = [];
+				var bikesReports = theBike.val().reports;
+				var keys = [];
+				var numReports = 0;
+				var numRetrieved = new Number(0);
+				console.log("og num: " + numRetrieved)
+				for (var report in bikesReports) {
+					if (bikesReports.hasOwnProperty(report)) {
+						numReports++;
+					}
 				}
-			});
+
+				for (var report in bikesReports) {
+					if (bikesReports.hasOwnProperty(report)) {
+						var reportSerial = bikesReports[report].serial;
+						var getReport = firebase.database().ref('/reports/'+reportSerial);
+						getReport.once("value", function(theReport){
+							if(theReport.val()) {
+								reportArr.push(theReport.val());
+							}
+							numRetrieved++;
+
+						}).then(function(){
+							console.log("in func " + numRetrieved)
+							if(numRetrieved	== numReports) {
+
+								bikeDict.bike.reportDetails = reportArr;
+								console.log(bikeDict.bike.reportDetails)
+								insertTemplate(bikeDict, "lookup", "#lookup-container");
+							}
+						});
+
+					}
+				}
+
+
+
+			} else {
+				insertTemplate({},"noSerial","#lookup-container")
+				return
+			}
+		});
+
 };
 
 function printMissingFields(strings) {

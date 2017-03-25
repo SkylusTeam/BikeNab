@@ -83,3 +83,6 @@ Handlebars.registerHelper('contact', function(contactOwner, contactPolice) {
 		}
 	}
 });
+
+Handlebars.partials = Handlebars.templates;
+
