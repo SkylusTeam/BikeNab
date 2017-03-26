@@ -13,17 +13,34 @@
 //Huge mega switch statement telling what we should do when each page loads
 $("body").on('pagecontainerbeforeshow', function(event, data) {
 	// Typically called when the person has just reloaded the page
-	if (!loadedUser) {
+	if (typeof loadedUser == 'undefined') {
 		loadedUser = localStorage.getItem('loadedUser');
-		if (loadedUser && loadedUser.police) {
-			addMenu(loadedUser.police);
+		if (loadedUser) {
+			loadedUser = JSON.parse(loadedUser);
 		}
+		var work = localStorage.getItem('please');
+		if (work) {
+			work = JSON.parse(work);
+		}
+		if (typeof loadedUser != 'undefined') {
+			if(loadedUser) {
+				addMenu(loadedUser.police);
+			}
+		} else {
+			// loadedUser doesn't exist.  If the person is logged in, that's bad.
+			if (firebase.auth().currentUser) {
+				initProfile(false);
+			}
+		}
+		
+
 	}  
 
 	// Pages you can navigate to w/o being logged in.
 	var loggedOutPages = ['login', 'create-account', 'le-create-account', 'about'];
-	if (!loadedUser && ($.inArray(data.toPage[0].id, loggedOutPages) === -1)) {
+	if (typeof loadedUser === 'undefined' && ($.inArray(data.toPage[0].id, loggedOutPages) === -1)) {
 		//Uh oh!  Someone's trying to access a logged-in page when they're not logged in.
+		//alert("probs here");
 		goSomewhere('#login');
 		alert("To access this page, please log in.");
 	} else {
@@ -263,11 +280,13 @@ function reachedMyBikes() {
 
 	if (user) {
 		var userId = user.uid;
-		bikeDict = loadedBikes;
-		insertTemplate(bikeDict, "myBikes", "#my-bikes-container");
-		} else {
-			insertTemplate(userData, "myBikes", "#my-bikes-container");
-		}
+		bikeDict = loadedUser.bikes;
+		insertTemplate({'bikes': bikeDict}, "myBikes", "#my-bikes-container");
+	} else {
+		// Trying to see myBikes when not logged in
+		goSomewhere('#login');
+		alert("To access this page, please log in.");
+	}
 }
 
 function reachedLookup() {

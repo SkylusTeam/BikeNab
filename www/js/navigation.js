@@ -10,18 +10,20 @@
 
 //Switch to the given page of the app
 function goSomewhere(page, lePage) {
-	if(page =='#home' && firebase.auth().currentUser && !loadedBikes) {
-		loadedUser = initProfile();
-		myBikes();
-		loadedReports = loadReports();
+	if (typeof loadedUser != 'undefined' && loadedUser.police == true && lePage) {
+		$.mobile.pageContainer.pagecontainer("change", lePage, {});
 	} else {
-		if (loadedUser && loadedUser.police && lePage) {
-			alert("going to le page");
-			$.mobile.pageContainer.pagecontainer("change", lePage, {});
-		} else {
-			$.mobile.pageContainer.pagecontainer("change", page, {});
-		}
+		$.mobile.pageContainer.pagecontainer("change", page, {});
 	}
+
+
+	// if(page =='#home' && firebase.auth().currentUser && !loadedBikes) {
+	// 	//loadedUser = initProfile();
+	// 	//myBikes();
+	// 	//loadedReports = loadReports();
+	// } else {
+		
+	// }
 }
 
 

@@ -217,7 +217,6 @@ function leCreate() {
 function signOut() {
 	//Delete relevant stuf from local storage
 	localStorage.clear();
-	alert("all clear");
 
 	firebase.auth().signOut().then(function(){goSomewhere('#login');})
 }
@@ -259,7 +258,6 @@ function signIn() {
 	 	.then(function(){
 			var user = firebase.auth().currentUser;
 			loadedUser = initProfile();
-			myBikes();
 			loadedReports = loadReports();
 		});
 		// [END authwithemail]
@@ -316,10 +314,12 @@ function registerBike() {
 		var receiptFile = document.getElementById('receiptButton').files[0];
 		var pics = ['bikeOwnerPic', 'bikePic', 'bikeSerialPic','receiptPic'];
 
-		// Store pics in firebase
+		//Store pics in firebase
 		for (var i = 0; i < 4; i++) {
 			savePic(i, pics[i], userId, serial);
-		}
+		} //TODO: Add these back
+
+		//savePic(0, pics[i], userId, serial);
 
 		// Store text data in Firebase
 		firebase.database().ref('bikes/' + serial).set({
@@ -353,6 +353,7 @@ function registerBike() {
 						}, 
 						function(error) {
 							console.log('Error saving data: ', error);
+							//console.log("Error: " + error.code);
 						})
 					});
 			});
@@ -365,7 +366,7 @@ function registerBike() {
 		console.log("no user signed in on bike registration");
 		return false;
 	}
-	goSomewhere("#home");
+	goSomewhere("#home"); //TODO: Add back in!
 	return false;
 }
 
@@ -459,16 +460,13 @@ function makeReport() {
 
 
 
-
-
 function myBikes() {
 	var user = firebase.auth().currentUser;
 	var userId = user.uid;
 	var bikes = firebase.database().ref('/users/' + userId+'/bikes');
-	var bikeDict = {bikes:[]};
+	var bikeDict = [];
 	if (bikes) {
 		bikes.on("value", function(snapshot) {
-			bikeDict = {bikes:[]};
 			if (snapshot.val()) {
 				jQuery.each(snapshot.val(), function() {
 				  var getBike = firebase.database().ref('/bikes/'+this.serial);
@@ -479,21 +477,34 @@ function myBikes() {
 					var userId = user.uid;
 					var imagePath = firebase.storage().ref('/users/' + userId + '/bikes/' + bikeData.serial);
 					imagePath.child('bikePic').getDownloadURL().then(function(url) {
+						console.log("trying to set pic for " + bikeData.serial);
 						bikeData.bikePic = url;
+						bikeDict.push(bikeData);
+						loadedUser.bikes = bikeDict;
+						localStorage.setItem('loadedUser', JSON.stringify(loadedUser));
+					//TODO: What about on error?
+					}).catch(function(error) {
+						console.log("no pic for " + bikeData.serial);
+						bikeDict.push(bikeData);
+						loadedUser.bikes = bikeDict;
+						localStorage.setItem('loadedUser', JSON.stringify(loadedUser));
 					});
-					bikeDict["bikes"].push(bikeData);
 				  });
 
 				});
 		}
-		loadedBikes = bikeDict;
+		loadedUser.bikes = bikeDict;
+		localStorage.setItem('loadedUser', JSON.stringify(loadedUser));
+		localStorage.setItem('please', JSON.stringify({'please': 'work', 'come':'on'}));
+		loadedUser = JSON.parse(localStorage.getItem('loadedUser'));
+
 		}, function (error) {
 		   console.log("Error: " + error.code);
 		});
 	}
 }
 
-function initProfile() {
+function initProfile(navigate = true) {
 	var user = firebase.auth().currentUser;
 	var userId = user.uid;
 	var prof = firebase.database().ref('/users/' + userId)
@@ -501,9 +512,13 @@ function initProfile() {
 	prof.on("value", function(snapshot) {
 		if(snapshot.val()) {
 			loadedUser = snapshot.val();
-			localStorage.setItem('loadedUser', loadedUser);
-			addMenu(loadedUser.police); //TODO: If police, this should be true.  kangaroo
-			goSomewhere('#home');
+			myBikes();
+			localStorage.setItem('loadedUser', JSON.stringify(loadedUser));
+			addMenu(loadedUser.police); //TODO: If police, this should be true.
+			// If you've just pushed the login button
+			if (navigate) {
+				goSomewhere('#home');
+			}
 		}
 
 	});
