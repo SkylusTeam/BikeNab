@@ -15,6 +15,10 @@
 		<li>
 			<font style="white-space:normal" >
 				<table>
+				<tr class="{{no bike.owneremail 'hidden'}}">
+					<td><b>Owner Email:</b></td>
+					<td>{{bike.owneremail}}</td>
+				</tr>
 				<tr class="{{no bike.serial 'hidden'}}">
 					<td><b>Serial Number:</b></td>
 					<td>{{bike.serial}}</td>
@@ -98,5 +102,10 @@
 			</li>
 		</ul>
 	</div>
+
+	{{#each bike.reportDetails}}
+			<div>Report below:</div>
+    		{{> reportsPartial}}
+	{{/each}}
 
 </div>

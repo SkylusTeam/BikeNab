@@ -98,7 +98,7 @@ function setUpPhotoCrop(name) {
 
 // Every time a pic has been cropped, save the crop data
 // and display the updated image
-function updatePic(c) {
+function updatePic(c) { //TODO: Function called more often than you expect
 	let xsize =  250; //medium-pic-container css width
 	let ysize =  141; //medium-pic-container css height
 	var rx = xsize / c.w;
