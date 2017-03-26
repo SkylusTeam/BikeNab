@@ -32,7 +32,6 @@ $( document ).ready(function() {
 					picIndex = parseInt($(e.target).parent().prev().children().attr("picindex"));
 					console.log("just set picIndex to ", picIndex);
 					picData[picIndex] = data;
-
 				}
 				img.src = picFile;
 
@@ -99,6 +98,7 @@ function setUpPhotoCrop(name) {
 // Every time a pic has been cropped, save the crop data
 // and display the updated image
 function updatePic(c) { //TODO: Function called more often than you expect
+	console.log("update pic being called");
 	let xsize =  250; //medium-pic-container css width
 	let ysize =  141; //medium-pic-container css height
 	var rx = xsize / c.w;
@@ -121,19 +121,19 @@ function updatePic(c) { //TODO: Function called more often than you expect
 
 		// Save crop data
 		data.finalX = c.x;
-		//data.finalY = c.y;
-		//data.finalW = c.w;
-		//data.finalH = c.h;
+		data.finalY = c.y;
+		data.finalW = c.w;
+		data.finalH = c.h;
 
-		console.log("type: ", typeof c);
-		console.log("type2: ", typeof c.h);
+		// console.log("type: ", typeof c);
+		// console.log("type2: ", typeof c.h);
 
-		var height = JSON.parse(JSON.stringify(c));
-		data.finalH = height.h;
+		// var height = JSON.parse(JSON.stringify(c));
+		// data.finalH = height.h;
 
 
-		var width = JSON.parse(JSON.stringify(c.w));
-		data.finalW = width;
+		// var width = JSON.parse(JSON.stringify(c.w));
+		// data.finalW = width;
 
 
 
@@ -177,23 +177,23 @@ function savePic(index, picName, userId, serial) {
 
 		//var canvas;
 		if (picName === 'bikePic') {
-			// console.log("first case!!!");
-			// canvas = document.getElementById("canvasBike");
-			// console.log("canvas: ", canvas);
-			// If there was something on the canvas before, get rid of it.	
-			// var context = canvas.getContext('2d');
-			// console.log("context: ", context);
-			// //context.clearRect(0, 0, canvas.width, canvas.height);
-			// var newPic = new Image();
-			// 	newPic.onload = function() {
-			// 		// context.drawImage(newPic, data.finalX, data.finalY, data.finalW, data.finalH, 0,0, 250, 141);
-			// 		// canvas.toBlob(function(blob) {
-			// 		// 	console.log("picname is " + picName);
-			// 		// 	firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + picName).put(blob);
-			// 		// });
-			// 	};
-			// 	//The pic which is going to be drawn on the canvas will have the pic-to-save as its src
-			// 	newPic.src = data.src;
+			console.log("first case!!!");
+			canvas = document.getElementById("canvasBike");
+			console.log("canvas: ", canvas);
+			//If there was something on the canvas before, get rid of it.	
+			var context = canvas.getContext('2d');
+			console.log("context: ", context);
+			//context.clearRect(0, 0, canvas.width, canvas.height);
+			var newPic = new Image();
+			newPic.onload = function() {
+				context.drawImage(newPic, data.finalX, data.finalY, data.finalW, data.finalH, 0,0, 250, 141);
+				canvas.toBlob(function(blob) {
+					console.log("picname is " + picName);
+					firebase.storage().ref().child("users/" + userId + "/bikes/" + serial + "/" + picName).put(blob);
+				});
+			};
+			//The pic which is going to be drawn on the canvas will have the pic-to-save as its src
+			newPic.src = data.src;
 		} else {
 			var canvas;
 			console.log("actually saving pic: ", index, picName, userId, serial);

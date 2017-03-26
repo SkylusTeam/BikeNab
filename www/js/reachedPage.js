@@ -14,9 +14,9 @@
 $("body").on('pagecontainerbeforeshow', function(event, data) {
 	// Typically called when the person has just reloaded the page
 	if (typeof loadedUser == 'undefined') {
-		
+
 		loadedUser = localStorage.getItem('loadedUser');
-		if (loadedUser) {
+		if (loadedUser != 'undefined') {
 			loadedUser = JSON.parse(loadedUser);
 		}
 		var work = localStorage.getItem('please');
